@@ -125,6 +125,7 @@ namespace NsTcpClient
 		}
 			
 		// Socket异常连接
+		[XLua.CSharpCallLua]
 		public Action OnSocketAbort
 		{
 			get;
@@ -132,6 +133,7 @@ namespace NsTcpClient
 		}
 
 		// 连接返回
+		[XLua.CSharpCallLua]
 		public Action<bool> OnConnectResult
 		{
 			get;
