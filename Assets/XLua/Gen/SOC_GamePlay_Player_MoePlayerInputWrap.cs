@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class SOCGamePlayPlayerPlayerInputWrap 
+    public class SOCGamePlayPlayerMoePlayerInputWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(SOC.GamePlay.Player.PlayerInput);
+			System.Type type = typeof(SOC.GamePlay.Player.MoePlayerInput);
 			Utils.BeginObjectRegister(type, L, translator, 0, 0, 0, 0);
 			
 			
@@ -50,7 +50,7 @@ namespace XLua.CSObjectWrap
 				if(LuaAPI.lua_gettop(L) == 1)
 				{
 					
-					var gen_ret = new SOC.GamePlay.Player.PlayerInput();
+					var gen_ret = new SOC.GamePlay.Player.MoePlayerInput();
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -60,7 +60,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.Player.PlayerInput constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.Player.MoePlayerInput constructor!");
             
         }
         

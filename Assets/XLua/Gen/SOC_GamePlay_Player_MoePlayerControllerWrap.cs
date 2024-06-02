@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class SOCGamePlayPlayerPlayerControllerWrap 
+    public class SOCGamePlayPlayerMoePlayerControllerWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(SOC.GamePlay.Player.PlayerController);
+			System.Type type = typeof(SOC.GamePlay.Player.MoePlayerController);
 			Utils.BeginObjectRegister(type, L, translator, 0, 0, 2, 2);
 			
 			
@@ -54,7 +54,7 @@ namespace XLua.CSObjectWrap
 				if(LuaAPI.lua_gettop(L) == 1)
 				{
 					
-					var gen_ret = new SOC.GamePlay.Player.PlayerController();
+					var gen_ret = new SOC.GamePlay.Player.MoePlayerController();
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -64,7 +64,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.Player.PlayerController constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.Player.MoePlayerController constructor!");
             
         }
         
@@ -84,7 +84,7 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                SOC.GamePlay.Player.PlayerController gen_to_be_invoked = (SOC.GamePlay.Player.PlayerController)translator.FastGetCSObj(L, 1);
+                SOC.GamePlay.Player.MoePlayerController gen_to_be_invoked = (SOC.GamePlay.Player.MoePlayerController)translator.FastGetCSObj(L, 1);
                 translator.Push(L, gen_to_be_invoked.Input);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
@@ -98,7 +98,7 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                SOC.GamePlay.Player.PlayerController gen_to_be_invoked = (SOC.GamePlay.Player.PlayerController)translator.FastGetCSObj(L, 1);
+                SOC.GamePlay.Player.MoePlayerController gen_to_be_invoked = (SOC.GamePlay.Player.MoePlayerController)translator.FastGetCSObj(L, 1);
                 translator.Push(L, gen_to_be_invoked.Character);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
@@ -114,8 +114,8 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                SOC.GamePlay.Player.PlayerController gen_to_be_invoked = (SOC.GamePlay.Player.PlayerController)translator.FastGetCSObj(L, 1);
-                gen_to_be_invoked.Input = (SOC.GamePlay.Player.PlayerInput)translator.GetObject(L, 2, typeof(SOC.GamePlay.Player.PlayerInput));
+                SOC.GamePlay.Player.MoePlayerController gen_to_be_invoked = (SOC.GamePlay.Player.MoePlayerController)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.Input = (SOC.GamePlay.Player.MoePlayerInput)translator.GetObject(L, 2, typeof(SOC.GamePlay.Player.MoePlayerInput));
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
@@ -129,8 +129,8 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                SOC.GamePlay.Player.PlayerController gen_to_be_invoked = (SOC.GamePlay.Player.PlayerController)translator.FastGetCSObj(L, 1);
-                gen_to_be_invoked.Character = (SOC.GamePlay.CharacterController)translator.GetObject(L, 2, typeof(SOC.GamePlay.CharacterController));
+                SOC.GamePlay.Player.MoePlayerController gen_to_be_invoked = (SOC.GamePlay.Player.MoePlayerController)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.Character = (SOC.GamePlay.MoeCharacterController)translator.GetObject(L, 2, typeof(SOC.GamePlay.MoeCharacterController));
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

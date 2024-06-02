@@ -185,16 +185,16 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(NsHttpClient.HttpHelper), NsHttpClientHttpHelperWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(SOC.GamePlay.CharacterController), SOCGamePlayCharacterControllerWrap.__Register);
+            translator.DelayWrapLoader(typeof(SOC.GamePlay.MoeCharacterController), SOCGamePlayMoeCharacterControllerWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(SOC.GamePlay.ILuaBinder), SOCGamePlayILuaBinderWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.PlayerController), SOCGamePlayPlayerPlayerControllerWrap.__Register);
+            translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.MoePlayerController), SOCGamePlayPlayerMoePlayerControllerWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.PlayerInput), SOCGamePlayPlayerPlayerInputWrap.__Register);
+            translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.MoePlayerInput), SOCGamePlayPlayerMoePlayerInputWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.GameStart), SOCGamePlayPlayerGameStartWrap.__Register);

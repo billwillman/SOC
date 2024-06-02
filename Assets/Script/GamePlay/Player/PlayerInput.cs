@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SOC.GamePlay.Player
 {
     [XLua.LuaCallCSharp]
-    public class PlayerInput : ILuaBinder
+    public class MoePlayerInput : ILuaBinder
     {
         
     }

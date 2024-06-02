@@ -5,6 +5,6 @@ using UnityEngine;
 namespace SOC.GamePlay
 {
     [XLua.LuaCallCSharp]
-    public class CharacterController : ILuaBinder
+    public class MoeCharacterController : ILuaBinder
     { }
 }
