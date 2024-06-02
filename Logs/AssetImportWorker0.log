@@ -1458,3 +1458,11 @@ Memory consumption went from 185.4 MB to 180.0 MB.
 Total: 9.139500 ms (FindLiveObjects: 0.701300 ms CreateObjectMapping: 0.816600 ms MarkObjects: 4.616600 ms  DeleteObjects: 3.004200 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 1061.319067 seconds.
+  path: Assets/XLua/Gen/NsTcpClient_NetManagerWrap.cs
+  artifactKey: Guid(3521dfd774929ff4c998eeeff1fa433f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/XLua/Gen/NsTcpClient_NetManagerWrap.cs using Guid(3521dfd774929ff4c998eeeff1fa433f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c33dd482b898fa293070ff1b41243774') in 0.0021895 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+

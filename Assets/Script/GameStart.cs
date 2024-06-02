@@ -48,6 +48,11 @@ namespace SOC.GamePlay.Player
 
         // 初始化NetCode的Lua全局变量
         void InitNetCodeLuaGlobalVars(LuaTable _MOE) {
+#if UNITY_EDITOR
+            _MOE.Set<string, bool>("IsEditor", true);
+#else
+            _MOE.Set<string, bool>("IsEditor", false);
+#endif
 #if UNITY_SERVER
             _MOE.Set<string, bool>("IsDS", true);
 #else

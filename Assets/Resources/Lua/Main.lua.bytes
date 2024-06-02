@@ -1,5 +1,7 @@
 _MOE = {
-    IsOpenLog = true
+    IsOpenLog = true,
+    IsEditor = false,
+    IsDS = false,
 }
 
 _MOE.Logger = {
