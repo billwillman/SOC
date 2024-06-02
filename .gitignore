@@ -3,3 +3,7 @@ Temp/
 obj/
 outPath/
 .vs/
+.vsconfig
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+SOC.sln
