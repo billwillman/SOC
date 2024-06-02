@@ -46,6 +46,7 @@ namespace SOC.GamePlay.Player
             Lua_DoMain();
         }
 
+        [XLua.Hotfix]
         // 初始化NetCode的Lua全局变量
         void InitNetCodeLuaGlobalVars(LuaTable _MOE) {
 #if UNITY_EDITOR
