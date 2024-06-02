@@ -1,0 +1,16 @@
+local function InitDS()
+end
+
+local function InitDSAndClient()
+end
+
+local function InitClient()
+end
+
+if _MOE.IsDS then
+    InitDS()
+    InitDSAndClient()
+else
+    InitClient()
+    InitDSAndClient()
+end
