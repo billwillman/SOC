@@ -135,6 +135,7 @@ namespace NsTcpClient
 #endif
 	}
 
+    [XLua.CSharpCallLua]
 	public delegate void OnPacketRead(GamePacket packet);
 
 	public abstract class ClientPackageListener
