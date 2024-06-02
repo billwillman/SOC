@@ -2,6 +2,7 @@ Library/
 Temp/
 obj/
 outPath/
+Logs/
 .vs/
 .vsconfig
 Assembly-CSharp.csproj
