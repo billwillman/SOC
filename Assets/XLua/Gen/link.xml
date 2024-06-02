@@ -23,6 +23,7 @@
 		<type fullname="XLuaTest.Foo2Child" preserve="all"/>
 		<type fullname="XLuaTest.Foo" preserve="all"/>
 		<type fullname="XLuaTest.FooExtension" preserve="all"/>
+		<type fullname="NsTcpClient.NetManager" preserve="all"/>
 		<type fullname="NsLib.ResMgr.BaseResLoaderAsyncType" preserve="all"/>
 		<type fullname="NsLib.ResMgr.BaseResLoaderAsyncMono" preserve="all"/>
 		<type fullname="NsHttpClient.HttpClient" preserve="all"/>

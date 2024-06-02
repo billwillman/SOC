@@ -169,15 +169,18 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(XLuaTest.FooExtension), XLuaTestFooExtensionWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(NsTcpClient.NetManager), NsTcpClientNetManagerWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(NsLib.ResMgr.BaseResLoaderAsyncType), NsLibResMgrBaseResLoaderAsyncTypeWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(NsLib.ResMgr.BaseResLoaderAsyncMono), NsLibResMgrBaseResLoaderAsyncMonoWrap.__Register);
         
         }
         
         static void wrapInit1(LuaEnv luaenv, ObjectTranslator translator)
         {
+        
+            translator.DelayWrapLoader(typeof(NsLib.ResMgr.BaseResLoaderAsyncMono), NsLibResMgrBaseResLoaderAsyncMonoWrap.__Register);
+        
         
             translator.DelayWrapLoader(typeof(NsHttpClient.HttpClient), NsHttpClientHttpClientWrap.__Register);
         
