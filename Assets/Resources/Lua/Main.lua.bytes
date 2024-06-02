@@ -22,8 +22,14 @@ _MOE.Logger = {
     end
 }
 
+local function InitCSGlobalVars()
+    _MOE.NetManager = CS.NsTcpClient.NetManager
+    _MOE.ResourceManager = CS.ResourceMgr
+end
+
 function Main()
     _MOE.Logger.Log("[xlua] Main Start...")
+    InitCSGlobalVars()
     -- 设置调试Lua Panda调试
     if _MOE.IsDS then
         require("LuaPanda").start("127.0.0.1", 8818)

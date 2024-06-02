@@ -4,6 +4,7 @@
 
 	<assembly fullname="Assembly-CSharp">
 	    <type fullname="BaseResLoader" preserve="all"/>
+		<type fullname="ResourceCacheType" preserve="all"/>
 		<type fullname="ResourceMgr" preserve="all"/>
 		<type fullname="Tutorial.BaseClass" preserve="all"/>
 		<type fullname="Tutorial.TestEnum" preserve="all"/>

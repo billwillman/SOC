@@ -9,6 +9,7 @@
 using System;
 using UnityEngine;
 
+[XLua.LuaCallCSharp]
 public enum ResourceCacheType
 {
 	// 只用在读取配置（建议不要使用）

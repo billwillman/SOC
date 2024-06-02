@@ -37,6 +37,7 @@ namespace XLua
 				translator.RegisterPushAndGetAndUpdate<XLuaTest.Pedding>(translator.PushXLuaTestPedding, translator.Get, translator.UpdateXLuaTestPedding);
 				translator.RegisterPushAndGetAndUpdate<XLuaTest.MyStruct>(translator.PushXLuaTestMyStruct, translator.Get, translator.UpdateXLuaTestMyStruct);
 				translator.RegisterPushAndGetAndUpdate<XLuaTest.PushAsTableStruct>(translator.PushXLuaTestPushAsTableStruct, translator.Get, translator.UpdateXLuaTestPushAsTableStruct);
+				translator.RegisterPushAndGetAndUpdate<ResourceCacheType>(translator.PushResourceCacheType, translator.Get, translator.UpdateResourceCacheType);
 				translator.RegisterPushAndGetAndUpdate<Tutorial.TestEnum>(translator.PushTutorialTestEnum, translator.Get, translator.UpdateTutorialTestEnum);
 				translator.RegisterPushAndGetAndUpdate<Tutorial.DerivedClass.TestEnumInner>(translator.PushTutorialDerivedClassTestEnumInner, translator.Get, translator.UpdateTutorialDerivedClassTestEnumInner);
 				translator.RegisterPushAndGetAndUpdate<XLuaTest.MyEnum>(translator.PushXLuaTestMyEnum, translator.Get, translator.UpdateXLuaTestMyEnum);
@@ -772,6 +773,90 @@ namespace XLua
             }
         }
         
+        int ResourceCacheType_TypeID = -1;
+		int ResourceCacheType_EnumRef = -1;
+        
+        public void PushResourceCacheType(RealStatePtr L, ResourceCacheType val)
+        {
+            if (ResourceCacheType_TypeID == -1)
+            {
+			    bool is_first;
+                ResourceCacheType_TypeID = getTypeId(L, typeof(ResourceCacheType), out is_first);
+				
+				if (ResourceCacheType_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(ResourceCacheType));
+				    ResourceCacheType_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, ResourceCacheType_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, ResourceCacheType_TypeID);
+            if (!CopyByValue.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for ResourceCacheType ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, ResourceCacheType_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public void Get(RealStatePtr L, int index, out ResourceCacheType val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != ResourceCacheType_TypeID)
+				{
+				    throw new Exception("invalid userdata for ResourceCacheType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for ResourceCacheType");
+                }
+				val = (ResourceCacheType)e;
+                
+            }
+            else
+            {
+                val = (ResourceCacheType)objectCasters.GetCaster(typeof(ResourceCacheType))(L, index, null);
+            }
+        }
+		
+        public void UpdateResourceCacheType(RealStatePtr L, int index, ResourceCacheType val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != ResourceCacheType_TypeID)
+				{
+				    throw new Exception("invalid userdata for ResourceCacheType");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for ResourceCacheType ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
         int TutorialTestEnum_TypeID = -1;
 		int TutorialTestEnum_EnumRef = -1;
         
@@ -1185,6 +1270,12 @@ namespace XLua
 				translator.PushXLuaTestPushAsTableStruct(L, array[index]);
 				return true;
 			}
+			else if (type == typeof(ResourceCacheType[]))
+			{
+			    ResourceCacheType[] array = obj as ResourceCacheType[];
+				translator.PushResourceCacheType(L, array[index]);
+				return true;
+			}
 			else if (type == typeof(Tutorial.TestEnum[]))
 			{
 			    Tutorial.TestEnum[] array = obj as Tutorial.TestEnum[];
@@ -1278,6 +1369,12 @@ namespace XLua
 			else if (type == typeof(XLuaTest.PushAsTableStruct[]))
 			{
 			    XLuaTest.PushAsTableStruct[] array = obj as XLuaTest.PushAsTableStruct[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(ResourceCacheType[]))
+			{
+			    ResourceCacheType[] array = obj as ResourceCacheType[];
 				translator.Get(L, obj_idx, out array[array_idx]);
 				return true;
 			}
