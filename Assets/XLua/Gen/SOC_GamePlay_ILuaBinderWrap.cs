@@ -21,7 +21,7 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(SOC.GamePlay.ILuaBinder);
-			Utils.BeginObjectRegister(type, L, translator, 0, 6, 1, 1);
+			Utils.BeginObjectRegister(type, L, translator, 0, 6, 2, 2);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "RegisterLuaEvent", _m_RegisterLuaEvent);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "CallCustomLuaFunc", _m_CallCustomLuaFunc);
@@ -32,8 +32,10 @@ namespace XLua.CSObjectWrap
 			
 			
 			Utils.RegisterFunc(L, Utils.GETTER_IDX, "LuaPath", _g_get_LuaPath);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "SelfTarget", _g_get_SelfTarget);
             
 			Utils.RegisterFunc(L, Utils.SETTER_IDX, "LuaPath", _s_set_LuaPath);
+            Utils.RegisterFunc(L, Utils.SETTER_IDX, "SelfTarget", _s_set_SelfTarget);
             
 			
 			Utils.EndObjectRegister(type, L, translator, null, null,
@@ -263,6 +265,20 @@ namespace XLua.CSObjectWrap
             return 1;
         }
         
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_SelfTarget(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                SOC.GamePlay.ILuaBinder gen_to_be_invoked = (SOC.GamePlay.ILuaBinder)translator.FastGetCSObj(L, 1);
+                translator.Push(L, gen_to_be_invoked.SelfTarget);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -273,6 +289,21 @@ namespace XLua.CSObjectWrap
 			
                 SOC.GamePlay.ILuaBinder gen_to_be_invoked = (SOC.GamePlay.ILuaBinder)translator.FastGetCSObj(L, 1);
                 gen_to_be_invoked.LuaPath = LuaAPI.lua_tostring(L, 2);
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_SelfTarget(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                SOC.GamePlay.ILuaBinder gen_to_be_invoked = (SOC.GamePlay.ILuaBinder)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.SelfTarget = (UnityEngine.MonoBehaviour)translator.GetObject(L, 2, typeof(UnityEngine.MonoBehaviour));
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

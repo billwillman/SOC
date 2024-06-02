@@ -18,6 +18,7 @@ namespace SOC.GamePlay
     public class ILuaBinder : MonoBehaviour
     {
         public string LuaPath = string.Empty;
+        public MonoBehaviour SelfTarget = null;
 
         // LuaEvent_MonoEvent ”√intºı…ŸGC
         private Dictionary<int, LuaFunction> m_LuaEventMap = null;
