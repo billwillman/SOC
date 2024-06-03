@@ -164,6 +164,7 @@ namespace SOC.GamePlay
         public virtual void OnDestroyed() { }
         [DoNotGen]
         public virtual void OnUpdate() { }
+		[DoNotGen]
         public virtual void OnAwake() { }
     }
 }
