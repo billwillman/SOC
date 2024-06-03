@@ -16215,3 +16215,59 @@ Memory consumption went from 176.3 MB to 168.2 MB.
 Total: 11.263000 ms (FindLiveObjects: 0.724500 ms CreateObjectMapping: 0.360500 ms MarkObjects: 3.853900 ms  DeleteObjects: 6.323500 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 1652.951001 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ffb8cfa2aecfbbebb4834e7802f22519') in 0.0525469 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 81.290631 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3f956c1acd8e080703f04d40e9595b69') in 0.0025642 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 144.729279 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '61125510587ec2eab0e3f2b598b4d49a') in 0.0031691 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 307.724419 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '13f5d5512cf9453dac4213f55da719aa') in 0.0054438 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 129.682163 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '58765c2e2d9c4974e128416c8207d18f') in 0.0030643 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.359167 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5d368cc271ea23b7cf031be8696a177d') in 0.0024927 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.048012 seconds.
+  path: Assets/Resources/Character/Player/MoePlayerController.prefab
+  artifactKey: Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Character/Player/MoePlayerController.prefab using Guid(65d3d926e4f464149a1c2d780e4b9734) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3266fb1379b67ce63a6dad82f6d2d5c6') in 0.0057693 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
