@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XLua;
 
-namespace SOC.GamePlay.Player
+namespace SOC.GamePlay
 {
     [LuaCallCSharp]
     public class GameStart : MonoBehaviour
@@ -85,6 +85,16 @@ namespace SOC.GamePlay.Player
                         }
                     }
                 }
+            }
+        }
+
+        [DoNotGen]
+        public static LuaEnv EnvLua {
+            get {
+                if (Instance != null) {
+                    return Instance.m_LuaEnv;
+                }
+                return null;
             }
         }
 

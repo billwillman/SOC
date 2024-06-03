@@ -197,13 +197,13 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(SOC.GamePlay.ILuaBinder), SOCGamePlayILuaBinderWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(SOC.GamePlay.GameStart), SOCGamePlayGameStartWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.MoePlayerController), SOCGamePlayPlayerMoePlayerControllerWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.MoePlayerInput), SOCGamePlayPlayerMoePlayerInputWrap.__Register);
-        
-        
-            translator.DelayWrapLoader(typeof(SOC.GamePlay.Player.GameStart), SOCGamePlayPlayerGameStartWrap.__Register);
         
         
         

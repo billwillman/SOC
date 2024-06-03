@@ -31,9 +31,9 @@
 		<type fullname="NsHttpClient.HttpHelper" preserve="all"/>
 		<type fullname="SOC.GamePlay.MoeCharacterController" preserve="all"/>
 		<type fullname="SOC.GamePlay.ILuaBinder" preserve="all"/>
+		<type fullname="SOC.GamePlay.GameStart" preserve="all"/>
 		<type fullname="SOC.GamePlay.Player.MoePlayerController" preserve="all"/>
 		<type fullname="SOC.GamePlay.Player.MoePlayerInput" preserve="all"/>
-		<type fullname="SOC.GamePlay.Player.GameStart" preserve="all"/>
 		
 	</assembly>
 

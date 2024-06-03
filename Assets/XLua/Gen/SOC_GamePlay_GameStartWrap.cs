@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class SOCGamePlayPlayerGameStartWrap 
+    public class SOCGamePlayGameStartWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(SOC.GamePlay.Player.GameStart);
+			System.Type type = typeof(SOC.GamePlay.GameStart);
 			Utils.BeginObjectRegister(type, L, translator, 0, 0, 0, 0);
 			
 			
@@ -31,11 +31,12 @@ namespace XLua.CSObjectWrap
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 1, 1);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 1, 2, 1);
 			
 			
             
-			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "Instance", _g_get_Instance);
+			Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "EnvLua", _g_get_EnvLua);
+            Utils.RegisterFunc(L, Utils.CLS_GETTER_IDX, "Instance", _g_get_Instance);
             
 			Utils.RegisterFunc(L, Utils.CLS_SETTER_IDX, "Instance", _s_set_Instance);
             
@@ -52,7 +53,7 @@ namespace XLua.CSObjectWrap
 				if(LuaAPI.lua_gettop(L) == 1)
 				{
 					
-					var gen_ret = new SOC.GamePlay.Player.GameStart();
+					var gen_ret = new SOC.GamePlay.GameStart();
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -62,7 +63,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.Player.GameStart constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to SOC.GamePlay.GameStart constructor!");
             
         }
         
@@ -77,11 +78,23 @@ namespace XLua.CSObjectWrap
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_EnvLua(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			    translator.Push(L, SOC.GamePlay.GameStart.EnvLua);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _g_get_Instance(RealStatePtr L)
         {
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			    translator.Push(L, SOC.GamePlay.Player.GameStart.Instance);
+			    translator.Push(L, SOC.GamePlay.GameStart.Instance);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
@@ -95,7 +108,7 @@ namespace XLua.CSObjectWrap
         {
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			    SOC.GamePlay.Player.GameStart.Instance = (SOC.GamePlay.Player.GameStart)translator.GetObject(L, 1, typeof(SOC.GamePlay.Player.GameStart));
+			    SOC.GamePlay.GameStart.Instance = (SOC.GamePlay.GameStart)translator.GetObject(L, 1, typeof(SOC.GamePlay.GameStart));
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

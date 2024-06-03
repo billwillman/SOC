@@ -23,12 +23,18 @@ namespace SOC.GamePlay
         // LuaEvent_MonoEvent 用int减少GC
         private Dictionary<int, LuaFunction> m_LuaEventMap = null;
         private LuaTable m_LuaSelf = null;
+        private LuaTable m_LuaClass = null;
         private bool m_IsDestroyed = false;
-        
-        // 根据LuaPath获取对应LUA的对象实例，然后赋值
-        [DoNotGen]
-        private void RegisterLuaSelf(LuaTable self) {
-            m_LuaSelf = self;
+        public LuaTable LuaSelf {
+            get {
+                return m_LuaSelf;
+            }
+        }
+
+        public LuaTable LuaClass {
+            get {
+                return m_LuaClass;
+            }
         }
 
         public void RegisterLuaEvent(int evtType, LuaFunction func) {
@@ -48,6 +54,32 @@ namespace SOC.GamePlay
         }
 
         [DoNotGen]
+        void LoadLua() {
+            if (m_LuaClass != null) {
+                m_LuaClass.Dispose();
+                m_LuaClass = null;
+            }
+            if (string.IsNullOrEmpty(LuaPath) || SelfTarget == null)
+                return;
+            var env = GameStart.EnvLua;
+            if (env == null)
+                return;
+            var rets = env.DoString(string.Format("require(\"{0}\")", LuaPath), SelfTarget.name);
+            if (rets != null && rets.Length > 0) {
+                LuaTable luaClass = rets[0] as LuaTable;
+                if (luaClass != null) {
+                    LuaFunction constructorFunc = luaClass.Get<LuaFunction>("New");
+                    if (constructorFunc != null) {
+                        m_LuaSelf = constructorFunc.Func<MonoBehaviour, LuaTable>(SelfTarget);
+                        m_LuaClass = luaClass;
+                    } else {
+                        m_LuaSelf = luaClass;
+                    }
+                }
+            }
+        }
+
+        [DoNotGen]
         private bool CallLuaFunc(LuaEvent_MonoEventType evtType) {
             if (m_LuaEventMap == null)
                 return true;
@@ -60,6 +92,7 @@ namespace SOC.GamePlay
 
         [DoNotGen]
         private void Awake() {
+            LoadLua();
             // 加载Lua
             if (CallLuaFunc(LuaEvent_MonoEventType.Awake)) {
                 OnAwake();
@@ -110,6 +143,10 @@ namespace SOC.GamePlay
             if (m_LuaSelf != null) {
                 m_LuaSelf.Dispose();
                 m_LuaSelf = null;
+            }
+            if (m_LuaClass != null) {
+                m_LuaClass.Dispose();
+                m_LuaClass = null;
             }
         }
 
