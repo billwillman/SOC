@@ -254,6 +254,9 @@ namespace NsHttpClient
 				if (m_OrgStream.CanTimeout)
 					m_OrgStream.ReadTimeout = _cReadTimeOut;
                 System.Threading.Interlocked.Exchange(ref m_MaxReadBytes, rep.ContentLength);
+
+                MakeCookies(client, rep);
+
 				//m_MaxReadBytes = rep.ContentLength;
 				if (m_MaxReadBytes == -1) {
                     // 有些页面会返回-1，ContentLength会忽略 
@@ -301,6 +304,18 @@ namespace NsHttpClient
                 OnReadEvt(this, ReadBytes + read);
             }
 		}
+
+        private bool m_IsInitCookies = false;
+        private void MakeCookies(HttpClient client, HttpWebResponse rep) {
+            if (m_IsInitCookies || client == null)
+                return;
+
+             //  int cnt = rep.Cookies != null ? rep.Cookies.Count : 0;
+            //   Console.WriteLine(StringHelper.Format("CookCount: {0:D}", cnt));
+
+            client.RepCookie = rep.Headers.Get("set-cookie");
+          //  Console.WriteLine(StringHelper.Format("Cookie: {0}", client.RepCookie));
+        }
 
 		private static void OnRead(IAsyncResult result)
 		{
@@ -396,7 +411,13 @@ namespace NsHttpClient
     [XLua.LuaCallCSharp]
     public class HttpClient: DisposeObject
 	{
-		public HttpClient()
+
+        public string RepCookie {
+            get;
+            internal set;
+        }
+
+        public HttpClient()
 		{}
 
 		public HttpClient(string url, IHttpClientListener listener, float connectTimeOut, float readTimeOut = 5.0f,
@@ -602,6 +623,9 @@ namespace NsHttpClient
             m_Url = string.Empty;
 			m_TimeOut = 5.0f;
             m_ReadTimeOut = 5.0f;
+            this.RepCookie = null;
+            this.m_DefaultContentType = "application/x-www-form-urlencoded";
+            ReqCookie = null;
             ResetReadTimeOut();
             ResetConnectTimeOut();
         }
@@ -787,8 +811,10 @@ namespace NsHttpClient
             return ret;
         }
 
-        public static string GetPostDefaultContentType() {
-            return "application/x-www-form-urlencoded";
+        public string m_DefaultContentType = "application/x-www-form-urlencoded";
+
+        public string GetPostDefaultContentType() {
+            return m_DefaultContentType;
         }
 
         // 上传文件会要用到的
@@ -875,6 +901,12 @@ namespace NsHttpClient
                 }
             }
 
+            //Console.WriteLine("C# ReqCookie: " + ReqCookie);
+            if (!string.IsNullOrEmpty(ReqCookie)) {
+                //Console.WriteLine("C# ReqCookie: " + ReqCookie);
+                m_Req.Headers.Add("Cookie", ReqCookie);
+            }
+
             if (m_ClientType == HttpClientType.httpGet) {
                 m_Req.Method = "GET";
                 StartResponse();
@@ -942,6 +974,11 @@ namespace NsHttpClient
 		{
 			return true;
 		}
+
+        public string ReqCookie {
+            get;
+            set;
+        }
 
 		private string m_Url;
 		private float m_TimeOut = 5.0f;

@@ -21,28 +21,33 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(NsHttpClient.HttpClient);
-			Utils.BeginObjectRegister(type, L, translator, 0, 2, 5, 1);
+			Utils.BeginObjectRegister(type, L, translator, 0, 3, 8, 3);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Init", _m_Init);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Dispose", _m_Dispose);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "GetPostDefaultContentType", _m_GetPostDefaultContentType);
 			
 			
-			Utils.RegisterFunc(L, Utils.GETTER_IDX, "Url", _g_get_Url);
+			Utils.RegisterFunc(L, Utils.GETTER_IDX, "RepCookie", _g_get_RepCookie);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "Url", _g_get_Url);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "Timeout", _g_get_Timeout);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "ReadTimeout", _g_get_ReadTimeout);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "UserData", _g_get_UserData);
             Utils.RegisterFunc(L, Utils.GETTER_IDX, "Listener", _g_get_Listener);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "ReqCookie", _g_get_ReqCookie);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "m_DefaultContentType", _g_get_m_DefaultContentType);
             
 			Utils.RegisterFunc(L, Utils.SETTER_IDX, "UserData", _s_set_UserData);
+            Utils.RegisterFunc(L, Utils.SETTER_IDX, "ReqCookie", _s_set_ReqCookie);
+            Utils.RegisterFunc(L, Utils.SETTER_IDX, "m_DefaultContentType", _s_set_m_DefaultContentType);
             
 			
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
 
-		    Utils.BeginClassRegister(type, L, __CreateInstance, 4, 0, 0);
+		    Utils.BeginClassRegister(type, L, __CreateInstance, 3, 0, 0);
 			Utils.RegisterFunc(L, Utils.CLS_IDX, "ResetServerPointCallBack", _m_ResetServerPointCallBack_xlua_st_);
             Utils.RegisterFunc(L, Utils.CLS_IDX, "GetPostUpFileContentType", _m_GetPostUpFileContentType_xlua_st_);
-            Utils.RegisterFunc(L, Utils.CLS_IDX, "GetPostDefaultContentType", _m_GetPostDefaultContentType_xlua_st_);
             
 			
             
@@ -381,16 +386,20 @@ namespace XLua.CSObjectWrap
         }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int _m_GetPostDefaultContentType_xlua_st_(RealStatePtr L)
+        static int _m_GetPostDefaultContentType(RealStatePtr L)
         {
 		    try {
             
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
                     
-                        var gen_ret = NsHttpClient.HttpClient.GetPostDefaultContentType(  );
+                        var gen_ret = gen_to_be_invoked.GetPostDefaultContentType(  );
                         LuaAPI.lua_pushstring(L, gen_ret);
                     
                     
@@ -406,6 +415,20 @@ namespace XLua.CSObjectWrap
         
         
         
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_RepCookie(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushstring(L, gen_to_be_invoked.RepCookie);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _g_get_Url(RealStatePtr L)
@@ -477,6 +500,34 @@ namespace XLua.CSObjectWrap
             return 1;
         }
         
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_ReqCookie(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushstring(L, gen_to_be_invoked.ReqCookie);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_m_DefaultContentType(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
+                LuaAPI.lua_pushstring(L, gen_to_be_invoked.m_DefaultContentType);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
         
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -487,6 +538,36 @@ namespace XLua.CSObjectWrap
 			
                 NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
                 gen_to_be_invoked.UserData = translator.GetObject(L, 2, typeof(object));
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_ReqCookie(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.ReqCookie = LuaAPI.lua_tostring(L, 2);
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_m_DefaultContentType(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                NsHttpClient.HttpClient gen_to_be_invoked = (NsHttpClient.HttpClient)translator.FastGetCSObj(L, 1);
+                gen_to_be_invoked.m_DefaultContentType = LuaAPI.lua_tostring(L, 2);
             
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

@@ -72,7 +72,7 @@ namespace XLua.CSObjectWrap
             
 			    int gen_param_count = LuaAPI.lua_gettop(L);
             
-                if(gen_param_count == 9&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 4)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& (LuaAPI.lua_isnil(L, 7) || LuaAPI.lua_type(L, 7) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 8)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 9)) 
+                if(gen_param_count == 11&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 4)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& (LuaAPI.lua_isnil(L, 7) || LuaAPI.lua_type(L, 7) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 8)&& (LuaAPI.lua_isnil(L, 9) || LuaAPI.lua_type(L, 9) == LuaTypes.LUA_TSTRING)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 10)&& (LuaAPI.lua_isnil(L, 11) || LuaAPI.lua_type(L, 11) == LuaTypes.LUA_TSTRING)) 
                 {
                     string _url = LuaAPI.lua_tostring(L, 1);
                     NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
@@ -82,9 +82,50 @@ namespace XLua.CSObjectWrap
                     float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 6);
                     string _postStr = LuaAPI.lua_tostring(L, 7);
                     bool _isKeepAlive = LuaAPI.lua_toboolean(L, 8);
-                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 9, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    string _cookie = LuaAPI.lua_tostring(L, 9);
+                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 10, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    string _defaultContentType = LuaAPI.lua_tostring(L, 11);
                     
-                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _certs );
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie, _certs, _defaultContentType );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 10&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 4)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& (LuaAPI.lua_isnil(L, 7) || LuaAPI.lua_type(L, 7) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 8)&& (LuaAPI.lua_isnil(L, 9) || LuaAPI.lua_type(L, 9) == LuaTypes.LUA_TSTRING)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 10)) 
+                {
+                    string _url = LuaAPI.lua_tostring(L, 1);
+                    NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
+                    System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus> _OnEnd = translator.GetDelegate<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3);
+                    System.Action<NsHttpClient.HttpClient> _OnProcess = translator.GetDelegate<System.Action<NsHttpClient.HttpClient>>(L, 4);
+                    float _connectTimeOut = (float)LuaAPI.lua_tonumber(L, 5);
+                    float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 6);
+                    string _postStr = LuaAPI.lua_tostring(L, 7);
+                    bool _isKeepAlive = LuaAPI.lua_toboolean(L, 8);
+                    string _cookie = LuaAPI.lua_tostring(L, 9);
+                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 10, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie, _certs );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 9&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 4)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& (LuaAPI.lua_isnil(L, 7) || LuaAPI.lua_type(L, 7) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 8)&& (LuaAPI.lua_isnil(L, 9) || LuaAPI.lua_type(L, 9) == LuaTypes.LUA_TSTRING)) 
+                {
+                    string _url = LuaAPI.lua_tostring(L, 1);
+                    NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
+                    System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus> _OnEnd = translator.GetDelegate<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 3);
+                    System.Action<NsHttpClient.HttpClient> _OnProcess = translator.GetDelegate<System.Action<NsHttpClient.HttpClient>>(L, 4);
+                    float _connectTimeOut = (float)LuaAPI.lua_tonumber(L, 5);
+                    float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 6);
+                    string _postStr = LuaAPI.lua_tostring(L, 7);
+                    bool _isKeepAlive = LuaAPI.lua_toboolean(L, 8);
+                    string _cookie = LuaAPI.lua_tostring(L, 9);
+                    
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie );
                         translator.Push(L, gen_ret);
                     
                     
@@ -196,7 +237,7 @@ namespace XLua.CSObjectWrap
                     
                     return 1;
                 }
-                if(gen_param_count == 10&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3) || LuaAPI.lua_isint64(L, 3))&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 7)&& (LuaAPI.lua_isnil(L, 8) || LuaAPI.lua_type(L, 8) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 9)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 10)) 
+                if(gen_param_count == 12&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3) || LuaAPI.lua_isint64(L, 3))&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 7)&& (LuaAPI.lua_isnil(L, 8) || LuaAPI.lua_type(L, 8) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 9)&& (LuaAPI.lua_isnil(L, 10) || LuaAPI.lua_type(L, 10) == LuaTypes.LUA_TSTRING)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 11)&& (LuaAPI.lua_isnil(L, 12) || LuaAPI.lua_type(L, 12) == LuaTypes.LUA_TSTRING)) 
                 {
                     string _url = LuaAPI.lua_tostring(L, 1);
                     NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
@@ -207,9 +248,52 @@ namespace XLua.CSObjectWrap
                     float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 7);
                     string _postStr = LuaAPI.lua_tostring(L, 8);
                     bool _isKeepAlive = LuaAPI.lua_toboolean(L, 9);
-                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 10, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    string _cookie = LuaAPI.lua_tostring(L, 10);
+                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 11, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    string _defaultContentType = LuaAPI.lua_tostring(L, 12);
                     
-                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _filePos, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _certs );
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _filePos, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie, _certs, _defaultContentType );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 11&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3) || LuaAPI.lua_isint64(L, 3))&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 7)&& (LuaAPI.lua_isnil(L, 8) || LuaAPI.lua_type(L, 8) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 9)&& (LuaAPI.lua_isnil(L, 10) || LuaAPI.lua_type(L, 10) == LuaTypes.LUA_TSTRING)&& translator.Assignable<System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>>(L, 11)) 
+                {
+                    string _url = LuaAPI.lua_tostring(L, 1);
+                    NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
+                    long _filePos = LuaAPI.lua_toint64(L, 3);
+                    System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus> _OnEnd = translator.GetDelegate<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4);
+                    System.Action<NsHttpClient.HttpClient> _OnProcess = translator.GetDelegate<System.Action<NsHttpClient.HttpClient>>(L, 5);
+                    float _connectTimeOut = (float)LuaAPI.lua_tonumber(L, 6);
+                    float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 7);
+                    string _postStr = LuaAPI.lua_tostring(L, 8);
+                    bool _isKeepAlive = LuaAPI.lua_toboolean(L, 9);
+                    string _cookie = LuaAPI.lua_tostring(L, 10);
+                    System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate> _certs = (System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>)translator.GetObject(L, 11, typeof(System.Collections.Generic.List<System.Security.Cryptography.X509Certificates.X509Certificate>));
+                    
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _filePos, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie, _certs );
+                        translator.Push(L, gen_ret);
+                    
+                    
+                    
+                    return 1;
+                }
+                if(gen_param_count == 10&& (LuaAPI.lua_isnil(L, 1) || LuaAPI.lua_type(L, 1) == LuaTypes.LUA_TSTRING)&& translator.Assignable<NsHttpClient.HttpClientResponse>(L, 2)&& (LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 3) || LuaAPI.lua_isint64(L, 3))&& translator.Assignable<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4)&& translator.Assignable<System.Action<NsHttpClient.HttpClient>>(L, 5)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 6)&& LuaTypes.LUA_TNUMBER == LuaAPI.lua_type(L, 7)&& (LuaAPI.lua_isnil(L, 8) || LuaAPI.lua_type(L, 8) == LuaTypes.LUA_TSTRING)&& LuaTypes.LUA_TBOOLEAN == LuaAPI.lua_type(L, 9)&& (LuaAPI.lua_isnil(L, 10) || LuaAPI.lua_type(L, 10) == LuaTypes.LUA_TSTRING)) 
+                {
+                    string _url = LuaAPI.lua_tostring(L, 1);
+                    NsHttpClient.HttpClientResponse _listener = (NsHttpClient.HttpClientResponse)translator.GetObject(L, 2, typeof(NsHttpClient.HttpClientResponse));
+                    long _filePos = LuaAPI.lua_toint64(L, 3);
+                    System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus> _OnEnd = translator.GetDelegate<System.Action<NsHttpClient.HttpClient, NsHttpClient.HttpListenerStatus>>(L, 4);
+                    System.Action<NsHttpClient.HttpClient> _OnProcess = translator.GetDelegate<System.Action<NsHttpClient.HttpClient>>(L, 5);
+                    float _connectTimeOut = (float)LuaAPI.lua_tonumber(L, 6);
+                    float _readTimeOut = (float)LuaAPI.lua_tonumber(L, 7);
+                    string _postStr = LuaAPI.lua_tostring(L, 8);
+                    bool _isKeepAlive = LuaAPI.lua_toboolean(L, 9);
+                    string _cookie = LuaAPI.lua_tostring(L, 10);
+                    
+                        var gen_ret = NsHttpClient.HttpHelper.OpenUrl( _url, _listener, _filePos, _OnEnd, _OnProcess, _connectTimeOut, _readTimeOut, _postStr, _isKeepAlive, _cookie );
                         translator.Push(L, gen_ret);
                     
                     
