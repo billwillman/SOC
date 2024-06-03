@@ -54,11 +54,31 @@ namespace SOC.GamePlay
         }
 
         [DoNotGen]
-        void LoadLua() {
+        void DoDestroyLuaObject() {
+            if (m_LuaEventMap != null) {
+                var iter = m_LuaEventMap.GetEnumerator();
+                while (iter.MoveNext()) {
+                    var func = iter.Current.Value;
+                    if (func != null) {
+                        func.Dispose();
+                    }
+                }
+                iter.Dispose();
+                m_LuaEventMap.Clear();
+            }
+            if (m_LuaSelf != null) {
+                m_LuaSelf.Dispose();
+                m_LuaSelf = null;
+            }
             if (m_LuaClass != null) {
                 m_LuaClass.Dispose();
                 m_LuaClass = null;
             }
+        }
+
+        [DoNotGen]
+        void LoadLua() {
+            DoDestroyLuaObject();
             if (string.IsNullOrEmpty(LuaPath) || SelfTarget == null)
                 return;
             var env = GameStart.EnvLua;
@@ -129,25 +149,7 @@ namespace SOC.GamePlay
             if (CallLuaFunc(LuaEvent_MonoEventType.Destroyed)) {
                 OnDestroyed();
             }
-            if (m_LuaEventMap != null) {
-                var iter = m_LuaEventMap.GetEnumerator();
-                while (iter.MoveNext()) {
-                    var func = iter.Current.Value;
-                    if (func != null) {
-                        func.Dispose();
-                    }
-                }
-                iter.Dispose();
-                m_LuaEventMap.Clear();
-            }
-            if (m_LuaSelf != null) {
-                m_LuaSelf.Dispose();
-                m_LuaSelf = null;
-            }
-            if (m_LuaClass != null) {
-                m_LuaClass.Dispose();
-                m_LuaClass = null;
-            }
+            DoDestroyLuaObject();
         }
 
         [DoNotGen]
