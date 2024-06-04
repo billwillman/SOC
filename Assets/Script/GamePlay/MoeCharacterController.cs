@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using KinematicCharacterController;
+using Animancer;
 
 namespace SOC.GamePlay
 {
@@ -10,7 +11,8 @@ namespace SOC.GamePlay
     [XLua.LuaCallCSharp]
     public class MoeCharacterController : NetworkBehaviour, ICharacterController
     {
-        private KinematicCharacterMotor m_CharacterMotor;
+        private KinematicCharacterMotor m_CharacterMotor = null;
+        private AnimancerComponent m_Animancer = null; // 从Body上获取
         void Awake() {
             m_CharacterMotor = GetComponent<KinematicCharacterMotor>();
             if (m_CharacterMotor != null)
