@@ -2067,7 +2067,7 @@ MonoBehaviour:
   MaxStableSlopeAngle: 60
   StableGroundLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   DiscreteCollisionEvents: 0
   StepHandling: 1
   MaxStepHeight: 0.5

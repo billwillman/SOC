@@ -623,6 +623,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7606380463191819097, guid: e4e8fed3c57439646b1fb9a87e5618da,
+        type: 3}
+      propertyPath: StableGroundLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
