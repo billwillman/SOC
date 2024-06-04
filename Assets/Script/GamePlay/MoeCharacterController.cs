@@ -10,6 +10,13 @@ namespace SOC.GamePlay
     [XLua.LuaCallCSharp]
     public class MoeCharacterController : NetworkBehaviour, ICharacterController
     {
+        private KinematicCharacterMotor m_CharacterMotor;
+        void Awake() {
+            m_CharacterMotor = GetComponent<KinematicCharacterMotor>();
+            if (m_CharacterMotor != null)
+                m_CharacterMotor.CharacterController = this;
+        }
+
         // ------------------------------------------- Collision and Slide 移动控制相关 ---------------------------------------- //
         /// <summary>
         /// This is called when the motor wants to know what its rotation should be right now
