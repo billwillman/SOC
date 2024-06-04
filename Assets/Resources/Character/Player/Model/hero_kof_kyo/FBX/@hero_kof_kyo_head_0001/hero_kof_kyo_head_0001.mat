@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hero_kof_kyo_body_0002
+  m_Name: hero_kof_kyo_head_0001
   m_Shader: {fileID: 4800000, guid: f422d8c960de0c944aa52fb6c42d41b1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -58,15 +58,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 016ab633982084f4aa9146046d001cb5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3e7d3bab13242ff459771c1cc984c643, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: d10fa76722808b24da4ba7ff2034c50e, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapDiff:
-        m_Texture: {fileID: 2800000, guid: 66aba7be37ad5224d9e2eb2626c39309, type: 3}
+        m_Texture: {fileID: 2800000, guid: 866231b27226dbf4eb05a28159d4c4f5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapReflA:
@@ -74,7 +74,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapReflB:
-        m_Texture: {fileID: 2800000, guid: d893d2168cb6cd5439f5028c0deb6955, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapReflG:
@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatcapReflR:
-        m_Texture: {fileID: 2800000, guid: 1275622d943700f41a8dd818cd36873a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -124,7 +124,7 @@ Material:
     - _OutlineSaturation: 1
     - _OutlineWidth: 1
     - _Parallax: 0.02
-    - _ReflAmount: 0.495
+    - _ReflAmount: 0.36
     - _Reflect: 1
     - _ReflectA: 0
     - _ReflectB: 0
