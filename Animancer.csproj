@@ -72,8 +72,8 @@
     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\DontAllowFade.cs" />
     <Compile Include="Assets\Plugins\Animancer\Utilities\ExitEvent.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\Units\UnitsAttribute.cs" />
-    <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\AnimationModifierTool.cs" />
+    <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerPlayable.cs" />
     <Compile Include="Assets\Plugins\Animancer\Utilities\Custom Fade\Easing.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Validate.Value.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Collections\ObjectPool.cs" />
@@ -113,10 +113,10 @@
     <Compile Include="Assets\Plugins\Animancer\Internal\Mixer States\ManualMixerState.cs" />
     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\ManualMixerTransitionAsset.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\ICharacterRoot.cs" />
-    <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IWrapper.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Core\AnimancerUtilities.cs" />
-    <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\AttributeCache.cs" />
+    <Compile Include="Assets\Plugins\Animancer\Internal\Interfaces\IWrapper.cs" />
     <Compile Include="Assets\Plugins\Animancer\Utilities\Transitions\PlayableAssetTransitionAsset.cs" />
+    <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Attributes\AttributeCache.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\AnimationClipPreview.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Transition Preview Window\TransitionPreviewWindow.cs" />
     <Compile Include="Assets\Plugins\Animancer\Internal\Editor\Animancer Tools\PackTexturesTool.cs" />
