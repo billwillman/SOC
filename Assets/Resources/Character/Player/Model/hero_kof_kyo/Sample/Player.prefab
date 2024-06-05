@@ -163,7 +163,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2669854071043817520}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: a2728f7790f485244b69cebab03e25e3, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1
@@ -2121,6 +2121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152b87575f46ace4a8dda4c0d0c2b0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Head: {fileID: 6432076495148041872}
+  m_Body: {fileID: 8978359185048615677}
+  m_Weapon: {fileID: 2669854071038545054}
+  m_Hair: {fileID: 6432076495148041874}
 --- !u!114 &1019826167386358128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2971,7 +2975,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6432076495151221754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 4b2a046338043174b8c28366969da0fa, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1

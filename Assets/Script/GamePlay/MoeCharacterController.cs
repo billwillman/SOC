@@ -13,10 +13,21 @@ namespace SOC.GamePlay
     {
         private KinematicCharacterMotor m_CharacterMotor = null;
         private AnimancerComponent m_Animancer = null; // 从Body上获取
+
+        public SkinnedMeshRenderer m_Head = null;
+        public SkinnedMeshRenderer m_Body = null;
+        public SkinnedMeshRenderer m_Weapon = null;
+        public SkinnedMeshRenderer m_Hair = null;
+
         void Awake() {
+            InitSkinMesh();
             m_CharacterMotor = GetComponent<KinematicCharacterMotor>();
             if (m_CharacterMotor != null)
                 m_CharacterMotor.CharacterController = this;
+        }
+
+        void InitSkinMesh() {
+           
         }
 
         // ------------------------------------------- Collision and Slide 移动控制相关 ---------------------------------------- //
