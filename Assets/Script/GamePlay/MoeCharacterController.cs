@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using KinematicCharacterController;
 using Animancer;
+using System.Collections.Generic;
 
 namespace SOC.GamePlay
 {
@@ -18,6 +19,8 @@ namespace SOC.GamePlay
         public SkinnedMeshRenderer m_Body = null;
         public SkinnedMeshRenderer m_Weapon = null;
         public SkinnedMeshRenderer m_Hair = null;
+
+        public List<SkinnedMeshRenderer> m_OtherSkinedMeshList = null;
 
         void Awake() {
             InitSkinMesh();
