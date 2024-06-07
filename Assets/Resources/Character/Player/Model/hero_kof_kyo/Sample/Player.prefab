@@ -2125,6 +2125,7 @@ MonoBehaviour:
   m_Body: {fileID: 8978359185048615677}
   m_Weapon: {fileID: 2669854071038545054}
   m_Hair: {fileID: 6432076495148041874}
+  m_OtherSkinedMeshList: []
 --- !u!114 &1019826167386358128
 MonoBehaviour:
   m_ObjectHideFlags: 0
