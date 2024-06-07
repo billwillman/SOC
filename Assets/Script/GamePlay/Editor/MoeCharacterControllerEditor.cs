@@ -44,18 +44,20 @@ namespace SOC.GamePlay
                         Transform newRootBone = bodyRootTrans.Find(path);
                         if (newRootBone != null) {
                             other.rootBone = newRootBone;
-                            // 处理最大骨骼数量，然后处理bindPoses
-                            //other.bones
-                            // other.sharedMesh.bindposes
-                            if (otherRootTrans != null) {
-                                Animator otherAnim = otherRootTrans.GetComponent<Animator>();
-                                if (otherAnim != null) {
-                                    otherAnim.enabled = false;
-                                    GameObject.DestroyImmediate(otherAnim);
-                                }
-                            }
+                            
                         }
                     }
+                }
+            }
+            // 合并骨骼，并且需要生成一个Mesh的VertexIndex
+            // 处理最大骨骼数量，然后处理bindPoses
+            //other.bones = body.bones;
+            // other.sharedMesh.bindposes
+            if (otherRootTrans != null) {
+                Animator otherAnim = otherRootTrans.GetComponent<Animator>();
+                if (otherAnim != null) {
+                    otherAnim.enabled = false;
+                    GameObject.DestroyImmediate(otherAnim);
                 }
             }
         }
