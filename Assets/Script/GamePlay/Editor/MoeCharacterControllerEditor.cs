@@ -49,7 +49,7 @@ namespace SOC.GamePlay
                     }
                 }
             }
-            // 合并骨骼，并且需要生成一个Mesh的VertexIndex
+            // 合并骨骼，并且需要生成一个Mesh的VertexIndex, 最后要自己生成一个Mesh的资产
             // 处理最大骨骼数量，然后处理bindPoses
             //other.bones = body.bones;
             // other.sharedMesh.bindposes
