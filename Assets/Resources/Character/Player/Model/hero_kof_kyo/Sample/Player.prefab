@@ -116,7 +116,7 @@ SkinnedMeshRenderer:
   - {fileID: 2669854071043988980}
   - {fileID: 2669854071043988972}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 2669854071043988960}
+  m_RootBone: {fileID: 8978359185043827625}
   m_AABB:
     m_Center: {x: -0.0045199543, y: -0.0776697, z: 0.46507287}
     m_Extent: {x: 0.44880444, y: 0.16184852, z: 0.519197}
@@ -130,7 +130,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2669854071043988944}
-  - component: {fileID: 2669854071034475102}
   m_Layer: 0
   m_Name: weapon_kof_kyo_0002
   m_TagString: Untagged
@@ -155,28 +154,6 @@ Transform:
   - {fileID: 2669854071043988942}
   m_Father: {fileID: 1241827662112262665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2669854071034475102
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2669854071043817520}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: a2728f7790f485244b69cebab03e25e3, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2669854071043817522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,8 +2077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1038091058
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1894525754
+  InScenePlacedSourceGlobalObjectIdHash: 910853700
   AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2121,6 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152b87575f46ace4a8dda4c0d0c2b0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animancer: {fileID: 843423730710026471}
   m_Head: {fileID: 6432076495148041872}
   m_Body: {fileID: 8978359185048615677}
   m_Weapon: {fileID: 2669854071038545054}
@@ -2804,7 +2782,7 @@ SkinnedMeshRenderer:
   - {fileID: 6432076495151650704}
   - {fileID: 6432076495151650740}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 6432076495151650740}
+  m_RootBone: {fileID: 8978359185043827615}
   m_AABB:
     m_Center: {x: -0.16995057, y: -0.0013367385, z: 0.0048239306}
     m_Extent: {x: 0.12632596, y: 0.13281627, z: 0.13853627}
@@ -2928,7 +2906,7 @@ SkinnedMeshRenderer:
   - {fileID: 6432076495151650722}
   - {fileID: 6432076495151650720}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 6432076495151650740}
+  m_RootBone: {fileID: 8978359185043827615}
   m_AABB:
     m_Center: {x: -0.13252768, y: 0.049545802, z: -0.00000013411045}
     m_Extent: {x: 0.10174531, y: 0.07614825, z: 0.08624659}
@@ -2942,7 +2920,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6432076495151650714}
-  - component: {fileID: 6432076495143942226}
   m_Layer: 0
   m_Name: hero_kof_kyo_head_0001
   m_TagString: Untagged
@@ -2968,28 +2945,6 @@ Transform:
   - {fileID: 6432076495151650718}
   m_Father: {fileID: 1241827662112262665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6432076495143942226
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6432076495151221754}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 4b2a046338043174b8c28366969da0fa, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6432076495151221758
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,6 +4265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8978359185043827275}
   - component: {fileID: 8978359185052910653}
+  - component: {fileID: 843423730710026471}
   m_Layer: 0
   m_Name: hero_kof_kyo_body_0002
   m_TagString: Untagged
@@ -4356,6 +4312,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &843423730710026471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978359185043404395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 8978359185052910653}
+  _ActionOnDisable: 0
 --- !u!1 &8978359185043404397
 GameObject:
   m_ObjectHideFlags: 0

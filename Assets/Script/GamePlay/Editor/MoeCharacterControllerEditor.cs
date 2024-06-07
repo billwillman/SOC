@@ -23,7 +23,7 @@ namespace SOC.GamePlay
                 builder.Insert(0, bone.name + "/");
             }
             bone = bone.parent;
-            GetBonePath(bone, ref builder);
+            GetBonePath(bone, ref builder, root);
         }
 
         private static void ProcessSkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other) {
@@ -46,6 +46,7 @@ namespace SOC.GamePlay
                             if (otherRootTrans != null) {
                                 Animator otherAnim = otherRootTrans.GetComponent<Animator>();
                                 if (otherAnim != null) {
+                                    otherAnim.enabled = false;
                                     GameObject.DestroyImmediate(otherAnim);
                                 }
                             }
@@ -55,7 +56,7 @@ namespace SOC.GamePlay
             }
         }
 
-        void ProcessBodySkinnedMesh(SkinnedMeshRenderer body) {
+        static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body) {
             if (body == null)
                 return;
             Transform parent = body.transform.parent;
@@ -70,6 +71,7 @@ namespace SOC.GamePlay
                 animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
             }
             animancerComp.enabled = true;
+            controller.m_Animancer = animancerComp;
         }
 
         public override void OnInspectorGUI() {
@@ -85,7 +87,7 @@ namespace SOC.GamePlay
                             ProcessSkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
                         }
                     }
-                    ProcessBodySkinnedMesh(controller.m_Body);
+                    ProcessBodySkinnedMesh(controller, controller.m_Body);
                     this.SetDirty();
                     this.SaveChanges();
                 }
