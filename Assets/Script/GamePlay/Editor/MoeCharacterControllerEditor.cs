@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEditor;
+using Unity.Netcode;
 
 namespace SOC.GamePlay
 {
@@ -43,6 +44,9 @@ namespace SOC.GamePlay
                         Transform newRootBone = bodyRootTrans.Find(path);
                         if (newRootBone != null) {
                             other.rootBone = newRootBone;
+                            // 处理最大骨骼数量，然后处理bindPoses
+                            //other.bones
+                            // other.sharedMesh.bindposes
                             if (otherRootTrans != null) {
                                 Animator otherAnim = otherRootTrans.GetComponent<Animator>();
                                 if (otherAnim != null) {
@@ -74,6 +78,17 @@ namespace SOC.GamePlay
             controller.m_Animancer = animancerComp;
         }
 
+        static void ProcessControllerRoot(MoeCharacterController controller) {
+            if (controller == null)
+                return;
+            NetworkObject netObject = controller.GetComponent<NetworkObject>();
+            if (netObject != null) {
+                netObject.enabled = true;
+                netObject.AlwaysReplicateAsRoot = true;
+                netObject.SynchronizeTransform = true;
+            }
+        }
+
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
             if (GUILayout.Button("角色标准化")) {
@@ -88,6 +103,7 @@ namespace SOC.GamePlay
                         }
                     }
                     ProcessBodySkinnedMesh(controller, controller.m_Body);
+                    ProcessControllerRoot(controller);
                     this.SetDirty();
                     this.SaveChanges();
                 }
