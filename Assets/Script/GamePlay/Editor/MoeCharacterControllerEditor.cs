@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 using Unity.Netcode;
@@ -27,7 +28,7 @@ namespace SOC.GamePlay
             GetBonePath(bone, ref builder, root);
         }
 
-        private static void ProcessSkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other) {
+        private void ProcessSkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other) {
             if (body == null || other == null)
                 return;
             var otherBone = other.rootBone;
@@ -77,13 +78,30 @@ namespace SOC.GamePlay
                 }
                 if (oldBoneToNewBoneMap.Count > 0) {
                     // Clone Mesh
-                    //--
-                    var iter = oldBoneToNewBoneMap.GetEnumerator();
-                    while (iter.MoveNext()) {
+                    Mesh OrignMesh = other.sharedMesh;
+                    if (OrignMesh != null) {
+                        string meshFilePath = AssetDatabase.GetAssetPath(OrignMesh);
+                        if (!string.IsNullOrEmpty(meshFilePath)) {
+                            string ext = Path.GetExtension(meshFilePath);
+                            if (string.Compare(ext, ".fbx", true) == 0) {
+                                Mesh targetMesh = Instantiate<Mesh>(OrignMesh);
+                                meshFilePath = Path.ChangeExtension(meshFilePath, ".asset");
+                                AssetDatabase.DeleteAsset(meshFilePath);
+                                AssetDatabase.CreateAsset(targetMesh, meshFilePath);
+                                SetAssetMeshReadable(meshFilePath);
 
+                                BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
+
+                                var iter = oldBoneToNewBoneMap.GetEnumerator();
+                                while (iter.MoveNext()) {
+
+                                }
+                                iter.Dispose();
+                            }
+                        }
                     }
-                    iter.Dispose();
                 }
+                //--
             }
             // other.sharedMesh.bindposes
             if (otherRootTrans != null) {
@@ -94,6 +112,38 @@ namespace SOC.GamePlay
                 }
             }
         }
+
+        static void SetAssetMeshReadable(string meshFilePath) {
+            if (!string.IsNullOrEmpty(meshFilePath))
+                return;
+            if (File.Exists(meshFilePath)) {
+                FileStream metaStream = new FileStream(meshFilePath, FileMode.Open, FileAccess.ReadWrite);
+                try {
+                    byte[] buffer = new byte[meshFilePath.Length];
+                    metaStream.Read(buffer, 0, buffer.Length);
+                    string metaStr = System.Text.Encoding.UTF8.GetString(buffer);
+                    const string readAblaStr = "m_IsReadable: ";
+                    int startIndex = metaStr.IndexOf(readAblaStr);
+                    if (startIndex < 0)
+                        return;
+                    int endIndex = metaStr.IndexOf("\n", startIndex);
+                    if (endIndex < 0)
+                        endIndex = metaStr.Length - 1;
+                    string leftStr = metaStr.Substring(0, startIndex);
+                    string rightStr = metaStr.Substring(endIndex);
+                    metaStr = leftStr + readAblaStr + "1" + rightStr;
+                    metaStream.Seek(0, SeekOrigin.Begin);
+
+                    buffer = System.Text.Encoding.UTF8.GetBytes(metaStr);
+                    metaStream.Write(buffer, 0, buffer.Length);
+                } finally {
+                    metaStream.Close();
+                    metaStream.Dispose();
+                }
+                AssetDatabase.Refresh(); // Ë¢ÐÂ
+            }
+        }
+
 
         static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body) {
             if (body == null)
