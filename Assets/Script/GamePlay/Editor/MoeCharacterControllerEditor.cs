@@ -106,6 +106,7 @@ namespace SOC.GamePlay
                                         AssetDatabase.SaveAssets();
                                     }
                                 }
+                                // дbindPose
                             }
                         }
                     }
