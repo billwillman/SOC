@@ -114,7 +114,7 @@ namespace SOC.GamePlay
         }
 
         static void SetAssetMeshReadable(string meshFilePath) {
-            if (!string.IsNullOrEmpty(meshFilePath))
+            if (string.IsNullOrEmpty(meshFilePath))
                 return;
             if (File.Exists(meshFilePath)) {
                 FileStream metaStream = new FileStream(meshFilePath, FileMode.Open, FileAccess.ReadWrite);
