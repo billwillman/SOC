@@ -89,14 +89,23 @@ namespace SOC.GamePlay
                                 AssetDatabase.DeleteAsset(meshFilePath);
                                 AssetDatabase.CreateAsset(targetMesh, meshFilePath);
                                 SetAssetMeshReadable(meshFilePath, true);
-
+                                // ´æ´¢¹ýºóµÄ
+                                OrignMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
                                 BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
-
-                                var iter = oldBoneToNewBoneMap.GetEnumerator();
-                                while (iter.MoveNext()) {
-
+                                if (otherBoneWeights != null) {
+                                    bool isDirty = false;
+                                    for (int i = 0; i < otherBoneWeights.Length; ++i) {
+                                        BoneWeight boneWeight = otherBoneWeights[i];
+                                        if (TransOldBoneIndexToNewBoneIndex(oldBoneToNewBoneMap, ref boneWeight)) {
+                                            otherBoneWeights[i] = boneWeight;
+                                            isDirty = true;
+                                        }
+                                    }
+                                    if (isDirty) {
+                                        OrignMesh.boneWeights = otherBoneWeights;
+                                        AssetDatabase.SaveAssets();
+                                    }
                                 }
-                                iter.Dispose();
                             }
                         }
                     }
@@ -111,6 +120,41 @@ namespace SOC.GamePlay
                     GameObject.DestroyImmediate(otherAnim);
                 }
             }
+        }
+
+        static bool TransOldBoneIndexToNewBoneIndex(Dictionary<int, int> map, ref BoneWeight weight) {
+            if (map == null)
+                return false;
+            bool ret = false;
+            if (weight.weight0 > 0) {
+                int idx;
+                if (map.TryGetValue(weight.boneIndex0, out idx)) {
+                    weight.boneIndex0 = idx;
+                    ret = true;
+                }
+            }
+            if (weight.weight1 > 0) {
+                int idx;
+                if (map.TryGetValue(weight.boneIndex1, out idx)) {
+                    weight.boneIndex1 = idx;
+                    ret = true;
+                }
+            }
+            if (weight.weight2 > 0) {
+                int idx;
+                if (map.TryGetValue(weight.boneIndex2, out idx)) {
+                    weight.boneIndex2 = idx;
+                    ret = true;
+                }
+            }
+            if (weight.weight3 > 0) {
+                int idx;
+                if (map.TryGetValue(weight.boneIndex3, out idx)) {
+                    weight.boneIndex3 = idx;
+                    ret = true;
+                }
+            }
+            return ret;
         }
 
         static void SetAssetMeshReadable(UnityEngine.Object assetObj, bool isReadWrite) {
