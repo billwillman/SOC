@@ -88,7 +88,7 @@ namespace SOC.GamePlay
                                 meshFilePath = Path.ChangeExtension(meshFilePath, ".asset");
                                 AssetDatabase.DeleteAsset(meshFilePath);
                                 AssetDatabase.CreateAsset(targetMesh, meshFilePath);
-                                SetAssetMeshReadable(meshFilePath);
+                                SetAssetMeshReadable(meshFilePath, true);
 
                                 BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
 
@@ -113,7 +113,7 @@ namespace SOC.GamePlay
             }
         }
 
-        static void SetAssetMeshReadable(string meshFilePath) {
+        static void SetAssetMeshReadable(string meshFilePath, bool isReadWrite) {
             if (string.IsNullOrEmpty(meshFilePath))
                 return;
             if (File.Exists(meshFilePath)) {
@@ -131,7 +131,7 @@ namespace SOC.GamePlay
                         endIndex = metaStr.Length - 1;
                     string leftStr = metaStr.Substring(0, startIndex);
                     string rightStr = metaStr.Substring(endIndex);
-                    metaStr = leftStr + readAblaStr + "1" + rightStr;
+                    metaStr = leftStr + readAblaStr + (isReadWrite ? "1" : "0") + rightStr;
                     metaStream.Seek(0, SeekOrigin.Begin);
 
                     buffer = System.Text.Encoding.UTF8.GetBytes(metaStr);
