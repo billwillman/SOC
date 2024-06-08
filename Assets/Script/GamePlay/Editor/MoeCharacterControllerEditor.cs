@@ -33,7 +33,8 @@ namespace SOC.GamePlay
             var otherBone = other.rootBone;
             if (otherBone == null)
                 return;
-            StringBuilder builder = null;
+            // 1.处理rootBone
+            StringBuilder builder = new StringBuilder();
             Transform otherRootTrans = other.transform.parent;
             GetBonePath(otherBone, ref builder, otherRootTrans);
             if (builder != null) {
@@ -52,6 +53,38 @@ namespace SOC.GamePlay
             // 合并骨骼，并且需要生成一个Mesh的VertexIndex, 最后要自己生成一个Mesh的资产
             // 处理最大骨骼数量，然后处理bindPoses
             //other.bones = body.bones;
+            // 2.处理bones
+            if (other.bones != null && body.bones != null && other.bones.Length > 0 && other.bones.Length != body.bones.Length) {
+                Dictionary<int, int> oldBoneToNewBoneMap = new Dictionary<int, int>();
+                for (int i = 0; i < other.bones.Length; ++i) {
+                    var bone = other.bones[i];
+                    builder.Clear();
+                    GetBonePath(bone, ref builder, otherRootTrans);
+                    string path = builder.ToString();
+                    if (!string.IsNullOrEmpty(path)) {
+                        Transform bodyRootTrans = body.transform.parent;
+                        if (bodyRootTrans != null) {
+                            Transform newBone = bodyRootTrans.Find(path);
+                            if (newBone != null) {
+                                int index = System.Array.FindIndex<Transform>(body.bones, (Transform inBone)=>{
+                                    bool ret = inBone == newBone;
+                                    return true;
+                                });
+                                oldBoneToNewBoneMap[i] = index;
+                            }
+                        }
+                    }
+                }
+                if (oldBoneToNewBoneMap.Count > 0) {
+                    // Clone Mesh
+                    //--
+                    var iter = oldBoneToNewBoneMap.GetEnumerator();
+                    while (iter.MoveNext()) {
+
+                    }
+                    iter.Dispose();
+                }
+            }
             // other.sharedMesh.bindposes
             if (otherRootTrans != null) {
                 Animator otherAnim = otherRootTrans.GetComponent<Animator>();
