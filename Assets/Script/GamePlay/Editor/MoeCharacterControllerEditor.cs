@@ -103,10 +103,16 @@ namespace SOC.GamePlay
                                     }
                                     if (isDirty) {
                                         OrignMesh.boneWeights = otherBoneWeights;
-                                        AssetDatabase.SaveAssets();
                                     }
                                 }
                                 // дbindPose
+                                var otherBindPoses = OrignMesh.bindposes;
+                                if (otherBindPoses != null) {
+                                    OrignMesh.bindposes = body.sharedMesh.bindposes;
+                                    other.bones = body.bones;
+                                }
+                                AssetDatabase.SaveAssets();
+                                SetAssetMeshReadable(OrignMesh, false);
                             }
                         }
                     }
