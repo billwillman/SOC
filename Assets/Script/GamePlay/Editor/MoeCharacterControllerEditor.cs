@@ -236,7 +236,9 @@ namespace SOC.GamePlay
                 animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
             }
             animancerComp.enabled = true;
-            controller.m_Animancer = animancerComp;
+            if (controller.m_Animancer == null)
+                controller.m_Animancer = new Animancer.AnimancerComponent[1];
+            controller.m_Animancer[0] = animancerComp;
         }
 
         static void ProcessControllerRoot(MoeCharacterController controller) {

@@ -13,7 +13,7 @@ namespace SOC.GamePlay
     public class MoeCharacterController : NetworkBehaviour, ICharacterController
     {
         private KinematicCharacterMotor m_CharacterMotor = null;
-        public AnimancerComponent m_Animancer = null; // 从Body上获取
+        public AnimancerComponent[] m_Animancer = null; // 从Body上获取
 
         public SkinnedMeshRenderer m_Head = null;
         public SkinnedMeshRenderer m_Body = null;
