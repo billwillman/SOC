@@ -113,6 +113,13 @@ namespace SOC.GamePlay
             }
         }
 
+        static void SetAssetMeshReadable(UnityEngine.Object assetObj, bool isReadWrite) {
+            if (assetObj == null)
+                return;
+            string path = AssetDatabase.GetAssetPath(assetObj);
+            SetAssetMeshReadable(path, isReadWrite);
+        }
+
         static void SetAssetMeshReadable(string meshFilePath, bool isReadWrite) {
             if (string.IsNullOrEmpty(meshFilePath))
                 return;
