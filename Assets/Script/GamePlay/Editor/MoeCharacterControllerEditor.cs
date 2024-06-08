@@ -57,6 +57,7 @@ namespace SOC.GamePlay
             // 2.´¦Àíbones
             if (other.bones != null && body.bones != null && other.bones.Length > 0 && other.bones.Length != body.bones.Length) {
                 Dictionary<int, int> oldBoneToNewBoneMap = new Dictionary<int, int>();
+                var bodyBones = body.bones;
                 for (int i = 0; i < other.bones.Length; ++i) {
                     var bone = other.bones[i];
                     builder.Clear();
@@ -67,11 +68,18 @@ namespace SOC.GamePlay
                         if (bodyRootTrans != null) {
                             Transform newBone = bodyRootTrans.Find(path);
                             if (newBone != null) {
-                                int index = System.Array.FindIndex<Transform>(body.bones, (Transform inBone)=>{
-                                    bool ret = inBone == newBone;
-                                    return true;
-                                });
-                                oldBoneToNewBoneMap[i] = index;
+                                int index = -1;
+                                for (int j = 0; j < bodyBones.Length; ++j) {
+                                    if (bodyBones[j] == newBone) {
+                                        index = j;
+                                        break;
+                                    }
+                                }
+                                if (index >= 0)
+                                    oldBoneToNewBoneMap[i] = index;
+                                else {
+                                    Debug.LogError("[OtherBone] not found:" + path + "\n=== " + other.name);
+                                }
                             }
                         }
                     }
@@ -85,7 +93,8 @@ namespace SOC.GamePlay
                             string ext = Path.GetExtension(meshFilePath);
                             if (string.Compare(ext, ".fbx", true) == 0) {
                                 Mesh targetMesh = Instantiate<Mesh>(OrignMesh);
-                                meshFilePath = Path.ChangeExtension(meshFilePath, ".asset");
+                                meshFilePath = Path.GetDirectoryName(meshFilePath) + "/" + OrignMesh.name + ".asset";
+                                meshFilePath = meshFilePath.Replace("\\", "/");
                                 AssetDatabase.DeleteAsset(meshFilePath);
                                 AssetDatabase.CreateAsset(targetMesh, meshFilePath);
                                 SetAssetMeshReadable(meshFilePath, true);
@@ -107,8 +116,17 @@ namespace SOC.GamePlay
                                 }
                                 // Ð´bindPose
                                 var otherBindPoses = OrignMesh.bindposes;
+                                var bodyBindPoses = body.sharedMesh.bindposes;
                                 if (otherBindPoses != null) {
-                                    OrignMesh.bindposes = body.sharedMesh.bindposes;
+                                    for (int i = 0; i < OrignMesh.bindposes.Length; ++i) {
+                                        int newIdx;
+                                        if (oldBoneToNewBoneMap.TryGetValue(i, out newIdx)) {
+                                            Debug.Log("[Origin] " + otherBindPoses[i].ToString() + "\n[New] " + bodyBindPoses[newIdx].ToString());
+                                        } else {
+                                            Debug.LogError("not found bindPose: " + i.ToString() + "\n=== " + other.name);
+                                        }
+                                    }
+                                    OrignMesh.bindposes = bodyBindPoses;
                                     other.bones = body.bones;
                                 }
                                 AssetDatabase.SaveAssets();
