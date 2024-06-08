@@ -119,7 +119,7 @@ namespace SOC.GamePlay
             if (File.Exists(meshFilePath)) {
                 FileStream metaStream = new FileStream(meshFilePath, FileMode.Open, FileAccess.ReadWrite);
                 try {
-                    byte[] buffer = new byte[meshFilePath.Length];
+                    byte[] buffer = new byte[metaStream.Length];
                     metaStream.Read(buffer, 0, buffer.Length);
                     string metaStr = System.Text.Encoding.UTF8.GetString(buffer);
                     const string readAblaStr = "m_IsReadable: ";
