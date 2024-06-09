@@ -372,6 +372,18 @@ namespace SOC.GamePlay
             }
         }
 
+        static void SavePrefab(GameObject target) {
+            var prefabInstance = PrefabUtility.GetCorrespondingObjectFromSource(target);
+            if (prefabInstance) {
+                var path = AssetDatabase.GetAssetPath(prefabInstance);
+                PrefabUtility.UnpackPrefabInstance(target, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+                PrefabUtility.SaveAsPrefabAssetAndConnect(target, path, InteractionMode.AutomatedAction);
+                PrefabUtility.SaveAsPrefabAsset(target, path);
+            } else {
+                
+            }
+        }
+
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
             if (GUILayout.Button("角色标准化")) {
@@ -391,7 +403,7 @@ namespace SOC.GamePlay
                     // 生成新的body数据
                     BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
                     // 存储数据到prefab
-                    PrefabUtility.SavePrefabAsset(controller.gameObject);
+                    SavePrefab(controller.gameObject);
                     AssetDatabase.Refresh();
                     //--
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
