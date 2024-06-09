@@ -28,6 +28,33 @@ namespace SOC.GamePlay
             GetBonePath(bone, ref builder, root);
         }
 
+        static void BuildNewBodyMesh(SkinnedMeshRenderer body, List<Transform> boneList, List<Matrix4x4> bindPoseList) {
+            if (body == null || boneList == null || bindPoseList == null)
+                return;
+            Mesh OrignMesh = body.sharedMesh;
+            if (OrignMesh != null) {
+                string meshFilePath = AssetDatabase.GetAssetPath(OrignMesh);
+                if (!string.IsNullOrEmpty(meshFilePath)) {
+                    string ext = Path.GetExtension(meshFilePath);
+                    if (string.Compare(ext, ".fbx", true) == 0) {
+                        Mesh targetMesh = Instantiate<Mesh>(OrignMesh);
+                        meshFilePath = Path.GetDirectoryName(meshFilePath) + "/" + OrignMesh.name + ".asset";
+                        meshFilePath = meshFilePath.Replace("\\", "/");
+                        AssetDatabase.DeleteAsset(meshFilePath);
+                        AssetDatabase.CreateAsset(targetMesh, meshFilePath);
+                        SetAssetMeshReadable(meshFilePath, true);
+                        // 存储过后的
+                        OrignMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
+                        body.bones = boneList.ToArray();
+                        OrignMesh.bindposes = bindPoseList.ToArray();
+                        AssetDatabase.SaveAssets();
+                        SetAssetMeshReadable(OrignMesh, false);
+                        AssetDatabase.Refresh();
+                    }
+                }
+            }
+        }
+
         private void ProcessSkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other) {
             if (body == null || other == null)
                 return;
@@ -46,7 +73,6 @@ namespace SOC.GamePlay
                         Transform newRootBone = bodyRootTrans.Find(path);
                         if (newRootBone != null) {
                             other.rootBone = newRootBone;
-                            
                         }
                     }
                 }
@@ -252,14 +278,40 @@ namespace SOC.GamePlay
             }
         }
 
-        static void ProcessOhterBonesAddToBodySkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other) {
+        static void _AddBodyToListFunc(SkinnedMeshRenderer body, ref List<Transform> bodyBoneList,
+                ref List<Matrix4x4> bodyBoneBindPoseList,
+                Transform[] otherBones, Matrix4x4[] otherBindPoses, Transform childRoot) {
+            int oldIdx = -1;
+            for (int i = 0; i < otherBones.Length; ++i) {
+                if (otherBones[i] == childRoot) {
+                    oldIdx = i;
+                    break;
+                }
+            }
+            if (oldIdx < 0)
+                return;
+            if (bodyBoneList == null)
+                bodyBoneList = new List<Transform>(body.bones);
+            bodyBoneList.Add(childRoot);
+            if (bodyBoneBindPoseList == null)
+                bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
+            bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
+            for (int i = 0; i < childRoot.childCount; ++i) {
+                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, childRoot.GetChild(i));
+            }
+        }
+
+        static void ProcessOhterBonesAddToBodySkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other, ref List<Transform> bodyBoneList,
+                ref List<Matrix4x4> bodyBoneBindPoseList) {
+            if (body == null || other == null || body.sharedMesh == null || other.sharedMesh == null)
+                return;
             Transform bodyRootTrans = body.transform.parent;
             Transform otherRootTrans = other.transform.parent;
             Transform[] otherBones = other.bones;
+            Matrix4x4[] otherBindPoses = other.sharedMesh.bindposes;
             if (otherBones != null) {
-                List<Transform> bodyBoneList = new List<Transform>(body.bones);
-                List<Matrix4x4> bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
                 StringBuilder builder = new StringBuilder();
+                // 1.增加没有的bone
                 for (int i = 0; i < otherBones.Length; ++i) {
                     builder.Clear();
                     Transform bone = otherBones[i];
@@ -268,6 +320,27 @@ namespace SOC.GamePlay
                     if (bodyRootTrans.Find(path) != null)
                         continue;
                     // 没找到需要增加
+                    while (true) {
+                        bone = bone.parent;
+                        if (bone == null)
+                            break;
+                        builder.Clear();
+                        GetBonePath(bone, ref builder, otherRootTrans);
+                        path = builder.ToString();
+                        if (string.IsNullOrEmpty(path)) {
+                            break;
+                        }
+                        Transform findRoot = bodyRootTrans.Find(path);
+                        if (findRoot != null) {
+                            // 从没找到到找到了，需要Clone了
+                            for (int j = 0; j < bone.childCount; ++j) {
+                                var childBone = bone.GetChild(j);
+                                GameObject cloneObj = GameObject.Instantiate<GameObject>(childBone.gameObject, findRoot, false);
+                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneObj.transform);
+                            }
+                            break;
+                        }
+                    }
                     // ---
                 }
             }
@@ -279,14 +352,18 @@ namespace SOC.GamePlay
                 MoeCharacterController controller = this.target as MoeCharacterController;
                 if (controller != null) {
                     // 骨骼增加到Body上
-                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head);
-                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head);
-                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Weapon);
+                    List<Transform> boneList = null;
+                    List<Matrix4x4> bindPoseList = null;
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head, ref boneList, ref bindPoseList);
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head, ref boneList, ref bindPoseList);
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Weapon, ref boneList, ref bindPoseList);
                     if (controller.m_OtherSkinedMeshList != null) {
                         for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
-                            ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                            ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i], ref boneList, ref bindPoseList);
                         }
                     }
+                    // 生成新的body数据
+                    BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
                     //--
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Hair);
