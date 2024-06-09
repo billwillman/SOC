@@ -242,6 +242,8 @@ namespace SOC.GamePlay
                     metaStream.Close();
                     metaStream.Dispose();
                 }
+                this.SetDirty();
+                this.SaveChanges();
                 AssetDatabase.Refresh(); // Ë¢ÐÂ
             }
         }
