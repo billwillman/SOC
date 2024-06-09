@@ -164,6 +164,8 @@ namespace SOC.GamePlay
                                 }
                                 AssetDatabase.SaveAssets();
                                 SetAssetMeshReadable(OrignMesh, false);
+                                // –¥»ÎµΩSkinnedMesh¿Ô
+                                other.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
                             }
                         }
                     }
