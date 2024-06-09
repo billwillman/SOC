@@ -227,6 +227,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7034789312528750470}
     m_Modifications:
+    - target: {fileID: 2140586222250548248, guid: 509e9a8ff3eb8c846a15209527876c89,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2140586222257451926, guid: 509e9a8ff3eb8c846a15209527876c89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,6 +418,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: hero_kof_kyo_body_0004
       objectReference: {fileID: 0}
+    - target: {fileID: 1642453317554381811, guid: 3e788e41defe7b4408255461af212b5d,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -489,6 +499,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7034789312528750470}
     m_Modifications:
+    - target: {fileID: 6735692404598141329, guid: 5a21c01d48a35654691cef4aaed5e47e,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6735692404605099603, guid: 5a21c01d48a35654691cef4aaed5e47e,
         type: 3}
       propertyPath: m_LocalPosition.x

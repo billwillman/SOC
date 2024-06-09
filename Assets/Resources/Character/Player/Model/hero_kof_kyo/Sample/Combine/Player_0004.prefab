@@ -1746,7 +1746,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: d8c9134c6f19b0143a4eb90749ebebb9, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -2869,7 +2869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4067551750
+  GlobalObjectIdHash: 575848625
   InScenePlacedSourceGlobalObjectIdHash: 1704117829
   AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
