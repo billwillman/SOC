@@ -352,8 +352,14 @@ namespace SOC.GamePlay
                     Transform bone = otherBones[i];
                     GetBonePath(bone, ref builder, otherRootTrans);
                     string path = builder.ToString();
-                    if (bodyRootTrans.Find(path) != null)
-                        continue;
+                    Transform bodyBone = bodyRootTrans.Find(path);
+                    if (bodyBone != null) {
+                        // 判断bodyBone是不是在列表里
+                        if (bodyBoneList == null)
+                            bodyBoneList = new List<Transform>(body.bones);
+                        if (bodyBoneList.IndexOf(bodyBone) >= 0)
+                            continue;
+                    }
                     if (string.IsNullOrEmpty(boneRootName))
                         boneRootName = path.Split("/")[0];
                     newBoneIndexs.Add(path);
