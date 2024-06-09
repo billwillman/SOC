@@ -172,6 +172,14 @@ namespace SOC.GamePlay
                     otherAnim.enabled = false;
                     GameObject.DestroyImmediate(otherAnim);
                 }
+                Animancer.AnimancerComponent a1 = otherRootTrans.GetComponent<Animancer.AnimancerComponent>();
+                if (a1 != null) {
+                    GameObject.DestroyImmediate(a1);
+                }
+                Animancer.NamedAnimancerComponent a2 = otherRootTrans.GetComponent<Animancer.NamedAnimancerComponent>();
+                if (a2 != null) {
+                    GameObject.DestroyImmediate(a2);
+                }
             }
         }
 
