@@ -338,7 +338,7 @@ namespace SOC.GamePlay
                             for (int j = 0; j < bone.childCount; ++j) {
                                 var childBone = bone.GetChild(j);
                                 GameObject cloneObj = GameObject.Instantiate<GameObject>(childBone.gameObject, findRoot, false);
-                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, childBone, cloneObj.transform);
+                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneObj.transform, childBone);
                             }
                             break;
                         }
