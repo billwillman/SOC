@@ -28,7 +28,7 @@ namespace SOC.GamePlay
             GetBonePath(bone, ref builder, root);
         }
 
-        static void BuildNewBodyMesh(SkinnedMeshRenderer body, List<Transform> boneList, List<Matrix4x4> bindPoseList) {
+        void BuildNewBodyMesh(SkinnedMeshRenderer body, List<Transform> boneList, List<Matrix4x4> bindPoseList) {
             if (body == null || boneList == null || bindPoseList == null)
                 return;
             Mesh OrignMesh = body.sharedMesh;
@@ -49,6 +49,8 @@ namespace SOC.GamePlay
                         OrignMesh.bindposes = bindPoseList.ToArray();
                         AssetDatabase.SaveAssets();
                         SetAssetMeshReadable(OrignMesh, false);
+                        this.SetDirty();
+                        this.SaveChanges();
                         AssetDatabase.Refresh();
                     }
                 }
@@ -242,8 +244,6 @@ namespace SOC.GamePlay
                     metaStream.Close();
                     metaStream.Dispose();
                 }
-                this.SetDirty();
-                this.SaveChanges();
                 AssetDatabase.Refresh(); // Ë¢ÐÂ
             }
         }
