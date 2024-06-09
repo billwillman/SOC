@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -695,6 +695,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221962529219876478, guid: 8f90b14cb63f1464e8be5520bb6e3d0c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221962529219876478, guid: 8f90b14cb63f1464e8be5520bb6e3d0c,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221962529219876478, guid: 8f90b14cb63f1464e8be5520bb6e3d0c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7489974944984529720, guid: 8f90b14cb63f1464e8be5520bb6e3d0c,
         type: 3}
