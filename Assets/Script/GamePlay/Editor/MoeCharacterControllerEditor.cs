@@ -357,7 +357,7 @@ namespace SOC.GamePlay
                     List<Transform> boneList = null;
                     List<Matrix4x4> bindPoseList = null;
                     ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head, ref boneList, ref bindPoseList);
-                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head, ref boneList, ref bindPoseList);
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Hair, ref boneList, ref bindPoseList);
                     ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Weapon, ref boneList, ref bindPoseList);
                     if (controller.m_OtherSkinedMeshList != null) {
                         for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
