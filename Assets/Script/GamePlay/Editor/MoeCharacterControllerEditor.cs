@@ -392,6 +392,7 @@ namespace SOC.GamePlay
 
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
+            /*
             if (GUILayout.Button("角色骨骼合并")) {
                 MoeCharacterController controller = this.target as MoeCharacterController;
                 if (controller != null) {
@@ -414,9 +415,25 @@ namespace SOC.GamePlay
                     //--
                 }
             }
+            */
             if (GUILayout.Button("角色标准化")) {
                 MoeCharacterController controller = this.target as MoeCharacterController;
                 if (controller != null) {
+                    // 骨骼增加到Body上
+                    List<Transform> boneList = null;
+                    List<Matrix4x4> bindPoseList = null;
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head, ref boneList, ref bindPoseList);
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Hair, ref boneList, ref bindPoseList);
+                    ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Weapon, ref boneList, ref bindPoseList);
+                    if (controller.m_OtherSkinedMeshList != null) {
+                        for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
+                            ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i], ref boneList, ref bindPoseList);
+                        }
+                    }
+                    // 生成新的body数据
+                    BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
+                    AssetDatabase.Refresh();
+
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Hair);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Weapon);
