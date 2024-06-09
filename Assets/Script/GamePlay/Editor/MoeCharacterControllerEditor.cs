@@ -52,6 +52,11 @@ namespace SOC.GamePlay
                         this.SetDirty();
                         this.SaveChanges();
                         AssetDatabase.Refresh();
+                        // 设置到body的skinned上
+                        body.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
+                        this.SetDirty();
+                        this.SaveChanges();
+                        AssetDatabase.Refresh();
                     }
                 }
             }
@@ -311,6 +316,24 @@ namespace SOC.GamePlay
             }
         }
 
+        static void CheckAddChildNode(Transform targetRoot, Transform sourceRoot) {
+            if (targetRoot != null && sourceRoot != null) {
+                for (int i = 0; i < sourceRoot.childCount; ++i) {
+                    var sourceChild = sourceRoot.GetChild(i);
+                    string name = sourceChild.name;
+                    var targetChild = targetRoot.Find(name);
+                    if (targetChild != null) {
+                        CheckAddChildNode(targetChild, sourceChild);
+                    } else {
+                        var newGameObj = GameObject.Instantiate<GameObject>(sourceChild.gameObject, targetRoot, false);
+                        newGameObj.name = sourceChild.gameObject.name;
+                        //CheckAddChildNode(newGameObj.transform, sourceChild);
+                    }
+                }
+            }
+        }
+
+        // 这个函数有问题，bindposes和bones的数量跟骨骼节点数量是不一样的，需要全合并，再根据bindposes和bones处理
         static void ProcessOhterBonesAddToBodySkinnedMesh(SkinnedMeshRenderer body, SkinnedMeshRenderer other, ref List<Transform> bodyBoneList,
                 ref List<Matrix4x4> bodyBoneBindPoseList) {
             if (body == null || other == null || body.sharedMesh == null || other.sharedMesh == null)
@@ -320,8 +343,10 @@ namespace SOC.GamePlay
             Transform[] otherBones = other.bones;
             Matrix4x4[] otherBindPoses = other.sharedMesh.bindposes;
             if (otherBones != null) {
+                List<string> newBoneIndexs = new List<string>();
                 StringBuilder builder = new StringBuilder();
-                // 1.增加没有的bone
+                // 1.增加没有的bone,放到列表里
+                string boneRootName = null;
                 for (int i = 0; i < otherBones.Length; ++i) {
                     builder.Clear();
                     Transform bone = otherBones[i];
@@ -329,29 +354,20 @@ namespace SOC.GamePlay
                     string path = builder.ToString();
                     if (bodyRootTrans.Find(path) != null)
                         continue;
-                    // 没找到需要增加
-                    while (true) {
-                        bone = bone.parent;
-                        if (bone == null)
-                            break;
-                        builder.Clear();
-                        GetBonePath(bone, ref builder, otherRootTrans);
-                        path = builder.ToString();
-                        if (string.IsNullOrEmpty(path)) {
-                            break;
-                        }
-                        Transform findRoot = bodyRootTrans.Find(path);
-                        if (findRoot != null) {
-                            // 从没找到到找到了，需要Clone了
-                            for (int j = 0; j < bone.childCount; ++j) {
-                                var childBone = bone.GetChild(j);
-                                GameObject cloneObj = GameObject.Instantiate<GameObject>(childBone.gameObject, findRoot, false);
-                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneObj.transform, childBone);
-                            }
-                            break;
-                        }
+                    if (string.IsNullOrEmpty(boneRootName))
+                        boneRootName = path.Split("/")[0];
+                    newBoneIndexs.Add(path);
+                }
+                if (!string.IsNullOrEmpty(boneRootName) && newBoneIndexs.Count > 0) {
+                    Transform bodyBoneRoot = bodyRootTrans.Find(boneRootName);
+                    Transform otherBoneRoot = otherRootTrans.Find(boneRootName);
+                    CheckAddChildNode(bodyBoneRoot, otherBoneRoot);
+                    for (int i = 0; i < newBoneIndexs.Count; ++i) {
+                        string path = newBoneIndexs[i];
+                        Transform cloneChildRoot = bodyRootTrans.Find(path);
+                        Transform childRoot = otherRootTrans.Find(path);
+                        _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneChildRoot, childRoot);
                     }
-                    // ---
                 }
             }
         }
@@ -374,6 +390,9 @@ namespace SOC.GamePlay
                     }
                     // 生成新的body数据
                     BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
+                    // 存储数据到prefab
+                    PrefabUtility.SavePrefabAsset(controller.gameObject);
+                    AssetDatabase.Refresh();
                     //--
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Hair);
