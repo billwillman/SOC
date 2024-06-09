@@ -278,12 +278,35 @@ namespace SOC.GamePlay
             if (animancerComp == null) {
                 animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
             }
-            animancerComp.enabled = true;
+           // animancerComp.enabled = true;
             if (controller.m_Animancer == null || isCombineBone)
                 controller.m_Animancer = new Animancer.AnimancerComponent[1];
             controller.m_Animancer[0] = animancerComp;
-            for (int i = 0; i < controller.m_Animancer.Length; ++i) {
+            if (isCombineBone) {
+                /*
+                // É¾³ý¹Ç÷ÀÈßÓà½Úµã
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
+                if (controller.m_OtherSkinedMeshList != null) {
+                    for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
+                        RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                    }
+                }
+                */
+            }
+        }
 
+        static void RemoveSkinnedMeshBoneRoot(SkinnedMeshRenderer body, SkinnedMeshRenderer skin) {
+            if (body == null || skin == null)
+                return;
+            var bodyParent = body.transform.parent;
+            if (bodyParent == null)
+                return;
+            var skinParent = skin.transform.parent;
+            skin.transform.parent = bodyParent;
+            if (skinParent != null) {
+               // GameObject.DestroyImmediate(skinParent.gameObject);
             }
         }
 
