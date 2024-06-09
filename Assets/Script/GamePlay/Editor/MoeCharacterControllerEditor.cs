@@ -290,14 +290,14 @@ namespace SOC.GamePlay
                     break;
                 }
             }
-            if (oldIdx < 0)
-                return;
-            if (bodyBoneList == null)
-                bodyBoneList = new List<Transform>(body.bones);
-            bodyBoneList.Add(cloneChildRoot);
-            if (bodyBoneBindPoseList == null)
-                bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
-            bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
+            if (oldIdx >= 0) {
+                if (bodyBoneList == null)
+                    bodyBoneList = new List<Transform>(body.bones);
+                bodyBoneList.Add(cloneChildRoot);
+                if (bodyBoneBindPoseList == null)
+                    bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
+                bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
+            }
             for (int i = 0; i < childRoot.childCount; ++i) {
                 _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneChildRoot.GetChild(i), childRoot.GetChild(i));
             }
