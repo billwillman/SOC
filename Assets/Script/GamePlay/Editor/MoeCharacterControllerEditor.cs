@@ -282,6 +282,11 @@ namespace SOC.GamePlay
                     ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_Weapon);
+                    if (controller.m_OtherSkinedMeshList != null) {
+                        for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
+                            ProcessOhterBonesAddToBodySkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                        }
+                    }
                     //--
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Hair);
