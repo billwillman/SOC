@@ -264,7 +264,7 @@ namespace SOC.GamePlay
         }
 
 
-        static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body) {
+        static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body, bool isCombineBone) {
             if (body == null)
                 return;
             Transform parent = body.transform.parent;
@@ -279,9 +279,12 @@ namespace SOC.GamePlay
                 animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
             }
             animancerComp.enabled = true;
-            if (controller.m_Animancer == null)
+            if (controller.m_Animancer == null || isCombineBone)
                 controller.m_Animancer = new Animancer.AnimancerComponent[1];
             controller.m_Animancer[0] = animancerComp;
+            for (int i = 0; i < controller.m_Animancer.Length; ++i) {
+
+            }
         }
 
         static void ProcessControllerRoot(MoeCharacterController controller) {
@@ -444,7 +447,7 @@ namespace SOC.GamePlay
                             ProcessSkinnedMesh(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
                         }
                     }
-                    ProcessBodySkinnedMesh(controller, controller.m_Body);
+                    ProcessBodySkinnedMesh(controller, controller.m_Body, true);
                     ProcessControllerRoot(controller);
                     this.SetDirty();
                     this.SaveChanges();
