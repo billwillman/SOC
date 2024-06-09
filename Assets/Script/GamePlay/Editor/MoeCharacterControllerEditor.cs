@@ -386,7 +386,7 @@ namespace SOC.GamePlay
 
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
-            if (GUILayout.Button("角色标准化")) {
+            if (GUILayout.Button("角色骨骼合并")) {
                 MoeCharacterController controller = this.target as MoeCharacterController;
                 if (controller != null) {
                     // 骨骼增加到Body上
@@ -406,6 +406,11 @@ namespace SOC.GamePlay
                     SavePrefab(controller.gameObject);
                     AssetDatabase.Refresh();
                     //--
+                }
+            }
+            if (GUILayout.Button("角色标准化")) {
+                MoeCharacterController controller = this.target as MoeCharacterController;
+                if (controller != null) {
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Hair);
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Weapon);
