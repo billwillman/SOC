@@ -282,7 +282,7 @@ namespace SOC.GamePlay
 
         static void _AddBodyToListFunc(SkinnedMeshRenderer body, ref List<Transform> bodyBoneList,
                 ref List<Matrix4x4> bodyBoneBindPoseList,
-                Transform[] otherBones, Matrix4x4[] otherBindPoses, Transform childRoot) {
+                Transform[] otherBones, Matrix4x4[] otherBindPoses, Transform cloneChildRoot, Transform childRoot) {
             int oldIdx = -1;
             for (int i = 0; i < otherBones.Length; ++i) {
                 if (otherBones[i] == childRoot) {
@@ -294,12 +294,12 @@ namespace SOC.GamePlay
                 return;
             if (bodyBoneList == null)
                 bodyBoneList = new List<Transform>(body.bones);
-            bodyBoneList.Add(childRoot);
+            bodyBoneList.Add(cloneChildRoot);
             if (bodyBoneBindPoseList == null)
                 bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
             bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
             for (int i = 0; i < childRoot.childCount; ++i) {
-                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, childRoot.GetChild(i));
+                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneChildRoot.GetChild(i), childRoot.GetChild(i));
             }
         }
 
@@ -338,7 +338,7 @@ namespace SOC.GamePlay
                             for (int j = 0; j < bone.childCount; ++j) {
                                 var childBone = bone.GetChild(j);
                                 GameObject cloneObj = GameObject.Instantiate<GameObject>(childBone.gameObject, findRoot, false);
-                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneObj.transform);
+                                _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, childBone, cloneObj.transform);
                             }
                             break;
                         }
