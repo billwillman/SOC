@@ -275,38 +275,38 @@ namespace SOC.GamePlay
        }
 
 
-       static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body, bool isCombineBone) {
-           if (body == null)
-               return;
-           Transform parent = body.transform.parent;
-           if (parent == null)
-               return;
-           Animator animator = parent.GetComponent<Animator>();
-           if (animator == null)
-               return;
-           animator.enabled = true;
-           Animancer.AnimancerComponent animancerComp = parent.GetComponent<Animancer.AnimancerComponent>();
-           if (animancerComp == null) {
-               animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
-           }
-          // animancerComp.enabled = true;
-           if (controller.m_Animancer == null || isCombineBone)
-               controller.m_Animancer = new Animancer.AnimancerComponent[1];
-           controller.m_Animancer[0] = animancerComp;
-           if (isCombineBone) {
-               /*
-               // É¾³ý¹Ç÷ÀÈßÓà½Úµã
-               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
-               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
-               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
-               if (controller.m_OtherSkinedMeshList != null) {
-                   for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
-                       RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
-                   }
-               }
-               */
-                            }
-                        }
+        static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body, bool isCombineBone) {
+            if (body == null)
+                return;
+            Transform parent = body.transform.parent;
+            if (parent == null)
+                return;
+            Animator animator = parent.GetComponent<Animator>();
+            if (animator == null)
+                return;
+            animator.enabled = true;
+            Animancer.AnimancerComponent animancerComp = parent.GetComponent<Animancer.AnimancerComponent>();
+            if (animancerComp == null) {
+                animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
+            }
+            // animancerComp.enabled = true;
+            if (controller.m_Animancer == null || isCombineBone)
+                controller.m_Animancer = new Animancer.AnimancerComponent[1];
+            controller.m_Animancer[0] = animancerComp;
+            if (isCombineBone) {
+                // °ÑPrefab¹ØÁªÈ¥µô
+                PrefabUtility.UnpackPrefabInstance(controller.gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+                // É¾³ý¹Ç÷ÀÈßÓà½Úµã
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
+                if (controller.m_OtherSkinedMeshList != null) {
+                    for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
+                        RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                    }
+                }
+            }
+        }
 
         static void RemoveSkinnedMeshBoneRoot(SkinnedMeshRenderer body, SkinnedMeshRenderer skin) {
             if (body == null || skin == null)
@@ -317,7 +317,7 @@ namespace SOC.GamePlay
             var skinParent = skin.transform.parent;
             skin.transform.parent = bodyParent;
             if (skinParent != null) {
-               // GameObject.DestroyImmediate(skinParent.gameObject);
+               GameObject.DestroyImmediate(skinParent.gameObject);
             }
         }
 
