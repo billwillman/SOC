@@ -88,11 +88,13 @@ namespace SOC.GamePlay
             // 处理最大骨骼数量，然后处理bindPoses
             //other.bones = body.bones;
             // 2.处理bones
-            if (other.bones != null && body.bones != null && other.bones.Length > 0 && other.bones.Length != body.bones.Length) {
+            // 不需要other.bones和body.bones相同，因为传入Shader里的骨骼对象，只需要传入使用的
+            var otherBones = other.bones;
+            if (otherBones != null && otherBones != null && otherBones.Length > 0 /*&& other.bones.Length != body.bones.Length*/) {
                 Dictionary<int, int> oldBoneToNewBoneMap = new Dictionary<int, int>();
                 var bodyBones = body.bones;
-                for (int i = 0; i < other.bones.Length; ++i) {
-                    var bone = other.bones[i];
+                for (int i = 0; i < otherBones.Length; ++i) {
+                    var bone = otherBones[i];
                     builder.Clear();
                     GetBonePath(bone, ref builder, otherRootTrans);
                     string path = builder.ToString();
@@ -101,6 +103,7 @@ namespace SOC.GamePlay
                         if (bodyRootTrans != null) {
                             Transform newBone = bodyRootTrans.Find(path);
                             if (newBone != null) {
+                                /*
                                 int index = -1;
                                 for (int j = 0; j < bodyBones.Length; ++j) {
                                     if (bodyBones[j] == newBone) {
@@ -112,12 +115,16 @@ namespace SOC.GamePlay
                                     oldBoneToNewBoneMap[i] = index;
                                 else {
                                     Debug.LogError("[OtherBone] not found:" + path + "\n=== " + other.name);
-                                }
+                                }*/
+                                otherBones[i] = newBone;
+                            } else {
+                                Debug.LogError("[OtherBone] not found:" + path + "\n=== " + other.name);
                             }
                         }
                     }
                 }
-                if (oldBoneToNewBoneMap.Count > 0) {
+                other.bones = otherBones;
+                if (/*oldBoneToNewBoneMap.Count > 0*/ true) {
                     // Clone Mesh
                     Mesh OrignMesh = other.sharedMesh;
                     if (OrignMesh != null) {
@@ -132,170 +139,172 @@ namespace SOC.GamePlay
                                 AssetDatabase.CreateAsset(targetMesh, meshFilePath);
                                 SetAssetMeshReadable(meshFilePath, true);
                                 // 存储过后的
-                                OrignMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
-                                BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
-                                if (otherBoneWeights != null) {
-                                    bool isDirty = false;
-                                    for (int i = 0; i < otherBoneWeights.Length; ++i) {
-                                        BoneWeight boneWeight = otherBoneWeights[i];
-                                        if (TransOldBoneIndexToNewBoneIndex(oldBoneToNewBoneMap, ref boneWeight)) {
-                                            otherBoneWeights[i] = boneWeight;
-                                            isDirty = true;
-                                        }
-                                    }
-                                    if (isDirty) {
-                                        OrignMesh.boneWeights = otherBoneWeights;
-                                    }
-                                }
-                                // 写bindPose
-                                var otherBindPoses = OrignMesh.bindposes;
-                                var bodyBindPoses = body.sharedMesh.bindposes;
-                                if (otherBindPoses != null) {
-                                    for (int i = 0; i < OrignMesh.bindposes.Length; ++i) {
-                                        int newIdx;
-                                        if (oldBoneToNewBoneMap.TryGetValue(i, out newIdx)) {
-                                            Debug.Log("[Origin] " + otherBindPoses[i].ToString() + "\n[New] " + bodyBindPoses[newIdx].ToString());
-                                        } else {
-                                            Debug.LogError("not found bindPose: " + i.ToString() + "\n=== " + other.name);
-                                        }
-                                    }
-                                    OrignMesh.bindposes = bodyBindPoses;
-                                    other.bones = body.bones;
-                                }
-                                AssetDatabase.SaveAssets();
+                               OrignMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
+                                /*
+                             BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
+                             if (otherBoneWeights != null) {
+                                 bool isDirty = false;
+                                 for (int i = 0; i < otherBoneWeights.Length; ++i) {
+                                     BoneWeight boneWeight = otherBoneWeights[i];
+                                     if (TransOldBoneIndexToNewBoneIndex(oldBoneToNewBoneMap, ref boneWeight)) {
+                                         otherBoneWeights[i] = boneWeight;
+                                         isDirty = true;
+                                     }
+                                 }
+                                 if (isDirty) {
+                                     OrignMesh.boneWeights = otherBoneWeights;
+                                 }
+                             }
+                             // 写bindPose
+                             var otherBindPoses = OrignMesh.bindposes;
+                             var bodyBindPoses = body.sharedMesh.bindposes;
+                             if (otherBindPoses != null) {
+                                 for (int i = 0; i < OrignMesh.bindposes.Length; ++i) {
+                                     int newIdx;
+                                     if (oldBoneToNewBoneMap.TryGetValue(i, out newIdx)) {
+                                         Debug.Log("[Origin] " + otherBindPoses[i].ToString() + "\n[New] " + bodyBindPoses[newIdx].ToString());
+                                     } else {
+                                         Debug.LogError("not found bindPose: " + i.ToString() + "\n=== " + other.name);
+                                     }
+                                 }
+                                 OrignMesh.bindposes = bodyBindPoses;
+                                 other.bones = body.bones;
+                             }
+                             AssetDatabase.SaveAssets();
+                          */
                                 SetAssetMeshReadable(OrignMesh, false);
-                                // 写入到SkinnedMesh里
-                                other.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
+                               // 写入到SkinnedMesh里
+                               other.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
+                           }
+                       }
+                   }
+               }
+               //--
+           }
+           // other.sharedMesh.bindposes
+           if (otherRootTrans != null) {
+               Animator otherAnim = otherRootTrans.GetComponent<Animator>();
+               if (otherAnim != null) {
+                   otherAnim.enabled = false;
+                   GameObject.DestroyImmediate(otherAnim);
+               }
+               Animancer.AnimancerComponent a1 = otherRootTrans.GetComponent<Animancer.AnimancerComponent>();
+               if (a1 != null) {
+                   GameObject.DestroyImmediate(a1);
+               }
+               Animancer.NamedAnimancerComponent a2 = otherRootTrans.GetComponent<Animancer.NamedAnimancerComponent>();
+               if (a2 != null) {
+                   GameObject.DestroyImmediate(a2);
+               }
+           }
+       }
+
+       static bool TransOldBoneIndexToNewBoneIndex(Dictionary<int, int> map, ref BoneWeight weight) {
+           if (map == null)
+               return false;
+           bool ret = false;
+           if (weight.weight0 > 0) {
+               int idx;
+               if (map.TryGetValue(weight.boneIndex0, out idx)) {
+                   weight.boneIndex0 = idx;
+                   ret = true;
+               }
+           }
+           if (weight.weight1 > 0) {
+               int idx;
+               if (map.TryGetValue(weight.boneIndex1, out idx)) {
+                   weight.boneIndex1 = idx;
+                   ret = true;
+               }
+           }
+           if (weight.weight2 > 0) {
+               int idx;
+               if (map.TryGetValue(weight.boneIndex2, out idx)) {
+                   weight.boneIndex2 = idx;
+                   ret = true;
+               }
+           }
+           if (weight.weight3 > 0) {
+               int idx;
+               if (map.TryGetValue(weight.boneIndex3, out idx)) {
+                   weight.boneIndex3 = idx;
+                   ret = true;
+               }
+           }
+           return ret;
+       }
+
+       static void SetAssetMeshReadable(UnityEngine.Object assetObj, bool isReadWrite) {
+           if (assetObj == null)
+               return;
+           string path = AssetDatabase.GetAssetPath(assetObj);
+           SetAssetMeshReadable(path, isReadWrite);
+       }
+
+       static void SetAssetMeshReadable(string meshFilePath, bool isReadWrite) {
+           if (string.IsNullOrEmpty(meshFilePath))
+               return;
+           if (File.Exists(meshFilePath)) {
+               FileStream metaStream = new FileStream(meshFilePath, FileMode.Open, FileAccess.ReadWrite);
+               try {
+                   byte[] buffer = new byte[metaStream.Length];
+                   metaStream.Read(buffer, 0, buffer.Length);
+                   string metaStr = System.Text.Encoding.UTF8.GetString(buffer);
+                   const string readAblaStr = "m_IsReadable: ";
+                   int startIndex = metaStr.IndexOf(readAblaStr);
+                   if (startIndex < 0)
+                       return;
+                   int endIndex = metaStr.IndexOf("\n", startIndex);
+                   if (endIndex < 0)
+                       endIndex = metaStr.Length - 1;
+                   string leftStr = metaStr.Substring(0, startIndex);
+                   string rightStr = metaStr.Substring(endIndex);
+                   metaStr = leftStr + readAblaStr + (isReadWrite ? "1" : "0") + rightStr;
+                   metaStream.Seek(0, SeekOrigin.Begin);
+
+                   buffer = System.Text.Encoding.UTF8.GetBytes(metaStr);
+                   metaStream.Write(buffer, 0, buffer.Length);
+               } finally {
+                   metaStream.Close();
+                   metaStream.Dispose();
+               }
+               AssetDatabase.Refresh(); // 刷新
+           }
+       }
+
+
+       static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body, bool isCombineBone) {
+           if (body == null)
+               return;
+           Transform parent = body.transform.parent;
+           if (parent == null)
+               return;
+           Animator animator = parent.GetComponent<Animator>();
+           if (animator == null)
+               return;
+           animator.enabled = true;
+           Animancer.AnimancerComponent animancerComp = parent.GetComponent<Animancer.AnimancerComponent>();
+           if (animancerComp == null) {
+               animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
+           }
+          // animancerComp.enabled = true;
+           if (controller.m_Animancer == null || isCombineBone)
+               controller.m_Animancer = new Animancer.AnimancerComponent[1];
+           controller.m_Animancer[0] = animancerComp;
+           if (isCombineBone) {
+               /*
+               // 删除骨骼冗余节点
+               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
+               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
+               RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
+               if (controller.m_OtherSkinedMeshList != null) {
+                   for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
+                       RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                   }
+               }
+               */
                             }
                         }
-                    }
-                }
-                //--
-            }
-            // other.sharedMesh.bindposes
-            if (otherRootTrans != null) {
-                Animator otherAnim = otherRootTrans.GetComponent<Animator>();
-                if (otherAnim != null) {
-                    otherAnim.enabled = false;
-                    GameObject.DestroyImmediate(otherAnim);
-                }
-                Animancer.AnimancerComponent a1 = otherRootTrans.GetComponent<Animancer.AnimancerComponent>();
-                if (a1 != null) {
-                    GameObject.DestroyImmediate(a1);
-                }
-                Animancer.NamedAnimancerComponent a2 = otherRootTrans.GetComponent<Animancer.NamedAnimancerComponent>();
-                if (a2 != null) {
-                    GameObject.DestroyImmediate(a2);
-                }
-            }
-        }
-
-        static bool TransOldBoneIndexToNewBoneIndex(Dictionary<int, int> map, ref BoneWeight weight) {
-            if (map == null)
-                return false;
-            bool ret = false;
-            if (weight.weight0 > 0) {
-                int idx;
-                if (map.TryGetValue(weight.boneIndex0, out idx)) {
-                    weight.boneIndex0 = idx;
-                    ret = true;
-                }
-            }
-            if (weight.weight1 > 0) {
-                int idx;
-                if (map.TryGetValue(weight.boneIndex1, out idx)) {
-                    weight.boneIndex1 = idx;
-                    ret = true;
-                }
-            }
-            if (weight.weight2 > 0) {
-                int idx;
-                if (map.TryGetValue(weight.boneIndex2, out idx)) {
-                    weight.boneIndex2 = idx;
-                    ret = true;
-                }
-            }
-            if (weight.weight3 > 0) {
-                int idx;
-                if (map.TryGetValue(weight.boneIndex3, out idx)) {
-                    weight.boneIndex3 = idx;
-                    ret = true;
-                }
-            }
-            return ret;
-        }
-
-        static void SetAssetMeshReadable(UnityEngine.Object assetObj, bool isReadWrite) {
-            if (assetObj == null)
-                return;
-            string path = AssetDatabase.GetAssetPath(assetObj);
-            SetAssetMeshReadable(path, isReadWrite);
-        }
-
-        static void SetAssetMeshReadable(string meshFilePath, bool isReadWrite) {
-            if (string.IsNullOrEmpty(meshFilePath))
-                return;
-            if (File.Exists(meshFilePath)) {
-                FileStream metaStream = new FileStream(meshFilePath, FileMode.Open, FileAccess.ReadWrite);
-                try {
-                    byte[] buffer = new byte[metaStream.Length];
-                    metaStream.Read(buffer, 0, buffer.Length);
-                    string metaStr = System.Text.Encoding.UTF8.GetString(buffer);
-                    const string readAblaStr = "m_IsReadable: ";
-                    int startIndex = metaStr.IndexOf(readAblaStr);
-                    if (startIndex < 0)
-                        return;
-                    int endIndex = metaStr.IndexOf("\n", startIndex);
-                    if (endIndex < 0)
-                        endIndex = metaStr.Length - 1;
-                    string leftStr = metaStr.Substring(0, startIndex);
-                    string rightStr = metaStr.Substring(endIndex);
-                    metaStr = leftStr + readAblaStr + (isReadWrite ? "1" : "0") + rightStr;
-                    metaStream.Seek(0, SeekOrigin.Begin);
-
-                    buffer = System.Text.Encoding.UTF8.GetBytes(metaStr);
-                    metaStream.Write(buffer, 0, buffer.Length);
-                } finally {
-                    metaStream.Close();
-                    metaStream.Dispose();
-                }
-                AssetDatabase.Refresh(); // 刷新
-            }
-        }
-
-
-        static void ProcessBodySkinnedMesh(MoeCharacterController controller, SkinnedMeshRenderer body, bool isCombineBone) {
-            if (body == null)
-                return;
-            Transform parent = body.transform.parent;
-            if (parent == null)
-                return;
-            Animator animator = parent.GetComponent<Animator>();
-            if (animator == null)
-                return;
-            animator.enabled = true;
-            Animancer.AnimancerComponent animancerComp = parent.GetComponent<Animancer.AnimancerComponent>();
-            if (animancerComp == null) {
-                animancerComp = parent.gameObject.AddComponent<Animancer.AnimancerComponent>();
-            }
-           // animancerComp.enabled = true;
-            if (controller.m_Animancer == null || isCombineBone)
-                controller.m_Animancer = new Animancer.AnimancerComponent[1];
-            controller.m_Animancer[0] = animancerComp;
-            if (isCombineBone) {
-                /*
-                // 删除骨骼冗余节点
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
-                if (controller.m_OtherSkinedMeshList != null) {
-                    for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
-                        RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
-                    }
-                }
-                */
-            }
-        }
 
         static void RemoveSkinnedMeshBoneRoot(SkinnedMeshRenderer body, SkinnedMeshRenderer skin) {
             if (body == null || skin == null)
@@ -334,10 +343,12 @@ namespace SOC.GamePlay
             if (oldIdx >= 0) {
                 if (bodyBoneList == null)
                     bodyBoneList = new List<Transform>(body.bones);
-                bodyBoneList.Add(cloneChildRoot);
+                // 不需要更改
+                //bodyBoneList.Add(cloneChildRoot);
                 if (bodyBoneBindPoseList == null)
                     bodyBoneBindPoseList = new List<Matrix4x4>(body.sharedMesh.bindposes);
-                bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
+                // 不需要更改
+                //bodyBoneBindPoseList.Add(otherBindPoses[oldIdx]);
             }
             for (int i = 0; i < childRoot.childCount; ++i) {
                 _AddBodyToListFunc(body, ref bodyBoneList, ref bodyBoneBindPoseList, otherBones, otherBindPoses, cloneChildRoot.GetChild(i), childRoot.GetChild(i));
