@@ -296,29 +296,44 @@ namespace SOC.GamePlay
             if (isCombineBone) {
                 // 把Prefab关联去掉
                 PrefabUtility.UnpackPrefabInstance(controller.gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
                 // 删除骨骼冗余节点
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair);
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head);
-                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon);
+                HashSet<GameObject> deleteObjs = null;
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Hair, ref deleteObjs);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Head, ref deleteObjs);
+                RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_Weapon, ref deleteObjs);
                 if (controller.m_OtherSkinedMeshList != null) {
                     for (int i = 0; i < controller.m_OtherSkinedMeshList.Count; ++i) {
-                        RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i]);
+                        RemoveSkinnedMeshBoneRoot(controller.m_Body, controller.m_OtherSkinedMeshList[i], ref deleteObjs);
                     }
+                }
+                // 删除不用的骨骼
+                if (deleteObjs != null) {
+                    var iter = deleteObjs.GetEnumerator();
+                    while (iter.MoveNext()) {
+                        if (iter.Current != null) {
+                            GameObject.DestroyImmediate(iter.Current);
+                        }
+                    }
+                    iter.Dispose();
+                    deleteObjs.Clear();
                 }
             }
         }
 
-        static void RemoveSkinnedMeshBoneRoot(SkinnedMeshRenderer body, SkinnedMeshRenderer skin) {
+        static void RemoveSkinnedMeshBoneRoot(SkinnedMeshRenderer body, SkinnedMeshRenderer skin, ref HashSet<GameObject> deleteObj) {
             if (body == null || skin == null)
                 return;
             var bodyParent = body.transform.parent;
             if (bodyParent == null)
                 return;
             var skinParent = skin.transform.parent;
-            skin.transform.parent = bodyParent;
-            if (skinParent != null) {
-               GameObject.DestroyImmediate(skinParent.gameObject);
-            }
+            skin.transform.SetParent(bodyParent, true);
+            if (deleteObj == null)
+                deleteObj = new HashSet<GameObject>();
+            if (!deleteObj.Contains(skinParent.gameObject))
+                deleteObj.Add(skinParent.gameObject);
         }
 
         static void ProcessControllerRoot(MoeCharacterController controller) {
