@@ -91,7 +91,7 @@ namespace SOC.GamePlay
             // 不需要other.bones和body.bones相同，因为传入Shader里的骨骼对象，只需要传入使用的
             var otherBones = other.bones;
             if (otherBones != null && otherBones != null && otherBones.Length > 0 /*&& other.bones.Length != body.bones.Length*/) {
-                Dictionary<int, int> oldBoneToNewBoneMap = new Dictionary<int, int>();
+               // Dictionary<int, int> oldBoneToNewBoneMap = new Dictionary<int, int>();
                 var bodyBones = body.bones;
                 for (int i = 0; i < otherBones.Length; ++i) {
                     var bone = otherBones[i];
