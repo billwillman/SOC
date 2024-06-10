@@ -124,7 +124,8 @@ namespace SOC.GamePlay
                     }
                 }
                 other.bones = otherBones;
-                if (/*oldBoneToNewBoneMap.Count > 0*/ true) {
+                /*
+                if (oldBoneToNewBoneMap.Count > 0) {
                     // Clone Mesh
                     Mesh OrignMesh = other.sharedMesh;
                     if (OrignMesh != null) {
@@ -140,7 +141,7 @@ namespace SOC.GamePlay
                                 SetAssetMeshReadable(meshFilePath, true);
                                 // 存储过后的
                                OrignMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
-                                /*
+                                
                              BoneWeight[] otherBoneWeights = OrignMesh.boneWeights;
                              if (otherBoneWeights != null) {
                                  bool isDirty = false;
@@ -171,7 +172,7 @@ namespace SOC.GamePlay
                                  other.bones = body.bones;
                              }
                              AssetDatabase.SaveAssets();
-                          */
+                          
                                 SetAssetMeshReadable(OrignMesh, false);
                                // 写入到SkinnedMesh里
                                other.sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshFilePath);
@@ -179,10 +180,11 @@ namespace SOC.GamePlay
                        }
                    }
                }
-               //--
-           }
-           // other.sharedMesh.bindposes
-           if (otherRootTrans != null) {
+                */
+                //--
+            }
+            // other.sharedMesh.bindposes
+            if (otherRootTrans != null) {
                Animator otherAnim = otherRootTrans.GetComponent<Animator>();
                if (otherAnim != null) {
                    otherAnim.enabled = false;
@@ -470,7 +472,7 @@ namespace SOC.GamePlay
                         }
                     }
                     // 生成新的body数据
-                    BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
+                    //BuildNewBodyMesh(controller.m_Body, boneList, bindPoseList);
                     AssetDatabase.Refresh();
 
                     ProcessSkinnedMesh(controller.m_Body, controller.m_Head);
