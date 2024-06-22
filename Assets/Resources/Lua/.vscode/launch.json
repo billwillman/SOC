@@ -10,7 +10,7 @@
             "cwd": "${workspaceFolder}",
             "luaFileExtension": "",
             "connectionPort": 8819,
-            "stopOnEntry": true,
+            "stopOnEntry": false,
             "useCHook": true,
             "autoPathMode": true
         },
@@ -24,7 +24,7 @@
             "packagePath": [],
             "luaFileExtension": "",
             "connectionPort": 8820,
-            "stopOnEntry": true,
+            "stopOnEntry": false,
             "useCHook": true
         }
     ]

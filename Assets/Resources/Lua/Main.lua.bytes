@@ -37,6 +37,7 @@ end
 --- 游戏结束
 function QuitGame()
     if _MOE.GameApp then
+        _MOE.Logger.Log("[QuitGame] GameApp")
         _MOE.GameApp:Quit()
     end
 end
