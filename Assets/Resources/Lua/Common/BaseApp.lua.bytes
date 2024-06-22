@@ -1,0 +1,18 @@
+local BaseApp = _MOE.class("BaseApp")
+
+function BaseApp:Ctor(...)
+    self:OnInit(...)
+end
+
+function BaseApp:Quit()
+    self:OnQuit()
+end
+
+------------------------------------------------------ 虚方法 ---------------------------------------------------
+function BaseApp:OnInit(...)
+end
+
+function BaseApp:OnQuit()
+end
+
+return BaseApp

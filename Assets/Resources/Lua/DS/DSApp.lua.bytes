@@ -1,0 +1,5 @@
+local BaseAppClass = require("Common.BaseApp")
+
+local DSApp = _MOE.class("DSApp", BaseAppClass)
+
+return DSApp
