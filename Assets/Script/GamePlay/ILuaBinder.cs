@@ -15,7 +15,7 @@ namespace SOC.GamePlay
     }
 
     [LuaCallCSharp]
-    public class ILuaBinder : MonoBehaviour
+    public class ILuaBinder : BaseMonoBehaviour
     {
         public string LuaPath = string.Empty;
         public MonoBehaviour SelfTarget = null;
@@ -24,7 +24,6 @@ namespace SOC.GamePlay
         private Dictionary<int, LuaFunction> m_LuaEventMap = null;
         private LuaTable m_LuaSelf = null;
         private LuaTable m_LuaClass = null;
-        private bool m_IsDestroyed = false;
         public LuaTable LuaSelf {
             get {
                 return m_LuaSelf;
@@ -135,27 +134,11 @@ namespace SOC.GamePlay
             }
         }
 
-        // OnApplicationQuit 是优先OnDestroy, 这样保证GameStart的OnDestroy最后调用
-        [DoNotGen]
-        private void OnApplicationQuit() {
-            DoDestroy();
-        }
-
-        [DoNotGen]
-        void DoDestroy() {
-            if (m_IsDestroyed)
-                return;
-            m_IsDestroyed = true;
+        protected override void OnInternalDestroyed() {
             if (CallLuaFunc(LuaEvent_MonoEventType.Destroyed)) {
                 OnDestroyed();
             }
             DoDestroyLuaObject();
-        }
-
-        [DoNotGen]
-
-        private void OnDestroy() {
-            DoDestroy();
         }
 
         [DoNotGen]
