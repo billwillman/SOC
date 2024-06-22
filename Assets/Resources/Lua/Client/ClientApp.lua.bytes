@@ -1,0 +1,5 @@
+local BaseAppClass = require("Common.BaseApp")
+
+local ClientApp = _MOE.class("ClientApp", BaseAppClass)
+
+return ClientApp

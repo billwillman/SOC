@@ -28,6 +28,21 @@ local function InitCSGlobalVars()
     _MOE.ResourceManager = CS.ResourceMgr
 end
 
+local function CreateApplication()
+    local appClass
+    if _MOE.IsDS then
+        appClass = require("DS.DSApp")
+    else
+        appClass = require("Client.ClientApp")
+    end
+    if not appClass then
+        _MOE.Logger.LogError("[CreateApplication] not found appClass~!")
+        return
+    end
+    _MOE.GameApp = appClass.New()
+end
+
+--- 主函数
 function Main()
     _MOE.Logger.Log("[xlua] Main Start...")
     InitCSGlobalVars()
@@ -37,8 +52,16 @@ function Main()
     else
         require("LuaPanda").start("127.0.0.1", 8819)
     end
+    CreateApplication()
     -- 初始化Model
     require("ModelInit")
+end
+
+--- 游戏结束
+function QuitGame()
+    if _MOE.GameApp then
+        _MOE.GameApp:Quit()
+    end
 end
 
 return _MOE

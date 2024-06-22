@@ -100,6 +100,14 @@ namespace SOC.GamePlay
 
         private void OnDestroy() {
             if (m_LuaEnv != null) {
+                var QuitGame = m_LuaEnv.Global.Get<LuaFunction>("QuitGame");
+                if (QuitGame != null) {
+                    try {
+                        QuitGame.Call();
+                    } finally {
+                        QuitGame.Dispose();
+                    }
+                }
                 m_LuaEnv.Dispose();
                 m_LuaEnv = null;
             }
