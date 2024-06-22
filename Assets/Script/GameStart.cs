@@ -63,25 +63,25 @@ namespace SOC.GamePlay
 
         void Lua_DoMain() {
             if (m_LuaEnv != null) {
-                byte[] lua = ResourceMgr.Instance.LoadBytes("Resources/Lua/Main.lua.bytes");
+                // ÓÅÏÈ¼ÓÔØPreload.lua
+                byte[] lua = ResourceMgr.Instance.LoadBytes("Resources/Lua/Preload.lua.bytes");
+                System.Object[] result =  m_LuaEnv.DoString(lua);
+                LuaTable _MOE = result[0] as LuaTable;
+                try {
+                    InitNetCodeLuaGlobalVars(_MOE);
+                } finally {
+                    _MOE.Dispose();
+                }
+                //--
+                lua = ResourceMgr.Instance.LoadBytes("Resources/Lua/Main.lua.bytes");
                 if (lua != null) {
-                    System.Object[] result = m_LuaEnv.DoString(lua);
-                    if (result != null && result.Length > 0) {
-                        LuaTable _MOE = result[0] as LuaTable;
-                        if (_MOE != null) {
-                            try {
-                                InitNetCodeLuaGlobalVars(_MOE);
-                                LuaFunction MainFunc = m_LuaEnv.Global.Get<LuaFunction>("Main");
-                                if (MainFunc != null) {
-                                    try {
-                                        MainFunc.Call();
-                                    } finally {
-                                        MainFunc.Dispose();
-                                    }
-                                }
-                            } finally {
-                                _MOE.Dispose();
-                            }
+                   m_LuaEnv.DoString(lua);
+                    LuaFunction MainFunc = m_LuaEnv.Global.Get<LuaFunction>("Main");
+                    if (MainFunc != null) {
+                        try {
+                            MainFunc.Call();
+                        } finally {
+                            MainFunc.Dispose();
                         }
                     }
                 }
@@ -114,6 +114,7 @@ namespace SOC.GamePlay
         }
 
         private byte[] OnLuaFileLoad(ref string filepath) {
+            filepath = filepath.Replace(".", "/");
             string luaPath = string.Format("Resources/Lua/{0}.lua.bytes", filepath);
             byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath);
             return ret;

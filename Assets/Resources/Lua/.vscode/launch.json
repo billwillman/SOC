@@ -9,7 +9,7 @@
             "description": "通用模式,通常调试项目请选择此模式 | launchVer:3.2.0",
             "cwd": "${workspaceFolder}",
             "luaFileExtension": "",
-            "connectionPort": 8818,
+            "connectionPort": 8819,
             "stopOnEntry": true,
             "useCHook": true,
             "autoPathMode": true
