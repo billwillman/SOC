@@ -2,4 +2,11 @@ local BaseAppClass = require("Common.BaseApp")
 
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
+function ClientApp:OnInit()
+end
+
+function ClientApp:OnQuit()
+    _MOE.NetManager:GetInstance():Disconnect()
+end
+
 return ClientApp
