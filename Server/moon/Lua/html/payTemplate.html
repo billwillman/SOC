@@ -1,0 +1,93 @@
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>向商户付款</title>
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="{IP}:9998/html/pay_files/default.css">
+    <link rel="stylesheet" href="{IP}:9998/html/pay_files/style.css">
+</head>
+<body>
+<div class="layout-flex wrap">
+
+  <!-- content start -->
+  <div class="content">
+      <div class="mar20">
+          <table>
+              <tbody>
+                  <tr>
+                      <td><span class="sico_pay" style="margin:5px 5px 10px 5px"></span></td>
+                      <td class="selTitle">请支付</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    <form name="payForm" action="{IP}:9999/payResult" method="post">
+        <input type="hidden" name="pid" id="pid" value="%d">
+		<input type="hidden" name="trade_no" id="trade_no" value="%s">
+		<input type="hidden" name="clientip" id="clientip" value="%s">
+                <div class="set_amount">
+        	<div class="payMoney marLeft10">请输入付款金额</div>
+            <div class="amount_bd">
+                <i class="i_money marLeft10" style="">¥</i>
+                <span class="input_simu " id="amount"></span>
+
+                <!-- 模拟input -->
+                <em class="line_simu" id="line"></em>
+                <!-- 模拟闪烁的光标 -->
+                <div id="clearBtn" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+                <!-- 清除按钮 -->
+            </div>
+        </div>
+    </form>
+
+  </div>
+  <!-- content end -->
+
+  <div class="copyRight">由 <span style="font-weight:bold">支付</span> 提供服务支持</div>
+  <!-- 键盘 -->
+  <div class="keyboard">
+      <table class="key_table" id="keyboard" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+          <tbody>
+              <tr>
+                <td class="key border b_rgt_btm" data-value="1">1</td>
+                <td class="key border b_rgt_btm" data-value="2">2</td>
+                <td class="key border b_rgt_btm" data-value="3">3</td>
+                <td class="key border b_btm clear" data-value="delete"></td>
+              </tr>
+              <tr>
+                <td class="key border b_rgt_btm" data-value="4">4</td>
+                <td class="key border b_rgt_btm" data-value="5">5</td>
+                <td class="key border b_rgt_btm" data-value="6">6</td>
+                <td class="pay_btn" rowspan="3" id="payBtn" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><em>确认</em>支付</td>
+              </tr>
+              <tr>
+                <td class="key border b_rgt_btm" data-value="7">7</td>
+                <td class="key border b_rgt_btm" data-value="8">8</td>
+                <td class="key border b_rgt_btm" data-value="9">9</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="key border b_rgt" data-value="0">0</td>
+                <td class="key border b_rgt" data-value="dot">.</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+
+</div>
+
+<div class="circle-box none"><div class="circle_animate"><div class="circle"></div><p></p></div></div><div class="pop_wrapper none"><div class="pop_outer"><div class="pop_cont"><div class="pop_tip"></div><p class="border b_top"><span class="pop_btn">我知道了</span></p></div></div></div><script src="{IP}:9998/html/pay_files/jquery.min.js"></script>
+<script src="{IP}:9998/html/pay_files/qqapi.js"></script>
+<script src="{IP}:9998/html/pay_files/hammer.js"></script>
+<script src="{IP}:9998/html/pay_files/common.js"></script>
+<script src="{IP}:9998/html/pay_files/pay.js"></script>
+<script>
+	document.body.addEventListener('touchmove', function (event) {
+		event.preventDefault();
+	},{ passive: false });
+    var tips = new Tips();
+</script>
+
+</body></html>
