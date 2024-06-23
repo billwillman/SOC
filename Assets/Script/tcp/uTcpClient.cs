@@ -280,6 +280,48 @@ namespace NsTcpClient
 			Buffer.BlockCopy (crc, 0, dst, 4, crc.Length);
 		}*/
 
+        // 发送MoonServer的Moon头类型数据
+        unsafe public void SendMoonPacket(byte[] buf, int bufSize = -1) {
+            if (mConnecting || (mTcpClient == null))
+                return;
+
+            if (mTcpClient.GetState() != eClientState.eClient_STATE_CONNECTED)
+                return;
+
+            if (bufSize < 0 && buf != null) {
+                bufSize = buf.Length;
+            }
+            // 不允许大于ushort的最大值
+            if (bufSize > ushort.MaxValue)
+                throw new Exception("[SendMoon] bufSize is More Max ushort");
+
+            bool hasBufData = (buf != null) && (bufSize > 0);
+            MoonPackHeader header = new MoonPackHeader();
+            if (hasBufData)
+                // 2Byte(big-endian)
+                header.Len = (ushort)System.Net.IPAddress.HostToNetworkOrder((short)bufSize);
+            else
+                header.Len = 0;
+
+            int headerSize = Marshal.SizeOf(header);
+            int dstSize = headerSize;
+            if (hasBufData)
+                dstSize += bufSize;
+
+            var dstStream = NetByteArrayPool.GetByteBufferNode(dstSize);
+            try {
+                byte[] dstBuffer = dstStream.GetBuffer();
+                byte* pHeader = (byte*)&header;
+                Marshal.Copy((IntPtr)pHeader, dstBuffer, 0, headerSize);
+                if (hasBufData)
+                    Buffer.BlockCopy(buf, 0, dstBuffer, headerSize, bufSize);
+                mTcpClient.Send(dstBuffer, dstSize);
+            } finally {
+                dstStream.Dispose();
+                dstStream = null;
+            }
+        }
+
 		// 支持发送buf为null
 		unsafe public void Send (byte[] buf, int packetHandle, int bufSize = -1)
 		{
