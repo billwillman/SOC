@@ -144,6 +144,19 @@ namespace NsTcpClient
 			set;
 		}
 
+		[XLua.CSharpCallLua]
+		public OnMoonPacketRead OnMoonPacketRead {
+			get {
+				if (m_Client != null)
+					return m_Client.MoonPacketRead;
+				return null;
+			}
+			set {
+				if (m_Client != null)
+					m_Client.MoonPacketRead = value;
+			}
+        }
+
 		public void AddPacketListener(int header, OnPacketRead callBack)
 		{
 			if (m_Client == null)
