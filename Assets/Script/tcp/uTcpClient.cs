@@ -199,6 +199,8 @@ namespace NsTcpClient
 
     [XLua.CSharpCallLua]
 	public delegate void OnPacketRead(GamePacket packet);
+    [XLua.CSharpCallLua]
+    public delegate void OnMoonPacketRead(MoonGamePacket packet);
 
 	public abstract class ClientPackageListener
 	{
