@@ -2,4 +2,8 @@
 
 local NetClientModel = _MOE.class("NetClientModel")
 
+--- 请求服务器列表
+function NetClientModel:ReqServerList()
+end
+
 return NetClientModel
