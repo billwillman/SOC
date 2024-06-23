@@ -433,6 +433,22 @@ namespace NsTcpClient
 			return ret;
 		}
 
+        public bool ConnectMoonServer(string ip, int port) {
+            DisConnect();
+            mTcpClient = new TcpClient();
+            mTcpClient.OnThreadBufferProcess = OnMoonPacketThreadBufferProcess;
+            bool ret = mTcpClient.Connect(ip, port, cSocketConnWaitTime);
+            if (ret) {
+                mConnecting = true;
+                Start();
+            } else {
+                mTcpClient.Release();
+                mTcpClient = null;
+            }
+
+            return ret;
+        }
+
 		public void DisConnect()
 		{
 			Stop ();
@@ -517,6 +533,7 @@ namespace NsTcpClient
 			}
 
             ProcessPackets ();
+            ProcessMoonPackets();
 
             if (mTcpClient != null && !mTcpClient.HasReadData ()) {
                 if (!mAbort) {
@@ -537,6 +554,56 @@ namespace NsTcpClient
             return true;
                    
 		}
+
+        // 子线程调用
+        private unsafe void OnMoonPacketThreadBufferProcess(TcpClient tcp) {
+            if (tcp == null)
+                return;
+            int recvsize = mTcpClient.GetReadDataNoLock(mRecvBuffer, mRecvSize);
+            if (recvsize > 0) {
+                mRecvSize += recvsize;
+                int recvBufSz = mRecvSize;
+                int i = 0;
+                MoonPackHeader header = new MoonPackHeader();
+
+                int headerSize = Marshal.SizeOf(header);
+                try {
+                    while (recvBufSz - i >= headerSize) {
+                        byte* headerBuffer = (byte*)&header;
+                        Marshal.Copy(mRecvBuffer, i, (IntPtr)headerBuffer, headerSize);
+                        // 2Byte(big-endian)
+                        ushort dataSize = (ushort)System.Net.IPAddress.NetworkToHostOrder((short)header.Len);
+                        if ((recvBufSz - i) < (dataSize + headerSize))
+                            break;
+                        // 这里转本地的小端模式，方便调用
+                        header.Len = dataSize;
+                        // ----
+                        MoonGamePacket packet = MoonGamePacket.CreateFromPool();
+                        packet.header = header;
+                        if (dataSize <= 0) {
+                            packet.header.Len = 0;
+                            packet.data = null;
+                        } else {
+                            packet.data = NetByteArrayPool.GetByteBufferNode(dataSize);
+                            var buf = packet.data.GetBuffer();
+                            Buffer.BlockCopy(mRecvBuffer, i + headerSize, buf, 0, dataSize);
+                        }
+                        var node = packet.LinkedNode;
+                        lock (this) {
+                            mMoonPacketList.AddLast(node);
+                        }
+
+                        i += headerSize + dataSize;
+                    }
+                } finally {
+                }
+
+                recvBufSz -= i;
+                mRecvSize = recvBufSz;
+                if (recvBufSz > 0)
+                    Buffer.BlockCopy(mRecvBuffer, i, mRecvBuffer, 0, recvBufSz);
+            }
+        }
 
         // 子线程调用
         private unsafe void OnThreadBufferProcess(TcpClient tcp)
@@ -615,7 +682,22 @@ namespace NsTcpClient
                     mPacketList.Clear();
                 }
             }
+            if (mMoonPacketList != null) {
+                lock (this) {
+                    mMoonPacketList.Clear();
+                }
+            }
 		}
+
+        private void ProcessMoonPacket(MoonGamePacket packet) {
+            packet.DoDone();
+            if (MoonPacketRead != null) {
+                try {
+                    MoonPacketRead(packet);
+                } catch {
+                }
+            }
+        }
 
 		private void ProcessPacket(GamePacket packet)
 		{
@@ -706,6 +788,42 @@ namespace NsTcpClient
             }
 		}
 
+        private void ProcessMoonPackets() {
+            while (true) {
+                LinkedListNode<MoonGamePacket> node;
+                lock (this) {
+                    node = mMoonPacketList.First;
+                    if (node != null)
+                        mPacketList.RemoveFirst();
+                }
+
+                if (node == null)
+                    break;
+                MoonGamePacket packet = node.Value;
+                if (packet != null) {
+                    if (packet.status == GamePacketStatus.GPNone) {
+                        ProcessMoonPacket(packet);
+                        // 如果为标记为正在处理
+                        if (packet.status == GamePacketStatus.GPProcessing) {
+                            lock (this) {
+                                mMoonPacketList.AddFirst(node);
+                            }
+                            break;
+                        } else {
+                            packet.Dispose();
+                        }
+                    } else if (packet.status == GamePacketStatus.GPProcessing) {
+                        lock (this) {
+                            mMoonPacketList.AddFirst(node);
+                        }
+                        break;
+                    } else {
+                        packet.Dispose();
+                    }
+                }
+            }
+        }
+
         public void RegisterServerMessageClass(int header, System.Type messageClass)
         {
             if (messageClass == null)
@@ -748,8 +866,14 @@ namespace NsTcpClient
 			}
 		}
 
+        public OnMoonPacketRead MoonPacketRead {
+            get;
+            set;
+        }
+
         private TcpClient mTcpClient = null;
 		private LinkedList<GamePacket> mPacketList = new LinkedList<GamePacket>();
+        private LinkedList<MoonGamePacket> mMoonPacketList = new LinkedList<MoonGamePacket>();
 		private Dictionary<int, OnPacketRead> mPacketListenerMap = new Dictionary<int, OnPacketRead>();
         private Dictionary<int, System.Type> mPacketAbstractServerMessageMap = null;
         private byte[] mRecvBuffer = new byte[TcpClient.MAX_TCP_CLIENT_BUFF_SIZE];
