@@ -5,6 +5,7 @@ local function InitDSAndClient()
 end
 
 local function InitClient()
+    _MOE.GameApp:RegisterModel("Client.Models.NetClientModel")
 end
 
 if _MOE.IsDS then

@@ -3,6 +3,7 @@ local BaseAppClass = require("Common.BaseApp")
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
 function ClientApp:OnInit()
+    self:RegisterModel("Client.Models.NetClientModel")
 end
 
 function ClientApp:OnQuit()

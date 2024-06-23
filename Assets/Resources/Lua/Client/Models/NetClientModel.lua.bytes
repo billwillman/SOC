@@ -1,9 +1,10 @@
 -- 网络客户端Model
-
-local NetClientModel = _MOE.class("NetClientModel")
+local NetClientModel = _MOE.class("NetClientModel", _MOE.BaseModel)
 
 --- 请求服务器列表
-function NetClientModel:ReqServerList()
+function NetClientModel:OnInit()
+    local jsonStr = _MOE.ResourceManager:GetInstance():LoadString("Resources/Config/Server.json")
+    _MOE.Logger.Log(jsonStr)
 end
 
 return NetClientModel

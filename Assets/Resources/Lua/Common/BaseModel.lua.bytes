@@ -1,0 +1,42 @@
+local BaseModel = _MOE.class("BaseModel")
+
+function BaseModel:Init()
+    self:OnInit()
+    self:RegisterEvents()
+end
+
+function BaseModel:UnInit()
+    self:UnRegisterEvents()
+    self:OnUnInit()
+end
+
+-- 登出
+function BaseModel:Loginout()
+    self:OnLoginout()
+end
+
+-- 断线重连成功
+function BaseModel:ReConnected()
+    self:OnReConnected()
+end
+
+------------------------------------------------ 虚方法 ----------------------------------
+function BaseModel:OnInit()
+end
+
+function BaseModel:OnUnInit()
+end
+
+function BaseModel:OnLoginout()
+end
+
+function BaseModel:OnReConnected()
+end
+
+function BaseModel:RegisterEvents()
+end
+
+function BaseModel:UnRegisterEvents()
+end
+
+return BaseModel
