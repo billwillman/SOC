@@ -171,6 +171,18 @@ namespace NsTcpClient
             m_Client.RegisterServerMessageClass(header, messageClass);
         }
 
+		public void SendMoonServer(byte[] buf, int bufSize = -1) {
+			if (m_Client == null)
+				return;
+			var status = m_Client.GetState();
+			if (status == eClientState.eClient_STATE_CONNECTED) {
+				m_Client.SendMoonPacket(buf, bufSize);
+			} else if (status == eClientState.eClient_STATE_CONNECTING) {
+				TempPacket temp = new TempPacket(buf, 0, bufSize, true);
+				m_TempList.AddLast(temp);
+			}
+		}
+
         public void Send(byte[] buf, int packetHandle, int bufSize = -1)
 		{
 			if (m_Client == null)
@@ -178,10 +190,10 @@ namespace NsTcpClient
 			var status = m_Client.GetState();
 			if (status == eClientState.eClient_STATE_CONNECTED)
 			{
-                m_Client.Send(buf, packetHandle, bufSize);
+				m_Client.Send(buf, packetHandle, bufSize);
 			} else if (status == eClientState.eClient_STATE_CONNECTING)
 			{
-                TempPacket temp = new TempPacket(buf, packetHandle, bufSize);
+                TempPacket temp = new TempPacket(buf, packetHandle, bufSize, false);
 				m_TempList.AddLast(temp);
 			}
 		}
@@ -259,8 +271,19 @@ namespace NsTcpClient
 			if (string.IsNullOrEmpty(data))
 				src = null;
 			else
-				src = System.Text.Encoding.ASCII.GetBytes(data);
+				src = System.Text.Encoding.UTF8.GetBytes(data);
 			Send(src, packetHandle);
+		}
+
+		public void SendMoonStr(string data) {
+			if (m_Client == null)
+				return;
+			byte[] src;
+			if (string.IsNullOrEmpty(data))
+				src = null;
+			else
+				src = System.Text.Encoding.UTF8.GetBytes(data);
+			SendMoonServer(src);
 		}
 
         // 发送AbstractClientMessage
@@ -300,7 +323,10 @@ namespace NsTcpClient
 			LinkedListNode<TempPacket> node = m_TempList.First;
 			while (node != null)
 			{
-				m_Client.Send(node.Value.data, node.Value.handle);
+				if (node.Value.isMoonServer)
+					m_Client.SendMoonPacket(node.Value.data);
+				else
+					m_Client.Send(node.Value.data, node.Value.handle);
 				node = node.Next;
 			}
 
@@ -311,11 +337,13 @@ namespace NsTcpClient
 		{
 			public byte[] data;
 			public int handle;
+			public bool isMoonServer;
 
-            public TempPacket(byte[] srcData, int packetHandle, int bufSize = -1)
+            public TempPacket(byte[] srcData, int packetHandle, int bufSize = -1, bool isMoonServer = false)
 			{
 				handle = packetHandle;
-                if (srcData == null || srcData.Length <= 0 || bufSize == 0)
+				this.isMoonServer = isMoonServer;
+				if (srcData == null || srcData.Length <= 0 || bufSize == 0)
 					data = null;
 				else 
 				{
