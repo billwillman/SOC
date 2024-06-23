@@ -1,1 +1,5 @@
 -- 网络客户端Model
+
+local NetClientModel = _MOE.class("NetClientModel")
+
+return NetClientModel
