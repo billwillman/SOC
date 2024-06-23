@@ -46,7 +46,7 @@ namespace NsTcpClient
 			return ConnectServer(m_Ip, m_Port);
 		}
 
-		public bool ConnectServer(string ip, int port)
+		public bool ConnectServer(string ip, int port, bool isMoonServer = false)
 		{
 			if (m_Client == null || string.IsNullOrEmpty(ip) || port <= 0)
 				return false;
@@ -66,7 +66,11 @@ namespace NsTcpClient
 
 			ClearTempList();
 
-			bool ret = m_Client.Connect(ip, port);
+			bool ret;
+			if (isMoonServer)
+				ret = m_Client.ConnectMoonServer(ip, port);
+			else
+				ret = m_Client.Connect(ip, port);
 
 			if (ret)
 			{
