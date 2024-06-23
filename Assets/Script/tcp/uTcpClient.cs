@@ -27,11 +27,73 @@ namespace NsTcpClient
 		public uint dataCrc32;
 		public int header;
 	}
-	
-	public enum GamePacketStatus {
+
+    [StructLayoutAttribute(LayoutKind.Sequential, Pack = 1)]
+    public struct MoonPackHeader
+    {
+        public ushort Len;
+    }
+
+    public enum GamePacketStatus {
         GPNone = 0,
         GPProcessing,
         GPDone
+    }
+
+    public class MoonGamePacket: PoolNode<MoonGamePacket>
+    {
+        public MoonPackHeader header;
+        public ByteBufferNode data = null;
+        private LinkedListNode<MoonGamePacket> m_LinkedNode = null;
+        public LinkedListNode<MoonGamePacket> LinkedNode {
+            get {
+                if (m_LinkedNode == null)
+                    m_LinkedNode = new LinkedListNode<MoonGamePacket>(this);
+                return m_LinkedNode;
+            }
+        }
+        public GamePacketStatus status {
+            get;
+            private set;
+        }
+        private void UnInit() {
+            status = GamePacketStatus.GPNone;
+            if (data != null) {
+                data.Dispose();
+                data = null;
+            }
+        }
+        private void Init() {
+            UnInit();
+        }
+
+        public static MoonGamePacket CreateFromPool() {
+            MoonGamePacket ret = (MoonGamePacket)AbstractPool<MoonGamePacket>.GetNode();
+            ret.Init();
+            return ret;
+        }
+        protected override void OnFree() {
+            UnInit();
+        }
+        public bool hasData() {
+            if ((header.Len <= 0) || (data == null))
+                return false;
+            return (data.DataSize > 0);
+        }
+
+        public string dataToString() {
+            if (data == null)
+                return string.Empty;
+            return data.ToString();
+        }
+
+        public void DoDone() {
+            status = GamePacketStatus.GPDone;
+        }
+
+        public void DoProcessing() {
+            status = GamePacketStatus.GPProcessing;
+        }
     }
 
 	// 1. data is ProtoBuf
