@@ -6,6 +6,57 @@ end
 
 function BaseApp:Quit()
     self:OnQuit()
+    self:UnRegisterModels()
+end
+
+function BaseApp:GetModel(modelName)
+    if not modelName or not self.Models then
+        return
+    end
+    local ret = self.Models[modelName]
+    return ret
+end
+
+function BaseApp:RegisterModel(modelFilePath, ...)
+    if not modelFilePath then
+        return false
+    end
+    local modelClass = require(modelFilePath)
+    if not modelClass or not modelClass.cls or not modelClass.cls.__cname then
+        return false
+    end
+    local modelName = modelClass.cls.__cname
+    local ret = self:GetModel(modelName)
+    if ret then
+        return ret
+    end
+    ret = modelClass.New(...)
+    self.Models = self.Models or {}
+    self.Models[modelName] = ret
+    -- 初始化
+    if ret and ret.Init then
+        ret:Init()
+    end
+    return ret
+end
+
+function BaseApp:UnRegisterModel(modelName)
+    local model = self:GetModel(modelName)
+    if model and model.UnInit then
+        model:UnInit()
+    end
+end
+
+function BaseApp:UnRegisterModels()
+    if not self.Models or next(self.Models) == nil then
+        return
+    end
+    for _, model in pairs(self.Models) do
+        if model and model.UnInit then
+            model:UnInit()
+        end
+    end
+    self.Models = {}
 end
 
 ------------------------------------------------------ 虚方法 ---------------------------------------------------

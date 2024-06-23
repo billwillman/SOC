@@ -1,0 +1,5 @@
+local LoginModel = _MOE.class("LoginModel")
+
+
+
+return LoginModel
