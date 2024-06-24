@@ -1,4 +1,11 @@
 -- UI管理器
 local UIManager = _MOE.class("UIManager")
 
+-- 打开界面
+function UIManager:OpenWindow(wndName)
+end
+
+function UIManager:CloseWindow(wndName)
+end
+
 return UIManager
