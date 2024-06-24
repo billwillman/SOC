@@ -22,4 +22,8 @@ _MOE.Logger = {
     end
 }
 
+_MOE.NetManager = CS.NsTcpClient.NetManager
+_MOE.ResourceManager = CS.ResourceMgr
+_MOE.class = require("Common.BaseClass") -- class框架
+
 return _MOE

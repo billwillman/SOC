@@ -22,10 +22,10 @@ function BaseApp:RegisterModel(modelFilePath, ...)
         return false
     end
     local modelClass = require(modelFilePath)
-    if not modelClass or not modelClass.cls or not modelClass.cls.__cname then
+    if not modelClass or not modelClass.__cname then
         return false
     end
-    local modelName = modelClass.cls.__cname
+    local modelName = modelClass.__cname
     local ret = self:GetModel(modelName)
     if ret then
         return ret

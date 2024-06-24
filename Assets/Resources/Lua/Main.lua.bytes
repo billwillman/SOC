@@ -7,10 +7,7 @@ else
 end
 
 local function InitCSGlobalVars()
-    _MOE.class = require("Common.BaseClass") -- class框架
     _MOE.BaseModel = require("Common.BaseModel")
-    _MOE.NetManager = CS.NsTcpClient.NetManager
-    _MOE.ResourceManager = CS.ResourceMgr
 end
 
 local function CreateApplication()
