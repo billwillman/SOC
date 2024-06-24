@@ -3,6 +3,7 @@ local NetClientModel = _MOE.class("NetClientModel", _MOE.BaseModel)
 
 --- 请求服务器列表
 function NetClientModel:OnInit()
+    _MOE.Logger.Log("[NetClientModel] OnInit...")
     local jsonStr = _MOE.ResourceManager:GetInstance():LoadString("Resources/Config/Server.json")
     _MOE.Logger.Log(jsonStr)
 end
