@@ -13,7 +13,7 @@
             "cwd": "${workspaceFolder}",
             "luaFileExtension": ".lua.bytes",
             "connectionPort": 8818,
-            "stopOnEntry": true,
+            "stopOnEntry": false,
             "useCHook": true,
             "autoPathMode": true
         },
