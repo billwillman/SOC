@@ -1,3 +1,7 @@
 local BaseView = _MOE.class("BaseView")
 
+function BaseView:Ctor(...)
+    self.bp = {}
+end
+
 return BaseView
