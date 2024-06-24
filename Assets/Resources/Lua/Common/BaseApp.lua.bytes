@@ -42,8 +42,11 @@ end
 
 function BaseApp:UnRegisterModel(modelName)
     local model = self:GetModel(modelName)
-    if model and model.UnInit then
-        model:UnInit()
+    if model then
+        if model.UnInit then
+            model:UnInit()
+        end
+        self.Models[modelName] = nil
     end
 end
 

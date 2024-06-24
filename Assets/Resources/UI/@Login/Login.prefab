@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 7445557520095635108}
   - component: {fileID: 5847645828945954466}
   - component: {fileID: 5678313915314511824}
+  - component: {fileID: 2840667925446856142}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -799,3 +800,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2840667925446856142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161157953403262015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64533a518d657d748bea84e24762d653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LuaPath: 
+  SelfTarget: {fileID: 0}
