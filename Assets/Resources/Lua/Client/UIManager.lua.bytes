@@ -1,0 +1,4 @@
+-- UI管理器
+local UIManager = _MOE.class("UIManager")
+
+return UIManager
