@@ -31,8 +31,6 @@ function Main()
     -- 设置调试Lua Panda调试
     InitCSGlobalVars()
     CreateApplication()
-    -- 初始化Model
-    require("ModelInit")
 end
 
 --- 游戏结束
