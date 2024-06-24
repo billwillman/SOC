@@ -1,7 +1,7 @@
 if _MOE.IsDS then
-    require("LuaPanda").start("127.0.0.1", 8818)
-else
     require("LuaPanda").start("127.0.0.1", 8819)
+else
+    require("LuaPanda").start("127.0.0.1", 8818)
 end
 
 local function InitCSGlobalVars()
