@@ -40,6 +40,10 @@ function BaseView:Open(...)
     xpcall(self.OnOpen, _G.ErrorHandle, self, ...)
 end
 
+function BaseView:Close()
+    xpcall(self.OnClose, _G.ErrorHandle, self)
+end
+
 --- UI释放
 function BaseView:Destroy()
     xpcall(self.OnDestroy, _G.ErrorHandle, self)
@@ -64,6 +68,9 @@ function BaseView:OnDestroy()
 end
 
 function BaseView:OnOpen()
+end
+
+function BaseView:OnClose()
 end
 
 return BaseView
