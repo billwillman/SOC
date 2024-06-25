@@ -1,5 +1,12 @@
 local BaseView = _MOE.class("BaseView")
 
+local function GetControlName(control)
+    if not control then
+        return
+    end
+    return control.gameObj.name
+end
+
 function BaseView:Ctor(gameObj)
     self.bp = {}
     self.RootGameObject = gameObj
@@ -21,6 +28,37 @@ function BaseView:ClearUIEvents()
             end
         end
     end
+end
+
+function BaseView:_RegisterUIEvent(name, eventName, func)
+    self.__UIEvents = self.__UIEvents or {}
+    local ctl = self:GetControl(name)
+    if ctl then
+        local params = self.__UIEvents[name]
+        if not params then
+            params = {}
+            self.__UIEvents[name] = params
+        end
+        params[eventName] = func
+        ctl[eventName] = func
+        return true
+    end
+    return false
+end
+
+function BaseView:_UnRegisterUIEvent(name, eventName)
+    if self.__UIEvents then
+        local ctl = self:GetControl(name)
+        if ctl then
+            local params = self.__UIEvents[name]
+            if params then
+                params[eventName] = nil
+            end
+            ctl[eventName] = nil
+            return true
+        end
+    end
+    return false
 end
 
 function BaseView:_ClearAllUIControls()
@@ -60,7 +98,18 @@ function BaseView:AddUIEvent(control, eventName, func)
         return false
     end
 
-    control[eventName] = func
+    return self:_RegisterUIEvent(GetControlName(control), eventName, func)
+end
+
+function BaseView:RemoveUIEvent(control, eventName)
+    if not eventName or not control then
+        return false
+    end
+    if type(eventName) ~= "string" then
+        _MOE.Logger.LogError("[BaseView] RemoveUIEvent: Param is not vaild~!")
+        return false
+    end
+    return self:_UnRegisterUIEvent(GetControlName(control), eventName)
 end
 
 --------------------------------------- 虚方法
