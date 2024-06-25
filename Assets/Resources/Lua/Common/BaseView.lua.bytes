@@ -27,6 +27,7 @@ function BaseView:ClearUIEvents()
                 end
             end
         end
+        self.__UIEvents = {}
     end
 end
 
