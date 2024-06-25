@@ -1,0 +1,11 @@
+_MOE.WindowName = {
+    Login = "Login"
+}
+
+_MOE.WindowResPath = {
+    Login = "@Login/Login"
+}
+
+_MOE.WindowViewClass = {
+    Login = ""
+}

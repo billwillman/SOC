@@ -8,22 +8,15 @@ using XLua;
 namespace SOC.GamePlay
 {
     [XLua.LuaCallCSharp]
-    [RequireComponent(typeof(ILuaBinder))]
     public sealed class UIBinder : BaseMonoBehaviour
     {
         public UIBehaviour[] m_BindControls = null;
-        private ILuaBinder m_Lua = null;
 
-        private void Awake()
+        public void InitRegisterControls(LuaTable lua)
         {
-            m_Lua = GetComponent<ILuaBinder>();
-        }
-
-        private void InitRegisterControls()
-        {
-            if (GameStart.EnvLua != null && m_BindControls != null && m_Lua != null && m_Lua.LuaSelf != null)
+            if (lua != null && m_BindControls != null)
             {
-                LuaTable bp = m_Lua.LuaSelf.Get<LuaTable>("bp");
+                LuaTable bp = lua.Get<LuaTable>("bp");
                 if (bp != null) {
                     for (int i = 0; i < m_BindControls.Length; ++i) {
                         var control = m_BindControls[i];
@@ -33,11 +26,6 @@ namespace SOC.GamePlay
                     }
                 }
             }
-        }
-
-        private void Start()
-        {
-            InitRegisterControls();
         }
     }
 }

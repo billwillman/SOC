@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 5756269718323733781}
   - component: {fileID: 4216573869334062602}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: BtnSubmit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,7 +707,6 @@ GameObject:
   - component: {fileID: 7445557520095635108}
   - component: {fileID: 5847645828945954466}
   - component: {fileID: 5678313915314511824}
-  - component: {fileID: 743259060686941569}
   - component: {fileID: 3740798648938610657}
   m_Layer: 5
   m_Name: Login
@@ -801,20 +800,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &743259060686941569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161157953403262015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64533a518d657d748bea84e24762d653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LuaPath: 
-  SelfTarget: {fileID: 3740798648938610657}
 --- !u!114 &3740798648938610657
 MonoBehaviour:
   m_ObjectHideFlags: 0

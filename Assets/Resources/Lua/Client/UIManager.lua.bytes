@@ -1,8 +1,77 @@
+require("Client.Views.UIConfig")
+
 -- UI管理器
 local UIManager = _MOE.class("UIManager")
+local BaseResLoaderAsyncType = typeof(CS.NSLib.ResMgr.BaseResLoaderAsyncMono)
+local UIBinderType = typeof(CS.SOC.GamePlay.UIBinder)
+
+function UIManager:Ctor()
+    self.Wnds = {}
+end
+
+function UIManager:_CreateUIPrefab(wndName)
+    if not wndName then
+        return
+    end
+    local path = _MOE.WindowResPath[wndName]
+    if not path then
+        return
+    end
+    path = string.format("Resources/UI/%s.prefab", path)
+    local ret = _MOE.ResourceManager:CreateGameObject(path)
+    if ret then
+        ret:AddComponent(BaseResLoaderAsyncType)
+    end
+    return ret
+end
+
+function UIManager:GetWindowView(wndName)
+    if not wndName then
+        return
+    end
+    local view = self.Wnds[wndName]
+    return view
+end
+
+function UIManager:_CreateUIWindow(wndName, ...)
+    if not wndName then
+        return
+    end
+    local viewClassPath = _MOE.WindowViewClass[wndName]
+    if not viewClassPath or string.len(viewClassPath) <= 0 then
+        return
+    end
+    local viewClass = require(viewClassPath)
+    if not viewClass then
+        return
+    end
+    local gameObj = self:_CreateUIPrefab(wndName)
+    if not gameObj then
+        return
+    end
+    local view = viewClass.New(gameObj)
+    if view then
+        local UIBinder = gameObj:GetComponent(UIBinderType)
+        if UIBinder then
+            UIBinder:InitRegisterControls(view)
+        end
+        self.Wnds[wndName] = view
+        view:Open(...)
+    end
+    return view
+end
 
 -- 打开界面
-function UIManager:OpenWindow(wndName)
+function UIManager:OpenWindow(wndName, ...)
+    if not wndName then
+        return
+    end
+    local view = self:GetWindowView(wndName)
+    if view then
+        return view
+    end
+    view = self:_CreateUIWindow(wndName, ...)
+    return view
 end
 
 function UIManager:CloseWindow(wndName)

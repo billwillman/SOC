@@ -1,7 +1,69 @@
 local BaseView = _MOE.class("BaseView")
 
-function BaseView:Ctor(...)
+function BaseView:Ctor(gameObj)
     self.bp = {}
+    self.RootGameObject = gameObj
+end
+
+-- 清理调所有delegete
+function BaseView:ClearUIEvents()
+    if self.__UIEvents then
+        for name, params in pairs(self.__UIEvents) do
+            local ctl = self:GetControl(name)
+            if ctl then
+                for eventName, _ in pairs(params) do
+                    if eventName and string.len(eventName) > 0 then
+                        if ctl[eventName] then
+                            ctl[eventName] = nil
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+function BaseView:_ClearAllUIControls()
+    self.bp = {}
+    self.RootGameObject = nil
+end
+
+function BaseView:GetControl(name)
+    if not self.bp or not name then
+        return
+    end
+    local ret = self.bp[name]
+    return ret
+end
+
+function BaseView:Open(...)
+    xpcall(self.OnOpen, _G.ErrorHandle, self, ...)
+end
+
+--- UI释放
+function BaseView:Destroy()
+    xpcall(self.OnDestroy, _G.ErrorHandle, self)
+    self:ClearUIEvents()
+    self:_ClearAllUIControls()
+end
+
+function BaseView:AddUIEvent(control, eventName, func)
+    if not eventName or not func or not control then
+        return false
+    end
+    if type(eventName) ~= "string" or type(func) ~= "function" then
+        _MOE.Logger.LogError("[BaseView] AddUIEvent: Param is not vaild~!")
+        return false
+    end
+
+    control[eventName] = func
+end
+
+--------------------------------------- 虚方法
+function BaseView:OnDestroy()
+end
+
+function BaseView:OnOpen()
 end
 
 return BaseView

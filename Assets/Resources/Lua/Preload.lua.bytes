@@ -27,4 +27,9 @@ _MOE.ResourceManager = CS.ResourceMgr
 _MOE.class = require("Common.BaseClass") -- class框架
 _MOE.Json = require("Common.json")
 
+_G.ErrorHandle = function (err)
+    print(err)
+	print(debug.traceback())
+end
+
 return _MOE
