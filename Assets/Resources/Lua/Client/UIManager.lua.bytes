@@ -82,7 +82,7 @@ function UIManager:FreeWindow(wndName)
     if view then
         local gameObj = view.RootGameObject
         view:Destroy()
-        self.Wnds = nil
+        self.Wnds[wndName] = nil
         -- 删除GameObject
         if gameObj then
             CS.GameObject.Destroy(gameObj)
