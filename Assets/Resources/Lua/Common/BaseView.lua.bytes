@@ -27,7 +27,7 @@ function BaseView:ClearUIEvents()
                 end
             end
         end
-        self.__UIEvents = {}
+        self.__UIEvents = nil
     end
 end
 
@@ -54,6 +54,9 @@ function BaseView:_UnRegisterUIEvent(name, eventName)
             local params = self.__UIEvents[name]
             if params then
                 params[eventName] = nil
+                if next(params) == nil then
+                    self.__UIEvents[name] = nil
+                end
             end
             ctl[eventName] = nil
             return true
