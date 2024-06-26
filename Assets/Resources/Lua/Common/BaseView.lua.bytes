@@ -93,6 +93,10 @@ function BaseView:Destroy()
     self:_ClearAllUIControls()
 end
 
+function BaseView:ReOpen(...)
+    xpcall(self.OnReOpen, _G.ErrorHandle, self, ...)
+end
+
 function BaseView:AddUIEvent(control, eventName, func)
     if not eventName or not func or not control then
         return false
@@ -120,7 +124,10 @@ end
 function BaseView:OnDestroy()
 end
 
-function BaseView:OnOpen()
+function BaseView:OnOpen(...)
+end
+
+function BaseView:OnReOpen(...)
 end
 
 function BaseView:OnClose()

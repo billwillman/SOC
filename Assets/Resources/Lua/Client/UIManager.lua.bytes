@@ -68,13 +68,14 @@ function UIManager:OpenWindow(wndName, ...)
     end
     local view = self:GetWindowView(wndName)
     if view then
+        view:ReOpen(...)
         return view
     end
     view = self:_CreateUIWindow(wndName, ...)
     return view
 end
 
-function UIManager:FreeWindow(wndName)
+function UIManager:_FreeWindow(wndName)
     if not wndName then
         return
     end
@@ -98,7 +99,7 @@ function UIManager:CloseWindow(wndName)
     if view then
         view:Close()
         ---- 释放流程
-        self:FreeWindow(wndName)
+        self:_FreeWindow(wndName)
     end
 end
 

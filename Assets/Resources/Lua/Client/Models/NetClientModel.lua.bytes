@@ -12,4 +12,12 @@ function NetClientModel:GetHttpServerList()
     return self.HttpServerList
 end
 
+-- 连接GS服务器
+function NetClientModel:ConnectGSServer()
+end
+
+-- 请求Http的GS服务器信息
+function NetClientModel:ReqHttpServerListData()
+end 
+
 return NetClientModel
