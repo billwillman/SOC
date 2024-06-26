@@ -24,6 +24,7 @@ _MOE.Logger = {
 
 _MOE.NetManager = CS.NsTcpClient.NetManager
 _MOE.ResourceManager = CS.ResourceMgr
+_MOE.GameObject = CS.GameObject
 _MOE.class = require("Common.BaseClass") -- class框架
 _MOE.Json = require("Common.json")
 
