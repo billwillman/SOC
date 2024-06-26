@@ -1,0 +1,14 @@
+local UILayer = _MOE.class("UILayer")
+
+UILayer.Type = {
+}
+
+function UILayer:Ctor(layerId)
+    self.LayerId = layerId
+end
+
+function UILayer:GetLayerId()
+    return self.LayerId
+end
+
+return UILayer

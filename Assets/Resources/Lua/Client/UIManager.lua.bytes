@@ -4,9 +4,23 @@ require("Client.Views.UIConfig")
 local UIManager = _MOE.class("UIManager")
 local BaseResLoaderAsyncType = typeof(CS.NSLib.ResMgr.BaseResLoaderAsyncMono)
 local UIBinderType = typeof(CS.SOC.GamePlay.UIBinder)
+local UILayerClass = require("Client.UILayer")
 
 function UIManager:Ctor()
     self.Wnds = {}
+    -- 创建层
+    self:_CreateLayers()
+end
+
+function UIManager:_CreateLayers()
+    self.Layers = {}
+    if UILayerClass.Type then
+        for _, layerId in pairs(UILayerClass.Type) do
+            if layerId then
+                self.Layers[layerId] = UILayerClass.New(layerId)
+            end
+        end
+    end
 end
 
 function UIManager:_CreateUIPrefab(wndName)
