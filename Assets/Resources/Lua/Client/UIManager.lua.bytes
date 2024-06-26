@@ -21,6 +21,7 @@ function UIManager:_CreateLayers()
             end
         end
     end
+    self.RemoveLayerTransform = _MOE.GameStartTransform:Find("UI Root/RemoveLayer")
 end
 
 function UIManager:_GetWindowConfig(wndName)
@@ -60,13 +61,8 @@ function UIManager:GetWindowView(wndName)
     return view
 end
 
-function UIManager:_AppendWndToLayer(wndName)
-    local cfg = self:GetWindowView(wndName)
-    if not cfg then
-        return
-    end
-    local layerId = cfg.layerId
-    if not layerId then
+function UIManager:_AppendLayerToLayer(wndName, layerId)
+    if not wndName or not layerId then
         return
     end
     local layer = self.Layers[layerId]
@@ -76,12 +72,34 @@ function UIManager:_AppendWndToLayer(wndName)
     return layer:_AppendWindow(wndName)
 end
 
-function UIManager:_RemoveWndToLayer(wndName)
+function UIManager:_AppendWndToLayerFromCfg(wndName)
     local cfg = self:GetWindowView(wndName)
     if not cfg then
         return
     end
-    local layerId = cfg.layerId
+    return self:_AppendLayerToLayer(wndName, cfg.layerId)
+end
+
+function UIManager:_AppendWndToRemoveLayer(wndName)
+    if not wndName then
+        return
+    end
+    local view = self:GetWindowView(wndName)
+    if not view then
+        return
+    end
+    self:_RemoveWndToLayer(wndName)
+    if view.RootTransform and self.RemoveLayerTransform then
+        view.RootTransform:SetParent(self.RemoveLayerTransform, false)
+    end
+end
+
+function UIManager:_RemoveWndToLayer(wndName)
+    local view = self:GetWindowView(wndName)
+    if not view then
+        return
+    end
+    local layerId = view:GetLayerId()
     if not layerId then
         return
     end
@@ -89,7 +107,8 @@ function UIManager:_RemoveWndToLayer(wndName)
     if not layer then
         return
     end
-    return layer:_RemoveWindow(wndName)
+    local ret = layer:_RemoveWindow(wndName)
+    return ret
 end
 
 function UIManager:_CreateUIWindow(wndName, ...)
@@ -116,10 +135,14 @@ function UIManager:_CreateUIWindow(wndName, ...)
             UIBinder:InitRegisterControls(view)
         end
         self.Wnds[wndName] = view
-        self:_AppendWndToLayer(wndName)
+        self:_AppendWndToLayerFromCfg(wndName)
         view:Open(...)
     end
     return view
+end
+
+function UIManager:ChangeWindowToRemoveLayer(wndName)
+    return self:ChangeWndowLayer(wndName, UILayerClass.Type.RemoveLayer)
 end
 
 -- 打开界面
@@ -144,7 +167,7 @@ function UIManager:_FreeWindow(wndName)
     if view then
         local gameObj = view.RootGameObject
         view:Destroy()
-        self:_RemoveWndToLayer(wndName)
+        self:_AppendWndToRemoveLayer(wndName)
         self.Wnds[wndName] = nil
         -- 删除GameObject
         if gameObj then

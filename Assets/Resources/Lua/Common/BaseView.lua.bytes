@@ -10,6 +10,15 @@ end
 function BaseView:Ctor(gameObj)
     self.bp = {}
     self.RootGameObject = gameObj
+    self.RootTransform = gameObj.transform
+end
+
+function BaseView:GetTransform()
+    return self.RootTransform
+end
+
+function BaseView:GetLayerId()
+    return self.LayerId
 end
 
 -- 清理调所有delegete
@@ -69,6 +78,7 @@ function BaseView:_ClearAllUIControls()
     self.bp = {}
     self.Loader = nil
     self.RootGameObject = nil
+    self.RootTransform = nil
 end
 
 function BaseView:GetControl(name)

@@ -7,13 +7,40 @@ UILayer.Type = {
     NormalLayer3 = 3,
     PopLayer1 = 4,
     PopLayer2 = 5,
-    PopLayer3 = 6
+    PopLayer3 = 6,
 }
+
+local function GetLayerName(layerId)
+    for name, id in pairs(UILayer.Type) do
+        if id == layerId then
+            return name
+        end
+    end
+end
+
+local function GetLayerRootGameObject(layerName)
+    local trans = _MOE.GameStartTransform
+    local path = "UI Root/" .. layerName
+    local ret = trans:Find(path)
+    if ret then
+        ret = ret.gameObject
+    end
+    return ret
+end
 
 function UILayer:Ctor(layerId, mgr)
     self.LayerId = layerId
+    self.LayerName = GetLayerName(layerId)
+    self.RootGameObject = GetLayerRootGameObject(self.LayerName)
+    if self.RootGameObject then
+        self.RootTransform = self.RootGameObject.transform
+    end
     self.UIManager = mgr
     self.WndNames = {}
+end
+
+function UILayer:GetName()
+    return self.LayerName
 end
 
 function UILayer:GetLayerId()
@@ -21,10 +48,26 @@ function UILayer:GetLayerId()
 end
 
 function UILayer:_AppendWindow(wndName)
+    if not self.RootTransform then
+        return false
+    end
+    self.WndNames[wndName] = {}
+    local view = self.UIManager:GetWindowView(wndName)
+    if view then
+        local viewTrans = view:GetTransform()
+        if viewTrans and viewTrans.RootTransform then
+            viewTrans.RootTransform:SetParent(self.RootTransform, false)
+        end
+    end
+    return true
 end
 
 function UILayer:_RemoveWindow(wndName)
-    self.WndNames[wndName] = nil
+    if self.WndNames[wndName] then
+        self.WndNames[wndName] = nil
+        return true
+    end
+    return false
 end
 
 return UILayer
