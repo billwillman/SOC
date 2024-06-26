@@ -8,7 +8,7 @@ function ClientApp:OnInit()
 end
 
 function ClientApp:OnQuit()
-    _MOE.NetManager:GetInstance():Disconnect()
+    _MOE.NetManager:Disconnect()
 end
 
 return ClientApp

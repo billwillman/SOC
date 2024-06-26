@@ -20,7 +20,7 @@ end
 
 local function GetLayerRootGameObject(layerName)
     local trans = _MOE.GameStartTransform
-    local path = "UI Root/" .. layerName
+    local path = "UI Root/Root/" .. layerName
     local ret = trans:Find(path)
     if ret then
         ret = ret.gameObject
@@ -55,8 +55,8 @@ function UILayer:_AppendWindow(wndName)
     local view = self.UIManager:GetWindowView(wndName)
     if view then
         local viewTrans = view:GetTransform()
-        if viewTrans and viewTrans.RootTransform then
-            viewTrans.RootTransform:SetParent(self.RootTransform, false)
+        if viewTrans then
+            viewTrans:SetParent(self.RootTransform, false)
         end
     end
     return true

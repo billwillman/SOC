@@ -7,10 +7,11 @@ local function GetControlName(control)
     return control.gameObj.name
 end
 
-function BaseView:Ctor(gameObj)
+function BaseView:Ctor(gameObj, loader)
     self.bp = {}
     self.RootGameObject = gameObj
     self.RootTransform = gameObj.transform
+    self.Loader = loader
 end
 
 function BaseView:GetTransform()

@@ -17,7 +17,7 @@ function UIManager:_CreateLayers()
     if UILayerClass.Type then
         for _, layerId in pairs(UILayerClass.Type) do
             if layerId then
-                self.Layers[layerId] = UILayerClass.New(layerId, mgr)
+                self.Layers[layerId] = UILayerClass.New(layerId, self)
             end
         end
     end
@@ -73,11 +73,11 @@ function UIManager:_AppendLayerToLayer(wndName, layerId)
 end
 
 function UIManager:_AppendWndToLayerFromCfg(wndName)
-    local cfg = self:GetWindowView(wndName)
+    local cfg = self:_GetWindowConfig(wndName)
     if not cfg then
         return
     end
-    return self:_AppendLayerToLayer(wndName, cfg.layerId)
+    return self:_AppendLayerToLayer(wndName, cfg.LayerId)
 end
 
 function UIManager:_AppendWndToRemoveLayer(wndName)
@@ -128,9 +128,8 @@ function UIManager:_CreateUIWindow(wndName, ...)
     if not gameObj then
         return
     end
-    local view = viewClass.New(gameObj)
+    local view = viewClass.New(gameObj, loader)
     if view then
-        view.Loader = loader -- 设置加载器
         local UIBinder = gameObj:GetComponent(UIBinderType)
         if UIBinder then
             UIBinder:InitRegisterControls(view)
