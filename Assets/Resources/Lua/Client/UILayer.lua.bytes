@@ -57,7 +57,7 @@ function UILayer:_AppendWindow(wndName)
         local viewTrans = view:GetTransform()
         if viewTrans then
             viewTrans:SetParent(self.RootTransform, false)
-            local rect = _MOE.RectClass.New()
+            local rect = _MOE.RectClass.new()
             rect.left = 0
             rect.top = 0
             rect.right = 0
