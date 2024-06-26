@@ -1,0 +1,3 @@
+local EventManager = _MOE.class("EventManager")
+
+return EventManager
