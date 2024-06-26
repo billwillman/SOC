@@ -13,6 +13,7 @@ UILayer.Type = {
 function UILayer:Ctor(layerId, mgr)
     self.LayerId = layerId
     self.UIManager = mgr
+    self.WndNames = {}
 end
 
 function UILayer:GetLayerId()
@@ -23,6 +24,7 @@ function UILayer:_AppendWindow(wndName)
 end
 
 function UILayer:_RemoveWindow(wndName)
+    self.WndNames[wndName] = nil
 end
 
 return UILayer
