@@ -57,12 +57,12 @@ function UILayer:_AppendWindow(wndName)
         local viewTrans = view:GetTransform()
         if viewTrans then
             viewTrans:SetParent(self.RootTransform, false)
-            local rect = _MOE.RectClass()
-            rect.xMin = 0
-            rect.yMin = 0
-            rect.xMax = 0
-            rect.yMax = 0
-            viewTrans.rect = rect
+            --local rectTrans = cast(viewTrans, _MOE.RectTransformClass)
+            local vec = _MOE.Vector2(0, 0)
+            viewTrans.anchorMin = vec
+            viewTrans.anchorMax = _MOE.Vector2(1, 1)
+            viewTrans.offsetMin = vec
+            viewTrans.offsetMax = vec
         end
     end
     return true

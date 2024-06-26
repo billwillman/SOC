@@ -28,7 +28,9 @@ _MOE.GameObject = CS.GameObject
 _MOE.AutoUpdateMgr = CS.AutoUpdate.AutoUpdateMgr:GetInstance() -- 资源更新模块
 _MOE.GameStart = CS.SOC.GamePlay.GameStart.Instance
 _MOE.GameStartTransform = _MOE.GameStart.transform
+_MOE.RectTransformClass = typeof(CS.UnityEngine.RectTransform)
 _MOE.RectClass = CS.UnityEngine.Rect
+_MOE.Vector2 = CS.UnityEngine.Vector2
 _MOE.class = require("Common.BaseClass") -- class框架
 _MOE.Json = require("Common.json")
 
