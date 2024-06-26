@@ -1,14 +1,28 @@
 local UILayer = _MOE.class("UILayer")
 
 UILayer.Type = {
+    MainLayer = 0,
+    NormalLayer1 = 1,
+    NormalLayer2 = 2,
+    NormalLayer3 = 3,
+    PopLayer1 = 4,
+    PopLayer2 = 5,
+    PopLayer3 = 6
 }
 
-function UILayer:Ctor(layerId)
+function UILayer:Ctor(layerId, mgr)
     self.LayerId = layerId
+    self.UIManager = mgr
 end
 
 function UILayer:GetLayerId()
     return self.LayerId
+end
+
+function UILayer:_AppendWindow(wndName)
+end
+
+function UILayer:_RemoveWindow(wndName)
 end
 
 return UILayer

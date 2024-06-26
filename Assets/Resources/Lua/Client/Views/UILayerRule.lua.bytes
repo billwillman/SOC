@@ -1,0 +1,4 @@
+-- 层级规则，用来做类似返回功能和互斥功能
+local UILayerRule = _MOE.class("UILayerRule")
+
+return UILayerRule

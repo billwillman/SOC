@@ -2,10 +2,10 @@ _MOE.WindowName = {
     Login = "Login"
 }
 
-_MOE.WindowResPath = {
-    Login = "@Login/Login"
-}
-
-_MOE.WindowViewClass = {
-    Login = ""
+_MOE.WindowConfig = {
+    Login = {
+        resPath = "@Login/Login",
+        LayerId = 1,
+        class = "",
+    }
 }

@@ -30,8 +30,8 @@ _MOE.class = require("Common.BaseClass") -- class框架
 _MOE.Json = require("Common.json")
 
 _G.ErrorHandler = function (err)
-    print(err)
-	print(debug.traceback())
+    _MOE.Logger.LogError(err)
+	_MOE.Logger.LogError(debug.traceback())
 end
 
 return _MOE
