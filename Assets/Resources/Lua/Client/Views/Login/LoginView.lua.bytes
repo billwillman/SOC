@@ -1,0 +1,3 @@
+local LoginView = _MOE.class("LoginView", _MOE.BaseViewClass)
+
+return LoginView

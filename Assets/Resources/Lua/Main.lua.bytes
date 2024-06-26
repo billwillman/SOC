@@ -8,8 +8,10 @@ end
 
 local function InitGlobalVars()
     _MOE.BaseModel = require("Common.BaseModel")
-    _MOE.BaseViewClass = require("Common.BaseView")
     _MOE.EventManager = require("Common.EventManager").New()
+    if not _MOE.IsDS then
+        _MOE.BaseViewClass = require("Common.BaseView")
+    end
 end
 
 local function CreateApplication()

@@ -119,7 +119,8 @@ function UIManager:_CreateUIWindow(wndName, ...)
     if not config or not config.class or string.len(config.class) <= 0 then
         return
     end
-    local viewClass = require(config.class)
+    local path = string.format("Client.Views.%s", config.class)
+    local viewClass = require(path)
     if not viewClass then
         return
     end
