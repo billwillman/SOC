@@ -67,6 +67,7 @@ end
 
 function BaseView:_ClearAllUIControls()
     self.bp = {}
+    self.Loader = nil
     self.RootGameObject = nil
 end
 
@@ -75,6 +76,12 @@ function BaseView:GetControl(name)
         return
     end
     local ret = self.bp[name]
+    return ret
+end
+
+-- Lua上的加载器
+function BaseView:GetLoader()
+    local ret = self.Loader
     return ret
 end
 

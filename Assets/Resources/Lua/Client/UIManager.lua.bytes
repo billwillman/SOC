@@ -19,10 +19,11 @@ function UIManager:_CreateUIPrefab(wndName)
     end
     path = string.format("Resources/UI/%s.prefab", path)
     local ret = _MOE.ResourceManager:CreateGameObject(path)
+    local loader = nil
     if ret then
-        ret:AddComponent(BaseResLoaderAsyncType)
+        loader = ret:AddComponent(BaseResLoaderAsyncType)
     end
-    return ret
+    return ret, loader
 end
 
 function UIManager:GetWindowView(wndName)
@@ -45,12 +46,13 @@ function UIManager:_CreateUIWindow(wndName, ...)
     if not viewClass then
         return
     end
-    local gameObj = self:_CreateUIPrefab(wndName)
+    local gameObj, loader = self:_CreateUIPrefab(wndName)
     if not gameObj then
         return
     end
     local view = viewClass.New(gameObj)
     if view then
+        view.Loader = loader -- 设置加载器
         local UIBinder = gameObj:GetComponent(UIBinderType)
         if UIBinder then
             UIBinder:InitRegisterControls(view)
