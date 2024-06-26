@@ -10,6 +10,7 @@ local function InitGlobalVars()
     _MOE.BaseModel = require("Common.BaseModel")
     _MOE.EventManager = require("Common.EventManager").New()
     if not _MOE.IsDS then
+        _MOE.UIManager = require("Client.UIManager").New()
         _MOE.BaseViewClass = require("Common.BaseView")
     end
 end

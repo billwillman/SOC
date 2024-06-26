@@ -1,5 +1,8 @@
-local LoginModel = _MOE.class("LoginModel")
+local LoginModel = _MOE.class("LoginModel", _MOE.BaseModel)
 
-
+function LoginModel:OnInit()
+    -- 打开登录界面
+    _MOE.UIManager:OpenWindow(_MOE.WindowName.Login)
+end
 
 return LoginModel

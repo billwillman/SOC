@@ -6,6 +6,6 @@ _MOE.WindowConfig = {
     Login = {
         resPath = "@Login/Login",
         LayerId = 1,
-        class = "Login/LoginView",
+        class = "Login.LoginView",
     }
 }

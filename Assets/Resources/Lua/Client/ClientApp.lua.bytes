@@ -4,6 +4,7 @@ local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
 function ClientApp:OnInit()
     self:RegisterModel("Client.Models.NetClientModel")
+    self:RegisterModel("Client.Models.LoginModel")
 end
 
 function ClientApp:OnQuit()
