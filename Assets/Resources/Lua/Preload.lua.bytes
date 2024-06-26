@@ -28,7 +28,7 @@ _MOE.GameObject = CS.GameObject
 _MOE.class = require("Common.BaseClass") -- class框架
 _MOE.Json = require("Common.json")
 
-_G.ErrorHandle = function (err)
+_G.ErrorHandler = function (err)
     print(err)
 	print(debug.traceback())
 end

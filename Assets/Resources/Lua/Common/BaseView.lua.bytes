@@ -79,22 +79,22 @@ function BaseView:GetControl(name)
 end
 
 function BaseView:Open(...)
-    xpcall(self.OnOpen, _G.ErrorHandle, self, ...)
+    xpcall(self.OnOpen, _G.ErrorHandler, self, ...)
 end
 
 function BaseView:Close()
-    xpcall(self.OnClose, _G.ErrorHandle, self)
+    xpcall(self.OnClose, _G.ErrorHandler, self)
 end
 
 --- UI释放
 function BaseView:Destroy()
-    xpcall(self.OnDestroy, _G.ErrorHandle, self)
+    xpcall(self.OnDestroy, _G.ErrorHandler, self)
     self:ClearUIEvents()
     self:_ClearAllUIControls()
 end
 
 function BaseView:ReOpen(...)
-    xpcall(self.OnReOpen, _G.ErrorHandle, self, ...)
+    xpcall(self.OnReOpen, _G.ErrorHandler, self, ...)
 end
 
 function BaseView:AddUIEvent(control, eventName, func)
