@@ -108,6 +108,20 @@ function BaseView:SetEnabled(control, isEnable)
     control.enabled = isEnable
 end
 
+function BaseView:IsInteractable(control)
+    if not control then
+        return
+    end
+    return control.interactable
+end
+
+function BaseView:SetInteractable(control, IsInteractable)
+    if not control or IsInteractable == nil then
+        return
+    end
+    control.interactable = IsInteractable
+end
+
 function BaseView:IsEnabled(control)
     if not control then
         return
