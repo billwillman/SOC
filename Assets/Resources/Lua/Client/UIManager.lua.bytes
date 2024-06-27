@@ -2,7 +2,8 @@ require("Client.Views.UIConfig")
 
 -- UI管理器
 local UIManager = _MOE.class("UIManager")
-local BaseResLoaderAsyncType = typeof(CS.NSLib.ResMgr.BaseResLoaderAsyncMono)
+local BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
+--local BaseResLoaderType = typeof(CS.BaseResLoader)
 local UIBinderType = typeof(CS.SOC.GamePlay.UIBinder)
 local UILayerClass = require("Client.UILayer")
 

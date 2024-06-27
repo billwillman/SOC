@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using NsLib.ResMgr;
 
-namespace NsLib.ResMgr {
+//namespace NsLib.ResMgr {
 
     [XLua.LuaCallCSharp]
     public enum BaseResLoaderAsyncType {
@@ -533,4 +534,4 @@ namespace NsLib.ResMgr {
         }
     }
 
-}
+//}
