@@ -116,11 +116,16 @@ function UIManager:_CreateUIWindow(wndName, ...)
         return
     end
     local config = self:_GetWindowConfig(wndName)
-    if not config or not config.class or string.len(config.class) <= 0 then
+    if not config then
         return
     end
-    local path = string.format("Client.Views.%s", config.class)
-    local viewClass = require(path)
+    local viewClass
+    if not config.class or string.len(config.class) <= 0  then
+        viewClass = _MOE.BaseViewClass
+    else
+        local path = string.format("Client.Views.%s", config.class)
+        viewClass = require(path)
+    end
     if not viewClass then
         return
     end
