@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8189278963556442412}
   - component: {fileID: 6343837035843451967}
   m_Layer: 5
-  m_Name: InputField (Legacy)
+  m_Name: EdtUserName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,4 +812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6977327a48b694e8210ff13407d014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindControls: []
+  m_BindControls:
+  - {fileID: 8189278963556442412}
+  - {fileID: 5756269718323733781}
