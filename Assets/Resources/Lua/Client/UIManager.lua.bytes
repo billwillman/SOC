@@ -183,6 +183,18 @@ function UIManager:_FreeWindow(wndName)
     end
 end
 
+local function _FreeWindowView(self, view, wndName)
+    if view and wndName then
+        local gameObj = view.RootGameObject
+        view:Destroy()
+        self:_AppendWndToRemoveLayer(wndName)
+        -- 删除GameObject
+        if gameObj then
+            _MOE.ResourceManager:DestroyObject(gameObj)
+        end
+    end
+end
+
 function UIManager:CloseWindow(wndName)
     if not wndName then
         return
@@ -197,11 +209,24 @@ end
 
 function UIManager:FreeAllWindow()
     if self.Wnds then
-        for _, view in pairs(self.Wnds) do
-            if view then
-                self:_FreeWindow(view)
+        for wndName, view in pairs(self.Wnds) do
+            if view and wndName then
+                _FreeWindowView(self, view, wndName)
             end
         end
+        self.Wnds = {}
+    end
+end
+
+function UIManager:CloseAllWindow()
+    if self.Wnds then
+        for wndName, view in pairs(self.Wnds) do
+            if view and wndName then
+                view:Close()
+                _FreeWindowView(self, view, wndName)
+            end
+        end
+        self.Wnds = {}
     end
 end
 
