@@ -1,3 +1,23 @@
 local LoginView = _MOE.class("LoginView", _MOE.BaseViewClass)
 
+function LoginView:RegisterEvents()
+    self:AddButtonClick(self.bp.BtnSubmit, self.OnBtnSubmit)
+end
+
+function LoginView:OnBtnSubmit()
+    print("OnBtnSubmit")
+end
+
+function LoginView:UnRegisterEvents()
+    self:ClearUIEvents()
+end
+
+function LoginView:OnOpen()
+    self:RegisterEvents()
+end
+
+function LoginView:OnClose()
+    self:UnRegisterEvents()
+end
+
 return LoginView
