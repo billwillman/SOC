@@ -14,6 +14,10 @@ end
 
 function LoginView:OnOpen()
     self:RegisterEvents()
+    local netModel = _MOE.GameApp:GetModel("NetClientModel")
+    if netModel then
+        netModel:ReqHttpServerListData() -- 请求服务器列表
+    end
 end
 
 function LoginView:OnClose()
