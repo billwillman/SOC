@@ -27,6 +27,7 @@ local function CreateApplication()
         return
     end
     _MOE.GameApp = appClass.New()
+    _MOE.GameApp:Init()
 end
 
 --- 主函数

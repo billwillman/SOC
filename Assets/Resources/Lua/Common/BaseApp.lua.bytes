@@ -1,11 +1,11 @@
 local BaseApp = _MOE.class("BaseApp")
 
-function BaseApp:Ctor(...)
-    self:OnInit(...)
+function BaseApp:Init()
+    xpcall(self.OnInit, _G.ErrorHandler, self)
 end
 
 function BaseApp:Quit()
-    self:OnQuit()
+    xpcall(self.OnQuit, _G.ErrorHandler, self)
     self:UnRegisterModels()
 end
 
@@ -63,7 +63,7 @@ function BaseApp:UnRegisterModels()
 end
 
 ------------------------------------------------------ 虚方法 ---------------------------------------------------
-function BaseApp:OnInit(...)
+function BaseApp:OnInit()
 end
 
 function BaseApp:OnQuit()
