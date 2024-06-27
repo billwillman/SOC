@@ -58,7 +58,9 @@ function BaseView:_RegisterUIEvent(name, eventName, func)
             func(self, ...)
         end
         params[eventName] = OnEvent
-        ctl[eventName] = OnEvent
+        local ctlEvt = ctl[eventName]
+        ctlEvt:RemoveAllListeners()
+        ctlEvt:AddListener(OnEvent)
         return true
     end
     return false
@@ -75,7 +77,8 @@ function BaseView:_UnRegisterUIEvent(name, eventName)
                     self.__UIEvents[name] = nil
                 end
             end
-            ctl[eventName] = nil
+            local ctlEvt = ctl[eventName]
+            ctlEvt:RemoveAllListeners()
             return true
         end
     end
