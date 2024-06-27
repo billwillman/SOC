@@ -166,23 +166,6 @@ function UIManager:OpenWindow(wndName, ...)
     return view
 end
 
-function UIManager:_FreeWindow(wndName)
-    if not wndName then
-        return
-    end
-    local view = self.Wnds[wndName]
-    if view then
-        local gameObj = view.RootGameObject
-        view:Destroy()
-        self:_AppendWndToRemoveLayer(wndName)
-        self.Wnds[wndName] = nil
-        -- 删除GameObject
-        if gameObj then
-            _MOE.GameObject.Destroy(gameObj)
-        end
-    end
-end
-
 local function _FreeWindowView(self, view, wndName)
     if view and wndName then
         local gameObj = view.RootGameObject
@@ -192,6 +175,17 @@ local function _FreeWindowView(self, view, wndName)
         if gameObj then
             _MOE.ResourceManager:DestroyObject(gameObj)
         end
+    end
+end
+
+function UIManager:_FreeWindow(wndName)
+    if not wndName then
+        return
+    end
+    local view = self.Wnds[wndName]
+    if view then
+        _FreeWindowView(self, view, wndName)
+        self.Wnds[wndName] = nil
     end
 end
 
