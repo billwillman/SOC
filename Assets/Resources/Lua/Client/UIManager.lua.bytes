@@ -195,4 +195,14 @@ function UIManager:CloseWindow(wndName)
     end
 end
 
+function UIManager:FreeAllWindow()
+    if self.Wnds then
+        for _, view in pairs(self.Wnds) do
+            if view then
+                self:_FreeWindow(view)
+            end
+        end
+    end
+end
+
 return UIManager

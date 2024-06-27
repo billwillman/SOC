@@ -8,6 +8,7 @@ function ClientApp:OnInit()
 end
 
 function ClientApp:OnQuit()
+    _MOE.UIManager:FreeAllWindow()
     _MOE.NetManager:Disconnect()
 end
 
