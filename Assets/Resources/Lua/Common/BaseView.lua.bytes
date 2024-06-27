@@ -35,7 +35,8 @@ function BaseView:ClearUIEvents()
                 for eventName, _ in pairs(params) do
                     if eventName and string.len(eventName) > 0 then
                         if ctl[eventName] then
-                            ctl[eventName] = nil
+                            local ctlEvt = ctl[eventName]
+                            ctlEvt:RemoveAllListeners()
                         end
                     end
                 end
