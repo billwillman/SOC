@@ -54,7 +54,7 @@ function BaseView:_RegisterUIEvent(name, eventName, func)
             params = {}
             self.__UIEvents[name] = params
         end
-        local function OnEvent(...)
+        local OnEvent = function(...)
             func(self, ...)
         end
         params[eventName] = OnEvent
