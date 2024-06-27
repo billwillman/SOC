@@ -101,6 +101,20 @@ function BaseView:GetControl(name)
     return ret
 end
 
+function BaseView:SetEnabled(control, isEnable)
+    if not control or isEnable == nil then
+        return
+    end
+    control.enabled = isEnable
+end
+
+function BaseView:IsEnabled(control)
+    if not control then
+        return
+    end
+    return control.enabled
+end
+
 -- Lua上的加载器
 function BaseView:GetLoader()
     local ret = self.Loader
