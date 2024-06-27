@@ -142,6 +142,7 @@ function UIManager:_CreateUIWindow(wndName, ...)
         end
         self.Wnds[wndName] = view
         self:_AppendWndToLayerFromCfg(wndName)
+        view:Init()
         view:Open(...)
     end
     return view

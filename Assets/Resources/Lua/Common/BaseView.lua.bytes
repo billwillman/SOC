@@ -14,6 +14,10 @@ function BaseView:Ctor(gameObj, loader)
     self.Loader = loader
 end
 
+function BaseView:Init()
+    xpcall(self.OnInit, _G.ErrorHandler, self)
+end
+
 function BaseView:GetTransform()
     return self.RootTransform
 end
@@ -149,6 +153,9 @@ function BaseView:OnReOpen(...)
 end
 
 function BaseView:OnClose()
+end
+
+function BaseView:OnInit()
 end
 
 return BaseView
