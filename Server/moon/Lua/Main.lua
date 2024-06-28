@@ -29,6 +29,7 @@ moon.env("PATH", string.format("package.path='%s'", package.path))
 
 -------------------------------以上代码是固定写法--------------------------------------
 
+--[[
 -- 启动HttpPayServer
 moon.async(function ()
     local id = moon.new_service(
@@ -39,6 +40,19 @@ moon.async(function ()
         }
     )
     assert(id > 0, "Create PayHttpServer Fail")
+end)
+]]
+
+-- 登录服务器
+moon.async(function ()
+    local id = moon.new_service(
+        {
+            name = "LoginServer",
+            file = "LoginServer.lua",
+            unique = true
+        }
+    )
+    assert(id > 0, "Create LoginServer Fail")
 end)
 
 --[[
