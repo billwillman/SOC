@@ -11,7 +11,8 @@ namespace SOC.GamePlay
         Awake = 1,
         Start = 2,
         Update = 3,
-        Destroyed = 4
+        Destroyed = 4,
+        FixedUpdate = 5,
     }
 
     [LuaCallCSharp]
@@ -134,6 +135,16 @@ namespace SOC.GamePlay
             }
         }
 
+        [DoNotGen]
+
+        private void FixedUpdate()
+        {
+            if (CallLuaFunc(LuaEvent_MonoEventType.FixedUpdate))
+            {
+                OnFixedUpdate();
+            }
+        }
+
         protected override void OnInternalDestroyed() {
             if (CallLuaFunc(LuaEvent_MonoEventType.Destroyed)) {
                 OnDestroyed();
@@ -149,5 +160,7 @@ namespace SOC.GamePlay
         public virtual void OnUpdate() { }
 		[DoNotGen]
         public virtual void OnAwake() { }
+        [DoNotGen]
+        public virtual void OnFixedUpdate() { }
     }
 }
