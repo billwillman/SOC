@@ -98,6 +98,11 @@ namespace SOC.GamePlay
             }
         }
 
+        private void Update() {
+            TimerMgr.Instance.ScaleTick(Time.deltaTime);
+            TimerMgr.Instance.UnScaleTick(Time.unscaledDeltaTime);
+        }
+
         private void OnDestroy() {
             if (m_LuaEnv != null) {
                 var QuitGame = m_LuaEnv.Global.Get<LuaFunction>("QuitGame");
