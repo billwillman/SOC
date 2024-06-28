@@ -6,6 +6,18 @@ function NetClientModel:OnInit()
     _MOE.Logger.Log("[NetClientModel] OnInit...")
     local jsonStr = _MOE.ResourceManager:LoadText("Resources/Config/Server.json")
     self.HttpServerList =_MOE.Json.decode(jsonStr)
+    self.HttpServerListClient = nil
+end
+
+local function DisposeHttpServerClient(self)
+    if self.HttpServerListClient then
+        self.HttpServerListClient:Dispose()
+        self.HttpServerListClient = nil
+    end
+end
+
+function NetClientModel:UnInit()
+    DisposeHttpServerClient(self)
 end
 
 function NetClientModel:GetHttpServerList()
@@ -17,7 +29,28 @@ function NetClientModel:ConnectGSServer()
 end
 
 -- 请求Http的GS服务器信息
-function NetClientModel:ReqHttpServerListData()
-end 
+function NetClientModel:ReqHttpServerListData(selectIdx)
+    if not self.HttpServerList then
+        return false
+    end
+    local httpData = self.HttpServerList[selectIdx]
+    if not httpData then
+        return false
+    end
+    DisposeHttpServerClient(self)
+    local txtRep = _MOE.HttpStrResponse()
+    self.HttpServerListClient = _MOE.HttpHelper.OpenUrl(httpData.url, txtRep, function (client, status)
+        if self.HttpServerListClient == client then
+            if status == _MOE.HttpListenerStatus.hsDone then
+                self.HttpServerListClient = nil
+                -- 完成了
+            elseif status == _MOE.HttpListenerStatus.hsError then
+                self.HttpServerListClient = nil
+                -- 失败
+            end
+        end
+    end)
+    return self.HttpServerListClient ~= nil
+end
 
 return NetClientModel
