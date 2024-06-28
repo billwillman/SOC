@@ -24,6 +24,7 @@ _MOE.Logger = {
 
 _MOE.NetManager = CS.NsTcpClient.NetManager:GetInstance()
 _MOE.ResourceManager = CS.ResourceMgr:GetInstance()
+_MOE.HttpHelper = CS.NsHttpClient.HttpHelper
 _MOE.GameObject = CS.GameObject
 _MOE.AutoUpdateMgr = CS.AutoUpdate.AutoUpdateMgr:GetInstance() -- 资源更新模块
 _MOE.GameStart = CS.SOC.GamePlay.GameStart.Instance
