@@ -1,0 +1,4 @@
+----- Lua定时器管理类
+local TimerManager = _MOE.class("TimerManager")
+
+return TimerManager
