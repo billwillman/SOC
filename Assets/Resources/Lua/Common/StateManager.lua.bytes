@@ -30,11 +30,13 @@ function StateManager:GetCurrentState()
     return self.m_State
 end
 
+--[[
 -- 哪些消息可以跨所有场景
 function StateManager:CanStateAllSceneChange(stateType)
     local ret = (stateType == StateManager.StateType.None) or (stateType == StateManager.StateType.InBattle)
     return ret
 end
+]]
 
 function StateManager:ChangeState(stateType, isForce, ...)
     --[[
