@@ -86,6 +86,14 @@ function BaseView:_UnRegisterUIEvent(name, eventName)
     return false
 end
 
+function BaseView:UnRegisterCustomEvents()
+    _MOE.EventManager:UnRegisterEvents(self)
+end
+
+function BaseView:RegisterCustomEvent(eventName, func)
+    _MOE.EventManager:RegisterEvent(eventName, self, func)
+end
+
 function BaseView:_ClearAllUIControls()
     self.bp = {}
     self.Loader = nil
@@ -147,6 +155,7 @@ end
 function BaseView:Destroy()
     xpcall(self.OnDestroy, _G.ErrorHandler, self)
     self:ClearUIEvents()
+    self:UnRegisterCustomEvents()
     self:_ClearAllUIControls()
 end
 
