@@ -10,7 +10,7 @@ end
 
 function StateManager:Ctor()
     self.RegisterStateClassMap = {}
-    ResetVar(self, true)
+    ResetVar(self)
     self:RegisterStateClasses()
 end
 
