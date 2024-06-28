@@ -46,4 +46,5 @@ function QuitGame()
         _MOE.GameApp:Quit()
     end
     _MOE.EventManager:ClearAllEvents()
+    _MOE.TimerManager:ClearAllTimers()
 end
