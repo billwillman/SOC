@@ -44,4 +44,5 @@ function QuitGame()
         _MOE.Logger.Log("[QuitGame] GameApp")
         _MOE.GameApp:Quit()
     end
+    _MOE.EventManager:ClearAllEvents()
 end
