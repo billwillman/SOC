@@ -26,7 +26,7 @@ end
 
 -- 连接GS服务器
 function NetClientModel:ConnectGSServer()
-    _MOE.NetManager:Disconnect()
+    _MOE.NetManager:ConnectServer("127.0.0.1", 5000, true)
 end
 
 -- 请求Http的GS服务器信息

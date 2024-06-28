@@ -6,6 +6,10 @@ end
 
 function LoginView:OnBtnSubmit()
     print("OnBtnSubmit")
+    local netModel = _MOE.GameApp:GetModel("NetClientModel")
+    if netModel then
+        netModel:ConnectGSServer()
+    end
 end
 
 function LoginView:UnRegisterEvents()
