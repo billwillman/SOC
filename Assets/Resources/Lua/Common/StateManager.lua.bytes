@@ -1,38 +1,21 @@
 local StateManager = _MOE.class("StateManager")
 
-local function ResetVar(self, clearEvents)
+local function ResetVar(self)
     if self.m_State then
         self.m_State:DoUnRegisterEvents()
         self.m_State:DoDispose()
     end
     self.m_State = nil
-    --[[
-    self.m_TempData = nil
-    if clearEvents then
-        _MOE.EventManager:UnRegisterEvent(_MOE.EventEnum.ON_LOBBY_BEGIN_PLAY, self)
-    end
-    ]]
 end
 
 function StateManager:Ctor()
-    self:RegisterStateClasses()
+    self.RegisterStateClassMap = {}
     ResetVar(self, true)
-   -- _MOE.EventManager:RegisterEvent(_MOE.EventEnum.ON_LOBBY_BEGIN_PLAY, self, self._OnLobbyBeginPlay)
+    self:RegisterStateClasses()
 end
-
---[[
-function StateManager:_OnLobbyBeginPlay()
-    _MOE.Logger.LogWarning("StateManager:_OnLobbyBeginPlay")
-    if self.m_TempData then
-        _MOE.Logger.LogWarning("StateManager:_OnLobbyBeginPlay: TempData")
-        self:ChangeState(self.m_TempData.stateType, self.m_TempData.isForce, table.unpack(self.m_TempData.args))
-        self.m_TempData = nil
-    end
-end
-]]
 
 function StateManager:RegisterStateClasses()
-    self.RegisterStateClassMap = {}
+    xpcall(self.OnRegisterStateClass, _G.ErrorHandler, self)
 end
 
 function StateManager:FindStateClass(stateType)
@@ -104,8 +87,12 @@ function StateManager:GetStateType()
 end
 
 -- 清理
-function StateManager:Dispose(clearEvents)
-    ResetVar(self, clearEvents)
+function StateManager:Dispose()
+    ResetVar(self)
+end
+
+------------------------------------------------- 虚方法
+function StateManager:OnRegisterStateClass()
 end
 
 return StateManager
