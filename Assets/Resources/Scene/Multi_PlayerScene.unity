@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LuaPath: _DS.GameMode
-  SelfTarget: {fileID: 0}
+  SelfTarget: {fileID: 196399326}
 --- !u!114 &196399328
 MonoBehaviour:
   m_ObjectHideFlags: 0
