@@ -7,12 +7,12 @@ else
 end
 
 local function InitGlobalVars()
-    _MOE.BaseModel = require("Common.BaseModel")
-    _MOE.EventManager = require("Common.EventManager").New()
-    _MOE.TimerManager = require("Common.TimerManager").New()
+    _MOE.BaseModel = require("_Common.BaseModel")
+    _MOE.EventManager = require("_Common.EventManager").New()
+    _MOE.TimerManager = require("_Common.TimerManager").New()
     if not _MOE.IsDS then
         _MOE.UIManager = require("Client.UIManager").New()
-        _MOE.BaseViewClass = require("Common.BaseView")
+        _MOE.BaseViewClass = require("_Common.BaseView")
     end
 end
 

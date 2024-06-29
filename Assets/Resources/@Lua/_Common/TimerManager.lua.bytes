@@ -1,4 +1,4 @@
-local Timer = require("Common.Timer")
+local Timer = require("_Common.Timer")
 
 local TimerManager = _MOE.class("TimerManager", _MOE.BaseModel)
 

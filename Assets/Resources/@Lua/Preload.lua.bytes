@@ -44,8 +44,8 @@ _MOE.GameStartTransform = _MOE.GameStart.transform
 _MOE.RectTransformClass = typeof(CS.UnityEngine.RectTransform)
 _MOE.RectClass = CS.UnityEngine.Rect
 _MOE.Vector2 = CS.UnityEngine.Vector2
-_MOE.class = require("Common.BaseClass") -- class框架
-_MOE.Json = require("Common.json")
+_MOE.class = require("_Common.BaseClass") -- class框架
+_MOE.Json = require("_Common.json")
 
 _G.ErrorHandler = function (err)
     _MOE.Logger.LogError(err)

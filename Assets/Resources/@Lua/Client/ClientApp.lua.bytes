@@ -1,11 +1,11 @@
-local BaseAppClass = require("Common.BaseApp")
+local BaseAppClass = require("_Common.BaseApp")
 
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
 function ClientApp:OnInit()
     self:RegisterModel("Client.Models.NetClientModel")
     self:RegisterModel("Client.Models.LoginModel", false)
-    self:RegisterModel("Common.TimerManager", false)
+    self:RegisterModel("_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
 end
 
