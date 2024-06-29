@@ -11,7 +11,7 @@ TimerManager.k_keys_timeEvent = {
 
 ---@protected
 function TimerManager:OnInit()
-    self.__scope = _MOE.EnumScope.BothClientServer
+    -- self.__scope = _MOE.EnumScope.BothClientServer
     -- _MOE.EventManager:RegisterEvent(_MOE.EventEnum.ON_ACCOUNT_LOGOUT, self, self.InitTimeEvents)
 
     self.m_timers = {}

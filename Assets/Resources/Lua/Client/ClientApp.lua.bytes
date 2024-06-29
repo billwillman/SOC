@@ -5,11 +5,19 @@ local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 function ClientApp:OnInit()
     self:RegisterModel("Client.Models.NetClientModel")
     self:RegisterModel("Client.Models.LoginModel", false)
+    self:RegisterModel("Common.TimerManager", false)
+    self.TimerManager = self:GetModel("TimerManager")
 end
 
 function ClientApp:OnQuit()
     _MOE.UIManager:FreeAllWindow()
     _MOE.NetManager:Disconnect()
+end
+
+function ClientApp:OnUpdate(deltaTime)
+    if self.TimerManager and self.TimerManager.OnUpdate then
+        self.TimerManager:OnUpdate(deltaTime)
+    end
 end
 
 return ClientApp

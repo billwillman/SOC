@@ -82,11 +82,18 @@ function BaseApp:UnRegisterModels()
     end
 end
 
+function BaseApp:Update(deltaTime)
+    xpcall(self.OnUpdate, _G.ErrorHandler, self, deltaTime)
+end
+
 ------------------------------------------------------ 虚方法 ---------------------------------------------------
 function BaseApp:OnInit()
 end
 
 function BaseApp:OnQuit()
+end
+
+function BaseApp:OnUpdate(deltaTime)
 end
 
 return BaseApp

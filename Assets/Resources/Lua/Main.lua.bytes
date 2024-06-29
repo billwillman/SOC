@@ -48,3 +48,9 @@ function QuitGame()
     _MOE.EventManager:ClearAllEvents()
     _MOE.TimerManager:ClearAllTimers()
 end
+
+function Update(deltaTime)
+    if _MOE.GameApp and _MOE.GameApp.Update then
+        _MOE.GameApp:Update(deltaTime)
+    end
+end

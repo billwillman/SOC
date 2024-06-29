@@ -10,6 +10,7 @@ namespace SOC.GamePlay
     {
 
         public static GameStart Instance = null;
+        private LuaFunction m_LuaUpdateFunc = null;
 
         // Start is called before the first frame update
         void Awake() {
@@ -84,6 +85,7 @@ namespace SOC.GamePlay
                             MainFunc.Dispose();
                         }
                     }
+                    m_LuaUpdateFunc = m_LuaEnv.Global.Get<LuaFunction>("Update");
                 }
             }
         }
@@ -101,6 +103,9 @@ namespace SOC.GamePlay
         private void Update() {
             TimerMgr.Instance.ScaleTick(Time.deltaTime);
             TimerMgr.Instance.UnScaleTick(Time.unscaledDeltaTime);
+            if (m_LuaUpdateFunc != null) {
+                m_LuaUpdateFunc.Call(Time.deltaTime);
+            }
         }
 
         private void OnDestroy() {
@@ -112,6 +117,10 @@ namespace SOC.GamePlay
                     } finally {
                         QuitGame.Dispose();
                     }
+                }
+                if (m_LuaUpdateFunc != null) {
+                    m_LuaUpdateFunc.Dispose();
+                    m_LuaUpdateFunc = null;
                 }
                 m_LuaEnv.Dispose();
                 m_LuaEnv = null;
