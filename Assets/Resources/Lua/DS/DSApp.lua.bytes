@@ -2,4 +2,9 @@ local BaseAppClass = require("Common.BaseApp")
 
 local DSApp = _MOE.class("DSApp", BaseAppClass)
 
+function DSApp:OnInit()
+    self:RegisterModel("Common.TimerManager", false)
+    self.TimerManager = self:GetModel("TimerManager")
+end
+
 return DSApp

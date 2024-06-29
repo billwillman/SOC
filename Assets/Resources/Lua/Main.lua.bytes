@@ -29,6 +29,7 @@ local function CreateApplication()
     end
     _MOE.GameApp = appClass.New()
     _MOE.GameApp:Init()
+    _MOE.TimerManager = _MOE.GameApp.TimerManager
 end
 
 --- 主函数
