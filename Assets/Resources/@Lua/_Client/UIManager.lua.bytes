@@ -1,11 +1,11 @@
-require("Client.Views.UIConfig")
+require("_Client.Views.UIConfig")
 
 -- UI管理器
 local UIManager = _MOE.class("UIManager")
 local BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
 --local BaseResLoaderType = typeof(CS.BaseResLoader)
 local UIBinderType = typeof(CS.SOC.GamePlay.UIBinder)
-local UILayerClass = require("Client.UILayer")
+local UILayerClass = require("_Client.UILayer")
 
 function UIManager:Ctor()
     self.Wnds = {}
@@ -124,7 +124,7 @@ function UIManager:_CreateUIWindow(wndName, ...)
     if not config.class or string.len(config.class) <= 0  then
         viewClass = _MOE.BaseViewClass
     else
-        local path = string.format("Client.Views.%s", config.class)
+        local path = string.format("_Client.Views.%s", config.class)
         viewClass = require(path)
     end
     if not viewClass then

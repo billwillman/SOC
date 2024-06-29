@@ -11,7 +11,7 @@ local function InitGlobalVars()
     _MOE.EventManager = require("_Common.EventManager").New()
     _MOE.TimerManager = require("_Common.TimerManager").New()
     if not _MOE.IsDS then
-        _MOE.UIManager = require("Client.UIManager").New()
+        _MOE.UIManager = require("_Client.UIManager").New()
         _MOE.BaseViewClass = require("_Common.BaseView")
     end
 end
@@ -21,7 +21,7 @@ local function CreateApplication()
     if _MOE.IsDS then
         appClass = require("_DS.DSApp")
     else
-        appClass = require("Client.ClientApp")
+        appClass = require("_Client.ClientApp")
     end
     if not appClass then
         _MOE.Logger.LogError("[CreateApplication] not found appClass~!")
