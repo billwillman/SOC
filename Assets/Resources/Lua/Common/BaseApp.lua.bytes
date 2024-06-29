@@ -37,6 +37,7 @@ function BaseApp:GetModel(modelName)
     return ret
 end
 
+-- @typpe string modelFilePath, bool isLazyCreate
 function BaseApp:RegisterModel(modelFilePath, isLazyCreate)
     if not modelFilePath then
         return false
