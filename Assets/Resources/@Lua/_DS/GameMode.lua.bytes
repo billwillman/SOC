@@ -1,0 +1,12 @@
+local GameMode = _MOE.class("GameMode")
+
+if _MOE.IsDS then
+
+    ----------------------------- 只有DS上才跑这个逻辑
+    function GameMode:Ctor()
+    end
+
+
+end
+
+return GameMode
