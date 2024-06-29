@@ -23,7 +23,11 @@ local function DisposeHttpServerClient(self)
 end
 
 function NetClientModel:_OnGSConnectResult(isOk)
-    _MOE.Logger.LogErrorFormat("[NetClientModel] GSConnnectResult: {0}", isOk)
+    if isOk then
+        _MOE.Logger.LogFormat("[NetClientModel] GSConnnectResult: {0}", isOk)
+    else
+        _MOE.Logger.LogErrorFormat("[NetClientModel] GSConnnectResult: {0}", isOk)
+    end
 end
 
 function NetClientModel:_OnGSSocketAbort()
