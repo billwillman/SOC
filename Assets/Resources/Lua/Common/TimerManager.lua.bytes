@@ -4,8 +4,8 @@ local TimerManager = _MOE.class("TimerManager", _MOE.BaseModel)
 
 --时间戳事件key
 TimerManager.k_keys_timeEvent = {
-    origin = 1,
-    mailRed = 2,
+    --origin = 1,
+    --mailRed = 2,
     defaultStart = 1000000,
 }
 
