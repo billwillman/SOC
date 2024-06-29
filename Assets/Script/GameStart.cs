@@ -65,7 +65,7 @@ namespace SOC.GamePlay
         void Lua_DoMain() {
             if (m_LuaEnv != null) {
                 // ”≈œ»º”‘ÿPreload.lua
-                byte[] lua = ResourceMgr.Instance.LoadBytes("Resources/Lua/Preload.lua.bytes");
+                byte[] lua = ResourceMgr.Instance.LoadBytes("Resources/@Lua/Preload.lua.bytes");
                 System.Object[] result =  m_LuaEnv.DoString(lua);
                 LuaTable _MOE = result[0] as LuaTable;
                 try {
@@ -74,7 +74,7 @@ namespace SOC.GamePlay
                     _MOE.Dispose();
                 }
                 //--
-                lua = ResourceMgr.Instance.LoadBytes("Resources/Lua/Main.lua.bytes");
+                lua = ResourceMgr.Instance.LoadBytes("Resources/@Lua/Main.lua.bytes");
                 if (lua != null) {
                    m_LuaEnv.DoString(lua);
                     LuaFunction MainFunc = m_LuaEnv.Global.Get<LuaFunction>("Main");
