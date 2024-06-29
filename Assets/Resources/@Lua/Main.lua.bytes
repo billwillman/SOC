@@ -9,10 +9,6 @@ end
 local function InitGlobalVars()
     _MOE.BaseModel = require("_Common.BaseModel")
     _MOE.EventManager = require("_Common.EventManager").New()
-    if not _MOE.IsDS then
-        _MOE.UIManager = require("_Client.UIManager").New()
-        _MOE.BaseViewClass = require("_Common.BaseView")
-    end
 end
 
 local function CreateApplication()
@@ -28,7 +24,6 @@ local function CreateApplication()
     end
     _MOE.GameApp = appClass.New()
     _MOE.GameApp:Init()
-    _MOE.TimerManager = _MOE.GameApp.TimerManager
 end
 
 --- 主函数

@@ -2,11 +2,23 @@ local BaseAppClass = require("_Common.BaseApp")
 
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
+local function CreateUIRoot()
+    local root = _MOE.ResourceManager:CreateGameObject("Resources/UI/UI Root.prefab")
+    if root then
+        root.name = "UI Root"
+        root.transform:SetParent(_MOE.GameStartTransform, false)
+    end
+end
+
 function ClientApp:OnInit()
+    CreateUIRoot()
+    _MOE.BaseViewClass = require("_Common.BaseView")
+    self.TimerManager = self:GetModel("TimerManager")
+    _MOE.TimerManager = self.TimerManager
+    _MOE.UIManager = require("_Client.UIManager").New()
     self:RegisterModel("_Client.Models.NetClientModel")
     self:RegisterModel("_Client.Models.LoginModel", false)
     self:RegisterModel("_Common.TimerManager", false)
-    self.TimerManager = self:GetModel("TimerManager")
 end
 
 function ClientApp:OnQuit()
