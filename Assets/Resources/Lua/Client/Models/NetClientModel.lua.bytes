@@ -7,6 +7,12 @@ function NetClientModel:OnInit()
     local jsonStr = _MOE.ResourceManager:LoadText("Resources/Config/Server.json")
     self.HttpServerList =_MOE.Json.decode(jsonStr)
     self.HttpServerListClient = nil
+    _MOE.NetManager.OnConnectResult = function (isOk)
+        self:_OnGSConnectResult(isOk)
+    end
+    _MOE.NetManager.OnSocketAbort = function ()
+        self:_OnGSSocketAbort()
+    end
 end
 
 local function DisposeHttpServerClient(self)
@@ -16,8 +22,17 @@ local function DisposeHttpServerClient(self)
     end
 end
 
+function NetClientModel:_OnGSConnectResult(isOk)
+end
+
+function NetClientModel:_OnGSSocketAbort()
+end
+
 function NetClientModel:UnInit()
     DisposeHttpServerClient(self)
+    _MOE.NetManager:Disconnect()
+    _MOE.NetManager.OnConnectResult = nil
+    _MOE.NetManager.OnSocketAbort = nil
 end
 
 function NetClientModel:GetHttpServerList()
