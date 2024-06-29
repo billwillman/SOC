@@ -22,7 +22,7 @@ _MOE.Logger = {
     end,
     LogFormat = function (fmt, ...)
         if _MOE.IsOpenLog then
-            CS.UnityEngine.Debug.LogFormat(...)
+            CS.UnityEngine.Debug.LogFormat(fmt, ...)
         end
     end,
     LogErrorFormat = function(fmt, ...)
