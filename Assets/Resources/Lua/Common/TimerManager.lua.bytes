@@ -1,4 +1,4 @@
------ Lua定时器管理类
+----- Lua定时器管理类(堆定时器)
 local TimerManager = _MOE.class("TimerManager")
 
 function TimerManager:ClearAllTimers()

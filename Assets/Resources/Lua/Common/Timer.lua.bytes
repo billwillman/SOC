@@ -1,0 +1,14 @@
+local Timer = _MOE.class("Timer")
+
+local function ResetVar(self)
+    self.idx = 0
+    self.id = 0
+    self.expire = 0
+    self.cb = nil
+end
+
+function Timer:Ctor()
+    ResetVar(self)
+end
+
+return Timer
