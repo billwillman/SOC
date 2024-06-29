@@ -32,8 +32,7 @@ function TimerManager:InitTimeEvents()
     self.m_timeEvents = {}
     self.m_timeEventsToAdd = {}
     self.m_timeEventsToRemove = {}
-    -- self.m_timeEventDefaultKey = TimerManager.k_keys_timeEvent.defaultStart
-    self.m_timeEventDefaultKey = 0
+    self.m_timeEventDefaultKey = TimerManager.k_keys_timeEvent.defaultStart
 end
 
 ---@public
