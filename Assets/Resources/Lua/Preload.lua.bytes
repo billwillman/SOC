@@ -19,6 +19,16 @@ _MOE.Logger = {
         if _MOE.IsOpenLog then
             CS.UnityEngine.Debug.LogWarning(...)
         end
+    end,
+    LogFormat = function (fmt, ...)
+        if _MOE.IsOpenLog then
+            CS.UnityEngine.Debug.LogFormat(...)
+        end
+    end,
+    LogErrorFormat = function(fmt, ...)
+        if _MOE.IsOpenLog then
+            CS.UnityEngine.Debug.LogErrorFormat(fmt, ...)
+        end
     end
 }
 
