@@ -19,7 +19,7 @@ end
 local function CreateApplication()
     local appClass
     if _MOE.IsDS then
-        appClass = require("DS.DSApp")
+        appClass = require("_DS.DSApp")
     else
         appClass = require("Client.ClientApp")
     end
