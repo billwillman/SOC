@@ -129,7 +129,7 @@ namespace SOC.GamePlay
 
         private byte[] OnLuaFileLoad(ref string filepath) {
             filepath = filepath.Replace(".", "/");
-            string luaPath = string.Format("Resources/Lua/{0}.lua.bytes", filepath);
+            string luaPath = string.Format("Resources/@Lua/{0}.lua.bytes", filepath);
             byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath);
             return ret;
         }
