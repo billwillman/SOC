@@ -2,10 +2,19 @@ local BaseAppClass = require("_Common.BaseApp")
 
 local DSApp = _MOE.class("DSApp", BaseAppClass)
 
+local function CreateNetworkManager()
+    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
+    if gameObj then
+        gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+    end
+end
+
 function DSApp:OnInit()
     self:RegisterModel("_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
     _MOE.TimerManager = self.TimerManager
+    -- 创建网络NetworkManager
+    CreateNetworkManager()
 end
 
 return DSApp
