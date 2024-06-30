@@ -1,4 +1,5 @@
-local BaseView = _MOE.class("BaseView")
+local CSharpEventContainer = require("_Common.CSharpEventContainer")
+local BaseView = _MOE.class("BaseView", CSharpEventContainer)
 
 local function GetControlName(control)
     if not control then
@@ -156,6 +157,7 @@ function BaseView:Destroy()
     xpcall(self.OnDestroy, _G.ErrorHandler, self)
     self:ClearUIEvents()
     self:UnRegisterCustomEvents()
+    self:UnRegsterAllCsharpEvents()
     self:_ClearAllUIControls()
 end
 
