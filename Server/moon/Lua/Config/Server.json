@@ -2,5 +2,9 @@
     "LoginSrv": {
         "ip": "127.0.0.1",
         "port": 5000
+    },
+    "ServerListSrv": {
+        "ip": "127.0.0.1",
+        "port": 1983
     }
 }
