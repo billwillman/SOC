@@ -1,9 +1,9 @@
 if _MOE.IsDS then
     _MOE.Logger.Log("[Server] LuaPanda Start Debug...")
-    require("LuaPanda").start("127.0.0.1", 8819)
+    require("LuaPanda").start("127.0.0.1", 31001)
 else
     _MOE.Logger.Log("[Client] LuaPanda Start Debug...")
-    require("LuaPanda").start("127.0.0.1", 8818)
+    require("LuaPanda").start("127.0.0.1", 31000)
 end
 
 local function InitGlobalVars()
