@@ -73,6 +73,7 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
                 -- 完成了
                 print(txtRep.Txt)
                 self.ServerList = _MOE.Json.decode(txtRep.Txt)
+                _MOE.EventManager:DispatchEvent(_MOE.ClientEvents.Client_RepServerList, self.ServerList)
             elseif status == _MOE.HttpListenerStatus.hsError then
                 self.HttpServerListClient = nil
                 -- 失败

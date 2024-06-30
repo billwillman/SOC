@@ -4,6 +4,14 @@ function LoginView:RegisterEvents()
     self:AddButtonClick(self.bp.BtnSubmit, self.OnBtnSubmit)
 end
 
+function LoginView:RegisterCustomEvents()
+    self:RegisterCustomEvent(_MOE.ClientEvents.Client_RepServerList, self._OnRepServerList)
+end
+
+function LoginView:_OnRepServerList(serverList)
+    print("[LoginView] _OnRepServerList")
+end
+
 function LoginView:OnBtnSubmit()
     print("OnBtnSubmit")
     local netModel = _MOE.GameApp:GetModel("NetClientModel")
@@ -17,6 +25,7 @@ function LoginView:UnRegisterEvents()
 end
 
 function LoginView:OnOpen()
+    self:RegisterCustomEvents()
     self:RegisterEvents()
     local netModel = _MOE.GameApp:GetModel("NetClientModel")
     if netModel then

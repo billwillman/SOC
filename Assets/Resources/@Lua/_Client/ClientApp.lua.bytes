@@ -1,4 +1,5 @@
 local BaseAppClass = require("_Common.BaseApp")
+require("_Client.Events")
 
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
