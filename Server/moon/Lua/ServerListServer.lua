@@ -9,10 +9,13 @@ httpserver.header_max_len = 8192
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
 local ServerData = serverCfg.ServerListSrv
-serverCfg = nil
+local clientServerListStr = io.readfile("./Config/ClientServerList.json")
 serverCfgStr = nil
+serverCfg = nil
+
 
 local G_StartTimer = os.clock() * 1000
+
 
 httpserver.error = function (fd, err)
     print("http server fd",fd," disconnected:",  err)
@@ -21,7 +24,7 @@ end
 httpserver.on("/serverlist", function(req, rep)
     -- 返回区服数据
     rep.status_code = 200
-    rep:write("test ok")
+    rep:write(clientServerListStr)
 end)
 
 httpserver.listen(ServerData.ip, ServerData.port, 60)
