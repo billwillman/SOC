@@ -93,6 +93,14 @@ local function _InitItems(self, items, itemStrKey)
     end
 end
 
+------------ 入口函数 ---------------
+--[[
+    示例：
+    local items = {
+        LifeTime = "LifeTime"
+    }
+]]
+------------------------------------
 function TrieTree:InitByValue(items)
     if items then
         for _, value in pairs(items) do
