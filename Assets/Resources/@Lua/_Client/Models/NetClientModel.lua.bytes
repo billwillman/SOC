@@ -50,17 +50,24 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
     if not self.HttpServerList then
         return false
     end
+    selectIdx = selectIdx or 1
     local httpData = self.HttpServerList[selectIdx]
     if not httpData then
         return false
     end
     DisposeHttpServerClient(self)
     local txtRep = _MOE.HttpStrResponse()
-    self.HttpServerListClient = _MOE.HttpHelper.OpenUrl(httpData.url, txtRep, function (client, status)
+    local url = httpData.url
+    if url[string.len(url)] ~= "/" then
+        url = url .. "/"
+    end
+    url = url .. "serverlist"
+    self.HttpServerListClient = _MOE.HttpHelper.OpenUrl(url, txtRep, function (client, status)
         if self.HttpServerListClient == client then
             if status == _MOE.HttpListenerStatus.hsDone then
                 self.HttpServerListClient = nil
                 -- 完成了
+                print(txtRep.Txt)
             elseif status == _MOE.HttpListenerStatus.hsError then
                 self.HttpServerListClient = nil
                 -- 失败
