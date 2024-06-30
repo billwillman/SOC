@@ -45,6 +45,10 @@ function NetClientModel:ConnectGSServer()
     _MOE.NetManager:ConnectServer("127.0.0.1", 5000, true)
 end
 
+function NetClientModel:GetServerList()
+    return self.ServerList
+end
+
 -- 请求Http的GS服务器信息
 function NetClientModel:ReqHttpServerListData(selectIdx)
     if not self.HttpServerList then
@@ -68,6 +72,7 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
                 self.HttpServerListClient = nil
                 -- 完成了
                 print(txtRep.Txt)
+                self.ServerList = _MOE.Json.decode(txtRep.Txt)
             elseif status == _MOE.HttpListenerStatus.hsError then
                 self.HttpServerListClient = nil
                 -- 失败
