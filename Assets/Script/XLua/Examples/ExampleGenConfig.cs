@@ -12,6 +12,7 @@ using UnityEngine;
 using XLua;
 using System.Linq;
 using System.Reflection;
+using NsHttpClient;
 
 //配置的详细介绍请看Doc下《XLua的配置.doc》
 public static class ExampleGenConfig
@@ -59,7 +60,8 @@ public static class ExampleGenConfig
                 typeof(Action<string>),
                 typeof(Action<double>),
                 typeof(UnityEngine.Events.UnityAction),
-                typeof(System.Collections.IEnumerator)
+                typeof(System.Collections.IEnumerator),
+                typeof(Action<HttpClient, HttpListenerStatus>)
             };
 
     //黑名单
