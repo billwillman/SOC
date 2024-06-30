@@ -18,7 +18,7 @@ httpserver.error = function (fd, err)
     print("http server fd",fd," disconnected:",  err)
 end
 
-httpserver.on("./", function(req, rep)
+httpserver.on("/serverlist", function(req, rep)
     -- 返回区服数据
     rep.status_code = 200
     rep:write("test ok")
