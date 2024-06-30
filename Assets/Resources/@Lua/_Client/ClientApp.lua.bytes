@@ -13,12 +13,12 @@ end
 function ClientApp:OnInit()
     CreateUIRoot()
     _MOE.BaseViewClass = require("_Common.BaseView")
+    self:RegisterModel("_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
     _MOE.TimerManager = self.TimerManager
     _MOE.UIManager = require("_Client.UIManager").New()
     self:RegisterModel("_Client.Models.NetClientModel")
     self:RegisterModel("_Client.Models.LoginModel", false)
-    self:RegisterModel("_Common.TimerManager", false)
 end
 
 function ClientApp:OnQuit()
