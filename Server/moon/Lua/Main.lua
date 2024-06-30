@@ -55,6 +55,18 @@ moon.async(function ()
     assert(id > 0, "Create LoginServer Fail")
 end)
 
+-- 区服服务器
+moon.async(function ()
+    local id = moon.new_service(
+        {
+            name = "ServerListServer",
+            file = "ServerListServer.lua",
+            unique = true
+        }
+    )
+    assert(id > 0, "Create ServerListServer Fail")
+end)
+
 --[[
 moon.async(function ()
     local id = moon.new_service(
