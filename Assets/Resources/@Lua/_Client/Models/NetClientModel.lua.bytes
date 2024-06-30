@@ -27,6 +27,7 @@ function NetClientModel:_OnGSConnectResult(isOk)
 end
 
 function NetClientModel:_OnGSSocketAbort()
+    _MOE.Logger.LogError("[NetClientModel] SocketAbort")
 end
 
 function NetClientModel:UnInit()
