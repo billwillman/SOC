@@ -10,7 +10,7 @@ local function CreateNetworkManager()
 end
 
 function DSApp:OnInit()
-    self:RegisterModel("_Common.TimerManager", false)
+    self:RegisterModel("TimerManager", "_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
     _MOE.TimerManager = self.TimerManager
     -- 创建网络NetworkManager

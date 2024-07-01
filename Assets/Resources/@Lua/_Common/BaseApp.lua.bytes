@@ -1,8 +1,5 @@
-local BaseApp = _MOE.class("BaseApp")
-
-function BaseApp:Ctor()
-    self.RegisterModels = {}
-end
+local ModelContainerClass = require("_Common.ModelContainer")
+local BaseApp = _MOE.class("BaseApp", ModelContainerClass)
 
 function BaseApp:Init()
     xpcall(self.OnInit, _G.ErrorHandler, self)
@@ -11,75 +8,6 @@ end
 function BaseApp:Quit()
     xpcall(self.OnQuit, _G.ErrorHandler, self)
     self:UnRegisterModels()
-end
-
-function BaseApp:GetModel(modelName)
-    if not modelName then
-        return
-    end
-    if self.Models then
-        local ret = self.Models[modelName]
-        if ret then
-            return ret
-        end
-    end
-    local registerClass = self.RegisterModels[modelName]
-    if not registerClass then
-        return
-    end
-    ret = registerClass.New()
-    self.Models = self.Models or {}
-    self.Models[modelName] = ret
-    -- 初始化
-    if ret and ret.Init then
-        ret:Init()
-    end
-    return ret
-end
-
--- @typpe string modelFilePath, bool isLazyCreate
-function BaseApp:RegisterModel(modelFilePath, isLazyCreate)
-    if not modelFilePath then
-        return false
-    end
-    local modelClass = require(modelFilePath)
-    if not modelClass or not modelClass.__cname then
-        return false
-    end
-    local modelName = modelClass.__cname
-    self.RegisterModels[modelName] = modelClass
-    if isLazyCreate == nil then
-        isLazyCreate = true
-    end
-    if not isLazyCreate then
-        self:GetModel(modelName)
-    end
-    return true
-end
-
-function BaseApp:UnRegisterModel(modelName)
-    if self.Models and self.Models[modelName] then
-        local model = self.Models[modelName]
-        if model.UnInit then
-            model:UnInit()
-        end
-        self.Models[modelName] = nil
-    end
-    self.RegisterModels[modelName] = nil
-end
-
-function BaseApp:UnRegisterModels()
-    if self.Models and next(self.Models) ~= nil then
-        for _, model in pairs(self.Models) do
-            if model and model.UnInit then
-                model:UnInit()
-            end
-        end
-        self.Models = {}
-    end
-    if next(self.RegisterModels) ~= nil then
-        self.RegisterModels = {}
-    end
 end
 
 function BaseApp:Update(deltaTime)
