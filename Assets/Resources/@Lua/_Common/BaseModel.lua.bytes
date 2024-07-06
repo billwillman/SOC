@@ -41,4 +41,9 @@ end
 function BaseModel:UnRegisterEvents()
 end
 
+-- 是否在Unluad后释放Path的require文件
+function BaseModel:IsUnRequireInUnInit()
+    return false
+end
+
 return BaseModel
