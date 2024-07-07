@@ -1,7 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Script/GamePlay/Editor/AnimToCurve/AnimToCurveWindow.uss?fileID=7433441132597879392&amp;guid=68ec35d8635f2e242887306e3ce87ad8&amp;type=3#AnimToCurveWindow" />
     <engine:VisualElement name="toppContainer" style="flex-grow: 0; flex-direction: row; height: 51px; flex-shrink: 1; transform-origin: left top; align-items: stretch; align-self: stretch;">
-        <ElementObjectField label="动画" allow-scene-objects="false" style="width: 70%; align-items: center; justify-content: flex-start; align-self: center; -unity-text-align: upper-left; transform-origin: left; top: auto; flex-grow: 0; left: auto; right: auto;" />
+        <ElementObjectField label="动画" allow-scene-objects="false" type="UnityEngine.AnimationClip, UnityEngine.AnimationModule" style="width: 70%; align-items: center; justify-content: flex-start; align-self: center; -unity-text-align: upper-left; transform-origin: left; top: auto; flex-grow: 0; left: auto; right: auto;" />
         <engine:Button text="转换" style="flex-direction: row; flex-grow: 1; left: auto; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; width: auto; translate: 0 0; transform-origin: right; margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px; -unity-text-align: middle-center; white-space: nowrap; align-items: auto;" />
     </engine:VisualElement>
 </engine:UXML>
