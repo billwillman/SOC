@@ -22,7 +22,12 @@ function ModelContainer:GetModel(modelName)
     if not registerClass then
         return
     end
-    local ret = registerClass.New()
+    local ret
+    if registerClass.New then
+        ret = registerClass.New()
+    else
+        ret = registerClass
+    end
     self.Models = self.Models or {}
     self.Models[modelName] = ret
     -- 初始化
