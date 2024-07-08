@@ -1,5 +1,5 @@
 # SYNOPSIS
-
+-- https://github.com/moonlibs/bin
 ```lua
 
 local bin = require 'bin'
