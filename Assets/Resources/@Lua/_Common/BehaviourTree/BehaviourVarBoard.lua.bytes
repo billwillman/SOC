@@ -1,0 +1,4 @@
+------------ 变量面板 --------------
+local _M = _MOE.class("BehaviourVarBoard")
+
+return _M

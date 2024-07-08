@@ -1,0 +1,4 @@
+-------------- 动画Action ---------------
+local _M = _MOE.class("BehaviourAction")
+
+return _M
