@@ -1,4 +1,51 @@
 ------------ 变量面板 --------------
 local _M = _MOE.class("BehaviourVarBoard")
 
+function _M:Ctor(...)
+    self:Clear()
+end
+
+function _M:RegisterVar(varName, type, defaultValue)
+    if not varName or not type then
+        _MOE.Logger.LogError("[BehaviourVarBoard] RegisterVar: varName or type is not vaild")
+        return false
+    end
+    self.Vars[varName] = {
+        value = defaultValue,
+        type = type
+    }
+    return true
+end
+
+function _M:UnRegisterVar(varName)
+    self.Vars[varName] = nil
+end
+
+function _M:GetVar(varName)
+    local item = self.Vars[varName]
+    if not item then
+        return
+    end
+    return item.value
+end
+
+function _M:SetVar(varName, varValue)
+    if not varName or not varValue then
+        return false
+    end
+    local item = self.Vars[varName]
+    if not item then
+        return false
+    end
+    local tt = type(varValue)
+    if item.type ~= tt then
+        return false
+    end
+    self.Vars[varName].value = varValue
+end
+
+function _M:Clear()
+    self.Vars= {}
+end
+
 return _M
