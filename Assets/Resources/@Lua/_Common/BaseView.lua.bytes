@@ -218,6 +218,12 @@ function BaseView:DropListSetOptionData(dropList, optionArray)
             end
             dropList.options:Add(optaion)
         end
+        if dropList.captionText then
+            local item0 = optionArray[1]
+            if item0 then
+                dropList.captionText.text = item0.text or ""
+            end
+        end
     end
     -- 精简
     dropList.options:TrimExcess()
