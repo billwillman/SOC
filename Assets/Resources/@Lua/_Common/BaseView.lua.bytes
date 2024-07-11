@@ -202,11 +202,11 @@ function BaseView:DropListSetOptionData(dropList, optionArray)
     dropList.options:Clear()
     -- 设置数据
     if optionArray and next(optionArray) ~= nil then
-        dropList.Capacity = #optionArray
-        local OptionDataClass = CS.UnityEngine.UI.OptionData
+        dropList.options.Capacity = #optionArray
+        local OptionDataClass = CS.UnityEngine.UI.Dropdown.OptionData
         local loader = self:GetLoader()
         for idx, item in ipairs(optionArray) do
-            local optaion = OptionDataClass.New()
+            local optaion = OptionDataClass()
             if item.text then
                 optaion.text = item.text
             else
@@ -216,7 +216,7 @@ function BaseView:DropListSetOptionData(dropList, optionArray)
                 local _, opt = loader:LoadSprite(dropList, optaion, idx, item.imagePath)
                 optaion = opt
             end
-            dropList:Add(optaion)
+            dropList.options:Add(optaion)
         end
     end
     -- 精简

@@ -13,7 +13,7 @@ function LoginView:_OnRepServerList(serverList)
     print("[LoginView] _OnRepServerList")
     local optDatas = {}
     for _, item in ipairs(serverList) do
-        table.insert({text = item.name})
+        table.insert(optDatas, {text = item.name})
     end
     self:DropListSetOptionData(self.bp.ServerList, optDatas)
 end
