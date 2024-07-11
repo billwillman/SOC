@@ -1,5 +1,6 @@
 ﻿#define USE_CHECK_VISIBLE
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -588,6 +589,118 @@ public class BaseResLoader: CachedMonoBehaviour
     {
         return ResourceMgr.Instance.InstantiateGameObj(orgObj);
     }
+
+	public bool LoadSprite(Dropdown dropList, ref Dropdown.OptionData optData, int index, string fileName) {
+		if ((dropList == null) || (index < 0) || string.IsNullOrEmpty(fileName))
+			return false;
+		ResValue resValue;
+		string resName = string.Format("index_{0:D}", index);
+		if (FindResValue(dropList, typeof(Sprite[]), out resValue, resName)) {
+			bool isSame = string.Compare(fileName, resValue.tag) == 0;
+			if (resValue.objs != null && resValue.objs.Length > 0) {
+				Sprite sp = resValue.objs[0] as Sprite;
+				optData.image = sp;
+				return sp != null;
+			}
+
+			optData.image = null;
+			return false;
+		}
+		Sprite[] sps = ResourceMgr.Instance.LoadSprites(fileName);
+		if (sps == null || sps.Length <= 0) {
+			optData.image = null;
+			SetResources(optData.image, null, typeof(Sprite[]), resName);
+			return false;
+		}
+		SetResources(dropList, sps, typeof(Sprite[]), resName, fileName);
+		Sprite sp1 = sps[0];
+		optData.image = sp1;
+		return sp1 != null;
+	}
+	
+	public bool LoadSprite(Image image, string fileName) {
+		if (image == null || string.IsNullOrEmpty(fileName))
+			return false;
+		ResValue resValue;
+		if (FindResValue(image, typeof(Sprite[]), out resValue)) {
+			bool isSame = string.Compare(fileName, resValue.tag) == 0;
+			if (isSame) {
+				if (resValue.objs != null && resValue.objs.Length > 0) {
+					Sprite sp = resValue.objs[0] as Sprite;
+					image.sprite = sp;
+					return sp != null;
+				}
+
+				image.sprite = null;
+				return false;
+			}
+		};
+
+		Sprite[] sps = ResourceMgr.Instance.LoadSprites(fileName);
+		if (sps == null || sps.Length <= 0) {
+			image.sprite = null;
+			SetResources(image, null, typeof(Sprite[]));
+			return false;
+		}
+
+
+		SetResources(image, sps, typeof(Sprite[]), string.Empty, fileName);
+		Sprite sp1 = sps[0];
+		image.sprite = sp1;
+		return sp1 != null;
+	}
+
+	public bool LoadSprite(Image image, string fileName, string spriteName) {
+		if (image == null || string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(spriteName))
+			return false;
+
+		ResValue resValue;
+		if (FindResValue(image, typeof(Sprite[]), out resValue)) {
+			bool isSame = string.Compare(resValue.tag, fileName) == 0;
+			if (isSame) {
+				if (resValue.objs != null) {
+					for (int i = 0; i < resValue.objs.Length; ++i) {
+						Sprite sp = resValue.objs[i] as Sprite;
+						if (sp == null)
+							continue;
+						if (string.Compare(sp.name, spriteName) == 0) {
+							image.sprite = sp;
+							return true;
+						}
+					}
+				}
+			}
+
+			image.sprite = null;
+			return false;
+		};
+
+		Sprite[] sps = ResourceMgr.Instance.LoadSprites(fileName);
+		bool isFound = false;
+		for (int i = 0; i < sps.Length; ++i) {
+			Sprite sp = sps[i];
+			if (sp == null)
+				continue;
+			if (!isFound && string.Compare(sp.name, spriteName) == 0) {
+				image.sprite = sp;
+				isFound = true;
+				SetResources(image, sps, typeof(Sprite[]), string.Empty, fileName);
+				break;
+			}
+		}
+
+		if (!isFound) {
+			for (int i = 0; i < sps.Length; ++i) {
+				Sprite sp = sps[i];
+				DestroySprite(sp);
+			}
+
+			image.sprite = null;
+			SetResources(image, null, typeof(Sprite[]));
+		}
+
+		return isFound;
+	}
 
 	public bool LoadSprite(SpriteRenderer sprite, string fileName)
 	{

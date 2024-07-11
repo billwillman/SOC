@@ -195,6 +195,34 @@ function BaseView:RemoveUIEvent(control, eventName)
     return self:_UnRegisterUIEvent(GetControlName(control), eventName)
 end
 
+function BaseView:DropListSetOptionData(dropList, optionArray)
+    if not dropList or not dropList.options then
+        return false
+    end
+    dropList.options:Clear()
+    -- 设置数据
+    if optionArray and next(optionArray) ~= nil then
+        dropList.Capacity = #optionArray
+        local OptionDataClass = CS.UnityEngine.UI.OptionData
+        local loader = self:GetLoader()
+        for idx, item in ipairs(optionArray) do
+            local optaion = OptionDataClass.New()
+            if item.text then
+                optaion.text = item.text
+            else
+                optaion.text = ""
+            end
+            if loader and item.imagePath then
+                local _, opt = loader:LoadSprite(dropList, optaion, idx, item.imagePath)
+                optaion = opt
+            end
+            dropList:Add(optaion)
+        end
+    end
+    -- 精简
+    dropList.options:TrimExcess()
+end
+
 --------------------------------------- 虚方法
 function BaseView:OnDestroy()
 end
