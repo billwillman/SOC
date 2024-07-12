@@ -23,6 +23,8 @@ function LoginView:OnBtnSubmit()
     local netModel = _MOE.GameApp:GetModel("NetClientModel")
     if netModel then
         netModel:ConnectGSServer()
+        -- 登录协议
+        netModel:CM_Login(self.bp.EdtUserName.text)
     end
 end
 

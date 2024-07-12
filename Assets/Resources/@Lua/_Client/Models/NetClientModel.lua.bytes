@@ -1,5 +1,6 @@
 -- 网络客户端Model
 local NetClientModel = _MOE.class("NetClientModel", _MOE.BaseModel)
+local MsgIds = require("_NetMsg.MsgId")
 
 --- 请求服务器列表
 function NetClientModel:OnInit()
@@ -111,6 +112,17 @@ end
 
 -- 连接Ds服务器
 function NetClientModel:ConnectDsAddr(dsAddr)
+end
+
+---------------------------------------- 客户端协议 ----------------------------------------
+function NetClientModel:CM_Login(userName, password)
+    local data = {
+        msgId = MsgIds.CM_Login,
+        userName = userName,
+        password = password
+    }
+    local msg = _MOE.Json.encode(data)
+    _MOE.NetManager:SendMoonStr(msg)
 end
 
 return NetClientModel
