@@ -43,11 +43,31 @@ end
 
 -- 连接GS服务器
 function NetClientModel:ConnectGSServer()
-    _MOE.NetManager:ConnectServer("127.0.0.1", 5000, true)
+    local gsData = self:GetSelectGsData()
+    if not gsData then
+        return
+    end
+    _MOE.NetManager:ConnectServer(gsData.ip, gsData.port, true)
 end
 
 function NetClientModel:GetServerList()
     return self.ServerList
+end
+
+function NetClientModel:GetSelectServerIndex()
+    return self.SelectServerIndex
+end
+
+function NetClientModel:GetSelectGsData()
+    if not self.ServerList then
+        return
+    end
+    local selIndex = self:GetSelectServerIndex()
+    if not selIndex then
+        return
+    end
+    local ret = self.ServerList[selIndex]
+    return ret
 end
 
 -- 请求Http的GS服务器信息
@@ -74,6 +94,7 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
                 -- 完成了
                 print(txtRep.Txt)
                 self.ServerList = _MOE.Json.decode(txtRep.Txt)
+                self.SelectServerIndex = 1
                 _MOE.EventManager:DispatchEvent(_MOE.ClientEvents.Client_RepServerList, self.ServerList)
             elseif status == _MOE.HttpListenerStatus.hsError then
                 self.HttpServerListClient = nil
@@ -82,6 +103,14 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
         end
     end)
     return self.HttpServerListClient ~= nil
+end
+
+-- 请求游戏地图，游戏类型
+function NetClientModel:ReqDsAddr(mapId, gameType)
+end
+
+-- 连接Ds服务器
+function NetClientModel:ConnectDsAddr(dsAddr)
 end
 
 return NetClientModel
