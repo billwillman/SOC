@@ -22,7 +22,6 @@ namespace SOC.GamePlay
                         var control = m_BindControls[i];
                         if (control != null) {
                             bp.Set<string, UIBehaviour>(control.gameObject.name, control);
-                            Button btn;
                         }
                     }
                 }
