@@ -1,6 +1,14 @@
 -------------- 动画Action ---------------
 local _M = _MOE.class("BehaviourAction")
 
+function _M:Ctor(actionName)
+    self.ActionName = actionName
+end
+
+function _M:GetActionName()
+    return self.ActionName
+end
+
 ------------------------------------------------- 虚方法 --------------------------------------------
 function _M:DoAction()
 end
