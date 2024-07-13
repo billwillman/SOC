@@ -1,0 +1,21 @@
+--- 基础玩法类 ----------
+local ModelContainerClass = require("_Common.ModelContainer")
+local BaseGame = _MOE.class("BaseGame", ModelContainerClass)
+
+function BaseApp:Init()
+    xpcall(self.OnInit, _G.ErrorHandler, self)
+end
+
+function BaseApp:Quit()
+    xpcall(self.OnQuit, _G.ErrorHandler, self)
+    self:UnRegisterModels()
+end
+
+------------------------------------------------------ 虚方法 ---------------------------------------------------
+function BaseApp:OnInit()
+end
+
+function BaseApp:OnQuit()
+end
+
+return BaseGame
