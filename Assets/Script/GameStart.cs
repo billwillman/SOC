@@ -127,11 +127,20 @@ namespace SOC.GamePlay
             }
         }
 
+        private static string[] _cLuaRootPathFormats = {
+            "Resources/@Lua/{0}.lua.bytes",
+            "Resources/@Lua/_BehaviourTree/{0}.lua.bytes"
+        };
+
         private byte[] OnLuaFileLoad(ref string filepath) {
             filepath = filepath.Replace(".", "/");
-            string luaPath = string.Format("Resources/@Lua/{0}.lua.bytes", filepath);
-            byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath);
-            return ret;
+            foreach (var pathFormat in _cLuaRootPathFormats) {
+                string luaPath = string.Format(pathFormat, filepath);
+                byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath);
+                if (ret != null)
+                    return ret;
+            }
+            return null;
         }
 
         private LuaEnv m_LuaEnv = null;
