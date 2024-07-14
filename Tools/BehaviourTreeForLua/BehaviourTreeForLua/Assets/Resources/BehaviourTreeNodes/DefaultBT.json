@@ -1,0 +1,346 @@
+﻿{
+    "BTFileName": "DefaultBT",
+    "RootNodeUID": 239323723,
+    "AllNodesList": [
+        {
+            "UID": 1824697752,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 113.0,
+                "y": 765.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "HasTaskCondition",
+            "NodeParams": "",
+            "NodeType": 4,
+            "ParentNodeUID": -1983406368,
+            "ChildNodesUIDList": [],
+            "AbortType": 2,
+            "IsCSNode": false
+        },
+        {
+            "UID": -1983406368,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 112.0,
+                "y": 585.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "InverterDecoration",
+            "NodeParams": "",
+            "NodeType": 5,
+            "ParentNodeUID": 1910568900,
+            "ChildNodesUIDList": [
+                1824697752
+            ],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": -1567445295,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 507.0,
+                "y": 586.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 2,
+            "NodeName": "LogAction",
+            "NodeParams": "Log1",
+            "NodeType": 2,
+            "ParentNodeUID": 1910568900,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": 1910568900,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 216.0,
+                "y": 407.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "Sequence",
+            "NodeParams": "",
+            "NodeType": 3,
+            "ParentNodeUID": 440266860,
+            "ChildNodesUIDList": [
+                -1983406368,
+                -10095761,
+                -1567445295
+            ],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": 440266860,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 877.0,
+                "y": 188.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "Selector",
+            "NodeParams": "",
+            "NodeType": 3,
+            "ParentNodeUID": 239323723,
+            "ChildNodesUIDList": [
+                1910568900,
+                1658271352,
+                1260220197
+            ],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": 239323723,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 876.0,
+                "y": 19.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "Root",
+            "NodeParams": "",
+            "NodeType": 1,
+            "ParentNodeUID": 0,
+            "ChildNodesUIDList": [
+                440266860
+            ],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": -10095761,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 308.0,
+                "y": 590.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 1,
+            "NodeName": "WaitForSeconds",
+            "NodeParams": "5",
+            "NodeType": 2,
+            "ParentNodeUID": 1910568900,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": 1658271352,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 907.0,
+                "y": 405.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 1,
+            "NodeName": "Sequence",
+            "NodeParams": "",
+            "NodeType": 3,
+            "ParentNodeUID": 440266860,
+            "ChildNodesUIDList": [
+                -365263331,
+                -944352450,
+                1290035526
+            ],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": -365263331,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 719.0,
+                "y": 592.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "CompareShareBool",
+            "NodeParams": "",
+            "NodeType": 4,
+            "ParentNodeUID": 1658271352,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": -944352450,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 907.0,
+                "y": 589.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 1,
+            "NodeName": "WaitForSeconds",
+            "NodeParams": "5",
+            "NodeType": 2,
+            "ParentNodeUID": 1658271352,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": 1290035526,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 1113.0,
+                "y": 586.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 2,
+            "NodeName": "SetShareBool",
+            "NodeParams": "",
+            "NodeType": 2,
+            "ParentNodeUID": 1658271352,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": 1260220197,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 1551.0,
+                "y": 382.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 2,
+            "NodeName": "ParalAllSuccess",
+            "NodeParams": "",
+            "NodeType": 3,
+            "ParentNodeUID": 440266860,
+            "ChildNodesUIDList": [
+                264671418,
+                -1828332611,
+                -2089175202
+            ],
+            "AbortType": 1,
+            "IsCSNode": true
+        },
+        {
+            "UID": -1828332611,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 1539.0,
+                "y": 590.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 1,
+            "NodeName": "WaitForSeconds",
+            "NodeParams": "5",
+            "NodeType": 2,
+            "ParentNodeUID": 1260220197,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": -2089175202,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 1744.0,
+                "y": 583.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 2,
+            "NodeName": "LogAction",
+            "NodeParams": "Log2",
+            "NodeType": 2,
+            "ParentNodeUID": 1260220197,
+            "ChildNodesUIDList": [],
+            "AbortType": 1,
+            "IsCSNode": false
+        },
+        {
+            "UID": 264671418,
+            "NodeDisplayRect": {
+                "serializedVersion": "2",
+                "x": 1336.0,
+                "y": 592.0,
+                "width": 150.0,
+                "height": 150.0
+            },
+            "NodeIndex": 0,
+            "NodeName": "CompareShareBool",
+            "NodeParams": "",
+            "NodeType": 4,
+            "ParentNodeUID": 1260220197,
+            "ChildNodesUIDList": [],
+            "AbortType": 2,
+            "IsCSNode": true
+        }
+    ],
+    "AllBoolVariableDataList": [
+        {
+            "VariableName": "testbool",
+            "VariableType": 1,
+            "VariableValue": false
+        },
+        {
+            "VariableName": "testbool2",
+            "VariableType": 1,
+            "VariableValue": false
+        }
+    ],
+    "AllIntVariableDataList": [
+        {
+            "VariableName": "testint",
+            "VariableType": 4,
+            "VariableValue": 123
+        }
+    ],
+    "AllFloatVariableDataList": [],
+    "AllStringVariableDataList": [
+        {
+            "VariableName": "teststring",
+            "VariableType": 2,
+            "VariableValue": "testssss"
+        }
+    ],
+    "AllBoolVariableNodeDataList": [
+        {
+            "NodeUID": 264671418,
+            "VariableName": "testbool",
+            "VariableType": 1,
+            "VariableValue": true
+        },
+        {
+            "NodeUID": -365263331,
+            "VariableName": "testbool",
+            "VariableType": 1,
+            "VariableValue": false
+        },
+        {
+            "NodeUID": 1290035526,
+            "VariableName": "testbool",
+            "VariableType": 1,
+            "VariableValue": false
+        }
+    ],
+    "AllIntVariableNodeDataList": [],
+    "AllFloatVariableNodeDataList": [],
+    "AllStringVariableNodeDataList": []
+}
