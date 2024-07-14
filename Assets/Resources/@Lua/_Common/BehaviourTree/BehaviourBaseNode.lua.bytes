@@ -1,9 +1,0 @@
-local _M = _MOE.class("BehaviourBaseNode")
-
-function _M:Ctor(...)
-    self.Conditions = nil -- 条件
-    self.ChildNodes = nil -- 子节点
-    self.Actions = nil -- 行为
-end
-
-return _M

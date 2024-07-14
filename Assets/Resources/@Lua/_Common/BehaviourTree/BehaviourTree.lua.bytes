@@ -1,4 +1,0 @@
--- 行为树
-local _M = _MOE.class("BehaviourTree")
-
-return _M
