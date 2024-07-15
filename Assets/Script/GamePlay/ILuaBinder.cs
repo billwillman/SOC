@@ -25,6 +25,12 @@ namespace SOC.GamePlay
         private Dictionary<int, LuaFunction> m_LuaEventMap = null;
         private LuaTable m_LuaSelf = null;
         private LuaTable m_LuaClass = null;
+        private Dictionary<string, LuaFunction> m_LuaCustomFuncs = null;
+
+        // 需要获取的Lua的方法
+        [DoNotGen]
+        public string[] CustomLuaFunctionName = null;
+
         public LuaTable LuaSelf {
             get {
                 return m_LuaSelf;
@@ -55,6 +61,7 @@ namespace SOC.GamePlay
 
         [DoNotGen]
         void DoDestroyLuaObject() {
+            DisposeCustomLuaFuncs();
             if (m_LuaEventMap != null) {
                 var iter = m_LuaEventMap.GetEnumerator();
                 while (iter.MoveNext()) {
@@ -95,8 +102,45 @@ namespace SOC.GamePlay
                     } else {
                         m_LuaSelf = luaClass;
                     }
+                    InitCustomLuaFuncs();
                 }
             }
+        }
+
+        [DoNotGen]
+        void InitCustomLuaFuncs()
+        {
+            if (CustomLuaFunctionName == null || m_LuaSelf == null)
+                return;
+            for (int i = 0; i < CustomLuaFunctionName.Length; ++i)
+            {
+                string funcName = CustomLuaFunctionName[i];
+                if (!string.IsNullOrEmpty(funcName))
+                {
+                    LuaFunction func = m_LuaSelf.Get<LuaFunction>(funcName);
+                    if (func != null)
+                    {
+                        if (m_LuaCustomFuncs == null)
+                            m_LuaCustomFuncs = new Dictionary<string, LuaFunction>();
+                        m_LuaCustomFuncs[funcName] = func;
+                    }
+                }
+            }
+               
+        }
+
+        [DoNotGen]
+        void DisposeCustomLuaFuncs()
+        {
+            if (m_LuaCustomFuncs == null)
+                return;
+            foreach(var iter in m_LuaCustomFuncs)
+            {
+                if (iter.Value != null)
+                    iter.Value.Dispose();
+            }
+            m_LuaCustomFuncs.Clear();
+            m_LuaCustomFuncs.TrimExcess();
         }
 
         [DoNotGen]
