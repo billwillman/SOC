@@ -794,7 +794,7 @@ namespace NsTcpClient
                 lock (this) {
                     node = mMoonPacketList.First;
                     if (node != null)
-                        mPacketList.RemoveFirst();
+                        mMoonPacketList.RemoveFirst();
                 }
 
                 if (node == null)
