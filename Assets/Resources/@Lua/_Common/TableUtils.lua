@@ -3,6 +3,7 @@ local TableUtils = {}
 
 local ignore_keys =
 {
+    --[[
     battleRecords = 1,
     lastBattleData = 1,
     protodata = 1,
@@ -20,6 +21,7 @@ local ignore_keys =
     globalRecord = 1,
     snapshotRecord = 1,
     mapInfo = 1
+    ]]
 }
 
 local function _InnerTablePrint(data, cstring, pfunc, depth, maxDepth)
