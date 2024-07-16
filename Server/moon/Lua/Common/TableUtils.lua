@@ -105,7 +105,7 @@ function TableUtils.Serialize(obj, serializeMeta)
     elseif t == "nil" then
         return "nil"
     else
-        print("can not serialize a type.")
+        print("can not serialize a type="..t)
     end
     return s
 end
