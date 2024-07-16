@@ -10,6 +10,20 @@ function NetClientModel:OnInit()
     self.HttpServerListClient = nil
     self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
     self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
+    self.m_HeartTimer = _MOE.TimerManager:AddLoopTimer(0.3, self, self._OnHeartTimer)
+end
+
+function NetClientModel:IsGsConnected()
+    local state = _MOE.NetManager.ClietnState
+    local ret = state == _MOE.NetState.eClient_STATE_CONNECTED
+    return ret
+end
+
+function NetClientModel:_OnHeartTimer()
+    -- 心跳包
+    if self:IsGsConnected() then
+        _MOE.NetManager:SendMoonStr()
+    end
 end
 
 local function DisposeHttpServerClient(self)
@@ -36,6 +50,10 @@ function NetClientModel:UnInit()
     _MOE.NetManager:Disconnect()
     _MOE.NetManager.OnConnectResult = nil
     _MOE.NetManager.OnSocketAbort = nil
+    if self.m_HeartTimer then
+        _MOE.TimerManager:RemoveTimer(self.m_HeartTimer)
+        self.m_HeartTimer = nil
+    end
 end
 
 function NetClientModel:GetHttpServerList()
