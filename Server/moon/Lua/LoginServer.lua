@@ -24,8 +24,9 @@ socket.on("accept",function(fd, msg)
 end)
 
 socket.on("message", function(fd, msg)
-    TableUtils.Serialize(msg)
-    socket.write(fd, moon.decode(msg, "Z"))
+    local data = moon.decode(msg, "Z")
+    TableUtils.Serialize(data)
+    socket.write(fd, msg)
 end)
 
 socket.on("close", function(fd, msg)
