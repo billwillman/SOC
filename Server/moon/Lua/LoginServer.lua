@@ -22,6 +22,7 @@ socket.on("accept",function(fd, msg)
 end)
 
 socket.on("message", function(fd, msg)
+    print(msg)
     socket.write(fd, moon.decode(msg, "Z"))
 end)
 
