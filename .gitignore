@@ -14,3 +14,4 @@ Assets/StreamingAssets/
 Assets/AssetBundles.xml
 Assets/Resources/@Lua/_Common
 Common/Lua/_Common/*.lua
+Common/Lua/_NetMsg/*.lua
