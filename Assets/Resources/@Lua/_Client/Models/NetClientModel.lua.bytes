@@ -22,7 +22,7 @@ end
 function NetClientModel:_OnHeartTimer()
     -- 心跳包
     if self:IsGsConnected() then
-        _MOE.NetManager:SendMoonStr()
+        self:SendMsg(MsgIds.CM_Heart)
     end
 end
 
@@ -135,10 +135,15 @@ end
 ---------------------------------------- 客户端协议 ----------------------------------------
 function NetClientModel:CM_Login(userName, password)
     local data = {
-        msgId = MsgIds.CM_Login,
         userName = userName,
         password = password
     }
+    self:SendMsg(MsgIds.CM_Login, data)
+end
+
+function NetClientModel:SendMsg(msgId, data)
+    data = data or {}
+    data.msgId = msgId
     local msg = _MOE.Json.encode(data)
     _MOE.NetManager:SendMoonStr(msg)
 end
