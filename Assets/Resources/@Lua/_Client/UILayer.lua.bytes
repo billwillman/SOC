@@ -76,8 +76,8 @@ function UILayer:_AppendWindow(wndName)
         local zorder = GetUseZOrder(self)
         local data = {
             View = view,
-            ZOrder = zorder
-            Index = #self.WndNameList + 1
+            ZOrder = zorder,
+            Index = #self.WndNameList + 1,
         }
         self.WndNames[wndName] = data
         table.insert(self.WndNameList, data)
