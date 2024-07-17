@@ -7,11 +7,12 @@ mklink /d "%~dp0/Server/moon/Lua/_NetMsg" "%~dp0/Common/Lua/_NetMsg"
 
 
 cd %~dp0/Server/moon/Lua/_Common
+del ".\*.lua"
 xcopy /Y ".\*.lua.bytes" ".\*.lua"
 ren "*.lua" "*."
 
 cd %~dp0/Server/moon/Lua/_NetMsg
-
+del ".\*.lua"
 xcopy /Y ".\*.lua.bytes" ".\*.lua"
 ren "*.lua" "*."
 pause
