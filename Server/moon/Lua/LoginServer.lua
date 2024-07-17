@@ -33,7 +33,7 @@ socket.on("message", function(fd, msg)
     -- socket.write(fd, data)
     if not data.msgId then
         -- 关闭Socket
-        socket.close(fd)
+       -- socket.close(fd)
         return
     end
     MsgProcesser:OnMsg(data)
