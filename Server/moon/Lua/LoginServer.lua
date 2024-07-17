@@ -3,7 +3,7 @@ require("LuaPanda").start("127.0.0.1", 20000)
 local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
-request("InitGlobalVars")
+require("InitGlobalVars")
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
