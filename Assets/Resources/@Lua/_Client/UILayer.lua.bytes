@@ -37,6 +37,8 @@ function UILayer:Ctor(layerId, mgr)
     end
     self.UIManager = mgr
     self.WndNames = {}
+    self.WndNameList = {}
+    self.MaxZOrder = 0
 end
 
 function UILayer:GetName()
@@ -50,11 +52,16 @@ end
 local _rootAnchorMin = _MOE.Vector2(0, 0)
 local _rootAnchorMax = _MOE.Vector2(1, 1)
 
+local function GetUseZOrder(self)
+    local ret = self.MaxZOrder
+    self.MaxZOrder = self.MaxZOrder + 1
+    return ret
+end
+
 function UILayer:_AppendWindow(wndName)
     if not self.RootTransform then
         return false
     end
-    self.WndNames[wndName] = {}
     local view = self.UIManager:GetWindowView(wndName)
     if view then
         local viewTrans = view:GetTransform()
@@ -66,13 +73,33 @@ function UILayer:_AppendWindow(wndName)
             viewTrans.offsetMin = _rootAnchorMin
             viewTrans.offsetMax = _rootAnchorMin
         end
+        local zorder = GetUseZOrder(self)
+        local data = {
+            View = view,
+            ZOrder = zorder
+            Index = #self.WndNameList + 1
+        }
+        self.WndNames[wndName] = data
+        table.insert(self.WndNameList, data)
     end
     return true
 end
 
 function UILayer:_RemoveWindow(wndName)
-    if self.WndNames[wndName] then
+    local data = self.WndNames[wndName]
+    if data then
         self.WndNames[wndName] = nil
+        if data.Index then
+            table.remove(self.WndNameList, data.Index)
+        end
+        if data.ZOrder and data.ZOrder == self.MaxZOrder - 1 then
+            local topData = self.WndNameList[#self.WndNameList]
+            if topData then
+                self.MaxZOrder = topData.ZOrder + 1
+            else
+                self.MaxZOrder  = 0
+            end
+        end
         return true
     end
     return false
