@@ -13,8 +13,6 @@ serverCfgStr = nil
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)--auto accept
 
-local TableUtils = require("_Common.TableUtils")
-
 --注册网络事件
 socket.on("accept",function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
@@ -26,7 +24,6 @@ end)
 socket.on("message", function(fd, msg)
     --print("message")
     local data = moon.decode(msg, "Z")
-    print(TableUtils.Serialize(data))
     -- socket.write(fd, data)
 end)
 

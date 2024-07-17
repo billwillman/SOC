@@ -815,6 +815,7 @@ PlayerSettings:
   webGLWebAssemblyBigInt: 0
   webGLCloseOnQuit: 0
   scriptingDefineSymbols:
+    Android: NODECANVAS
     iPhone: USE_LOWERCHAR
   additionalCompilerArguments: {}
   platformArchitecture: {}
