@@ -117,7 +117,7 @@ function NetClientModel:ReqHttpServerListData(selectIdx)
                 _MOE.EventManager:DispatchEvent(_MOE.ClientEvents.Client_RepServerList, self.ServerList)
             elseif status == _MOE.HttpListenerStatus.hsError then
                 self.HttpServerListClient = nil
-                -- 失败
+                _MOE.Logger.LogError("[ReqHttpServerListData] Error")
             end
         end
     end)
