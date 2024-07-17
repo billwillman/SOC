@@ -20,4 +20,5 @@ build/obj/
 exmaple/log/
 test/twitter-out.json
 Lua/_Common
+Lua/_NetMsg
 
