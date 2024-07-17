@@ -3,6 +3,9 @@ require("LuaPanda").start("127.0.0.1", 20000)
 local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
+request("InitGlobalVars")
+
+local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
@@ -28,6 +31,12 @@ socket.on("message", function(fd, msg)
     local data = moon.decode(msg, "Z")
     print(TableUtils.Serialize(data))
     -- socket.write(fd, data)
+    if not data.msgId then
+        -- 关闭Socket
+        socket.close(fd)
+        return
+    end
+    MsgProcesser:OnMsg(data)
 end)
 
 socket.on("close", function(fd, msg)
