@@ -77,7 +77,6 @@ function UILayer:_AppendWindow(wndName)
         local data = {
             View = view,
             ZOrder = zorder,
-            Index = #self.WndNameList + 1,
         }
         self.WndNames[wndName] = data
         table.insert(self.WndNameList, data)
@@ -89,16 +88,25 @@ function UILayer:_RemoveWindow(wndName)
     local data = self.WndNames[wndName]
     if data then
         self.WndNames[wndName] = nil
-        if data.Index then
-            table.remove(self.WndNameList, data.Index)
-        end
-        if data.ZOrder and data.ZOrder == self.MaxZOrder - 1 then
-            local topData = self.WndNameList[#self.WndNameList]
-            if topData then
-                self.MaxZOrder = topData.ZOrder + 1
-            else
-                self.MaxZOrder  = 0
+        local index
+        for i, d in ipairs(self.WndNameList) do
+            if d == data then
+                index = i
+                break
             end
+        end
+        if index then
+            table.remove(self.WndNameList, index)
+            if data.ZOrder and data.ZOrder == self.MaxZOrder - 1 then
+                local topData = self.WndNameList[#self.WndNameList]
+                if topData then
+                    self.MaxZOrder = topData.ZOrder + 1
+                else
+                    self.MaxZOrder  = 0
+                end
+            end
+        else
+            _MOE.Logger.LogErrorFormat("[UILayer] wndName: {0} is not found in WndNameList", wndName)
         end
         return true
     end
