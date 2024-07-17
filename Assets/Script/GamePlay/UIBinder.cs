@@ -14,14 +14,23 @@ namespace SOC.GamePlay
 
         public void InitRegisterControls(LuaTable lua)
         {
-            if (lua != null && m_BindControls != null)
-            {
-                LuaTable bp = lua.Get<LuaTable>("bp");
-                if (bp != null) {
-                    for (int i = 0; i < m_BindControls.Length; ++i) {
-                        var control = m_BindControls[i];
-                        if (control != null) {
-                            bp.Set<string, UIBehaviour>(control.gameObject.name, control);
+            if (lua != null) {
+                bool hasBindControl = m_BindControls != null;
+                Canvas canvas = gameObject.GetComponent<Canvas>();
+                bool hasCanvas = canvas != null;
+                if (hasCanvas || hasBindControl) {
+                    LuaTable bp = lua.Get<LuaTable>("bp");
+                    if (bp != null) {
+                        if (hasCanvas) {
+                            bp.Set<string, Canvas>("_Canvas", canvas);
+                        }
+                        if (hasBindControl) {
+                            for (int i = 0; i < m_BindControls.Length; ++i) {
+                                var control = m_BindControls[i];
+                                if (control != null) {
+                                    bp.Set<string, UIBehaviour>(control.gameObject.name, control);
+                                }
+                            }
                         }
                     }
                 }

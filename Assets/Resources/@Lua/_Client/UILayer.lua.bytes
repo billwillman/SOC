@@ -80,6 +80,11 @@ function UILayer:_AppendWindow(wndName)
         }
         self.WndNames[wndName] = data
         table.insert(self.WndNameList, data)
+        if view.bp and view.bp._Canvas then
+            local canvas = view.bp._Canvas
+            canvas.overrideSorting = true
+            canvas.sortingOrder = self.LayerId * 100 + zorder
+        end
     end
     return true
 end
