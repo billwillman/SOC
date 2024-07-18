@@ -79,7 +79,7 @@ function UILayer:BringToFront(wndName)
     local view = data.View
     if view and view.bp and view.bp._Canvas then
         local canvas = view.bp._Canvas
-        canvas.overrideSorting = true
+        -- canvas.overrideSorting = true
         canvas.sortingOrder = self.LayerId * 100 + data.ZOrder
     end
     return true
