@@ -58,6 +58,33 @@ local function GetUseZOrder(self)
     return ret
 end
 
+function UILayer:BringToFront(wndName)
+    if not wndName then
+        return false
+    end
+    local data = self.WndNames[wndName]
+    if not data then
+        return false
+    end
+    local index = self:_FindWndNameIndex(wndName)
+    if index <= 0 then
+        return false
+    end
+    if index == #self.WndNameList then
+        return true
+    end
+    table.remove(self.WndNameList, index)
+    data.ZOrder = GetUseZOrder(self)
+    table.insert(self.WndNameList, data)
+    local view = data.View
+    if view and view.bp and view.bp._Canvas then
+        local canvas = view.bp._Canvas
+        -- canvas.overrideSorting = true
+        canvas.sortingOrder = self.LayerId * 100 + data.ZOrder
+    end
+    return true
+end
+
 function UILayer:_AppendWindow(wndName)
     if not self.RootTransform then
         return false
@@ -89,18 +116,30 @@ function UILayer:_AppendWindow(wndName)
     return true
 end
 
+function UILayer:_FindWndNameIndex(wndName)
+    if not wndName then
+        return -1
+    end
+    local data = self.WndNames[wndName]
+    if not data then
+        return -1
+    end
+    local index = -1
+    for i, d in ipairs(self.WndNameList) do
+        if d == data then
+            index = i
+            break
+        end
+    end
+    return index
+end
+
 function UILayer:_RemoveWindow(wndName)
+    local index = self:_FindWndNameIndex(wndName)
     local data = self.WndNames[wndName]
     if data then
         self.WndNames[wndName] = nil
-        local index
-        for i, d in ipairs(self.WndNameList) do
-            if d == data then
-                index = i
-                break
-            end
-        end
-        if index then
+        if index and index > 0 then
             table.remove(self.WndNameList, index)
             if data.ZOrder and data.ZOrder == self.MaxZOrder - 1 then
                 local topData = self.WndNameList[#self.WndNameList]
