@@ -31,6 +31,9 @@ namespace SOC.GamePlay
         [DoNotGen]
         public string[] CustomLuaFunctionName = null;
 
+        [DoNotGen]
+        public bool bInitCustomLuaFunctionInStart = false;
+
         public LuaTable LuaSelf {
             get {
                 return m_LuaSelf;
@@ -49,12 +52,27 @@ namespace SOC.GamePlay
             m_LuaEventMap[evtType] = func;
         }
 
-        public System.Object[] CallCustomLuaFunc(int evtType, System.Object[] param) {
-            if (m_LuaEventMap == null)
-                return null;
-            LuaFunction func;
-            if (m_LuaEventMap.TryGetValue((int)evtType, out func) && func != null) {
-                return func.Call(param);
+        public System.Object[] CallCustomLuaFunc(string evtName, System.Object[] param) {
+            if (m_LuaCustomFuncs != null)
+            {
+                LuaFunction func;
+                if (m_LuaCustomFuncs.TryGetValue(evtName, out func))
+                {
+                    if (func != null)
+                        return func.Call(param);
+                    return null;
+                }
+            }
+            if (!bInitCustomLuaFunctionInStart)
+            {
+                if (string.IsNullOrEmpty(evtName) || m_LuaSelf == null)
+                    return null;
+                LuaFunction func = m_LuaSelf.Get<LuaFunction>(evtName);
+                if (func == null)
+                    return null;
+                if (m_LuaCustomFuncs == null)
+                    m_LuaCustomFuncs = new Dictionary<string, LuaFunction>();
+                m_LuaCustomFuncs[evtName] = func;
             }
             return null;
         }
@@ -110,7 +128,7 @@ namespace SOC.GamePlay
         [DoNotGen]
         void InitCustomLuaFuncs()
         {
-            if (CustomLuaFunctionName == null || m_LuaSelf == null)
+            if (!bInitCustomLuaFunctionInStart || CustomLuaFunctionName == null || m_LuaSelf == null)
                 return;
             for (int i = 0; i < CustomLuaFunctionName.Length; ++i)
             {
