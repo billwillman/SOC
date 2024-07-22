@@ -1,6 +1,5 @@
 local _M = _MOE.class("LoginMsgProcesser")
 
-local TableUtils = require("_Common.TableUtils")
 local MsgIds = require("_NetMsg.MsgId")
 
 _M.MsgDispatch = {
@@ -9,7 +8,7 @@ _M.MsgDispatch = {
 }
 
 function _M:OnMsg(msg)
-    print(TableUtils.Serialize(msg))
+    print(_MOE.TableUtils.Serialize(msg))
     local func = _M.MsgDispatch[msg.MsgId]
     if func then
         func(msg)
