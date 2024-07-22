@@ -1,0 +1,4 @@
+---- Ds连接Gs环境
+local _M = _MOE.class("DsGsNetModel", _MOE.BaseModel)
+
+return _M
