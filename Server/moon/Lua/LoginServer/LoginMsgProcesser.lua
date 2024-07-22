@@ -12,7 +12,9 @@ function _M:OnMsg(msg)
     local func = _M.MsgDispatch[msg.MsgId]
     if func then
         func(msg)
+        return true
     end
+    return false
 end
 
 return _M

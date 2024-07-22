@@ -30,14 +30,17 @@ socket.on("message", function(fd, msg)
     -- socket.write(fd, data)
     if not data then
         -- 关闭Socket
-       -- socket.close(fd)
+        socket.close(fd)
         return
     end
     msg = json.decode(data)
     if not msg.msgId then
+        socket.close(fd)
         return
     end
-    MsgProcesser:OnMsg(msg)
+    if not MsgProcesser:OnMsg(msg) then
+        socket.close(fd)
+    end
 end)
 
 socket.on("close", function(fd, msg)
