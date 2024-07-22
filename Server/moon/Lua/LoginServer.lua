@@ -33,7 +33,7 @@ socket.on("message", function(fd, msg)
        -- socket.close(fd)
         return
     end
-    local msg = json.decode(data)
+    msg = json.decode(data)
     if not msg.msgId then
         return
     end
