@@ -115,7 +115,7 @@ namespace SOC.GamePlay
                 if (luaClass != null) {
                     LuaFunction constructorFunc = luaClass.Get<LuaFunction>("New");
                     if (constructorFunc != null) {
-                        m_LuaSelf = constructorFunc.Func<MonoBehaviour, LuaTable>(SelfTarget);
+                        m_LuaSelf = constructorFunc.Func<MonoBehaviour, ILuaBinder, LuaTable>(SelfTarget, this);
                         m_LuaClass = luaClass;
                     } else {
                         m_LuaSelf = luaClass;

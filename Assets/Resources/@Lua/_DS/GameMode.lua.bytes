@@ -3,10 +3,14 @@ local GameMode = _MOE.class("GameMode")
 if _MOE.IsDS then
 
     ----------------------------- 只有DS上才跑这个逻辑
-    function GameMode:Ctor()
+    function GameMode:Ctor(netWorkMgr, binder)
+        self.bp = netWorkMgr
+        self.binder = binder
     end
 
-
+    function GameMode:OnAwake()
+        self.Transport = self.bp.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+    end
 end
 
 return GameMode
