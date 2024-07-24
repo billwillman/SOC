@@ -8,6 +8,7 @@ DsGsSession.GSStartupParamType = {
 }
 
 function DsGsSession:Ctor(tb)
+    self.tb = tb
 end
 
 return DsGsSession
