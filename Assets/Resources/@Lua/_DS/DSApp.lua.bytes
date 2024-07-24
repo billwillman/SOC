@@ -1,6 +1,7 @@
 local BaseAppClass = require("_Common.BaseApp")
 
 local DSApp = _MOE.class("DSApp", BaseAppClass)
+local DsGsSessionClass = require("_DS.DsGsSession")
 
 local function CreateNetworkManager()
     local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
@@ -9,10 +10,29 @@ local function CreateNetworkManager()
     end
 end
 
+local function ParseStartupCommands(self)
+    local commandLineArgs = CS.System.Environment.GetCommandLineArgs
+    if not commandLineArgs then
+        return false
+    end
+    local tb = nil
+    for _, p in ipairs(commandLineArgs) do
+        if p then
+            -- 处理启动参数
+        end
+    end
+    return true
+end
+
 function DSApp:OnInit()
     self:RegisterModel("TimerManager", "_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
     _MOE.TimerManager = self.TimerManager
+    if not ParseStartupCommands(self) then
+        _MOE.Logger.LogError("[DSApp] ParseStartupCommands: Error~!")
+        self:KillProcess() -- 杀掉进程
+        return
+    end
     -- 创建网络NetworkManager
     CreateNetworkManager()
 end

@@ -1,4 +1,13 @@
 --- Ds在GS上的Session
 local DsGsSession = _MOE.class("DsGsSession")
 
+DsGsSession.GSStartupParamType = {
+    GsIp = "GsIp", -- GS的IP
+    GsPort = "GsPort", -- GS的端口号
+    GsSession = "GsSession" -- GS给DS分配的Session
+}
+
+function DsGsSession:Ctor(tb)
+end
+
 return DsGsSession
