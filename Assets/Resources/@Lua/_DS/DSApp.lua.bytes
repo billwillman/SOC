@@ -21,6 +21,9 @@ local function ParseStartupCommands(self)
             -- 处理启动参数
         end
     end
+    if tb then
+        self.GsDsSession = DsGsSessionClass.New(tb)
+    end
     return true
 end
 
@@ -35,6 +38,10 @@ function DSApp:OnInit()
     end
     -- 创建网络NetworkManager
     CreateNetworkManager()
+end
+
+function DSApp:OnQuit()
+    self.GsDsSession = nil
 end
 
 return DSApp
