@@ -4,12 +4,28 @@ if _MOE.IsDS then
 
     ----------------------------- 只有DS上才跑这个逻辑
     function GameMode:Ctor(netWorkMgr, binder)
-        self.bp = netWorkMgr
-        self.binder = binder
+        self.NetWorkMgr = netWorkMgr
+        self.Binder = binder
+        self:RegisterSystemEvents()
+    end
+
+    function GameMode:RegisterSystemEvents()
+        local EventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Awake, self.OnAwake)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Destroyed, self.OnDestroy)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Start, self.OnStart)
     end
 
     function GameMode:OnAwake()
-        self.Transport = self.bp.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+        self.Transport = self.NetWorkMgr.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+    end
+
+    function GameMode:OnStart()
+        -- 连接到GS上
+    end
+
+    function GameMode:OnDestroy()
+        self.Transport = nil
     end
 end
 

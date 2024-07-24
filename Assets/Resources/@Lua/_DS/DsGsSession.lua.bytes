@@ -1,0 +1,4 @@
+--- Ds在GS上的Session
+local DsGsSession = _MOE.class("DsGsSession")
+
+return DsGsSession
