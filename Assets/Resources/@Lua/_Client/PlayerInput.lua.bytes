@@ -5,7 +5,8 @@ function PlayerInput:Ctor(target, binder)
     self.PlayerInput = target
     self.Binder = binder
 
-    local EventType = CS.SOC.LuaEvent_MonoEventType
+    local EventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
+    _MOE.Logger.Log(EventType.Awake)
     self.Binder:RegisterLuaEvent(EventType.Awake, self.OnAwake)
     self.Binder:RegisterLuaEvent(EventType.Destroyed, self.OnDestroy)
 end
