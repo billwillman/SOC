@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7614505072920662016}
   - component: {fileID: 2538171292629269233}
-  - component: {fileID: -8534985434658502617}
-  - component: {fileID: 1872346903908336671}
+  - component: {fileID: -6538410069429458184}
   m_Layer: 0
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -69,7 +68,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &-8534985434658502617
+--- !u!114 &-6538410069429458184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,27 +77,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1828517695438600134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 64533a518d657d748bea84e24762d653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1717489319
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 1
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
---- !u!114 &1872346903908336671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828517695438600134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d607a63535d72df4d94928be332ee6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  LuaPath: _Client.PlayerInput
+  SelfTarget: {fileID: 2538171292629269233}
+  CustomLuaFunctionName: []
+  bInitCustomLuaFunctionInStart: 0

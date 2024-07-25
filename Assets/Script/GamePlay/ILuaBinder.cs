@@ -109,7 +109,7 @@ namespace SOC.GamePlay
             var env = GameStart.EnvLua;
             if (env == null)
                 return;
-            var rets = env.DoString(string.Format("require(\"{0}\")", LuaPath), SelfTarget.name);
+            var rets = env.DoString(string.Format("local module = require(\"{0}\")\n return module", LuaPath), SelfTarget.name);
             if (rets != null && rets.Length > 0) {
                 LuaTable luaClass = rets[0] as LuaTable;
                 if (luaClass != null) {

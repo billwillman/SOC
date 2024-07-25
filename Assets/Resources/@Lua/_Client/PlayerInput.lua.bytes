@@ -1,0 +1,9 @@
+local PlayerInput = _MOE.class("PlayerInput")
+
+function PlayerInput:Ctor(target, binder)
+    self.PlayerInput = target
+    self.Binder = binder
+    _MOE.Logger.Log("[PlayerInput] PlayerInput Create")
+end
+
+return PlayerInput

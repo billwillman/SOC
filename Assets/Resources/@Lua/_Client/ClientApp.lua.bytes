@@ -11,6 +11,14 @@ local function CreateUIRoot()
     end
 end
 
+local function CreateMyPlayerInput()
+    local playerInput = _MOE.ResourceManager:CreateGameObject("Resources/@Input/PlayerInput.prefab")
+    if playerInput then
+        playerInput.name = "PlayerInput"
+        playerInput.transform:SetParent(_MOE.GameStartTransform, false)
+    end
+end
+
 function ClientApp:OnInit()
     CreateUIRoot()
     _MOE.BaseViewClass = require("_Common.BaseView")
@@ -20,6 +28,8 @@ function ClientApp:OnInit()
     _MOE.UIManager = require("_Client.UIManager").New()
     self:RegisterModel("NetClientModel", "_Client.Models.NetClientModel")
     self:RegisterModel("LoginModel", "_Client.Models.LoginModel", false)
+
+    CreateMyPlayerInput()
 end
 
 function ClientApp:OnQuit()
