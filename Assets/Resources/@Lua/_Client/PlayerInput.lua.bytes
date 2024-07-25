@@ -15,8 +15,26 @@ function PlayerInput:InitEvents()
     if asset then
         local PlayerMode = asset:FindActionMap("Player", true)
         if PlayerMode then
+            local MoveAction = PlayerMode:FindAction("Move", true)
+            if MoveAction then -- w,a,s,d
+                self:RegsterCSharpEvent(MoveAction, "started", self.OnMoveAction)
+                self:RegsterCSharpEvent(MoveAction, "canceled", self.OnCanceled)
+                self:RegsterCSharpEvent(MoveAction, "performed", self.OnPerformed)
+            end
         end
     end
+end
+
+function PlayerInput:OnPerformed()
+    _MOE.Logger.Log("OnPerformed")
+end
+
+function PlayerInput:OnCanceled()
+    _MOE.Logger.Log("OnCanceled")
+end
+
+function PlayerInput:OnMoveAction()
+    _MOE.Logger.Log("OnMoveAction")
 end
 
 function PlayerInput:OnAwake()
