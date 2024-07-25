@@ -1,9 +1,30 @@
-local PlayerInput = _MOE.class("PlayerInput")
+local PlayerInput = _MOE.class("PlayerInput", _MOE.CSharpEventContainer)
 
 function PlayerInput:Ctor(target, binder)
+    _MOE.Logger.Log("[PlayerInput] PlayerInput Create")
     self.PlayerInput = target
     self.Binder = binder
-    _MOE.Logger.Log("[PlayerInput] PlayerInput Create")
+
+    local EventType = CS.SOC.LuaEvent_MonoEventType
+    self.Binder:RegisterLuaEvent(EventType.Awake, self.OnAwake)
+    self.Binder:RegisterLuaEvent(EventType.Destroyed, self.OnDestroy)
+end
+
+function PlayerInput:InitEvents()
+    local asset = self.PlayerInput.actions
+    if asset then
+        local PlayerMode = asset:FindActionMap("Player", true)
+        if PlayerMode then
+        end
+    end
+end
+
+function PlayerInput:OnAwake()
+    self:InitEvents()
+end
+
+function PlayerInput:OnDestroy()
+    self:UnRegsterAllCsharpEvents()
 end
 
 return PlayerInput
