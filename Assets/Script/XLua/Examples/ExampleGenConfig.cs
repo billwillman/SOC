@@ -61,7 +61,8 @@ public static class ExampleGenConfig
                 typeof(Action<double>),
                 typeof(UnityEngine.Events.UnityAction),
                 typeof(System.Collections.IEnumerator),
-                typeof(Action<HttpClient, HttpListenerStatus>)
+                typeof(Action<HttpClient, HttpListenerStatus>),
+                typeof(Action<UnityEngine.InputSystem.InputAction.CallbackContext>)
             };
 
     //黑名单
