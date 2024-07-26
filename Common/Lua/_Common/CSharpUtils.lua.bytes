@@ -16,15 +16,15 @@ function _M.AddUnityEvent(self, csharpEvent, func)
     local evt = function (...)
         func(self, ...)
     end
-    csharpEvent = csharpEvent("+", evt)
+    csharpEvent("+", evt)
     return csharpEvent, evt
 end
 
-function _M.RemoveAllUnityEvent(csharpEvent, evt)
+function _M.RemoveUnityEvent(csharpEvent, evt)
     if not csharpEvent or not evt then
         return
     end
-    csharpEvent = csharpEvent("-", evt)
+    csharpEvent("-", evt)
     return csharpEvent
 end
 
