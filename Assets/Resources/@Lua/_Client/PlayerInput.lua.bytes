@@ -24,8 +24,9 @@ function PlayerInput:InitEvents()
             if MoveAction then -- w,a,s,d
                 local actionType = CS.UnityEngine.InputSystem.PlayerInput.ActionEvent
                 local events = CSharUtils.CreateArray(actionType, 1)
-                local event = actionType(MoveAction)
-                events[0] = event
+                self.MoveCSharpEvt = actionType(MoveAction)
+                self.MoveCSharpEvt, self.MoveLuaEvt = CSharUtils.AddUnityEvent(self, self.MoveCSharpEvt, self.OnInputEvent)
+                events[0] = self.MoveCSharpEvt
                 self.actionEvents = events
                 --[[
                 self:RegsterCSharpEvent(MoveAction, "started", self.OnMoveAction)
@@ -37,16 +38,7 @@ function PlayerInput:InitEvents()
     end
 end
 
-function PlayerInput:OnPerformed()
-    _MOE.Logger.Log("OnPerformed")
-end
-
-function PlayerInput:OnCanceled()
-    _MOE.Logger.Log("OnCanceled")
-end
-
-function PlayerInput:OnMoveAction()
-    _MOE.Logger.Log("OnMoveAction")
+function PlayerInput:OnInputEvent(...)
 end
 
 function PlayerInput:OnAwake()
@@ -55,6 +47,9 @@ end
 
 function PlayerInput:OnDestroy()
     self:UnRegsterAllCsharpEvents()
+    CSharpUtils.RemoveAllUnityEvent(self.MoveCSharpEvt, self.MoveLuaEvt)
+    self.MoveCSharpEvt = nil
+    self.MoveLuaEvt = nil
 end
 
 return PlayerInput

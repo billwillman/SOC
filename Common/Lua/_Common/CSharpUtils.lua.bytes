@@ -9,4 +9,23 @@ function _M.CreateArray(csharType, defaultNum)
     return ret
 end
 
+function _M.AddUnityEvent(self, csharpEvent, func)
+    if not self or not csharpEvent or not func then
+        return
+    end
+    local evt = function (...)
+        func(self, ...)
+    end
+    csharpEvent = csharpEvent("+", evt)
+    return csharpEvent, evt
+end
+
+function _M.RemoveAllUnityEvent(csharpEvent, evt)
+    if not csharpEvent or not evt then
+        return
+    end
+    csharpEvent = csharpEvent("-", evt)
+    return csharpEvent
+end
+
 return _M
