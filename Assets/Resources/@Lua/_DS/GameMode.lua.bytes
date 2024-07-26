@@ -11,9 +11,9 @@ if _MOE.IsDS then
 
     function GameMode:RegisterSystemEvents()
         local EventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
-        self.NetWorkMgr:RegisterLuaEvent(EventType.Awake, self.OnAwake)
-        self.NetWorkMgr:RegisterLuaEvent(EventType.Destroyed, self.OnDestroy)
-        self.NetWorkMgr:RegisterLuaEvent(EventType.Start, self.OnStart)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
     end
 
     function GameMode:OnAwake()

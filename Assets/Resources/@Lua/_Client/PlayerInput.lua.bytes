@@ -1,4 +1,5 @@
-local PlayerInput = _MOE.class("PlayerInput", _MOE.CSharpEventContainer)
+local CSharpEventContainer = require("_Common.CSharpEventContainer")
+local PlayerInput = _MOE.class("PlayerInput", CSharpEventContainer)
 
 function PlayerInput:Ctor(target, binder)
     _MOE.Logger.Log("[PlayerInput] PlayerInput Create")
@@ -6,9 +7,10 @@ function PlayerInput:Ctor(target, binder)
     self.Binder = binder
 
     local EventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
-    _MOE.Logger.Log(EventType.Awake)
-    self.Binder:RegisterLuaEvent(EventType.Awake.userdata, self.OnAwake)
-    self.Binder:RegisterLuaEvent(EventType.Destroyed, self.OnDestroy)
+
+    --_MOE.Logger.Log(EventType.Awake:GetHashCode())
+    self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
+    self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
 end
 
 function PlayerInput:InitEvents()
