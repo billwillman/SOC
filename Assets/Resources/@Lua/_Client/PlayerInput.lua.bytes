@@ -39,6 +39,7 @@ function PlayerInput:InitEvents()
 end
 
 function PlayerInput:OnInputEvent(...)
+    _MOE.Logger.Log("OnInputEvent")
 end
 
 function PlayerInput:OnAwake()
