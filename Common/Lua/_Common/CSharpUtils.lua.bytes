@@ -1,0 +1,12 @@
+local _M = {}
+
+function _M.CreateArray(csharType, defaultNum)
+    if not csharType then
+        return
+    end
+    defaultNum = defaultNum or 0
+    local ret = CS.System.Array.CreateInstance(typeof(csharType), defaultNum)
+    return ret
+end
+
+return _M
