@@ -1,3 +1,5 @@
+local util = require("xlua.util")
+
 local _M = {}
 
 function _M.CreateArray(csharType, defaultNum)
