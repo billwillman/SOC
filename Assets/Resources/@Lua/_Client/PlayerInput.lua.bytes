@@ -47,7 +47,7 @@ end
 
 function PlayerInput:OnDestroy()
     self:UnRegsterAllCsharpEvents()
-    CSharpUtils.RemoveUnityEvent(self.MoveCSharpEvt, self.MoveLuaEvt)
+    CSharUtils.RemoveUnityEvent(self.MoveCSharpEvt, self.MoveLuaEvt)
     self.MoveCSharpEvt = nil
     self.MoveLuaEvt = nil
 end

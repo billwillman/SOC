@@ -62,7 +62,7 @@ public static class ExampleGenConfig
                 typeof(UnityEngine.Events.UnityAction),
                 typeof(System.Collections.IEnumerator),
                 typeof(Action<HttpClient, HttpListenerStatus>),
-                typeof(UnityEngine.InputSystem.PlayerInput.ActionEvent),
+                typeof(UnityEngine.Events.UnityAction<UnityEngine.InputSystem.InputAction.CallbackContext>),
             };
 
     //黑名单
