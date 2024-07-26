@@ -1,6 +1,8 @@
 local CSharpEventContainer = require("_Common.CSharpEventContainer")
 local PlayerInput = _MOE.class("PlayerInput", CSharpEventContainer)
 
+local CSharUtils = require("_Common.CSharpUtils")
+
 function PlayerInput:Ctor(target, binder)
     _MOE.Logger.Log("[PlayerInput] PlayerInput Create")
     self.PlayerInput = target
@@ -20,9 +22,16 @@ function PlayerInput:InitEvents()
         if PlayerMode then
             local MoveAction = PlayerMode:FindAction("Move", true)
             if MoveAction then -- w,a,s,d
+                local actionType = CS.UnityEngine.InputSystem.PlayerInput.ActionEvent
+                local events = CSharUtils.CreateArray(actionType, 1)
+                local event = actionType(MoveAction)
+                events[0] = event
+                self.actionEvents = events
+                --[[
                 self:RegsterCSharpEvent(MoveAction, "started", self.OnMoveAction)
                 self:RegsterCSharpEvent(MoveAction, "canceled", self.OnCanceled)
                 self:RegsterCSharpEvent(MoveAction, "performed", self.OnPerformed)
+                ]]
             end
         end
     end
