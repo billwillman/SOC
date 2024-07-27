@@ -52,6 +52,7 @@ function PlayerInput:OnDestroy()
     CSharUtils.RemoveUnityEvent(self.MoveCSharpEvt, self.MoveLuaEvt)
     self.MoveCSharpEvt = nil
     self.MoveLuaEvt = nil
+    _MOE.Logger.Log("[PlayerInput] OnDestroy")
 end
 
 return PlayerInput
