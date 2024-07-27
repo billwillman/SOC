@@ -39,7 +39,7 @@ function PlayerInput:InitEvents()
     end
 end
 
-function PlayerInput:OnInputEvent(...)
+function PlayerInput:OnInputEvent(CallbackContext)
     _MOE.Logger.Log("OnInputEvent")
 end
 
