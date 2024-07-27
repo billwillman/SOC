@@ -26,9 +26,9 @@ function PlayerInput:InitEvents()
                 local events = CSharUtils.CreateArray(actionType, 1)
                 self.MoveCSharpEvt = actionType(MoveAction)
                 self.MoveCSharpEvt, self.MoveLuaEvt = CSharUtils.AddUnityEvent(self, self.MoveCSharpEvt, self.OnInputEvent)
-                events[0] = _MOE.ILuaBinder.CreatePlayerInputActionEvents(self.MoveCSharpEvt)
+                events[0] = self.MoveCSharpEvt
                 --_MOE.Logger.Log(events.Length)
-                self.PlayerInput.actionEvents = events
+                self.PlayerInput.actionEvents = _MOE.ILuaBinder.CreatePlayerInputActionEvents(events)
                 --[[
                 self:RegsterCSharpEvent(MoveAction, "started", self.OnMoveAction)
                 self:RegsterCSharpEvent(MoveAction, "canceled", self.OnCanceled)
