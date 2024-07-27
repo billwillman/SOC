@@ -1,7 +1,15 @@
+#define UNITY_INPUT
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XLua;
+
+#if UNITY_INPUT
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
+#endif
 
 namespace SOC.GamePlay
 {
@@ -76,6 +84,18 @@ namespace SOC.GamePlay
             }
             return null;
         }
+
+#if UNITY_INPUT
+        public static ReadOnlyArray<PlayerInput.ActionEvent> CreatePlayerInputActionEvents(PlayerInput.ActionEvent[] events, int index, int len) {
+            ReadOnlyArray<PlayerInput.ActionEvent> ret = new ReadOnlyArray<PlayerInput.ActionEvent>(events, index, len);
+            return ret;
+        }
+
+        public static ReadOnlyArray<PlayerInput.ActionEvent> CreatePlayerInputActionEvents(PlayerInput.ActionEvent[] events) {
+            ReadOnlyArray<PlayerInput.ActionEvent> ret = new ReadOnlyArray<PlayerInput.ActionEvent>(events);
+            return ret;
+        }
+#endif
 
         [DoNotGen]
         void DoDestroyLuaObject() {
