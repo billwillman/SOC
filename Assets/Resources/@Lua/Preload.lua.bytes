@@ -50,6 +50,7 @@ _MOE.RectTransformClass = typeof(CS.UnityEngine.RectTransform)
 _MOE.RectClass = CS.UnityEngine.Rect
 _MOE.Vector2 = CS.UnityEngine.Vector2
 _MOE.NetState = CS.NsTcpClient.eClientState
+_MOE.ILuaBinder = CS.SOC.GamePlay.ILuaBinder
 _MOE.class = require("_Common.BaseClass") -- class框架
 _MOE.Json = require("_Common.json")
 _MOE.TableUtils = require("_Common.TableUtils")
