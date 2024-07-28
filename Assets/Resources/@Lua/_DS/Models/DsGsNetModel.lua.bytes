@@ -1,4 +1,15 @@
 ---- Ds连接Gs环境
 local _M = _MOE.class("DsGsNetModel", _MOE.BaseModel)
 
+function _M:OnInit()
+end
+
+function _M:ConnectGS()
+    local Session = _MOE.GameApp:GetGsDsSession()
+    -- 连接GS
+end
+
+function _M:OnUnInit()
+end
+
 return _M

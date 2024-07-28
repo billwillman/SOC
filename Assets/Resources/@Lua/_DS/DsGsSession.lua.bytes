@@ -7,8 +7,31 @@ DsGsSession.GSStartupParamType = {
     GsSession = "GsSession" -- GS给DS分配的Session
 }
 
+local ParamType = DsGsSession.GSStartupParamType
+
 function DsGsSession:Ctor(tb)
     self.tb = tb
+end
+
+function DsGsSession:GetGsIp()
+    if not self.tb then
+        return
+    end
+    return self.tb[ParamType.GsIp]
+end
+
+function DsGsSession:GetGsPort()
+    if not self.tb then
+        return
+    end
+    return self.tb[ParamType.GsPort]
+end
+
+function DsGsSession:GetGsSession()
+    if not self.tb then
+        return
+    end
+    return self.tb[ParamType.GsSession]
 end
 
 return DsGsSession

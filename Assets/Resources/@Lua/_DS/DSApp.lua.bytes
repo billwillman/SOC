@@ -27,6 +27,10 @@ local function ParseStartupCommands(self)
     return true
 end
 
+function DSApp:GetGsDsSession()
+    return self.GsDsSession
+end
+
 function DSApp:OnInit()
     self:RegisterModel("TimerManager", "_Common.TimerManager", false)
     self.TimerManager = self:GetModel("TimerManager")
@@ -36,9 +40,9 @@ function DSApp:OnInit()
         self:KillProcess() -- 杀掉进程
         return
     end
+    self:RegisterModels("DsGsNetModel", "_DS.DsGsNetModel", true)
     -- 创建网络NetworkManager
     CreateNetworkManager()
-    self:RegisterModels("DsGsNetModel", "_DS.DsGsNetModel", true)
 end
 
 function DSApp:OnQuit()
