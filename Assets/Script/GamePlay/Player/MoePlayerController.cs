@@ -10,7 +10,6 @@ namespace SOC.GamePlay.Player
     [XLua.LuaCallCSharp]
     public class MoePlayerController : NetworkBehaviour
     {
-        public MoePlayerInput Input;
         public MoeCharacterController Character;
     }
 }
