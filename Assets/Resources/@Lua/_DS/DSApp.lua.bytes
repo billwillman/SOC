@@ -38,6 +38,7 @@ function DSApp:OnInit()
     end
     -- 创建网络NetworkManager
     CreateNetworkManager()
+    self:RegisterModels("DsGsNetModel", "_DS.DsGsNetModel", true)
 end
 
 function DSApp:OnQuit()

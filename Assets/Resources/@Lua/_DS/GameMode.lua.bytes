@@ -18,10 +18,11 @@ if _MOE.IsDS then
 
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+        self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
     end
 
     function GameMode:OnStart()
-        -- 连接到GS上
+        -- 连接到GS上 
     end
 
     function GameMode:OnDestroy()
