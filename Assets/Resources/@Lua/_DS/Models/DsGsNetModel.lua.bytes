@@ -2,14 +2,26 @@
 local _M = _MOE.class("DsGsNetModel", _MOE.BaseModel)
 
 function _M:OnInit()
+    self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
+    self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
+end
+
+function _M:_OnGSConnectResult(isOk)
+end
+
+function _M:_OnGSSocketAbort()
 end
 
 function _M:ConnectGS()
     local Session = _MOE.GameApp:GetGsDsSession()
     -- 连接GS
+    _MOE.NetManager:ConnectServer(Session:GetGsIp(), Session:GetGsPort(), true)
 end
 
 function _M:OnUnInit()
+    _MOE.NetManager:Disconnect()
+    _MOE.NetManager.OnConnectResult = nil
+    _MOE.NetManager.OnSocketAbort = nil
 end
 
 return _M
