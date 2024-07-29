@@ -1,6 +1,6 @@
 local _M = _MOE.class("DsBattleServerProcesser")
 
-local MsgIds = require("_NetMsg.Msg")
+local MsgIds = require("_NetMsg.MsgId")
 
 _M.MsgDispatch = {
     [MsgIds.CM_Heart] = function (msg)
