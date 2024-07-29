@@ -6,7 +6,7 @@ local moon = require("moon")
 local socket = require "moon.socket"
 require("InitGlobalVars")
 
-local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
+local MsgProcesser = require("DsBattleServer/DsBattleServerProcesser").New()
 
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
@@ -27,4 +27,21 @@ end)
 
 socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
+end)
+
+socket.on("message", function(fd, msg)
+    local data = moon.decode(msg, "Z")
+    if not data then
+        -- 关闭Socket
+        socket.close(fd)
+        return
+    end
+    msg = json.decode(data)
+    if not msg.msgId then
+        socket.close(fd)
+        return
+    end
+    if not MsgProcesser:OnMsg(msg) then
+        socket.close(fd)
+    end
 end)
