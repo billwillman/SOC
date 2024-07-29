@@ -67,6 +67,18 @@ moon.async(function ()
     assert(id > 0, "Create ServerListServer Fail")
 end)
 
+-- 战斗服务器
+moon.async(function ()
+    local id = moon.new_service(
+        {
+            name = "DsBattleServer",
+            file = "DsBattleServer.lua",
+            unique = true
+        }
+    )
+    assert(id > 0, "Create DsBattleServer Fail")
+end)
+
 --[[
 moon.async(function ()
     local id = moon.new_service(
