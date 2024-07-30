@@ -17,3 +17,4 @@ Assets/Resources/@Lua/_NetMsg
 Common/Lua/_Common/*.lua
 Common/Lua/_NetMsg/*.lua
 Server/SOC/
+Server/SOC/*.*
