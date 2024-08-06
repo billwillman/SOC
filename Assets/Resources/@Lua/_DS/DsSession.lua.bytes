@@ -1,0 +1,3 @@
+local DsSession = _MOE.class("DsSession")
+
+return DsSession
