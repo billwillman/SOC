@@ -6,4 +6,8 @@ DsSession.ConnectType = {
     DisConnect = 2
 }
 
+function DsSession:Ctor()
+    self.m_ConnectStatus = DsSession.ConnectType.None
+end
+
 return DsSession
