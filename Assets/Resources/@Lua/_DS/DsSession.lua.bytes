@@ -1,3 +1,9 @@
 local DsSession = _MOE.class("DsSession")
 
+DsSession.ConnectType = {
+    None = 0,
+    Connected = 1,
+    DisConnect = 2
+}
+
 return DsSession
