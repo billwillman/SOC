@@ -41,6 +41,7 @@ function DSApp:OnInit()
         return
     end
     self:RegisterModels("DsGsNetModel", "_DS.DsGsNetModel", true)
+    self:RegisterModels("DsSessionManager", "_DS.Models.DsSessionManager", true)
     -- 创建网络NetworkManager
     CreateNetworkManager()
 end
