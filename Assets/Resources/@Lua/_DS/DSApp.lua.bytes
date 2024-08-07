@@ -40,7 +40,7 @@ function DSApp:OnInit()
         self:KillProcess() -- 杀掉进程
         return
     end
-    self:RegisterModels("DsGsNetModel", "_DS.DsGsNetModel", true)
+    self:RegisterModels("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
     self:RegisterModels("DsSessionManager", "_DS.Models.DsSessionManager", true)
     -- 创建网络NetworkManager
     CreateNetworkManager()
