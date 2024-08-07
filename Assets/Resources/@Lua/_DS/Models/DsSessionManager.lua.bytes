@@ -1,0 +1,4 @@
+-- DsSession管理
+local DsSessionManager = _MOE.class("DsSessionManager", _MOE.BaseModel)
+
+return DsSessionManager
