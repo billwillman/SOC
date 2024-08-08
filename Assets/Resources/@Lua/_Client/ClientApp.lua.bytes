@@ -33,6 +33,7 @@ function ClientApp:OnInit()
 end
 
 function ClientApp:OnQuit()
+    self:DestroyDSNetManagerPrefab()
     _MOE.UIManager:FreeAllWindow()
     _MOE.NetManager:Disconnect()
 end
@@ -41,6 +42,26 @@ function ClientApp:OnUpdate(deltaTime)
     if self.TimerManager and self.TimerManager.OnUpdate then
         self.TimerManager:OnUpdate(deltaTime)
     end
+end
+
+----------------------------------------------------- DS链接对象 -----------------------------
+function ClientApp:CreateDSNetManagerPrefab()
+    if self.DSNetManagerPrefab then
+        return
+    end
+    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
+    if gameObj then
+        gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+    end
+    self.DSNetManagerPrefab = gameObj
+end
+
+function ClientApp:DestroyDSNetManagerPrefab()
+    if not self.DSNetManagerPrefab then
+        return
+    end
+    _MOE.GameObject.Destroy(self.DSNetManagerPrefab)
+    self.DSNetManagerPrefab = nil
 end
 
 return ClientApp
