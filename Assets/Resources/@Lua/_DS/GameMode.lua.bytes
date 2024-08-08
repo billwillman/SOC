@@ -7,6 +7,9 @@ if _MOE.IsDS then
         self.NetWorkMgr = netWorkMgr
         self.Binder = binder
         self:RegisterSystemEvents()
+
+        -- 设置GameMode数据
+        _MOE.GameApp.GameMode = self
     end
 
     function GameMode:RegisterSystemEvents()
@@ -19,6 +22,7 @@ if _MOE.IsDS then
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
         self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
+        self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
     end
 
     function GameMode:OnStart()
