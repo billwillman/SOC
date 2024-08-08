@@ -1,16 +1,22 @@
-local GameMode = _MOE.class("GameMode")
+local CSharpEventContainer = require("_Common.CSharpEventContainer")
+local GameMode = _MOE.class("GameMode", CSharpEventContainer)
+
+function GameMode:Ctor(netWorkMgr, binder)
+    self.NetWorkMgr = netWorkMgr
+    self.Binder = binder
+    self:RegisterSystemEvents()
+
+    -- 设置GameMode数据
+    _MOE.GameApp.GameMode = self
+end
+
+function GameMode:OnDestroy()
+    self:UnRegsterAllCsharpEvents()
+    self.Transport = nil
+end
 
 if _MOE.IsDS then
-
     ----------------------------- 只有DS上才跑这个逻辑
-    function GameMode:Ctor(netWorkMgr, binder)
-        self.NetWorkMgr = netWorkMgr
-        self.Binder = binder
-        self:RegisterSystemEvents()
-
-        -- 设置GameMode数据
-        _MOE.GameApp.GameMode = self
-    end
 
     function GameMode:RegisterSystemEvents()
         local EventType = _MOE.LuaEvent_MonoEventType
@@ -30,20 +36,8 @@ if _MOE.IsDS then
         self.DsGsNetModel:ConnectGS()
     end
 
-    function GameMode:OnDestroy()
-        self.Transport = nil
-    end
-
 else
     ------------------------- 只在Client跑这个逻辑 -------------------
-    function GameMode:Ctor(netWorkMgr, binder)
-        self.NetWorkMgr = netWorkMgr
-        self.Binder = binder
-        self:RegisterSystemEvents()
-
-        -- 设置GameMode数据
-        _MOE.GameApp.GameMode = self
-    end
 
     function GameMode:RegisterSystemEvents()
         self.NetWorkMgr:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
@@ -52,10 +46,10 @@ else
 
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClientConnected)
     end
 
-    function GameMode:OnDestroy()
-        self.Transport = nil
+    function GameMode:OnClientConnected()
     end
 end
 
