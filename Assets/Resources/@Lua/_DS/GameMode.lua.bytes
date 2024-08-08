@@ -33,6 +33,30 @@ if _MOE.IsDS then
     function GameMode:OnDestroy()
         self.Transport = nil
     end
+
+else
+    ------------------------- 只在Client跑这个逻辑 -------------------
+    function GameMode:Ctor(netWorkMgr, binder)
+        self.NetWorkMgr = netWorkMgr
+        self.Binder = binder
+        self:RegisterSystemEvents()
+
+        -- 设置GameMode数据
+        _MOE.GameApp.GameMode = self
+    end
+
+    function GameMode:RegisterSystemEvents()
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
+        self.NetWorkMgr:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
+    end
+
+    function GameMode:OnAwake()
+        self.Transport = self.NetWorkMgr.gameObject:GetComponent(CS.Unity.Netcode.Transports.UTP.UnityTransport)
+    end
+
+    function GameMode:OnDestroy()
+        self.Transport = nil
+    end
 end
 
 return GameMode
