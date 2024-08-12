@@ -50,4 +50,10 @@ function DSApp:OnQuit()
     self.GsDsSession = nil
 end
 
+function DSApp:OnUpdate(deltaTime)
+    if self.TimerManager and self.TimerManager.OnUpdate then
+        self.TimerManager:OnUpdate(deltaTime)
+    end
+end
+
 return DSApp
