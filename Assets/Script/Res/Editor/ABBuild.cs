@@ -4552,8 +4552,8 @@ public static class AssetBundleBuild
 	[MenuItem("Assets/平台打包/DS MD5(Lz4)")]
 	static public void OnBuildPlatformDSLz4Md5()
     {
-
-    }
+		BuildPlatform(eBuildPlatform.eBuildDS, 2, true);
+	}
 #endif
 
 #endif
