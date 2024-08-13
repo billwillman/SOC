@@ -4548,17 +4548,25 @@ public static class AssetBundleBuild
         BuildPlatform (eBuildPlatform.eBuildIOS, 2, true, true);
     }
 
+#if UNITY_2022_1_OR_NEWER
+	[MenuItem("Assets/平台打包/DS MD5(Lz4)")]
+	static public void OnBuildPlatformDSLz4Md5()
+    {
+
+    }
 #endif
 
-    /* 真正打包步骤 */
-    /*
+#endif
+
+	/* 真正打包步骤 */
+	/*
      * 1.判断目录是否为空，否则生成新工程
      * 2.拷贝非资源的文件
      * 3.打包原工程的资源到AB
      * 4.新工程生成APK
      */
 
-    static void _CopyAllDirs(string dir, string outPath, List<string> resPaths)
+	static void _CopyAllDirs(string dir, string outPath, List<string> resPaths)
     {
 		if (resPaths != null)
 		{
