@@ -4942,7 +4942,11 @@ public static class AssetBundleBuild
 				funcName = "AssetBundleBuild.Cmd_Win_Debug";
 			else
 				funcName = "AssetBundleBuild.Cmd_Win";
-        }
+        } else if (platform == eBuildPlatform.eBuildDS)
+        {
+			logFileName = System.IO.Path.GetDirectoryName(searchProjPath) + '/' + "dsLog.txt";
+			funcName = "AssetBundleBuild.Cmd_DS";
+		}
 
 		if (!string.IsNullOrEmpty(funcName))
 		{
