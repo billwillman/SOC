@@ -3571,8 +3571,18 @@ class AssetBundleMgr
 			opts |= BuildOptions.AllowDebugging;
 		if (isDevelop)
 			opts |= BuildOptions.Development;
-		
-		BuildPipeline.BuildPlayer (levelNames, outputFileName, platform, opts); 
+		if (isServer)
+		{
+			BuildPlayerOptions buildOpts = new BuildPlayerOptions();
+			buildOpts.scenes = levelNames;
+			buildOpts.options = opts;
+			buildOpts.locationPathName = outputFileName;
+			buildOpts.target = platform;
+			buildOpts.subtarget = (int)StandaloneBuildSubtarget.Server;
+			BuildPipeline.BuildPlayer(buildOpts);
+		}
+		else
+			BuildPipeline.BuildPlayer(levelNames, outputFileName, platform, opts); 
 	}
 
 	private bool m_TempIsNew;
@@ -4649,6 +4659,7 @@ public static class AssetBundleBuild
 	// 打包DS
 	static public void Cmd_DS()
 	{
+		// https://docs-alpha.unity3d.com/cn/2023.1/Manual/dedicated-server-build.html
 		// https://docs-alpha.unity3d.com/cn/2023.1/Manual/dedicated-server-assetbundles.html
 		string dsOutPath = "../DS";
 		dsOutPath = System.IO.Path.GetFullPath(dsOutPath);
