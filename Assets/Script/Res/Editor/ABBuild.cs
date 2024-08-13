@@ -2071,7 +2071,12 @@ class AssetBundleMgr
 			m_TempBuildTarget = target;
 			m_TempIsAppendForce = isForceAppend;
 			m_TempIsServer = isServer;
-			EditorUserBuildSettings.SwitchActiveBuildTarget(target);
+			if (isServerChanged) {
+#if UNITY_2022_1_OR_NEWER
+				EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.Build.NamedBuildTarget.Server, target);
+#endif
+			} else
+				EditorUserBuildSettings.SwitchActiveBuildTarget(target);
 			return;
 		}
 
