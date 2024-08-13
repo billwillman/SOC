@@ -4984,6 +4984,14 @@ public static class AssetBundleBuild
 	}
 #endif
 
+#if UNITY_2022_1_OR_NEWER
+	[MenuItem("Assets/发布/DS_资源整包(Lz4)")]
+	static public void Cmd_BuildDS_Lz4()
+    {
+		Cmd_Build(2, true, eBuildPlatform.eBuildDS);
+	}
+#endif
+
 	[MenuItem("Assets/发布/APK_Debug(非压缩)")]
 	static public void Cmd_BuildAPK_DEBUG_UNCOMPRESS()
 	{
