@@ -1948,7 +1948,7 @@ class AssetBundleMgr
 	private void OnBuildTargetChanged()
 	{
 		EditorUserBuildSettings.activeBuildTargetChanged -= OnBuildTargetChanged;
-		ProcessBuild_5_x(m_TempExportDir, m_TempCompressType, m_TempBuildTarget, m_TempIsAppendForce);
+		ProcessBuild_5_x(m_TempExportDir, m_TempCompressType, m_TempBuildTarget, m_TempIsAppendForce, m_TempIsServer);
 	}
 
     private UnityEditor.AssetBundleBuild[] BuildAssetBundleBuildArrayFrommAssetBundleList(bool isUseAssetBundleXml = false) {
@@ -1980,7 +1980,7 @@ class AssetBundleMgr
     }
 
     private AssetBundleManifest CallBuild_5_x_API(string exportDir, int compressType, BuildTarget target, bool isReBuild = true, 
-        bool isBuildAssetBundleXml = false)
+        bool isBuildAssetBundleXml = false, bool isServer = false)
 	{
 		BuildAssetBundleOptions buildOpts = /*BuildAssetBundleOptions.DisableWriteTypeTree |*/
 			BuildAssetBundleOptions.DeterministicAssetBundle;
@@ -2005,14 +2005,30 @@ class AssetBundleMgr
 
         // AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(exportDir, buildOpts, target);
         UnityEditor.AssetBundleBuild[] abs = BuildAssetBundleBuildArrayFrommAssetBundleList(isBuildAssetBundleXml);
-        AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(exportDir, abs, buildOpts, target);    
-    
-        return manifest;
+		if (isServer)
+		{
+			// DS的资源打包
+#if UNITY_2022_1_OR_NEWER
+			BuildAssetBundlesParameters abBuildParams = new BuildAssetBundlesParameters();
+			abBuildParams.bundleDefinitions = abs;
+			abBuildParams.outputPath = exportDir;
+			abBuildParams.targetPlatform = BuildTarget.StandaloneWindows64;
+			abBuildParams.options = buildOpts;
+			abBuildParams.subtarget = (int)StandaloneBuildSubtarget.Server;
+			AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(abBuildParams);
+			return manifest;
+#endif
+		}
+		else
+		{
+			AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(exportDir, abs, buildOpts, target);
+			return manifest;
+		}
 	}
 	
-	void ProcessBuild_5_x(string exportDir, int compressType, BuildTarget target, bool isForceAppend)
+	void ProcessBuild_5_x(string exportDir, int compressType, BuildTarget target, bool isForceAppend, bool isServer)
 	{
-		AssetBundleManifest manifest = CallBuild_5_x_API(exportDir, compressType, target, !isForceAppend);
+		AssetBundleManifest manifest = CallBuild_5_x_API(exportDir, compressType, target, !isForceAppend, isServer);
 		
 		for (int i = 0; i < mAssetBundleList.Count; ++i)
 		{
@@ -2046,11 +2062,12 @@ class AssetBundleMgr
 			m_TempCompressType = compressType;
 			m_TempBuildTarget = target;
 			m_TempIsAppendForce = isForceAppend;
+			m_TempIsServer = platform == eBuildPlatform.eBuildDS;
 			EditorUserBuildSettings.SwitchActiveBuildTarget(target);
 			return;
 		}
 
-		ProcessBuild_5_x(exportDir, compressType, target, isForceAppend);
+		ProcessBuild_5_x(exportDir, compressType, target, isForceAppend, platform == eBuildPlatform.eBuildDS);
 		
 #endif
 	}
@@ -3309,7 +3326,7 @@ class AssetBundleMgr
 					//	xmlImport.assetBundleName = "AssetBundles.xml";
 					//	xmlImport.SaveAndReimport();
 #if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
-					CallBuild_5_x_API(exportDir, compressType, target, false, true);
+					CallBuild_5_x_API(exportDir, compressType, target, false, true, platform == eBuildPlatform.eBuildDS);
 #else
 					CallBuild_5_x_API(exportDir, 0, target,  false, true);
 #endif
@@ -3573,6 +3590,7 @@ class AssetBundleMgr
 			opts |= BuildOptions.Development;
 		if (isServer)
 		{
+#if UNITY_2022_1_OR_NEWER
 			BuildPlayerOptions buildOpts = new BuildPlayerOptions();
 			buildOpts.scenes = levelNames;
 			buildOpts.options = opts;
@@ -3580,6 +3598,7 @@ class AssetBundleMgr
 			buildOpts.target = platform;
 			buildOpts.subtarget = (int)StandaloneBuildSubtarget.Server;
 			BuildPipeline.BuildPlayer(buildOpts);
+#endif
 		}
 		else
 			BuildPipeline.BuildPlayer(levelNames, outputFileName, platform, opts); 
