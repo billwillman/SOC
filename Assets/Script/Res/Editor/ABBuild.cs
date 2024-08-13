@@ -2056,19 +2056,26 @@ class AssetBundleMgr
 		if (!GetBuildTarget(platform, ref target))
 			return;
 		
-		if (EditorUserBuildSettings.activeBuildTarget != target)
+		bool isServer = platform == eBuildPlatform.eBuildDS;
+		bool isServerChanged = false;
+#if UNITY_2022_1_OR_NEWER
+		if (isServer) {
+			isServerChanged = EditorUserBuildSettings.standaloneBuildSubtarget != StandaloneBuildSubtarget.Server;
+		}
+#endif
+		if (EditorUserBuildSettings.activeBuildTarget != target || isServerChanged)
 		{
 			EditorUserBuildSettings.activeBuildTargetChanged += OnBuildTargetChanged;
 			m_TempExportDir = exportDir;
 			m_TempCompressType = compressType;
 			m_TempBuildTarget = target;
 			m_TempIsAppendForce = isForceAppend;
-			m_TempIsServer = platform == eBuildPlatform.eBuildDS;
+			m_TempIsServer = isServer;
 			EditorUserBuildSettings.SwitchActiveBuildTarget(target);
 			return;
 		}
 
-		ProcessBuild_5_x(exportDir, compressType, target, isForceAppend, platform == eBuildPlatform.eBuildDS);
+		ProcessBuild_5_x(exportDir, compressType, target, isForceAppend, isServer);
 		
 #endif
 	}
