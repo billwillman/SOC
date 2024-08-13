@@ -4644,6 +4644,21 @@ public static class AssetBundleBuild
 		mMgr.BuildPackage(eBuildPlatform.eBuildMac, macOutPath, true);
 	}
 
+	// 打包DS
+	static public void Cmd_DS()
+	{
+		string dsOutPath = "../DS";
+		dsOutPath = System.IO.Path.GetFullPath(dsOutPath);
+		if (Directory.Exists(dsOutPath))
+		{
+			DeleteDirectorAndFiles(dsOutPath);
+		}
+		Directory.CreateDirectory(dsOutPath);
+		dsOutPath += "/Server.exe";
+		Debug.Log("Build DS: " + dsOutPath);
+		mMgr.BuildPackage(eBuildPlatform.eBuildDS, dsOutPath, true);
+	}
+
 	static public void Cmd_Win()
 	{
 		string winOutPath = "../Win_Build";
