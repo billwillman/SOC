@@ -36,7 +36,8 @@ public enum eBuildPlatform
 	eBuildWindow = 0,
 	eBuildMac,
 	eBuildIOS,
-	eBuildAndroid
+	eBuildAndroid,
+	eBuildDS // DS平台
 }
 
 // AssetBundle 文件打包类型
@@ -1790,7 +1791,7 @@ class AssetBundleMgr
 		}
 	}
 
-	private bool GetBuildTarget(eBuildPlatform platform, ref BuildTarget target)
+	private bool GetBuildTarget(eBuildPlatform platform, ref BuildTarget target, bool isUse64 = true)
 	{
 		switch(platform) {
 		case eBuildPlatform.eBuildAndroid:
@@ -1801,12 +1802,15 @@ class AssetBundleMgr
 			
 		case eBuildPlatform.eBuildWindow:
 		{
-			target = BuildTarget.StandaloneWindows;
+					if (isUse64)
+						target = BuildTarget.StandaloneWindows64;
+					else
+						target = BuildTarget.StandaloneWindows;
 			break;
 		}
 		case eBuildPlatform.eBuildMac:
 		{
-			target = BuildTarget.StandaloneOSXIntel;
+			target = BuildTarget.StandaloneOSX;
 			break;
 		}
 		case eBuildPlatform.eBuildIOS:
@@ -1814,6 +1818,11 @@ class AssetBundleMgr
 			target = BuildTarget.iOS;
 			break;
 		}
+			case eBuildPlatform.eBuildDS:
+                {
+					target = BuildTarget.StandaloneWindows64;
+					break;
+                }
 		default:
 			return false;
 		}
