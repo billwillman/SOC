@@ -4647,6 +4647,7 @@ public static class AssetBundleBuild
 	// 打包DS
 	static public void Cmd_DS()
 	{
+		// https://docs-alpha.unity3d.com/cn/2023.1/Manual/dedicated-server-assetbundles.html
 		string dsOutPath = "../DS";
 		dsOutPath = System.IO.Path.GetFullPath(dsOutPath);
 		if (Directory.Exists(dsOutPath))
