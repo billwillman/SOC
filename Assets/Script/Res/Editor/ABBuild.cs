@@ -4902,6 +4902,7 @@ public static class AssetBundleBuild
 			rootManifest += "/Mac";
 			copyManifest += "/Mac";
 			break;
+		case eBuildPlatform.eBuildDS:
 		case eBuildPlatform.eBuildWindow:
 			rootManifest += "/Windows";
 			copyManifest += "/Windows";
