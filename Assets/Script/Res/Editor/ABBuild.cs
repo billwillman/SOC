@@ -1895,7 +1895,8 @@ class AssetBundleMgr
 			}
 			break;
 		}
-		
+
+		case eBuildPlatform.eBuildDS:
 		case eBuildPlatform.eBuildWindow:
 		{
 			outPath += "/Windows";
