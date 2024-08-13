@@ -3533,7 +3533,7 @@ class AssetBundleMgr
 #endif
     }
 
-	private void ProcessPackage(BuildTarget platform, string outputFileName, bool isNew, bool canProfilter, bool isDebug, bool isDevelop)
+	private void ProcessPackage(BuildTarget platform, string outputFileName, bool isNew, bool canProfilter, bool isDebug, bool isDevelop, bool isServer)
 	{
 		var scenes = EditorBuildSettings.scenes;
 		List<string> sceneNameList = new List<string> ();
@@ -3579,13 +3579,14 @@ class AssetBundleMgr
 	private bool m_TempCanProfilter;
 	private bool m_TempIsDebug;
 	private bool m_TempIsDevep;
+	private bool m_TempIsServer;
 	private string m_TempOutput;
 	private BuildTarget m_TempTarget;
 
 	private void OnBuildPackagePlatformChanged()
 	{
 		EditorUserBuildSettings.activeBuildTargetChanged -= OnBuildPackagePlatformChanged;
-		ProcessPackage(m_TempTarget, m_TempOutput, m_TempIsNew, m_TempCanProfilter, m_TempIsDebug, m_TempIsDevep);
+		ProcessPackage(m_TempTarget, m_TempOutput, m_TempIsNew, m_TempCanProfilter, m_TempIsDebug, m_TempIsDevep, m_TempIsServer);
 	}
 
 	public bool BuildPackage(eBuildPlatform buildPlatform, string outputFileName, bool isNew, bool canProfilter = false, bool isDebug = false, bool isDevelop = false)
@@ -3608,12 +3609,13 @@ class AssetBundleMgr
 			m_TempIsDevep = isDevelop;
 			m_TempOutput = outputFileName;
 			m_TempTarget = platform;
+			m_TempIsServer = buildPlatform == eBuildPlatform.eBuildDS;
 			EditorUserBuildSettings.activeBuildTargetChanged += OnBuildPackagePlatformChanged;
 			EditorUserBuildSettings.SwitchActiveBuildTarget (platform);
 			return true;
 		}
 
-		ProcessPackage(platform, outputFileName, isNew, canProfilter, isDebug, isDevelop);
+		ProcessPackage(platform, outputFileName, isNew, canProfilter, isDebug, isDevelop, buildPlatform == eBuildPlatform.eBuildDS);
 		return true;
 	}
 
