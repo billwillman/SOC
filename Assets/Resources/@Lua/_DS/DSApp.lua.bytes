@@ -13,6 +13,7 @@ local function CreateNetworkManager()
 end
 
 local function ParseStartupCommands(self)
+    local tb = nil
     if _MOE.IsEditor then
         -- 编辑器模式，直接读配置
         tb = {
@@ -26,7 +27,6 @@ local function ParseStartupCommands(self)
         if not commandLineArgs then
             return false
         end
-        local tb = nil
         for _, p in ipairs(commandLineArgs) do
             if p then
                 -- 处理启动参数
