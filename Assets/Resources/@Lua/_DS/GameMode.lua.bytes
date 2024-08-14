@@ -11,6 +11,7 @@ function GameMode:Ctor(netWorkMgr, binder)
 end
 
 function GameMode:OnDestroy()
+    _MOE.EventManager:UnRegisterEvents(self)
     self:UnRegsterAllCsharpEvents()
     self.Transport = nil
 end
@@ -23,6 +24,8 @@ if _MOE.IsDS then
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
+        _MOE.EventManager:RegisterEvent(_MOE.ServerEvent.GsConnectResult, self, self.OnGsConnectResult)
+        _MOE.EventManager:RegisterEvent(_MOE.ServerEvent.GsConnectAbort, self, self.OnGsConnectAbort)
     end
 
     function GameMode:OnAwake()
@@ -34,6 +37,11 @@ if _MOE.IsDS then
     function GameMode:OnStart()
         -- 连接到GS上
         self.DsGsNetModel:ConnectGS()
+    end
+
+    function GameMode:OnGsConnectAbort()
+        _MOE.Logger.LogError("[DS] NetManager:OnGsConnectAbort")
+        _MOE.GameApp:QuitGame()
     end
 
     function GameMode:OnGsConnectResult(isOk)
