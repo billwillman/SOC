@@ -7,9 +7,11 @@ function _M:OnInit()
 end
 
 function _M:_OnGSConnectResult(isOk)
+    _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectResult, isOk)
 end
 
 function _M:_OnGSSocketAbort()
+    _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectAbort)
 end
 
 function _M:ConnectGS()
