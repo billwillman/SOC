@@ -2057,13 +2057,11 @@ class AssetBundleMgr
 			return;
 		
 		bool isServer = platform == eBuildPlatform.eBuildDS;
-		bool isServerChanged = false;
+		bool isSubTargetChanged = false;
 #if UNITY_2022_1_OR_NEWER
-		if (isServer) {
-			isServerChanged = EditorUserBuildSettings.standaloneBuildSubtarget != StandaloneBuildSubtarget.Server;
-		}
+		isSubTargetChanged = EditorUserBuildSettings.standaloneBuildSubtarget != (isServer ? StandaloneBuildSubtarget.Server : StandaloneBuildSubtarget.Player);
 #endif
-		if (EditorUserBuildSettings.activeBuildTarget != target || isServerChanged)
+		if (EditorUserBuildSettings.activeBuildTarget != target || isSubTargetChanged)
 		{
 			EditorUserBuildSettings.activeBuildTargetChanged += OnBuildTargetChanged;
 			m_TempExportDir = exportDir;
@@ -2071,9 +2069,12 @@ class AssetBundleMgr
 			m_TempBuildTarget = target;
 			m_TempIsAppendForce = isForceAppend;
 			m_TempIsServer = isServer;
-			if (isServerChanged) {
+			if (isSubTargetChanged) {
 #if UNITY_2022_1_OR_NEWER
-				EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.Build.NamedBuildTarget.Server, target);
+				if (isServer)
+					EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.Build.NamedBuildTarget.Server, target);
+				else
+					EditorUserBuildSettings.SwitchActiveBuildTarget(target);
 #endif
 			} else
 				EditorUserBuildSettings.SwitchActiveBuildTarget(target);
