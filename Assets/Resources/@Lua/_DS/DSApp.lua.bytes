@@ -6,7 +6,8 @@ local DsGsSessionClass = require("_DS.DsGsSession")
 local function CreateNetworkManager()
     local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
     if gameObj then
-        gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+        -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+        gameObj.name = "MutiManager"
     end
 end
 
