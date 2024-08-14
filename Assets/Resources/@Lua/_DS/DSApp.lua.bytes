@@ -11,14 +11,23 @@ local function CreateNetworkManager()
 end
 
 local function ParseStartupCommands(self)
-    local commandLineArgs = CS.System.Environment.GetCommandLineArgs
-    if not commandLineArgs then
-        return false
-    end
-    local tb = nil
-    for _, p in ipairs(commandLineArgs) do
-        if p then
-            -- 处理启动参数
+    if _MOE.IsEditor then
+        -- 编辑器模式，直接读配置
+        tb = {
+            GsIp = "127.0.0.1",
+            GsPort = 1990,
+            GsSession = "LocalHost_DS_Session" -- 本机Session
+        }
+    else
+        local commandLineArgs = CS.System.Environment.GetCommandLineArgs()
+        if not commandLineArgs then
+            return false
+        end
+        local tb = nil
+        for _, p in ipairs(commandLineArgs) do
+            if p then
+                -- 处理启动参数
+            end
         end
     end
     if tb then
@@ -40,8 +49,8 @@ function DSApp:OnInit()
         self:KillProcess() -- 杀掉进程
         return
     end
-    self:RegisterModels("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
-    self:RegisterModels("DsSessionManager", "_DS.Models.DsSessionManager", true)
+    self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
+    self:RegisterModel("DsSessionManager", "_DS.Models.DsSessionManager", true)
     -- 创建网络NetworkManager
     CreateNetworkManager()
 end
