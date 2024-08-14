@@ -68,4 +68,8 @@ function DSApp:OnUpdate(deltaTime)
     end
 end
 
+function DSApp:QuitGame(...)
+    return _MOE.Application.Quit(...)
+end
+
 return DSApp
