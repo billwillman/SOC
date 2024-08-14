@@ -14,10 +14,6 @@ function BaseApp:Update(deltaTime)
     xpcall(self.OnUpdate, _G.ErrorHandler, self, deltaTime)
 end
 
-function BaseApp:QuitGame(...)
-    return _MOE.Application.Quit(...)
-end
-
 ------------------------------------------------------ 虚方法 ---------------------------------------------------
 function BaseApp:OnInit()
 end
