@@ -36,6 +36,26 @@ if _MOE.IsDS then
         self.DsGsNetModel:ConnectGS()
     end
 
+    function GameMode:OnGsConnectResult(isOk)
+        if not isOk or not self.Transport or not self.NetWorkMgr then
+            _MOE.GameApp:QuitGame()
+            return
+        end
+        local GsSession = _MOE.GameApp:GetGsDsSession()
+        if not GsSession then
+            _MOE.GameApp:QuitGame()
+            return
+        end
+        local ip = GsSession.DsIp or "127.0.0.1"
+        local port = GsSession.DsPort or 7777
+        self.Transport:SetConnectionData(ip, port)
+        if not self.NetWorkMgr:StartHost() then
+            _MOE.Logger.LogError("[DS] NetManager:StartHost False")
+            _MOE.GameApp:QuitGame()
+            return
+        end
+    end
+
 else
     ------------------------- 只在Client跑这个逻辑 -------------------
 

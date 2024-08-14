@@ -17,7 +17,8 @@ local function ParseStartupCommands(self)
         tb = {
             GsIp = "127.0.0.1",
             GsPort = 1990,
-            GsSession = "LocalHost_DS_Session" -- 本机Session
+            GsSession = "LocalHost_DS_Session", -- 本机Session
+            DsPort = 50000
         }
     else
         local commandLineArgs = CS.System.Environment.GetCommandLineArgs()
