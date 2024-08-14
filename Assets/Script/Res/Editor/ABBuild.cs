@@ -2044,7 +2044,26 @@ class AssetBundleMgr
 
 		EditorUtility.UnloadUnusedAssetsImmediate();
 	}
-	
+
+#endif
+#if UNITY_2022_1_OR_NEWER
+	private static UnityEditor.Build.NamedBuildTarget GetNameBuildTarget(eBuildPlatform platform)
+	{
+		switch(platform)
+        {
+			case eBuildPlatform.eBuildAndroid:
+				return UnityEditor.Build.NamedBuildTarget.Android;
+			case eBuildPlatform.eBuildDS:
+				return UnityEditor.Build.NamedBuildTarget.Server;
+			case eBuildPlatform.eBuildIOS:
+				return UnityEditor.Build.NamedBuildTarget.iOS;
+			case eBuildPlatform.eBuildWindow:
+			case eBuildPlatform.eBuildMac:
+				return UnityEditor.Build.NamedBuildTarget.Standalone;
+			default:
+				return UnityEditor.Build.NamedBuildTarget.Unknown;
+		}
+	}
 #endif
 
 	private void BuildAssetBundlesInfo_5_x(eBuildPlatform platform, string exportDir, int compressType, bool isForceAppend)
@@ -2071,10 +2090,7 @@ class AssetBundleMgr
 			m_TempIsServer = isServer;
 			if (isSubTargetChanged) {
 #if UNITY_2022_1_OR_NEWER
-				if (isServer)
-					EditorUserBuildSettings.SwitchActiveBuildTarget(UnityEditor.Build.NamedBuildTarget.Server, target);
-				else
-					EditorUserBuildSettings.SwitchActiveBuildTarget(target);
+				EditorUserBuildSettings.SwitchActiveBuildTarget(GetNameBuildTarget(platform), target);
 #endif
 			} else
 				EditorUserBuildSettings.SwitchActiveBuildTarget(target);
