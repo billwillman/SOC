@@ -35,8 +35,9 @@ local function ParseStartupCommands(self)
     end
     if tb then
         self.GsDsSession = DsGsSessionClass.New(tb)
+        return true
     end
-    return true
+    return false
 end
 
 function DSApp:GetGsDsSession()
@@ -49,7 +50,7 @@ function DSApp:OnInit()
     _MOE.TimerManager = self.TimerManager
     if not ParseStartupCommands(self) then
         _MOE.Logger.LogError("[DSApp] ParseStartupCommands: Error~!")
-        self:KillProcess() -- 杀掉进程
+        self:QuitGame() -- 杀掉进程
         return
     end
     self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
