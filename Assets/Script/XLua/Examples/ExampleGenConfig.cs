@@ -13,6 +13,7 @@ using XLua;
 using System.Linq;
 using System.Reflection;
 using NsHttpClient;
+using Unity.Netcode;
 
 //配置的详细介绍请看Doc下《XLua的配置.doc》
 public static class ExampleGenConfig
@@ -63,6 +64,7 @@ public static class ExampleGenConfig
                 typeof(System.Collections.IEnumerator),
                 typeof(Action<HttpClient, HttpListenerStatus>),
                 typeof(UnityEngine.Events.UnityAction<UnityEngine.InputSystem.InputAction.CallbackContext>),
+                typeof(Action<NetworkManager.ConnectionApprovalRequest, NetworkManager.ConnectionApprovalResponse>)
             };
 
     //黑名单

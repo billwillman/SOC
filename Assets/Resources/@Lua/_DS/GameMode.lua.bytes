@@ -28,6 +28,13 @@ if _MOE.IsDS then
         _MOE.EventManager:RegisterEvent(_MOE.ServerEvent.GsConnectAbort, self, self.OnGsConnectAbort)
     end
 
+    function GameMode:RegisterNetManagerServerEvents()
+        self:RegsterCSharpEvent(self.NetWorkMgr, "ConnectionApprovalCallback", self.OnServer_ConnectionApprovalCallback)
+    end
+
+    function GameMode:OnServer_ConnectionApprovalCallback(request, response)
+    end
+
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
         self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
@@ -35,6 +42,7 @@ if _MOE.IsDS then
     end
 
     function GameMode:OnStart()
+        self:RegisterNetManagerServerEvents()
         -- 连接到GS上
         self.DsGsNetModel:ConnectGS()
     end
