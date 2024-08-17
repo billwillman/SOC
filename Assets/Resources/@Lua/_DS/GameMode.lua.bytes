@@ -68,6 +68,7 @@ else
     ------------------------- 只在Client跑这个逻辑 -------------------
 
     function GameMode:RegisterSystemEvents()
+        local EventType = _MOE.LuaEvent_MonoEventType
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
     end
