@@ -62,6 +62,7 @@ if _MOE.IsDS then
             _MOE.GameApp:QuitGame()
             return
         end
+        _MOE.Logger.Log("[DS] NetManager:StartHost True")
     end
 
 else
