@@ -5230,7 +5230,7 @@ public static class AssetBundleBuild
 			if (string.IsNullOrEmpty(root))
 				root = d;
 			else
-				root = '/' + d;
+				root += '/' + d;
 			if (!Directory.Exists(root))
 				Directory.CreateDirectory(root);
 		}
