@@ -1,5 +1,6 @@
 local CSharpEventContainer = require("_Common.CSharpEventContainer")
 local GameMode = _MOE.class("GameMode", CSharpEventContainer)
+require("_DS.Events")
 
 function GameMode:Ctor(netWorkMgr, binder)
     self.NetWorkMgr = netWorkMgr
