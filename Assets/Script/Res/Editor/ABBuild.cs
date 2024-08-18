@@ -5039,6 +5039,7 @@ public static class AssetBundleBuild
 #if UNITY_EDITOR_WIN
 			string cmdApk = StringHelper.Format("Unity.exe -quit -batchmode -nographics -executeMethod {0} -logFile {1} -projectPath {2}", 
 			                              funcName, logFileName, searchProjPath);
+			Debug.Log(cmdApk);
 			RunCmd(cmdApk);
 #endif
 		}
