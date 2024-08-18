@@ -1,0 +1,4 @@
+_MOE.ServerEvent = {
+    GsConnectResult = "GsConnectResult",
+    GsConnectAbort = "GsConnectAbort",
+}
