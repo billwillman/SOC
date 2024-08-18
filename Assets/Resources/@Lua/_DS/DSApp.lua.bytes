@@ -1,5 +1,5 @@
 local BaseAppClass = require("_Common.BaseApp")
-require("_DS.Events")
+require("_DS.ServerEvents")
 
 local DSApp = _MOE.class("DSApp", BaseAppClass)
 local DsGsSessionClass = require("_DS.DsGsSession")
