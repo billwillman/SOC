@@ -5309,7 +5309,11 @@ public static class AssetBundleBuild
 			dstAssets = outPath +  "/ProjectSettings";
 			_CreateDirs(dstAssets);
 			_CopyAllFiles("ProjectSettings", dstAssets, null);
-		}
+
+		dstAssets = outPath + "/Packages";
+		_CreateDirs(dstAssets);
+		_CopyAllFiles("Packages", dstAssets, null);
+	}
 
     // 拷贝非资源文件夹
     // resPaths: 资源目录列表
@@ -5374,7 +5378,11 @@ public static class AssetBundleBuild
 		dstAssets = outPath + '/' + "ProjectSettings";
 		_CreateDirs(dstAssets);
 		_CopyAllFiles("ProjectSettings", dstAssets, null);
-    }
+
+		dstAssets = outPath + "/Packages";
+		_CreateDirs(dstAssets);
+		_CopyAllFiles("Packages", dstAssets, null);
+	}
 
 	private static void Cmd_RemoveAssetRootFiles(string outPath)
 	{
