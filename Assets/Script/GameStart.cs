@@ -136,7 +136,7 @@ namespace SOC.GamePlay
             filepath = filepath.Replace(".", "/");
             foreach (var pathFormat in _cLuaRootPathFormats) {
                 string luaPath = string.Format(pathFormat, filepath);
-                byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath);
+                byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath, ResourceCacheType.rctRefAdd);
                 if (ret != null)
                     return ret;
             }
