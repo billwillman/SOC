@@ -5307,6 +5307,7 @@ public static class AssetBundleBuild
 			}
 
 			dstAssets = outPath +  "/ProjectSettings";
+			_CreateDirs(dstAssets);
 			_CopyAllFiles("ProjectSettings", dstAssets, null);
 		}
 
