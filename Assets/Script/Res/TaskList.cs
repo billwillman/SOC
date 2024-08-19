@@ -421,6 +421,14 @@ public class WWWFileLoadTask: ITask
 				break;
 			}
 
+			case RuntimePlatform.LinuxServer:
+            {
+					ret = Application.streamingAssetsPath;
+					if (usePlatform)
+						ret += "/Linux";
+					break;
+            }
+
 			case RuntimePlatform.OSXEditor:
 			{
 				ret = "Assets/StreamingAssets";
