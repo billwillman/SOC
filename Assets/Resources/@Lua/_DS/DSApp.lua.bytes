@@ -13,16 +13,13 @@ local function CreateNetworkManager()
 end
 
 local function ParseStartupCommands(self)
-    local tb = nil
-    if _MOE.IsEditor then
-        -- 编辑器模式，直接读配置
-        tb = {
-            GsIp = "127.0.0.1",
-            GsPort = 1990,
-            GsSession = "LocalHost_DS_Session", -- 本机Session
-            DsPort = 50000
-        }
-    else
+    local tb = {
+        GsIp = "127.0.0.1",
+        GsPort = 1990,
+        GsSession = "LocalHost_DS_Session", -- 本机Session
+        DsPort = 50000
+    }
+    if not _MOE.IsEditor then
         local commandLineArgs = CS.System.Environment.GetCommandLineArgs()
         if not commandLineArgs then
             return false
