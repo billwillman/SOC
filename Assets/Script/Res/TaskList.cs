@@ -412,6 +412,7 @@ public class WWWFileLoadTask: ITask
         ret = string.Empty;
 		switch (Application.platform)
 		{
+			case RuntimePlatform.OSXServer:
 			case RuntimePlatform.OSXPlayer:
 			{
 				ret = Application.streamingAssetsPath;
@@ -448,6 +449,7 @@ public class WWWFileLoadTask: ITask
 				break;
 			}
 
+			case RuntimePlatform.WindowsServer:
 			case RuntimePlatform.WindowsPlayer:
 			{
 				ret = Application.streamingAssetsPath;
