@@ -24,10 +24,14 @@ local function ParseStartupCommands(self)
         if not commandLineArgs then
             return false
         end
-        for _, p in ipairs(commandLineArgs) do
-            if p then
-                -- 处理启动参数
+        if type(commandLineArgs) == "table" then
+            for _, p in ipairs(commandLineArgs) do
+                if p then
+                    -- 处理启动参数
+                end
             end
+        else
+            _MOE.Logger.LogError("[DS] commandLineArgs type is:" .. type(commandLineArgs))
         end
     end
     if tb then
