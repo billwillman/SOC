@@ -25,11 +25,17 @@ local function ParseStartupCommands(self)
             return false
         end
         local commandArgsType = type(commandLineArgs)
-        if commandArgsType == "table" then
-            for _, p in ipairs(commandLineArgs) do
-                if p then
-                    -- 处理启动参数
-                end
+        if commandArgsType == "userdata" then
+            if commandLineArgs.Length >= 1 then
+                local json = commandLineArgs[0]
+                xpcall(
+                    function ()
+                        tb = _MOE.Json.decode(json)
+                    end, function (err)
+                        tb = nil
+                        _G.ErrorHandler(err)
+                    end
+                )
             end
         else
             _MOE.Logger.LogError("[DS] commandLineArgs type error: " .. commandArgsType)
