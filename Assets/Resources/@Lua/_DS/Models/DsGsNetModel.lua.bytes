@@ -17,6 +17,7 @@ end
 function _M:OnInit()
     self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
     self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
+    self:RegsterCSharpEvent(_MOE.NetManager, "OnMoonPacketRead", self._OnMoonPacketRead)
 end
 
 function _M:_OnGSConnectResult(isOk)
@@ -34,6 +35,9 @@ function _M:_OnGSSocketAbort()
     _MOE.Logger.LogError("[DS] GS Connect Abort")
     _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectAbort)
     StopHeartTimer(self)
+end
+
+function _M:_OnMoonPacketRead(packet)
 end
 
 function _M:ConnectGS()
@@ -59,6 +63,7 @@ function _M:OnUnInit()
     _MOE.NetManager:Disconnect()
     _MOE.NetManager.OnConnectResult = nil
     _MOE.NetManager.OnSocketAbort = nil
+    _MOE.NetManager.OnMoonPacketRead = nil
     StopHeartTimer(self)
 end
 
