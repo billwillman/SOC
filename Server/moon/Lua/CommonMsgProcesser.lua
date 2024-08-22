@@ -1,6 +1,8 @@
 local _M = _MOE.class("CommonMsgProcesser")
 
 _M.MsgDispatch = {
+    [MsgIds.CM_Heart] = function (msg)
+    end
 }
 
 function _M:OnMsg(msg)
