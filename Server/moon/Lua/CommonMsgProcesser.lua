@@ -15,7 +15,8 @@ function _M:SendTableToJson(socket, fd, sendMsg)
         return false
     end
     local str = json.encode(sendMsg)
-    socket.write(fd, string.pack(">H",#str)..str)
+    --socket.write(fd, string.pack(">H",#str)..str)
+    socket.write(fd, str)
 end
 
 function _M:_OnMsg(msg, socket, fd)
