@@ -5,7 +5,7 @@ _M.MsgDispatch = {
     end
 }
 
-function _M:OnMsg(msg)
+function _M:OnMsg(msg, socket, fd)
     print(_MOE.TableUtils.Serialize(msg))
     local func = _M.MsgDispatch[msg.MsgId]
     if func then
