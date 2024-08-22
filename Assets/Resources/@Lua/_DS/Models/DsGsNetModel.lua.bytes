@@ -1,5 +1,18 @@
 ---- Ds连接Gs环境
 local _M = _MOE.class("DsGsNetModel", _MOE.BaseModel)
+local MsgIds = require("_NetMsg.MsgId")
+
+local function StopHeartTimer(self)
+    if self.m_HeartTimer then
+        _MOE.TimerManager:RemoveTimer(self.m_HeartTimer)
+        self.m_HeartTimer = nil
+    end
+end
+
+local function StartHeartTimer(self)
+    StopHeartTimer(self)
+    self.m_HeartTimer = _MOE.TimerManager:AddLoopTimer(0.3, self, self._OnHeartTimer)
+end
 
 function _M:OnInit()
     self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
@@ -7,11 +20,20 @@ function _M:OnInit()
 end
 
 function _M:_OnGSConnectResult(isOk)
+    _MOE.Logger.LogFormat("[DS] GS Connect Result: {0}", isOk)
     _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectResult, isOk)
+    if isOk then
+        -- 心跳包
+        StartHeartTimer(self)
+    else
+        StopHeartTimer(self)
+    end
 end
 
 function _M:_OnGSSocketAbort()
+    _MOE.Logger.LogError("[DS] GS Connect Abort")
     _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectAbort)
+    StopHeartTimer(self)
 end
 
 function _M:ConnectGS()
@@ -20,10 +42,24 @@ function _M:ConnectGS()
     _MOE.NetManager:ConnectServer(Session:GetGsIp(), Session:GetGsPort(), true)
 end
 
+function _M:_OnHeartTimer()
+    -- 心跳包
+    if self:IsGsConnected() then
+        self:SendMsg(MsgIds.CM_Heart)
+    end
+end
+
+function _M:IsGsConnected()
+    local state = _MOE.NetManager.ClietnState
+    local ret = state == _MOE.NetState.eClient_STATE_CONNECTED
+    return ret
+end
+
 function _M:OnUnInit()
     _MOE.NetManager:Disconnect()
     _MOE.NetManager.OnConnectResult = nil
     _MOE.NetManager.OnSocketAbort = nil
+    StopHeartTimer(self)
 end
 
 return _M

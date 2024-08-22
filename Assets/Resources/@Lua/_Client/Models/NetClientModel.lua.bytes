@@ -56,6 +56,7 @@ end
 
 function NetClientModel:_OnGSSocketAbort()
     _MOE.Logger.LogError("[NetClientModel] SocketAbort")
+    StopHeartTimer(self)
 end
 
 function NetClientModel:UnInit()
