@@ -38,7 +38,7 @@ socket.on("message", function(fd, msg)
         socket.close(fd)
         return
     end
-    if not MsgProcesser:OnMsg(msg) then
+    if not MsgProcesser:OnMsg(msg, socket) then
         socket.close(fd)
     end
 end)
