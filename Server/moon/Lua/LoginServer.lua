@@ -25,22 +25,7 @@ socket.on("accept",function(fd, msg)
 end)
 
 socket.on("message", function(fd, msg)
-    --print("message")
-    local data = moon.decode(msg, "Z")
-    -- socket.write(fd, data)
-    if not data then
-        -- 关闭Socket
-        socket.close(fd)
-        return
-    end
-    msg = json.decode(data)
-    if not msg.msgId then
-        socket.close(fd)
-        return
-    end
-    if not MsgProcesser:OnMsg(msg, socket, fd) then
-        socket.close(fd)
-    end
+    MsgProcesser:OnMsg(msg, socket, fd)
 end)
 
 socket.on("close", function(fd, msg)

@@ -18,7 +18,7 @@ function _M:SendTableToJson(socket, fd, sendMsg)
     socket.write(fd, string.pack(">H",#str)..str)
 end
 
-function _M:OnMsg(msg, socket, fd)
+function _M:_OnMsg(msg, socket, fd)
     print(_MOE.TableUtils.Serialize(msg))
     local func = _M.MsgDispatch[msg.MsgId]
     if func then
@@ -26,6 +26,25 @@ function _M:OnMsg(msg, socket, fd)
         return true
     end
     return false
+end
+
+function _M:OnMsg(msg, socket, fd)
+    local data = moon.decode(msg, "Z")
+    if not data then
+        -- 关闭Socket
+        socket.close(fd)
+        return false
+    end
+    msg = json.decode(data)
+    if not msg.msgId then
+        socket.close(fd)
+        return false
+    end
+    if not self:_OnMsg(msg, socket, fd) then
+        socket.close(fd)
+        return false
+    end
+    return true
 end
 
 return _M
