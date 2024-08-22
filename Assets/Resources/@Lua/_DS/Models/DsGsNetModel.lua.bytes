@@ -53,6 +53,13 @@ function _M:_OnHeartTimer()
     end
 end
 
+function _M:SendMsg(msgId, data)
+    data = data or {}
+    data.msgId = msgId
+    local msg = _MOE.Json.encode(data)
+    _MOE.NetManager:SendMoonStr(msg)
+end
+
 function _M:IsGsConnected()
     local state = _MOE.NetManager.ClietnState
     local ret = state == _MOE.NetState.eClient_STATE_CONNECTED
