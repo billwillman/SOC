@@ -21,7 +21,7 @@ function _M:OnInit()
 end
 
 function _M:_OnGSConnectResult(isOk)
-    _MOE.Logger.LogFormat("[DS] GS Connect Result: {0}", isOk)
+    _MOE.Logger.LogErrorFormat("[DS] GS Connect Result: {0}", isOk)
     _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectResult, isOk)
     if isOk then
         -- 心跳包
