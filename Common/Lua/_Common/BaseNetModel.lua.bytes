@@ -13,17 +13,6 @@ local function StartHeartTimer(self)
     self.m_HeartTimer = _MOE.TimerManager:AddLoopTimer(0.3, self, self._OnHeartTimer)
 end
 
-function _M:_OnGSConnectResult(isOk)
-    _MOE.Logger.LogErrorFormat("[GS] Connect Result: {0}", isOk)
-    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectResult, isOk)
-    if isOk then
-        -- 心跳包
-        StartHeartTimer(self)
-    else
-        StopHeartTimer(self)
-    end
-end
-
 function _M:OnInit()
     self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
     self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
@@ -32,7 +21,11 @@ function _M:OnInit()
 end
 
 function _M:_OnGSConnectResult(isOk)
-    _MOE.Logger.LogErrorFormat("[GS] Connect Result: {0}", isOk)
+    if not isOk then
+        _MOE.Logger.LogErrorFormat("[GS] Connect Result: {0}", isOk)
+    else
+        _MOE.Logger.LogFormat("[GS] Connect Result: {0}", isOk)
+    end
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectResult, isOk)
     if isOk then
         -- 心跳包
@@ -70,6 +63,10 @@ function _M:_OnHeartTimer()
     if self:IsGsConnected() then
         self:SendMsg(MsgIds.CM_Heart)
     end
+end
+
+function _M:PrepareStartConnect()
+    StopHeartTimer(self)
 end
 
 function _M:SendMsg(msgId, data)

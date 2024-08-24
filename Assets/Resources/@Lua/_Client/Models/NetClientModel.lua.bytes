@@ -32,7 +32,7 @@ function NetClientModel:ConnectGSServer()
     if not gsData then
         return
     end
-    StopHeartTimer(self)
+    self:PrepareStartConnect()
     _MOE.NetManager:ConnectServer(gsData.ip, gsData.port, true)
 end
 
