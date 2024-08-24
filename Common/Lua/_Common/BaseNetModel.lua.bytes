@@ -78,6 +78,12 @@ function _M:SendMsg(msgId, data)
 end
 
 function _M:_OnMoonPacketRead(packet)
+    if packet:hasData() then
+        local json = packet:dataToString()
+        _MOE.Logger.Log(json)
+    else
+        _MOE.Logger.LogError("[GS] OnMoonPacketRead not data")
+    end
 end
 
 ----------------------------------------------------------------- 虚方法 ---------------------------------------------------------
