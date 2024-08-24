@@ -155,7 +155,7 @@ end
 
 function NetClientModel:SendMsg(msgId, data)
     data = data or {}
-    data.msgId = msgId
+    data.MsgId = msgId
     local msg = _MOE.Json.encode(data)
     _MOE.NetManager:SendMoonStr(msg)
 end
