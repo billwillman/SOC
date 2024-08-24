@@ -24,8 +24,8 @@ if _MOE.IsDS then
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
-        _MOE.EventManager:RegisterEvent(_MOE.ServerEvent.GsConnectResult, self, self.OnGsConnectResult)
-        _MOE.EventManager:RegisterEvent(_MOE.ServerEvent.GsConnectAbort, self, self.OnGsConnectAbort)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectResult, self, self.OnGsConnectResult)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectAbort, self, self.OnGsConnectAbort)
     end
 
     function GameMode:RegisterNetManagerServerEvents()
