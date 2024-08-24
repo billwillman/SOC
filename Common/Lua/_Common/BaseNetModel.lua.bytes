@@ -28,6 +28,7 @@ function _M:OnInit()
     self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
     self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
     self:RegsterCSharpEvent(_MOE.NetManager, "OnMoonPacketRead", self._OnMoonPacketRead)
+    xpcall(self.NetModel_OnInit, _G.ErrorHandler, self)
 end
 
 function _M:_OnGSConnectResult(isOk)
@@ -39,12 +40,14 @@ function _M:_OnGSConnectResult(isOk)
     else
         StopHeartTimer(self)
     end
+    xpcall(self.NetModel_OnConnectResult, _G.ErrorHandler, self, isOk)
 end
 
 function _M:_OnGSSocketAbort()
     _MOE.Logger.LogError("[GS] Connect Abort")
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectAbort)
     StopHeartTimer(self)
+    xpcall(self.NetModel_OnSocketAbort, _G.ErrorHandler, self)
 end
 
 function _M:IsGsConnected()
@@ -54,6 +57,7 @@ function _M:IsGsConnected()
 end
 
 function _M:OnUnInit()
+    xpcall(self.NetModel_OnUnInit, _G.ErrorHandler, self)
     _MOE.NetManager:Disconnect()
     _MOE.NetManager.OnConnectResult = nil
     _MOE.NetManager.OnSocketAbort = nil
@@ -80,5 +84,19 @@ function _M:_OnMoonPacketRead(packet)
 end
 
 ----------------------------------------------------------------- 虚方法 ---------------------------------------------------------
+
+function _M:NetModel_OnInit()
+end
+
+function _M:NetModel_OnUnInit()
+end
+
+function _M:NetModel_OnConnectResult(isOk)
+end
+
+function _M:NetModel_OnSocketAbort()
+end
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 return _M
