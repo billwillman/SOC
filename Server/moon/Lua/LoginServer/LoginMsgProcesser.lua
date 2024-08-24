@@ -6,7 +6,8 @@ local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 
 local CurrentMsgProcess = {
-
+    [MsgIds.CM_Login] = function (self, msg, socket, fd)
+    end
 }
 
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
