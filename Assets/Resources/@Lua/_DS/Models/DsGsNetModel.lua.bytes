@@ -54,6 +54,7 @@ function _M:_OnHeartTimer()
 end
 
 function _M:SendMsg(msgId, data)
+    _MOE.Logger.LogWarningFormat("[DS] NetMsgId: {0:D}", msgId)
     data = data or {}
     data.msgId = msgId
     local msg = _MOE.Json.encode(data)
