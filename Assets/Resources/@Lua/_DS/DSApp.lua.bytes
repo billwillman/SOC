@@ -1,8 +1,8 @@
 local BaseAppClass = require("_Common.BaseApp")
-require("_DS.ServerEvents")
 
 local DSApp = _MOE.class("DSApp", BaseAppClass)
 local DsGsSessionClass = require("_DS.DsGsSession")
+require("_DS.ServerEvents")
 
 local function CreateNetworkManager()
     local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")

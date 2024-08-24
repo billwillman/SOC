@@ -15,7 +15,7 @@ end
 
 function _M:_OnGSConnectResult(isOk)
     _MOE.Logger.LogErrorFormat("[GS] Connect Result: {0}", isOk)
-    _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectResult, isOk)
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectResult, isOk)
     if isOk then
         -- 心跳包
         StartHeartTimer(self)
@@ -32,7 +32,7 @@ end
 
 function _M:_OnGSConnectResult(isOk)
     _MOE.Logger.LogErrorFormat("[GS] Connect Result: {0}", isOk)
-    _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectResult, isOk)
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectResult, isOk)
     if isOk then
         -- 心跳包
         StartHeartTimer(self)
@@ -43,7 +43,7 @@ end
 
 function _M:_OnGSSocketAbort()
     _MOE.Logger.LogError("[GS] Connect Abort")
-    _MOE.EventManager:DispatchEvent(_MOE.ServerEvent.GsConnectAbort)
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.GsConnectAbort)
     StopHeartTimer(self)
 end
 

@@ -6,6 +6,8 @@ else
     require("LuaPanda").start("127.0.0.1", 31000)
 end
 
+require("_Common.CommonEvents")
+
 local function InitGlobalVars()
     _MOE.BaseModel = require("_Common.BaseModel")
     _MOE.EventManager = require("_Common.EventManager").New()
