@@ -1,41 +1,7 @@
 -- 网络客户端Model
-local NetClientModel = _MOE.class("NetClientModel", _MOE.BaseModel)
+local baseNetModel = require("_Common.BaseNetModel")
+local NetClientModel = _MOE.class("NetClientModel", baseNetModel)
 local MsgIds = require("_NetMsg.MsgId")
-
-local function StopHeartTimer(self)
-    if self.m_HeartTimer then
-        _MOE.TimerManager:RemoveTimer(self.m_HeartTimer)
-        self.m_HeartTimer = nil
-    end
-end
-
-local function StartHeartTimer(self)
-    StopHeartTimer(self)
-    self.m_HeartTimer = _MOE.TimerManager:AddLoopTimer(0.3, self, self._OnHeartTimer)
-end
-
---- 请求服务器列表
-function NetClientModel:OnInit()
-    _MOE.Logger.Log("[NetClientModel] OnInit...")
-    local jsonStr = _MOE.ResourceManager:LoadText("Resources/@Config/Server.json")
-    self.HttpServerList =_MOE.Json.decode(jsonStr)
-    self.HttpServerListClient = nil
-    self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
-    self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
-end
-
-function NetClientModel:IsGsConnected()
-    local state = _MOE.NetManager.ClietnState
-    local ret = state == _MOE.NetState.eClient_STATE_CONNECTED
-    return ret
-end
-
-function NetClientModel:_OnHeartTimer()
-    -- 心跳包
-    if self:IsGsConnected() then
-        self:SendMsg(MsgIds.CM_Heart)
-    end
-end
 
 local function DisposeHttpServerClient(self)
     if self.HttpServerListClient then
@@ -44,27 +10,16 @@ local function DisposeHttpServerClient(self)
     end
 end
 
-function NetClientModel:_OnGSConnectResult(isOk)
-    if isOk then
-        _MOE.Logger.LogFormat("[NetClientModel] GSConnnectResult: {0}", isOk)
-        StartHeartTimer(self)
-    else
-        _MOE.Logger.LogErrorFormat("[NetClientModel] GSConnnectResult: {0}", isOk)
-        StopHeartTimer(self)
-    end
+--- 请求服务器列表
+function NetClientModel:NetModel_OnInit()
+    _MOE.Logger.Log("[NetClientModel] OnInit...")
+    local jsonStr = _MOE.ResourceManager:LoadText("Resources/@Config/Server.json")
+    self.HttpServerList =_MOE.Json.decode(jsonStr)
+    self.HttpServerListClient = nil
 end
 
-function NetClientModel:_OnGSSocketAbort()
-    _MOE.Logger.LogError("[NetClientModel] SocketAbort")
-    StopHeartTimer(self)
-end
-
-function NetClientModel:UnInit()
+function NetClientModel:NetModel_OnUnInit()
     DisposeHttpServerClient(self)
-    _MOE.NetManager:Disconnect()
-    _MOE.NetManager.OnConnectResult = nil
-    _MOE.NetManager.OnSocketAbort = nil
-    StopHeartTimer(self)
 end
 
 function NetClientModel:GetHttpServerList()
@@ -151,14 +106,6 @@ function NetClientModel:CM_Login(userName, password)
         password = password
     }
     self:SendMsg(MsgIds.CM_Login, data)
-end
-
-function NetClientModel:SendMsg(msgId, data)
-    _MOE.Logger.LogWarningFormat("[Client] NetMsgId: {0:D}", msgId)
-    data = data or {}
-    data.msgId = msgId
-    local msg = _MOE.Json.encode(data)
-    _MOE.NetManager:SendMoonStr(msg)
 end
 
 return NetClientModel
