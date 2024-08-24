@@ -154,8 +154,9 @@ function NetClientModel:CM_Login(userName, password)
 end
 
 function NetClientModel:SendMsg(msgId, data)
+    _MOE.Logger.LogWarningFormat("[Client] NetMsgId: {0:D}", msgId)
     data = data or {}
-    data.MsgId = msgId
+    data.msgId = msgId
     local msg = _MOE.Json.encode(data)
     _MOE.NetManager:SendMoonStr(msg)
 end

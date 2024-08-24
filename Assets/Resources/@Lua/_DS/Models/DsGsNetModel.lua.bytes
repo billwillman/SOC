@@ -55,7 +55,7 @@ end
 
 function _M:SendMsg(msgId, data)
     data = data or {}
-    data.MsgId = msgId
+    data.msgId = msgId
     local msg = _MOE.Json.encode(data)
     _MOE.NetManager:SendMoonStr(msg)
 end
