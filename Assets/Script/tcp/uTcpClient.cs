@@ -84,7 +84,8 @@ namespace NsTcpClient
         public string dataToString() {
             if (data == null)
                 return string.Empty;
-            return data.ToString();
+            string ret = System.Text.Encoding.UTF8.GetString(data.Buffer, 0, data.DataSize);
+            return ret;
         }
 
         public void DoDone() {
