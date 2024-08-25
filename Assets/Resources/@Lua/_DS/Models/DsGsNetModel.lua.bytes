@@ -10,4 +10,10 @@ function _M:ConnectGS()
     _MOE.NetManager:ConnectServer(Session:GetGsIp(), Session:GetGsPort(), true)
 end
 
+local GSMsgProcess = {
+
+}
+
+setmetatable(_M.ReceiveMsgProcess, {__index = GSMsgProcess})
+
 return _M
