@@ -6,6 +6,7 @@ local function StopHeartTimer(self)
         _MOE.TimerManager:RemoveTimer(self.m_HeartTimer)
         self.m_HeartTimer = nil
     end
+    self.m_LastHeartTime = nil
 end
 
 local function StartHeartTimer(self)
@@ -61,6 +62,19 @@ end
 function _M:_OnHeartTimer()
     -- 心跳包
     if self:IsGsConnected() then
+        -- 检测心跳包本地
+        if not self.m_LastHeartTime then
+            self.m_LastHeartTime = os.time()
+        else
+            local now = os.time()
+            if now - self.m_LastHeartTime > 10 then
+                -- 心跳包超时
+                _MOE.NetManager:Disconnect()
+                self:_OnGSSocketAbort()
+                return
+            end
+        end
+        --
         self:SendMsg(MsgIds.CM_Heart)
     end
 end
@@ -87,6 +101,7 @@ function _M:_OnMoonPacketRead(packet)
         local json = packet:dataToString()
         local msg = _MOE.Json.decode(json)
         if msg and msg.msgId then
+            self.m_LastHeartTime = os.time() -- 只要有包过来就认为协议是通的
             local OnProcess = _M.ReceiveMsgProcess[msg.msgId]
             if OnProcess then
                 OnProcess(msg)
