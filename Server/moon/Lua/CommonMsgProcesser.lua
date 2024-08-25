@@ -5,7 +5,7 @@ local moon = require("moon")
 
 _M.MsgDispatch = {
     [MsgIds.CM_Heart] = function (self, msg, socket, fd)
-        local sendMsg = {MsgId = MsgIds.SM_Heart}
+        local sendMsg = {msgId = MsgIds.SM_Heart}
         self:SendTableToJson(socket, fd, sendMsg)
     end
 }
