@@ -70,7 +70,7 @@ function _M:_PrepareStartConnect()
 end
 
 function _M:SendMsg(msgId, data)
-    _MOE.Logger.LogWarningFormat("[GS] NetMsgId: {0:D}", msgId)
+    -- _MOE.Logger.LogWarningFormat("[GS] NetMsgId: {0:D}", msgId)
     data = data or {}
     data.msgId = msgId
     local msg = _MOE.Json.encode(data)

@@ -20,7 +20,7 @@ function _M:SendTableToJson(socket, fd, sendMsg)
 end
 
 function _M:_OnMsg(msg, socket, fd)
-    print(_MOE.TableUtils.Serialize(msg))
+    -- print(_MOE.TableUtils.Serialize(msg))
     local func = _M.MsgDispatch[msg.msgId]
     if func then
         func(self, msg, socket, fd)
