@@ -77,10 +77,23 @@ function _M:SendMsg(msgId, data)
     _MOE.NetManager:SendMoonStr(msg)
 end
 
+_M.ReceiveMsgProcess = {
+    [MsgIds.SM_Heart] = function (msg)
+    end
+}
+
 function _M:_OnMoonPacketRead(packet)
     if packet:hasData() then
         local json = packet:dataToString()
-        _MOE.Logger.Log(json)
+        local msg = _MOE.Json.decode(json)
+        if msg and msg.msgId then
+            local OnProcess = _M.ReceiveMsgProcess[msg.msgId]
+            if OnProcess then
+                OnProcess(msg)
+            end
+        else
+            _MOE.Logger.LogError("[GS] OnMoonPacketRead not vaild data")
+        end
     else
         _MOE.Logger.LogError("[GS] OnMoonPacketRead not data")
     end
