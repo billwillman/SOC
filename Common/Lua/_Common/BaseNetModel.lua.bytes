@@ -65,7 +65,7 @@ function _M:_OnHeartTimer()
     end
 end
 
-function _M:PrepareStartConnect()
+function _M:_PrepareStartConnect()
     StopHeartTimer(self)
 end
 
@@ -97,6 +97,11 @@ function _M:_OnMoonPacketRead(packet)
     else
         _MOE.Logger.LogError("[GS] OnMoonPacketRead not data")
     end
+end
+
+function _M:ConnectServer(ip, port)
+    self:_PrepareStartConnect()
+    _MOE.NetManager:ConnectServer(ip, port, true)
 end
 
 ----------------------------------------------------------------- 虚方法 ---------------------------------------------------------

@@ -32,8 +32,7 @@ function NetClientModel:ConnectGSServer()
     if not gsData then
         return
     end
-    self:PrepareStartConnect()
-    _MOE.NetManager:ConnectServer(gsData.ip, gsData.port, true)
+    self:ConnectServer(gsData.ip, gsData.port)
 end
 
 function NetClientModel:GetServerList()

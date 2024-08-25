@@ -7,7 +7,7 @@ local MsgIds = require("_NetMsg.MsgId")
 function _M:ConnectGS()
     local Session = _MOE.GameApp:GetGsDsSession()
     -- 连接GS
-    _MOE.NetManager:ConnectServer(Session:GetGsIp(), Session:GetGsPort(), true)
+    self:ConnectServer(Session:GetGsIp(), Session:GetGsPort())
 end
 
 local GSMsgProcess = {
