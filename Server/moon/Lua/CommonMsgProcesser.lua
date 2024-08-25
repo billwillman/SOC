@@ -11,7 +11,7 @@ _M.MsgDispatch = {
 }
 
 function _M:SendTableToJson(socket, fd, sendMsg)
-    if not socket or not fd or not sendMsg or not sendMsg.MsgId then
+    if not socket or not fd or not sendMsg or not sendMsg.msgId then
         return false
     end
     local str = json.encode(sendMsg)
