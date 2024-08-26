@@ -6,6 +6,7 @@ local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 
 local CurrentMsgProcess = {
+    -- 登录协议
     [MsgIds.CM_Login] = function (self, msg, socket, fd)
         local s = string.format("%s+%s+%d", msg.userName, msg.password, os.time())
         local ret = {
