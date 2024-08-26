@@ -28,6 +28,16 @@ socket.on("close", function(fd, msg)
 end)
 
 -------------------------------------------- 服务器之间通信 ------------------------------------------
+
+-- 跨服务器处理
+local _Server_DSA_Process = {
+
+}
+
 moon.dispatch("lua", function(_, _, cmd, ...)
     -- 处理 cmd
+    local OnProcess = _Server_DSA_Process[cmd]
+    if OnProcess then
+        OnProcess(...)
+    end
 end)
