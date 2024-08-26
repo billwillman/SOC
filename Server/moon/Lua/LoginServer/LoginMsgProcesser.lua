@@ -1,4 +1,4 @@
-local baseClass = require("CommonMsgProcesser")
+local baseClass = require("ServerCommon.CommonMsgProcesser")
 local _M = _MOE.class("LoginMsgProcesser", baseClass)
 
 local json = require("json")
