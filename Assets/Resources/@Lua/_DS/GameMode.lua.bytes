@@ -66,11 +66,11 @@ if _MOE.IsDS then
         local port = GsSession.DsPort or 7777
         self.Transport:SetConnectionData(ip, port)
         if not self.NetWorkMgr:StartServer() then
-            _MOE.Logger.LogError("[DS] NetManager:StartHost False")
+            _MOE.Logger.LogError("[DS] NetManager:StartServer False")
             _MOE.GameApp:QuitGame()
             return
         end
-        _MOE.Logger.Log("[DS] NetManager:StartHost True")
+        _MOE.Logger.Log("[DS] NetManager:StartServer True")
     end
 
 else
