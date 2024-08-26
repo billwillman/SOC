@@ -26,3 +26,8 @@ end)
 socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
 end)
+
+-------------------------------------------- 服务器之间通信 ------------------------------------------
+moon.dispatch("lua", function(_, _, cmd, ...)
+    -- 处理 cmd
+end)
