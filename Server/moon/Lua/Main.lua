@@ -79,6 +79,20 @@ moon.async(function ()
     assert(id > 0, "Create DsBattleServer Fail")
 end)
 
+-- DSA服务器：用来拉取和分配DS的服务器
+moon.async(
+    function ()
+        local id = moon.new_service(
+            {
+                name = "DSA",
+                file = "DSAServer.lua",
+                unique = true
+            }
+        )
+        assert(id > 0, "Create DsBattleServer Fail")
+    end
+)
+
 --[[
 moon.async(function ()
     local id = moon.new_service(
