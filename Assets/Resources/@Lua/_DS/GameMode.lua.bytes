@@ -11,6 +11,9 @@ function GameMode:Ctor(netWorkMgr, binder)
 end
 
 function GameMode:OnDestroy()
+    if self.Transport and self.Transport.Shutdown then
+        self.Transport:Shutdown()
+    end
     _MOE.EventManager:UnRegisterEvents(self)
     self:UnRegsterAllCsharpEvents()
     self.Transport = nil
