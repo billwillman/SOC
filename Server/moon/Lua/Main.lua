@@ -89,7 +89,7 @@ moon.async(
                 unique = true
             }
         )
-        assert(id > 0, "Create DsBattleServer Fail")
+        assert(id > 0, "Create DSAServer Fail")
     end
 )
 
