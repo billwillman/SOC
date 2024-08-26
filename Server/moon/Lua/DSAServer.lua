@@ -5,6 +5,7 @@ local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
 require("InitGlobalVars")
+require("ServerCommon.ServerMsgIds")
 
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
@@ -31,7 +32,8 @@ end)
 
 -- 跨服务器处理
 local _Server_DSA_Process = {
-
+    [_MOE.ServerMsgIds.CM_ReqDS] = function (msg)
+    end
 }
 
 moon.dispatch("lua", function(_, _, cmd, ...)
