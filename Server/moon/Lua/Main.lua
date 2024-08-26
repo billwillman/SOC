@@ -112,7 +112,7 @@ moon.shutdown(function ()
         -- 控制其它唯一服务的退出逻辑
         assert(moon.call("lua", moon.queryservice("center"), "shutdown"))
         moon.raw_send("system", moon.queryservice("db"), "wait_save")
-
+        ]]
         ---wait all service quit
         while true do
             local size = moon.server_stats("service.count")
@@ -122,7 +122,7 @@ moon.shutdown(function ()
             moon.sleep(200)
             print("bootstrap wait all service quit, now count:", size)
         end
-        ]]
+        
         moon.quit()
     end)
 end)
