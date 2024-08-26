@@ -14,7 +14,7 @@ local CurrentMsgProcess = {
                 ip = "127.0.0.1",
                 port = 7777
             },
-            token = moon.core.md5(s) -- token 
+            token = moon.md5(s) -- token 
         }
         self:SendTableToJson(socket, fd, ret)
     end
