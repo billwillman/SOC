@@ -5,16 +5,8 @@ local json = require("json")
 local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 require("ServerCommon.ServerMsgIds")
+require("ServerCommon.GlobalFuncs")
 
-local DSA_ServerId = nil
-
-function GetDSAServerId()
-    if DSA_ServerId then
-        return DSA_ServerId
-    end
-    DSA_ServerId = moon.queryservice("DSA")
-    return DSA_ServerId
-end
 
 local CurrentMsgProcess = {
     -- 登录协议
