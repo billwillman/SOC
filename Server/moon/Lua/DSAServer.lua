@@ -28,11 +28,16 @@ socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
 end)
 
+-- 异步拉起DS
+local function StartDSAsync()
+end
+
 -------------------------------------------- 服务器之间通信 ------------------------------------------
 
 -- 跨服务器处理
 local _Server_DSA_Process = {
     [_MOE.ServerMsgIds.CM_ReqDS] = function (token)
+        -- 拉起DS
     end
 }
 
