@@ -32,7 +32,7 @@ end)
 
 -- 跨服务器处理
 local _Server_DSA_Process = {
-    [_MOE.ServerMsgIds.CM_ReqDS] = function (msg)
+    [_MOE.ServerMsgIds.CM_ReqDS] = function (token)
     end
 }
 

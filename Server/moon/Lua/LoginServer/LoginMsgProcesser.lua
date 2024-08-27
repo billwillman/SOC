@@ -13,15 +13,16 @@ local CurrentMsgProcess = {
     [MsgIds.CM_Login] = function (self, msg, socket, fd)
         local dsa = GetDSAServerId()
         if dsa then
-            moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS) -- 从DSA请求服务器
             local s = string.format("%s+%s+%d", msg.userName, msg.password, os.time())
+            local token = moon.md5(s) -- token
+            moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, token) -- 从DSA请求服务器
             local ret = {
                 -- 暂时这样，后面采用DSA分配拉起模式
                 DsServer = {
                     ip = "127.0.0.1",
                     port = 7777
                 },
-                token = moon.md5(s) -- token
+                token = token,
                 msgId = MsgIds.SM_LoginRet, -- 消息ID
             }
             self:SendTableToJson(socket, fd, ret)
