@@ -30,6 +30,8 @@ socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
 end)
 
+local TokenToDSHandleMap = {}
+
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
     if not playerInfos then
