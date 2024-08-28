@@ -31,6 +31,7 @@ socket.on("close", function(fd, msg)
 end)
 
 local TokenToDSHandleMap = {}
+local DSHandleToTokens = {}
 
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
@@ -41,7 +42,13 @@ local function StartDSAsync(playerInfos)
         local token = playerInfo.token
         local handler = TokenToDSHandleMap[token]
         if handler then
-            TokenToDSHandleMap[token] = nil
+            local tokens = DSHandleToTokens[handler]
+            DSHandleToTokens[handler] = nil
+            if tokens then
+                for _, t in pairs(tokens) do
+                    TokenToDSHandleMap[t] = nil
+                end
+            end
             handler:close() -- 杀进程
         end
     end
@@ -52,9 +59,15 @@ local function StartDSAsync(playerInfos)
         return false
     end
     -- 关联handler,如果服务器断线关闭此DS
+    local t = DSHandleToTokens[handler]
+    if not t then
+        t = {}
+        DSHandleToTokens[handler] = t
+    end
     for _, playerInfo in pairs(playerInfos) do
         local token = playerInfo.token
         TokenToDSHandleMap[token] = handler
+        table.insert(t, token)
     end
     --
     return true
