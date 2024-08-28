@@ -36,7 +36,7 @@ end
 
 -- 跨服务器处理
 local _Server_DSA_Process = {
-    [_MOE.ServerMsgIds.CM_ReqDS] = function (token)
+    [_MOE.ServerMsgIds.CM_ReqDS] = function (playerInfo)
         -- 拉起DS
     end
 }
