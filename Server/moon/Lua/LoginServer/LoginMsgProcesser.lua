@@ -14,12 +14,14 @@ local CurrentMsgProcess = {
         local dsa = GetDSAServerId()
         if dsa then
             local s = string.format("%s+%s+%d", msg.userName, msg.password, os.time())
-            local token = moon.md5(s) -- token
-            local ip, port = GetIpAndPort(socket, fd)
+            local session = moon.md5(s) -- token
+            local addressStr = socket.getaddress(fd)
+            local token = moon.md5(addressStr)
             -- 1.通知DB Server写入redius,token定时销毁
-            local playerInfo = {ip = ip, port = port, token = token}
+            local playerInfo = {token = token, session = session}
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
+                session = session,
                 token = token,
                 msgId = MsgIds.SM_LoginRet, -- 消息ID
             }

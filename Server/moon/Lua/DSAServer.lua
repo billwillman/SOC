@@ -37,11 +37,12 @@ local function StartDSAsync(playerInfos)
     end
     local jsonStr = json.encode(playerInfos)
     local handler = io.popen("SOC.exe " .. jsonStr)
-    if not handle then
+    if not handler then
         print("[dsa] not run SOC.exe...")
         return false
     end
     -- 关联handler,如果服务器断线关闭此DS
+    --
     return true
 end
 
