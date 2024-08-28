@@ -6,6 +6,7 @@ local moon = require("moon")
 local socket = require "moon.socket"
 require("InitGlobalVars")
 require("ServerCommon.ServerMsgIds")
+local TableUtils = require("_Common.TableUtils")
 
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
@@ -38,7 +39,7 @@ end
 local _Server_DSA_Process = {
     [_MOE.ServerMsgIds.CM_ReqDS] = function (playerInfo)
         -- 拉起DS
-        print("[DSA] PlayerInfo:" .. tostring(playerInfo))
+        -- print("[DSA] PlayerInfo:" .. TableUtils.Serialize(playerInfo))
     end
 }
 

@@ -15,9 +15,9 @@ local CurrentMsgProcess = {
         if dsa then
             local s = string.format("%s+%s+%d", msg.userName, msg.password, os.time())
             local token = moon.md5(s) -- token
-            local address = socket:getaddress(fd)
+            local ip, port = GetIpAndPort(socket, fd)
             -- 1.通知DB Server写入redius,token定时销毁
-            local playerInfo = {address = address, token = token}
+            local playerInfo = {ip = ip, port = port, token = token}
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
                 token = token,
