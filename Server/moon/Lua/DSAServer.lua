@@ -38,6 +38,7 @@ end
 local _Server_DSA_Process = {
     [_MOE.ServerMsgIds.CM_ReqDS] = function (playerInfo)
         -- 拉起DS
+        print("[DSA] PlayerInfo:" .. tostring(playerInfo))
     end
 }
 

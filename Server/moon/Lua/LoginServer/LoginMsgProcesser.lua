@@ -20,11 +20,6 @@ local CurrentMsgProcess = {
             local playerInfo = {address = address, token = token}
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
-                -- 暂时这样，后面采用DSA分配拉起模式
-                DsServer = {
-                    ip = "127.0.0.1",
-                    port = 7777
-                },
                 token = token,
                 msgId = MsgIds.SM_LoginRet, -- 消息ID
             }
