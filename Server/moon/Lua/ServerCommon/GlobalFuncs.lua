@@ -26,3 +26,9 @@ moon.exports.GetIpAndPort = function (socket, fd)
     local port = tonumber(string.sub(addressStr, idx + 1))
     return ip, port
 end
+
+moon.exports.GenerateToken = function (socket, fd)
+    local addressStr = socket.getaddress(fd)
+    local token = moon.md5(addressStr)
+    return token
+end
