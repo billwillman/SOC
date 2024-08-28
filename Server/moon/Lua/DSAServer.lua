@@ -7,6 +7,7 @@ local socket = require "moon.socket"
 require("InitGlobalVars")
 require("ServerCommon.ServerMsgIds")
 local TableUtils = require("_Common.TableUtils")
+local io = require("io")
 
 local serverCfgStr = io.readfile("./Config/Server.json")
 local serverCfg = json.decode(serverCfgStr)
@@ -30,16 +31,36 @@ socket.on("close", function(fd, msg)
 end)
 
 -- 异步拉起DS
-local function StartDSAsync()
+local function StartDSAsync(playerInfos)
+    if not playerInfos then
+        return false
+    end
+    local jsonStr = json.encode(playerInfos)
+    local handler = io.popen("SOC.exe " .. jsonStr)
+    if not handle then
+        print("[dsa] not run SOC.exe...")
+        return false
+    end
+    -- 关联handler,如果服务器断线关闭此DS
+    return true
 end
 
 -------------------------------------------- 服务器之间通信 ------------------------------------------
 
 -- 跨服务器处理
 local _Server_DSA_Process = {
-    [_MOE.ServerMsgIds.CM_ReqDS] = function (playerInfo)
+    [_MOE.ServerMsgIds.CM_ReqDS] = function (playerInfos)
         -- 拉起DS
         -- print("[DSA] PlayerInfo:" .. TableUtils.Serialize(playerInfo))
+        if type(playerInfos) == "table" then
+            if playerInfos[1] == nil and next(playerInfos) ~= nil then
+                -- 说明是数组
+                local arr = {}
+                table.insert(playerInfos)
+                playerInfos = arr
+            end
+            StartDSAsync(playerInfos)
+        end
     end
 }
 
