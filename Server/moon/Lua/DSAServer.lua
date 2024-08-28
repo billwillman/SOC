@@ -37,6 +37,14 @@ local function StartDSAsync(playerInfos)
     if not playerInfos then
         return false
     end
+    for _, playerInfo in pairs(playerInfos) do
+        local token = playerInfo.token
+        local handler = TokenToDSHandleMap[token]
+        if handler then
+            TokenToDSHandleMap[token] = nil
+            handler:close() -- 杀进程
+        end
+    end
     local jsonStr = json.encode(playerInfos)
     local handler = io.popen("SOC.exe " .. jsonStr)
     if not handler then
@@ -44,6 +52,10 @@ local function StartDSAsync(playerInfos)
         return false
     end
     -- 关联handler,如果服务器断线关闭此DS
+    for _, playerInfo in pairs(playerInfos) do
+        local token = playerInfo.token
+        TokenToDSHandleMap[token] = handler
+    end
     --
     return true
 end
