@@ -57,7 +57,7 @@ local _Server_DSA_Process = {
             if playerInfos[1] == nil and next(playerInfos) ~= nil then
                 -- 说明是数组
                 local arr = {}
-                table.insert(playerInfos)
+                table.insert(arr, playerInfos)
                 playerInfos = arr
             end
             StartDSAsync(playerInfos)
