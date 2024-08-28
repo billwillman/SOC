@@ -2,7 +2,7 @@ local moon = require("moon")
 
 local _DSA_ServerId = nil
 
-function GetDSAServerId()
+moon.exports.GetDSAServerId = function ()
     if _DSA_ServerId then
         return _DSA_ServerId
     end
