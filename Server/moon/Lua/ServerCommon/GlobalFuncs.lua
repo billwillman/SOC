@@ -32,3 +32,11 @@ moon.exports.GenerateToken = function (socket, fd)
     local token = moon.md5(addressStr)
     return token
 end
+
+moon.exports.GetFreeAdress = function ()
+    local so = require("socket")
+    local server = assert(so.bind("*", 0))
+    local ip, port = server:getsockname()
+    server:close()
+    return ip, port
+end

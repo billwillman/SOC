@@ -32,7 +32,6 @@ end)
 
 local TokenToDSHandleMap = {}
 local DSHandleToTokens = {}
-local DSPortStart = 7777
 
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
@@ -53,7 +52,8 @@ local function StartDSAsync(playerInfos)
             handler:close() -- 杀进程
         end
     end
-    local dsParam = {playerInfos = playerInfos, port = DSPortStart}
+    local ip, port = GetFreeAdress()
+    local dsParam = {playerInfos = playerInfos, ip = ip, port = port}
     local jsonStr = json.encode(dsParam)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
     if not handler then
