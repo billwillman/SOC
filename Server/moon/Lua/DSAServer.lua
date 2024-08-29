@@ -32,6 +32,7 @@ end)
 
 local TokenToDSHandleMap = {}
 local DSHandleToTokens = {}
+local DSPortStart = 7777
 
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
@@ -52,7 +53,8 @@ local function StartDSAsync(playerInfos)
             handler:close() -- 杀进程
         end
     end
-    local jsonStr = json.encode(playerInfos)
+    local dsParam = {playerInfos = playerInfos, port = DSPortStart}
+    local jsonStr = json.encode(dsParam)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
     if not handler then
         print("[dsa] not run SOC.exe...")
