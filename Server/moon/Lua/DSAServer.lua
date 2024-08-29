@@ -32,7 +32,7 @@ end)
 
 local TokenToDSHandleMap = {}
 local DSHandleToTokens = {}
-local ConnectedDSTokenMap = {} -- 已经连接成功的DS
+local DSSeverMap = {} -- 已经连接成功的DS
 
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
@@ -55,7 +55,9 @@ local function StartDSAsync(playerInfos)
     end
     -- 获取一个空闲的端口号
     local ip, port = GetFreeAdress()
-    local dsParam = {playerInfos = playerInfos, ip = ip, port = port}
+    local dsToken = moon.md5(string.format("%s:%d", ip, port))
+    local dsParam = {playerInfos = playerInfos, ip = ip, port = port, token = dsToken}
+    print("[dsa] start dsServer Param: %s", TableUtils.Serialize(dsParam))
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
