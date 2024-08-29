@@ -32,6 +32,7 @@ end)
 
 local TokenToDSHandleMap = {}
 local DSHandleToTokens = {}
+local ConnectedDSTokenMap = {} -- 已经连接成功的DS
 
 -- 异步拉起DS
 local function StartDSAsync(playerInfos)
