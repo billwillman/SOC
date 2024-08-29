@@ -56,6 +56,7 @@ local function StartDSAsync(playerInfos)
     local ip, port = GetFreeAdress()
     local dsParam = {playerInfos = playerInfos, ip = ip, port = port}
     local jsonStr = json.encode(dsParam)
+    print("[DSA] Command: " .. jsonStr)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
     if not handler then
         print("[dsa] not run SOC.exe...")
