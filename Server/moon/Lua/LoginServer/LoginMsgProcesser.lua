@@ -18,6 +18,9 @@ local CurrentMsgProcess = {
             local token = GenerateToken(socket, fd) -- token
             -- 1.通知DB Server写入redius,token定时销毁
             local playerInfo = {token = token, session = session}
+            -- 玩家数据
+            ClientPlayerInfos[token] = playerInfo
+            --
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
                 session = session,
