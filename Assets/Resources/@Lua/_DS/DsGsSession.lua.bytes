@@ -4,13 +4,29 @@ local DsGsSession = _MOE.class("DsGsSession")
 DsGsSession.GSStartupParamType = {
     GsIp = "GsIp", -- GS的IP
     GsPort = "GsPort", -- GS的端口号
-    GsSession = "GsSession" -- GS给DS分配的Session
+    DsToken = "DsToken", -- GS给DS分配的Token
+    DsIp = "DsIp",  -- Ds占用的IP
+    DsPort = "DsPort" -- Ds占用端口号
 }
 
 local ParamType = DsGsSession.GSStartupParamType
 
 function DsGsSession:Ctor(tb)
     self.tb = tb
+end
+
+function DsGsSession:GetDsIp()
+    if not self.tb then
+        return
+    end
+    return self.tb[ParamType.DsIp]
+end
+
+function DsGsSession:GetDsPort()
+    if not self.tb then
+        return
+    end
+    return self.tb[ParamType.DsPort]
 end
 
 function DsGsSession:GetGsIp()
@@ -27,11 +43,18 @@ function DsGsSession:GetGsPort()
     return self.tb[ParamType.GsPort]
 end
 
-function DsGsSession:GetGsSession()
+function DsGsSession:GetDsToken()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.GsSession]
+    return self.tb[ParamType.Gstoken]
+end
+
+function DsGsSession:GetPlayerInfos()
+    if not self.tb then
+        return
+    end
+    return self.tb.playerInfos
 end
 
 return DsGsSession
