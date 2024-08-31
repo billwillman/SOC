@@ -55,6 +55,9 @@
     <Filter Include="third\yyjson">
       <UniqueIdentifier>{5BC004CB-4723-946F-F0A8-CC25DCEA5FF2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="third\luaSocket">
+      <UniqueIdentifier>{aed0de2f-897d-4fdb-83a9-8f621fbd550a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\third\fastlz\fastlz.h">
@@ -125,6 +128,57 @@
     </ClInclude>
     <ClInclude Include="..\..\..\third\yyjson\yyjson.h">
       <Filter>third\yyjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\auxiliar.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\buffer.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\compat.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\except.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\inet.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\io.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\luasocket.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\mime.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\options.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\pierror.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\select.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\socket.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\tcp.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\timeout.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\udp.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\usocket.h">
+      <Filter>third\luaSocket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third\luasocket\src\wsocket.h">
+      <Filter>third\luaSocket</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +313,48 @@
     </ClCompile>
     <ClCompile Include="..\..\..\third\yyjson\yyjson.c">
       <Filter>third\yyjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\auxiliar.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\buffer.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\compat.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\except.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\inet.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\io.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\luasocket.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\mime.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\options.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\select.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\tcp.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\timeout.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\udp.c">
+      <Filter>third\luaSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third\luasocket\src\wsocket.c">
+      <Filter>third\luaSocket</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
