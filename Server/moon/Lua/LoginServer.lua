@@ -24,8 +24,10 @@ socket.on("accept",function(fd, msg)
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
     --socket.set_enable_chunked(fd, "w")
+    --[[
     local serverInfo = moon.server_stats()
     print(serverInfo)
+    ]]
 end)
 
 socket.on("message", function(fd, msg)
