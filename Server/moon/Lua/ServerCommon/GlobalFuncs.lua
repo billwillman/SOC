@@ -35,8 +35,11 @@ end
 
 moon.exports.GetFreeAdress = function ()
     local so = require("socket")
-    local server = assert(so.bind("*", 0))
-    local ip, port = server:getsockname()
-    server:close()
+    local tcpServer = so.tcp4()
+    tcpServer:bind("*", 0)
+    local _, port = tcpServer:getsockname()
+    tcpServer:close()
+    local ip = so.dns.gethostname()
+    ip = so.dns.toip(ip)
     return ip, port
 end
