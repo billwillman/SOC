@@ -3,6 +3,7 @@ local MsgIds = {
     CM_Login = 1,   -- 登录消息(Client用)
     CM_ReqDsAddr = 2, -- 请求玩法地址(Client用)
     CM_Heart = 3, -- 心跳包(通用)
+    CM_DS_StartReady = 4, -- DS已经启动Ready
     ----------------------------------------- 服务器协议 ------------------------------------
     SM_RepDsAddr = 1, -- 返回DS
     SM_Heart = 2, -- 心跳包
