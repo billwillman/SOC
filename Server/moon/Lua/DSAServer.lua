@@ -58,7 +58,7 @@ local function StartDSAsync(playerInfos)
     local ip, port = GetFreeAdress()
     local dsToken = moon.md5(string.format("%s:%d", ip, port))
     local dsParam = {playerInfos = playerInfos, DsIp = ip, DsPort = port, DsToken = dsToken}
-    print("[dsa] start dsServer Param: %s", TableUtils.Serialize(dsParam))
+    -- print("[dsa] start dsServer Param: %s", TableUtils.Serialize(dsParam))
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
