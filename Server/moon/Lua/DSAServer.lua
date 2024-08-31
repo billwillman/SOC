@@ -5,6 +5,7 @@ local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
 require("InitGlobalVars")
+require("ServerCommon.GlobalFuncs")
 require("ServerCommon.ServerMsgIds")
 local TableUtils = require("_Common.TableUtils")
 local io = require("io")
@@ -56,7 +57,7 @@ local function StartDSAsync(playerInfos)
     -- 获取一个空闲的端口号
     local ip, port = GetFreeAdress()
     local dsToken = moon.md5(string.format("%s:%d", ip, port))
-    local dsParam = {playerInfos = playerInfos, ip = ip, port = port, token = dsToken}
+    local dsParam = {playerInfos = playerInfos, DsIp = ip, DsPort = port, DsToken = dsToken}
     print("[dsa] start dsServer Param: %s", TableUtils.Serialize(dsParam))
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)

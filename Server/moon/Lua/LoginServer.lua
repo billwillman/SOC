@@ -16,7 +16,7 @@ serverCfgStr = nil
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)--auto accept
 
-ClientPlayerInfos = {}
+moon.exports.ClientPlayerInfos = {}
 
 --注册网络事件
 socket.on("accept",function(fd, msg)
@@ -24,6 +24,8 @@ socket.on("accept",function(fd, msg)
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
     --socket.set_enable_chunked(fd, "w")
+    local serverInfo = moon.server_stats()
+    print(serverInfo)
 end)
 
 socket.on("message", function(fd, msg)
