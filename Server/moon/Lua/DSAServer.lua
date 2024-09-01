@@ -97,6 +97,9 @@ local _Server_DSA_Process = {
             end
             StartDSAsync(playerInfos)
         end
+    end,
+    -- DS准备好
+    [_MOE.ServerMsgIds.SM_DSReady] = function ()
     end
 }
 

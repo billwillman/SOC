@@ -6,7 +6,12 @@ local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 
 local CurrentMsgProcess = {
-
+    [MsgIds.CM_DS_StartReady] = function (self, msg, socket, fd)
+        local dsToken = msg.dsToken
+        if not dsToken then
+            return
+        end
+    end
 }
 
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})

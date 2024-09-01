@@ -34,4 +34,5 @@ local CurrentMsgProcess = {
 
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
 
+
 return _M
