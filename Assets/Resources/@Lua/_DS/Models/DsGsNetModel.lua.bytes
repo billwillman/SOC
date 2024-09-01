@@ -8,6 +8,11 @@ function _M:ConnectGS()
     local Session = _MOE.GameApp:GetGsDsSession()
     -- 连接GS
     self:ConnectServer(Session:GetGsIp(), Session:GetGsPort())
+    -- 发送自己Token消息
+    local data = {
+        dsToken = _MOE.GameApp:GetGsDsSession():GetDsToken()
+    }
+    self:SendMsg(MsgIds.CM_DS_StartReady, data)
 end
 
 local GSMsgProcess = {
