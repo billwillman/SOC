@@ -2,12 +2,11 @@
 require("InitGlobalVars")
 local PlayerInfo = _MOE.class("PlayerInfo")
 
-function PlayerInfo:Ctor()
-    self.token = nil
-    self.session = nil
-    self.dsToken = nil
+function PlayerInfo:Ctor(info)
+    self.token = info and info.token or nil
+    self.session = info and info.session or nil
     self.dsData = {
-        dsToken = nil,
+        dsToken = info and info.dsToken,
         dsState = nil, -- 在DS的状态
     }
 end
