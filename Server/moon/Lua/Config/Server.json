@@ -1,18 +1,22 @@
 {
     "LoginSrv": {
         "ip": "127.0.0.1",
-        "port": 5000
+        "port": 5000,
+        "Debug": 20000
     },
     "ServerListSrv": {
         "ip": "127.0.0.1",
-        "port": 1983
+        "port": 1983,
+        "Debug": 20001
     },
     "BattleSrv": {
         "ip": "127.0.0.1",
-        "port": 1990
+        "port": 1990,
+        "Debug": 20002
     },
     "DSA": {
         "ip": "127.0.0.1",
-        "port": 1991
+        "port": 1991,
+        "Debug": 20003
     }
 }
