@@ -1,5 +1,8 @@
 -- DSA服务器
-require("LuaPanda").start("127.0.0.1", 20003)
+require("ServerCommon.GlobalServerConfig")
+local ServerData = GetServerConfig("DSA")
+
+require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 
 local json = require("json")
 local moon = require("moon")
@@ -8,13 +11,6 @@ require("InitGlobalVars")
 require("ServerCommon.GlobalFuncs")
 require("ServerCommon.ServerMsgIds")
 local TableUtils = require("_Common.TableUtils")
-local io = require("io")
-
-local serverCfgStr = io.readfile("./Config/Server.json")
-local serverCfg = json.decode(serverCfgStr)
-local ServerData = serverCfg.DSA
-serverCfg = nil
-serverCfgStr = nil
 
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)
