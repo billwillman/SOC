@@ -12,6 +12,11 @@ local socket = require "moon.socket"
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)
 
+socket.on("accept",function(fd, msg)
+    print("accept ", fd, moon.decode(msg, "Z"))
+    socket.settimeout(fd, 10)
+end)
+
 -------------------------------------------- 服务器之间通信 ------------------------------------------
 
 -- 跨服务器处理
