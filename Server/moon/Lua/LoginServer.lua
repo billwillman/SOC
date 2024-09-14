@@ -1,13 +1,12 @@
 require("ServerCommon.GlobalServerConfig")
+require("InitGlobalVars")
 
 local ServerData = GetServerConfig("LoginSrv")
-
 require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 
 local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
-require("InitGlobalVars")
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
