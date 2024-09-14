@@ -47,7 +47,7 @@ moon.async(function ()
     local id = moon.new_service(
         {
             name = "LoginServer",
-            file = "LoginServer.lua",
+            file = "./LoginServer/LoginServer.lua",
             unique = true
         }
     )
@@ -71,7 +71,7 @@ moon.async(function ()
     local id = moon.new_service(
         {
             name = "DsBattleServer",
-            file = "DsBattleServer.lua",
+            file = "./DsBattleServer/DsBattleServer.lua",
             unique = true
         }
     )
