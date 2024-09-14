@@ -23,5 +23,9 @@ namespace GMWeb
         {
             InitializeComponent();
         }
+
+        private void frame_Navigated(object sender, NavigationEventArgs e) {
+
+        }
     }
 }
