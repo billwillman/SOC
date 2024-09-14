@@ -84,7 +84,7 @@ moon.async(
         local id = moon.new_service(
             {
                 name = "DSA",
-                file = "DSAServer.lua",
+                file = "./DSAServer/DSAServer.lua",
                 unique = true
             }
         )
