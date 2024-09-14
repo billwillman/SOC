@@ -28,9 +28,6 @@ local moon = require("moon")
 --保存为env所有服务共享PATH配置
 moon.env("PATH", string.format("package.path='%s'", package.path))
 -------------------------------以上代码是固定写法--------------------------------------
-
-require("ServerCommon.GlobalServerConfig")
-
 --[[
 -- 启动HttpPayServer
 moon.async(function ()

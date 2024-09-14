@@ -1,4 +1,8 @@
-require("LuaPanda").start("127.0.0.1", 20000)
+require("ServerCommon.GlobalServerConfig")
+
+local ServerData = GetServerConfig("LoginSrv")
+
+require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 
 local json = require("json")
 local moon = require("moon")
@@ -6,12 +10,6 @@ local socket = require "moon.socket"
 require("InitGlobalVars")
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
-
-local serverCfgStr = io.readfile("./Config/Server.json")
-local serverCfg = json.decode(serverCfgStr)
-local ServerData = serverCfg.LoginSrv
-serverCfg = nil
-serverCfgStr = nil
 
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)--auto accept

@@ -44,6 +44,9 @@
 --         调试方法可以参考 github 文档
 
 --用户设置项
+
+local moon = require("moon")
+
 local openAttachMode = true;            --是否开启attach模式。attach模式开启后可以在任意时刻启动vscode连接调试。缺点是没有连接调试时也会略降低lua执行效率(会不断进行attach请求)
 local attachInterval = 1;               --attach间隔时间(s)
 local connectTimeoutSec = 0.005;       --lua进程作为Client时, 连接超时时间, 单位s. 时间过长等待attach时会造成卡顿，时间过短可能无法连接。建议值0.005 - 0.05
@@ -55,7 +58,8 @@ local consoleLogLevel = 2;           --打印在控制台(print)的日志等级 
 --用户设置项END
 
 local debuggerVer = "3.2.0";                 --debugger版本号
-LuaPanda = {};
+local LuaPanda = LuaPanda or {};
+moon.exports.LuaPanda = LuaPanda
 local this = LuaPanda;
 local tools = {};     --引用的开源工具，包括json解析和table展开工具等
 this.tools = tools;
