@@ -92,6 +92,20 @@ moon.async(
     end
 )
 
+-- GM服务器
+moon.async(
+    function ()
+        local id = moon.new_service(
+            {
+                name = "GM",
+                file = "./GMServer/GMServer.lua",
+                unique = true
+            }
+        )
+        assert(id > 0, "Create GMServer Fail")
+    end
+)
+
 --[[
 moon.async(function ()
     local id = moon.new_service(
