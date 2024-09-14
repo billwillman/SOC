@@ -1,4 +1,5 @@
 -- 启动入口脚本
+
 ---__init__---
 if _G["__init__"] then
     local arg = ... --- command line args
@@ -26,8 +27,9 @@ local moon = require("moon")
 
 --保存为env所有服务共享PATH配置
 moon.env("PATH", string.format("package.path='%s'", package.path))
-
 -------------------------------以上代码是固定写法--------------------------------------
+
+require("ServerCommon.GlobalServerConfig")
 
 --[[
 -- 启动HttpPayServer
