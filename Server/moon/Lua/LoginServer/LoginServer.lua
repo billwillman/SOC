@@ -13,7 +13,7 @@ local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)--auto accept
 
-moon.exports.ClientPlayerInfos = {}
+moon.exports.PlayerManager = require("Lua.LoginServer.PlayerManager").New()
 
 --注册网络事件
 socket.on("accept",function(fd, msg)
@@ -32,10 +32,7 @@ socket.on("message", function(fd, msg)
 end)
 
 socket.on("close", function(fd, msg)
-    local token = GenerateToken(socket, fd)
-    if token then
-        ClientPlayerInfos[token] = nil
-    end
+    PlayerManager:RemovePlayer(fd)
     print("close ", fd, moon.decode(msg, "Z"))
 end)
 
