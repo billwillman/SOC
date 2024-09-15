@@ -6,6 +6,8 @@ require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 local json = require("json")
 local httpserver = require("moon.http.server")
 
+local clientServerListStr = io.readfile("./Config/ClientServerList.json")
+
 httpserver.content_max_len = 8192
 httpserver.header_max_len = 8192
 
