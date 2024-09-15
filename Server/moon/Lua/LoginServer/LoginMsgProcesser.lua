@@ -13,11 +13,15 @@ local CurrentMsgProcess = {
     [MsgIds.CM_Login] = function (self, msg, socket, fd)
         local dsa = GetDSAServerId()
         if dsa then
-            local playerInfo = PlayerManager:AddPlayer(msg.userName, msg.password, fd)
+            -- print(_MOE.TableUtils.Serialize(msg))
+            local playerInfo = PlayerManager:AddPlayer(msg.userName, msg.password or "", fd)
+            if not playerInfo then
+                return
+            end
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
-                session = session,
-                token = token,
+                session = playerInfo.session,
+                token = playerInfo.token,
                 msgId = MsgIds.SM_LoginRet, -- 消息ID
             }
             self:SendTableToJson(socket, fd, ret)
