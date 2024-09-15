@@ -13,7 +13,7 @@ local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)--auto accept
 
-moon.exports.PlayerManager = require("Lua.LoginServer.PlayerManager").New()
+moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
 
 --注册网络事件
 socket.on("accept",function(fd, msg)
