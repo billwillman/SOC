@@ -10,6 +10,26 @@ using CapnProto;
 
 namespace NsTcpClient
 {
+	struct TempPacket
+	{
+		public byte[] data;
+		public int handle;
+		public bool isMoonServer;
+
+		public TempPacket(byte[] srcData, int packetHandle, int bufSize = -1, bool isMoonServer = false) {
+			handle = packetHandle;
+			this.isMoonServer = isMoonServer;
+			if (srcData == null || srcData.Length <= 0 || bufSize == 0)
+				data = null;
+			else {
+				if (bufSize < 0)
+					bufSize = srcData.Length;
+				data = new byte[bufSize];
+				Buffer.BlockCopy(srcData, 0, data, 0, bufSize);
+			}
+		}
+	}
+
 	[XLua.LuaCallCSharp]
 	public class NetManager: Singleton<NetManager>
 	{
@@ -331,28 +351,6 @@ namespace NsTcpClient
 			}
 
 			ClearTempList();
-		}
-
-		private struct TempPacket
-		{
-			public byte[] data;
-			public int handle;
-			public bool isMoonServer;
-
-            public TempPacket(byte[] srcData, int packetHandle, int bufSize = -1, bool isMoonServer = false)
-			{
-				handle = packetHandle;
-				this.isMoonServer = isMoonServer;
-				if (srcData == null || srcData.Length <= 0 || bufSize == 0)
-					data = null;
-				else 
-				{
-                    if (bufSize < 0)
-                        bufSize = srcData.Length;
-                    data = new byte[bufSize];
-                    Buffer.BlockCopy(srcData, 0, data, 0, bufSize);
-				}
-			}
 		}
 
 		private LinkedList<TempPacket> m_TempList = new LinkedList<TempPacket>();
