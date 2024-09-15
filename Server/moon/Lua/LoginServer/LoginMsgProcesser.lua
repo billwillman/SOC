@@ -13,7 +13,7 @@ local CurrentMsgProcess = {
     [MsgIds.CM_Login] = function (self, msg, socket, fd)
         local dsa = GetDSAServerId()
         if dsa then
-            PlayerManager:AddPlayer(msg.userName, msg.password, fd)
+            local playerInfo = PlayerManager:AddPlayer(msg.userName, msg.password, fd)
             moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
                 session = session,
