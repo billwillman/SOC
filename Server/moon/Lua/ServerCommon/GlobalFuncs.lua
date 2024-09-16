@@ -1,6 +1,7 @@
 local moon = require("moon")
 
 local _DSA_ServerId = nil
+local _Login_ServerId = nil
 
 moon.exports.GetDSAServerId = function ()
     if _DSA_ServerId then
@@ -8,6 +9,14 @@ moon.exports.GetDSAServerId = function ()
     end
     _DSA_ServerId = moon.queryservice("DSA")
     return _DSA_ServerId
+end
+
+moon.exports.GetLoginSrvId = function ()
+    if _Login_ServerId then
+        return _Login_ServerId
+    end
+    _Login_ServerId = moon.queryservice("LoginSrv")
+    return _Login_ServerId
 end
 
 moon.exports.GetIpAndPort = function (socket, fd)
