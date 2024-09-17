@@ -39,6 +39,7 @@ _MOE.Logger = {
 
 _MOE.Application = CS.UnityEngine.Application
 _MOE.NetManager = CS.NsTcpClient.NetManager:GetInstance()
+_MOE.NetClientClass = CS.NsTcpClient.NetClient
 _MOE.ResourceManager = CS.ResourceMgr:GetInstance()
 _MOE.HttpHelper = CS.NsHttpClient.HttpHelper
 _MOE.HttpStrResponse = CS.NsHttpClient.HttpClientStrResponse
