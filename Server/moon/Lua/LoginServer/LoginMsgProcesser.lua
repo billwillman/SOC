@@ -34,6 +34,15 @@ setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
 ----------------------------------------------- 服务器间通信 -------------------------------
 moon.exports._Server_TO_LOGIN = {
     [_MOE.ServerMsgIds.SM_DS_STATUS] = function (msg)
+        local playerInfos = msg.playerInfos
+        if not playerInfos then
+            return
+        end
+        local dsData = msg.dsData
+        for _, playerInfo in pairs(playerInfos) do
+            if PlayerManager:UpdateDsData(playerInfo, dsData) then
+            end
+        end
     end
 }
 

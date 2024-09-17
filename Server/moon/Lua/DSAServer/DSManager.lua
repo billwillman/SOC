@@ -25,8 +25,13 @@ function _M:StartDSAsync(playerInfos)
         print("[dsa] not run SOC.exe...")
         return
     end
+    local ret = {
+        dsToken = dsToken,
+        dsIp = ip,
+        dsPort = port
+    }
     self.DsTokenHandlerMap[dsToken] = handler
-    return dsToken
+    return ret
 end
 
 function _M:StopDS(dsToken)

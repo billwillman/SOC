@@ -103,22 +103,29 @@ local _Server_DSA_Process = {
                 playerInfos = arr
             end
             -- StartDSAsync(playerInfos)
-            local token = DSManager:StartDSAsync(playerInfos)
-            if token then
+            local dsData = DSManager:StartDSAsync(playerInfos)
+            if dsData then
                 -- 返回等待登录成功
                 local msg = {
                     playerInfos = playerInfos,
-                    dsStatus = _MOE.DsStatus.WaitRunning
+                    dsData = {
+                        dsStatus = _MOE.DsStatus.WaitRunning,
+                        dsToken = dsData.token,
+                        dsIp = dsData.dsIp,
+                        dsPort = dsData.dsPort
+                    }
                 }
                 if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
-                    print("[DSA] SendLoginServer Error: " .. msg.dsStatus)
+                    print("[DSA] SendLoginServer Error: " .. msg.dsData.dsStatus)
                     DSManager:StopDS(token) -- 主动关闭
                 end
             else
                 -- 返回失败状态
                 local msg = {
                     playerInfos = playerInfos,
-                    dsStatus = _MOE.DsStatus.StartError
+                    dsData = {
+                        dsStatus = _MOE.DsStatus.StartError
+                    }
                 }
                 if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
                     print("[DSA] SendLoginServer Error: " .. msg.dsStatus)

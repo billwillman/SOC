@@ -17,6 +17,7 @@ function _M:_RemovePlayer(token)
 end
 
 ---------------------------------------- 开放接口 ---------------------------
+
 function _M:RemovePlayer(fd)
     if not fd then
         return
@@ -41,6 +42,28 @@ function _M:AddPlayer(userName, password, fd)
     local PlayerInfo = PlayerInfoClass.New(info)
     self.ClientPlayerInfos[token] = PlayerInfo
     return info
+end
+
+function _M:UpdateDsData(playerInfo, dsData)
+    if not playerInfo then
+        return false
+    end
+    local token = playerInfo.token
+    local session = playerInfo.session
+    local currentPlayerInfo = self.ClientPlayerInfos[token]
+    if not currentPlayerInfo then
+        print(string.format("[LoginSrv] UpdateDsData: token=%s is not found", token))
+        return false
+    end
+    if currentPlayerInfo.session ~= session then
+        print(string.format("[LoginSrv] UpdateDsData: token=%s currentSession=%s UpdateSession=%s is session not vaild", token,
+            currentPlayerInfo.session, session))
+        return false
+    end
+
+    currentPlayerInfo.dsData = dsData or {}
+
+    return true
 end
 
 return _M
