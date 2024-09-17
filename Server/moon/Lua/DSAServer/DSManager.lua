@@ -32,7 +32,7 @@ function _M:StartDSAsync(playerInfos)
             ip = ServerData.ip,
             port = ServerData.port
         },
-        GsData = {
+        battleData = {
             ip = battlSrvData.ip,
             port = battlSrvData.port
         }
