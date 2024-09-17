@@ -4,7 +4,7 @@ mklink /d "%~dp0/Assets/Resources/@Lua/_Common" "%~dp0/Common/Lua/_Common"
 mklink /d "%~dp0/Server/moon/Lua/_Common" "%~dp0/Common/Lua/_Common"
 mklink /d "%~dp0/Assets/Resources/@Lua/_NetMsg" "%~dp0/Common/Lua/_NetMsg"
 mklink /d "%~dp0/Server/moon/Lua/_NetMsg" "%~dp0/Common/Lua/_NetMsg"
-mklink /d "%~dp0/Server/SOC" "%~dp0/outPath/DS"
+mklink /d "%~dp0/Server/DS" "%~dp0/outPath/DS"
 
 
 cd %~dp0/Server/moon/Lua/_Common
