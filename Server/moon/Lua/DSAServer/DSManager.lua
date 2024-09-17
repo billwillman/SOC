@@ -2,6 +2,7 @@ require("ServerCommon.GlobalFuncs")
 require("ServerCommon.GlobalServerConfig")
 local moon = require("moon")
 local json = require("json")
+local fs = require("fs")
 
 local ServerData = GetServerConfig("DSA")
 local battlSrvData = GetServerConfig("BattleSrv")
@@ -38,7 +39,8 @@ function _M:StartDSAsync(playerInfos)
         }
     }
     local jsonStr = json.encode(dsParam)
-    local command = string.format("start \"../../DS/Server.exe\" \"%s\"", jsonStr)
+    local absolutePath = fs.abspath("../../DS/Server.exe")
+    local command = string.format("\"%s\" \"%s\"",absolutePath, jsonStr)
     print("[DSA] Command: " .. command)
     local handler = io.popen(command, "r")
     if not handler then
