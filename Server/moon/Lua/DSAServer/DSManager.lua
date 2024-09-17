@@ -39,9 +39,7 @@ function _M:StartDSAsync(playerInfos)
     }
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)
-    local absolutePath = package.searchpath("../../DS/SOC.exe", package.path)
-    print("[DSA] absolutePath: " .. absolutePath)
-    local handler = io.popen(string.format("%s %s", absolutePath, jsonStr), "r")
+    local handler = io.popen(string.format("./../../DS/SOC.exe %s", jsonStr), "r")
     if not handler then
         print("[dsa] not run SOC.exe...")
         return
