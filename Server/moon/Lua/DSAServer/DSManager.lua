@@ -40,7 +40,7 @@ function _M:StartDSAsync(playerInfos)
     }
     local jsonStr = json.encode(dsParam)
     local absolutePath = fs.abspath("../../DS/Server.exe")
-    local command = string.format("\"%s\" \"%s\"",absolutePath, jsonStr)
+    local command = string.format("%s \"%s\"",absolutePath, jsonStr)
     print("[DSA] Command: " .. command)
     local handler = io.popen(command, "r")
     if not handler then
