@@ -79,7 +79,7 @@ local function StartDSAsync(playerInfos)
     return true
 end
 
-local function SendLoginServer(msgId, msgId, msg)
+local function SendLoginServer(msgId, msg)
     local loginSrvId = GetLoginSrvId()
     if not loginSrvId then
         return false
@@ -115,7 +115,7 @@ local _Server_DSA_Process = {
                         dsPort = dsData.dsPort
                     }
                 }
-                if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
+                if not SendLoginServer(_MOE.ServerMsgIds.SM_DS_STATUS, msg) then
                     print("[DSA] SendLoginServer Error: " .. msg.dsData.dsStatus)
                     DSManager:StopDS(token) -- 主动关闭
                 end
@@ -127,7 +127,7 @@ local _Server_DSA_Process = {
                         dsStatus = _MOE.DsStatus.StartError
                     }
                 }
-                if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
+                if not SendLoginServer(_MOE.ServerMsgIds.SM_DS_STATUS, msg) then
                     print("[DSA] SendLoginServer Error: " .. msg.dsStatus)
                 end
             end
