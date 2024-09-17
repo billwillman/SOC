@@ -14,10 +14,14 @@ local function StartHeartTimer(self)
     self.m_HeartTimer = _MOE.TimerManager:AddLoopTimer(0.3, self, self._OnHeartTimer)
 end
 
+function _M:Ctor(netClient)
+    self.NetClient = netClient or _MOE.NetManager
+end
+
 function _M:OnInit()
-    self:RegsterCSharpEvent(_MOE.NetManager, "OnConnectResult", self._OnGSConnectResult)
-    self:RegsterCSharpEvent(_MOE.NetManager, "OnSocketAbort", self._OnGSSocketAbort)
-    self:RegsterCSharpEvent(_MOE.NetManager, "OnMoonPacketRead", self._OnMoonPacketRead)
+    self:RegsterCSharpEvent(self.NetClient, "OnConnectResult", self._OnGSConnectResult)
+    self:RegsterCSharpEvent(self.NetClient, "OnSocketAbort", self._OnGSSocketAbort)
+    self:RegsterCSharpEvent(self.NetClient, "OnMoonPacketRead", self._OnMoonPacketRead)
     xpcall(self.NetModel_OnInit, _G.ErrorHandler, self)
 end
 
@@ -45,17 +49,17 @@ function _M:_OnGSSocketAbort()
 end
 
 function _M:IsGsConnected()
-    local state = _MOE.NetManager.ClietnState
+    local state = self.NetClient.ClietnState
     local ret = state == _MOE.NetState.eClient_STATE_CONNECTED
     return ret
 end
 
 function _M:OnUnInit()
     xpcall(self.NetModel_OnUnInit, _G.ErrorHandler, self)
-    _MOE.NetManager:Disconnect()
-    _MOE.NetManager.OnConnectResult = nil
-    _MOE.NetManager.OnSocketAbort = nil
-    _MOE.NetManager.OnMoonPacketRead = nil
+    self.NetClient:Disconnect()
+    self.NetClient.OnConnectResult = nil
+    self.NetClient.OnSocketAbort = nil
+    self.NetClient.OnMoonPacketRead = nil
     StopHeartTimer(self)
 end
 
@@ -69,7 +73,7 @@ function _M:_OnHeartTimer()
             local now = os.time()
             if now - self.m_LastHeartTime > 10 then
                 -- 心跳包超时
-                _MOE.NetManager:Disconnect()
+                self.NetClient:Disconnect()
                 self:_OnGSSocketAbort()
                 return
             end
@@ -88,7 +92,7 @@ function _M:SendMsg(msgId, data)
     data = data or {}
     data.msgId = msgId
     local msg = _MOE.Json.encode(data)
-    _MOE.NetManager:SendMoonStr(msg)
+    self.NetClient:SendMoonStr(msg)
 end
 
 _M.ReceiveMsgProcess = {
@@ -116,7 +120,7 @@ end
 
 function _M:ConnectServer(ip, port)
     self:_PrepareStartConnect()
-    _MOE.NetManager:ConnectServer(ip, port, true)
+    self.NetClient:ConnectServer(ip, port, true)
 end
 
 ----------------------------------------------------------------- 虚方法 ---------------------------------------------------------
