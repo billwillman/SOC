@@ -38,7 +38,7 @@ function _M:StartDSAsync(playerInfos)
         }
     }
     local jsonStr = json.encode(dsParam)
-    local command = string.format("start \"../../DS/SOC.exe\" \"%s\"", jsonStr)
+    local command = string.format("start \"../../DS/Server.exe\" \"%s\"", jsonStr)
     print("[DSA] Command: " .. command)
     local handler = io.popen(command, "r")
     if not handler then
