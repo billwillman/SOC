@@ -6,6 +6,8 @@ else
     require("LuaPanda").start("127.0.0.1", 31000)
 end
 
+print(string.format("[Main.lua] 是否是DS: %s 是否是编辑器: %s", _MOE.IsDS, _MOE.IsEditor))
+
 require("_Common.CommonEvents")
 
 local function InitGlobalVars()
