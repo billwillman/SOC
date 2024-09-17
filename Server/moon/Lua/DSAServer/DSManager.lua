@@ -39,12 +39,12 @@ function _M:StartDSAsync(playerInfos)
     }
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)
-    local handler = io.popen(string.format("\"../../SOC/SOC.exe.lnk %s\" ", jsonStr), "r")
+    local handler = io.popen(string.format("\"../../DS/SOC.exe %s\" ", jsonStr), "r")
     if not handler then
         print("[dsa] not run SOC.exe...")
         return
     end
-    print("[DSA] DS Handle: %s", handler)
+    print(string.format("[DSA] DS Handle: %s", handler))
     local ret = {
         dsToken = dsToken,
         dsIp = ip,
