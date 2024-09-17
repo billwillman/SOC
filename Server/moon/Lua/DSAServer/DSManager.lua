@@ -12,7 +12,7 @@ end
 -- 启动一个DS(只负责启动，其他类逻辑不在DSA管)
 function _M:StartDSAsync(playerInfos)
     if not playerInfos then
-        return false
+        return
     end
     -- 获取一个空闲的端口号
     local ip, port = GetFreeAdress()
@@ -23,10 +23,10 @@ function _M:StartDSAsync(playerInfos)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
     if not handler then
         print("[dsa] not run SOC.exe...")
-        return false
+        return
     end
     self.DsTokenHandlerMap[dsToken] = handler
-    return true
+    return dsToken
 end
 
 function _M:StopDS(dsToken)
@@ -37,7 +37,9 @@ function _M:StopDS(dsToken)
     if handler then
         self.DsTokenHandlerMap[dsToken] = nil
         handler:close() -- 杀进程
+        return true
     end
+    return false
 end
 
 return _M

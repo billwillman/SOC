@@ -31,5 +31,11 @@ local CurrentMsgProcess = {
 
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
 
+----------------------------------------------- 服务器间通信 -------------------------------
+---- DSA To Login
+moon.exports._Server_TO_LOGIN = {
+
+}
+
 
 return _M

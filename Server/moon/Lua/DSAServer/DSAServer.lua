@@ -15,6 +15,8 @@ local TableUtils = require("_Common.TableUtils")
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)
 
+local DSManager = require("DSAServer.DSManager").New()
+
 --注册网络事件
 socket.on("accept",function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
@@ -77,6 +79,15 @@ local function StartDSAsync(playerInfos)
     return true
 end
 
+local function SendLoginServer(msgId, msgId, msg)
+    local loginSrvId = GetLoginSrvId()
+    if not loginSrvId then
+        return false
+    end
+    moon.send("lua", loginSrvId, msgId, msg)
+    return true
+end
+
 -------------------------------------------- 服务器之间通信 ------------------------------------------
 
 -- 跨服务器处理
@@ -91,7 +102,28 @@ local _Server_DSA_Process = {
                 table.insert(arr, playerInfos)
                 playerInfos = arr
             end
-            StartDSAsync(playerInfos)
+            -- StartDSAsync(playerInfos)
+            local token = DSManager:StartDSAsync(playerInfos)
+            if token then
+                -- 返回等待登录成功
+                local msg = {
+                    playerInfos = playerInfos,
+                    dsStatus = _MOE.DsStatus.WaitRunning
+                }
+                if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
+                    print("[DSA] SendLoginServer Error: " .. msg.dsStatus)
+                    DSManager:StopDS(token) -- 主动关闭
+                end
+            else
+                -- 返回失败状态
+                local msg = {
+                    playerInfos = playerInfos,
+                    dsStatus = _MOE.DsStatus.StartError
+                }
+                if not SendLoginServer(_MOE.ServerMsgIds, _MOE.ServerMsgIds.SM_DS_STATUS, msg) then
+                    print("[DSA] SendLoginServer Error: " .. msg.dsStatus)
+                end
+            end
         end
     end,
     -- DS准备好

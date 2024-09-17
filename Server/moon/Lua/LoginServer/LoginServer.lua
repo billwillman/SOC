@@ -41,3 +41,13 @@ socket.on("error", function(fd, msg)
     print("error ", fd, moon.decode(msg, "Z"))
 end)
 ]]
+
+------------------------------------------- 服务器交互协议 -----------------------
+
+moon.dispatch("lua", function(_, _, cmd, ...)
+    -- 处理 cmd
+    local OnProcess = _Server_TO_LOGIN[cmd]
+    if OnProcess then
+        OnProcess(...)
+    end
+end)
