@@ -18,7 +18,7 @@ function _M:StartDSAsync(playerInfos)
     -- 获取一个空闲的端口号
     local ip, port = GetFreeAdress()
     local dsToken = moon.md5(string.format("%s:%d", ip, port))
-    local dsParam = {playerInfos = playerInfos, DsIp = ip, DsPort = port, DsToken = dsToken}
+    local dsParam = {playerInfos = playerInfos, dsIp = ip, dsPort = port, dsToken = dsToken}
     local jsonStr = json.encode(dsParam)
     print("[DSA] Command: " .. jsonStr)
     local handler = io.popen("SOC.exe " .. jsonStr, "r")
