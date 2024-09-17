@@ -10,7 +10,7 @@ function DsGsSession:GetDsIp()
     if not self.tb then
         return
     end
-    local dsData = self.bp.dsData
+    local dsData = self.tb.dsData
     if not dsData then
         return
     end
@@ -21,7 +21,7 @@ function DsGsSession:GetDsPort()
     if not self.tb then
         return
     end
-    local dsData = self.bp.dsData
+    local dsData = self.tb.dsData
     if not dsData then
         return
     end
@@ -48,6 +48,28 @@ function DsGsSession:GetGsPort()
         return
     end
     return battlData.port
+end
+
+function DsGsSession:GetDSAPort()
+    if not self.tb then
+        return
+    end
+    local dsa = self.tb.dsaData
+    if not dsa then
+        return
+    end
+    return dsa.port
+end
+
+function DsGsSession:GetDSAIp()
+    if not self.tb then
+        return
+    end
+    local dsa = self.tb.dsaData
+    if not dsa then
+        return
+    end
+    return dsa.ip
 end
 
 function DsGsSession:GetDsToken()

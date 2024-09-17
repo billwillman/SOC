@@ -4,7 +4,13 @@ local _M = _MOE.class("DSANetModel", baseNetModel)
 
 function _M:Ctor()
     local netClient = _MOE.NetClientClass.New()
-    self.super.Ctor(self, netClient)
+    self.super.Ctor(self, netClient, _MOE.CommonEvents.DsaConnectResult, _MOE.CommonEvents.DsaConnectResult)
+end
+
+-- 连DSA
+function _M:ConnectDSA()
+    local Session = _MOE.GameApp:GetGsDsSession()
+    self:ConnectServer(Session:GetDSAIp(), Session:GetDSAPort())
 end
 
 return _M

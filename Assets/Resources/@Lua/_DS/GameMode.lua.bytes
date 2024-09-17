@@ -27,8 +27,10 @@ if _MOE.IsDS then
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectResult, self, self.OnGsConnectResult)
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectAbort, self, self.OnGsConnectAbort)
+        --_MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectResult, self, self.OnGsConnectResult)
+        -- _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.GsConnectAbort, self, self.OnGsConnectAbort)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.DsaConnectResult, self, self.OnGsConnectResult)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.DsaConnectAbort, self, self.OnGsConnectAbort)
     end
 
     function GameMode:RegisterNetManagerServerEvents()
@@ -41,6 +43,7 @@ if _MOE.IsDS then
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
         self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
+        self.DsaNetModel = _MOE.GameApp:GetModel("DsDsaNetModel")
         self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
     end
 
@@ -48,6 +51,7 @@ if _MOE.IsDS then
         self:RegisterNetManagerServerEvents()
         -- 连接到GS上
         self.DsGsNetModel:ConnectGS()
+        self.DsaNetModel:ConnectDSA()
     end
 
     function GameMode:OnGsConnectAbort()
