@@ -52,13 +52,16 @@ namespace SOC.GamePlay
         void InitNetCodeLuaGlobalVars(LuaTable _MOE) {
 #if UNITY_EDITOR
             _MOE.Set<string, bool>("IsEditor", true);
+            var subTarget = UnityEditor.EditorUserBuildSettings.standaloneBuildSubtarget;
+            bool isServer = (subTarget == UnityEditor.StandaloneBuildSubtarget.Server);
+            _MOE.Set<string, bool>("IsDS", isServer); // 是否是DS 
 #else
             _MOE.Set<string, bool>("IsEditor", false);
-#endif
 #if UNITY_SERVER
             _MOE.Set<string, bool>("IsDS", true);
 #else
-            _MOE.Set<string, bool>("IsDS", false); // 是否是DS
+            _MOE.Set<string, bool>("IsDS", false); // 是否是DS 
+#endif
 #endif
         }
 
