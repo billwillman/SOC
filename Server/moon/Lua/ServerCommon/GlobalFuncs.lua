@@ -15,7 +15,7 @@ moon.exports.GetLoginSrvId = function ()
     if _Login_ServerId then
         return _Login_ServerId
     end
-    _Login_ServerId = moon.queryservice("LoginSrv")
+    _Login_ServerId = moon.queryservice("LoginServer")
     return _Login_ServerId
 end
 

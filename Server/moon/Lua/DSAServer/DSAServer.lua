@@ -84,6 +84,7 @@ local function SendLoginServer(msgId, msg)
     if not loginSrvId then
         return false
     end
+    print(string.format("[%d] msgId=%d msg=%s", loginSrvId, msgId, _MOE.TableUtils.Serialize(msg)))
     moon.send("lua", loginSrvId, msgId, msg)
     return true
 end
