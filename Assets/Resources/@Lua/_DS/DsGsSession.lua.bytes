@@ -1,15 +1,6 @@
 --- Ds在GS上的Session
 local DsGsSession = _MOE.class("DsGsSession")
 
-DsGsSession.GSStartupParamType = {
-    GsIp = "GsIp", -- GS的IP
-    GsPort = "GsPort", -- GS的端口号
-    DsToken = "DsToken", -- GS给DS分配的Token
-    DsIp = "DsIp",  -- Ds占用的IP
-    DsPort = "DsPort" -- Ds占用端口号
-}
-
-local ParamType = DsGsSession.GSStartupParamType
 
 function DsGsSession:Ctor(tb)
     self.tb = tb
@@ -19,35 +10,55 @@ function DsGsSession:GetDsIp()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.DsIp]
+    local dsData = self.bp.dsData
+    if not dsData then
+        return
+    end
+    return dsData.ip
 end
 
 function DsGsSession:GetDsPort()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.DsPort]
+    local dsData = self.bp.dsData
+    if not dsData then
+        return
+    end
+    return dsData.port
 end
 
 function DsGsSession:GetGsIp()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.GsIp]
+    local battlData = self.tb.battleData
+    if not battlData then
+        return
+    end
+    return battlData.ip
 end
 
 function DsGsSession:GetGsPort()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.GsPort]
+    local battlData = self.tb.battleData
+    if not battlData then
+        return
+    end
+    return battlData.port
 end
 
 function DsGsSession:GetDsToken()
     if not self.tb then
         return
     end
-    return self.tb[ParamType.Gstoken]
+    local dsData = self.bp.dsData
+    if not dsData then
+        return
+    end
+    return dsData.token
 end
 
 function DsGsSession:GetPlayerInfos()
