@@ -41,6 +41,9 @@ moon.exports._Server_TO_LOGIN = {
         local dsData = msg.dsData
         for _, playerInfo in pairs(playerInfos) do
             if PlayerManager:UpdateDsData(playerInfo, dsData) then
+                if dsData.dsStatus == _MOE.DsStatus.StartError then
+                    -- 启动DS失败
+                end
             end
         end
     end
