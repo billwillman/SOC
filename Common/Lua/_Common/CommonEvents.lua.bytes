@@ -1,4 +1,6 @@
 _MOE.CommonEvents = {
     GsConnectResult = "GsConnectResult",
     GsConnectAbort = "GsConnectAbort",
+    DsaConnectResult = "DsaConnectResult",
+    DsaConnectAbort = "DsaConnectAbort"
 }
