@@ -54,7 +54,7 @@ function DsGsSession:GetDsToken()
     if not self.tb then
         return
     end
-    local dsData = self.bp.dsData
+    local dsData = self.tb.dsData
     if not dsData then
         return
     end
