@@ -3,7 +3,7 @@ local baseNetModel = require("_Common.BaseNetModel")
 local _M = _MOE.class("DSANetModel", baseNetModel)
 
 function _M:Ctor()
-    local netClient = _MOE.NetClientClass.New()
+    local netClient = _MOE.NetClientClass()
     self.super.Ctor(self, netClient, _MOE.CommonEvents.DsaConnectResult, _MOE.CommonEvents.DsaConnectResult)
 end
 
