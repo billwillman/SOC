@@ -1,5 +1,5 @@
 -- 连接DSA
 local baseNetModel = require("_Common.BaseNetModel")
-local _M = _MOE.class("DSANetModel")
+local _M = _MOE.class("DSANetModel", baseNetModel)
 
 return _M
