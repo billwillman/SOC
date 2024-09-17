@@ -118,7 +118,7 @@ local _Server_DSA_Process = {
                 }
                 if not SendLoginServer(_MOE.ServerMsgIds.SM_DS_STATUS, msg) then
                     print("[DSA] SendLoginServer Error: " .. msg.dsData.dsStatus)
-                    DSManager:StopDS(token) -- 主动关闭
+                    DSManager:StopDS(dsData.dsToken) -- 主动关闭
                 end
             else
                 -- 返回失败状态
