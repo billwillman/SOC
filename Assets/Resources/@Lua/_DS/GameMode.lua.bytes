@@ -43,7 +43,7 @@ if _MOE.IsDS then
     function GameMode:OnAwake()
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
         self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
-        self.DsaNetModel = _MOE.GameApp:GetModel("DsDsaNetModel")
+        self.DsaNetModel = _MOE.GameApp:GetModel("DsaNetModel")
         self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
     end
 
