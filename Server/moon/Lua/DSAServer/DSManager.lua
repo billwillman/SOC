@@ -4,6 +4,7 @@ local moon = require("moon")
 local json = require("json")
 
 local ServerData = GetServerConfig("DSA")
+local battlSrvData = GetServerConfig("BattleSrv")
 
 local _M = _MOE.class("DSManager")
 
@@ -30,6 +31,10 @@ function _M:StartDSAsync(playerInfos)
         dsaData = {
             ip = ServerData.ip,
             port = ServerData.port
+        },
+        GsData = {
+            ip = battlSrvData.ip,
+            port = battlSrvData.port
         }
     }
     local jsonStr = json.encode(dsParam)
