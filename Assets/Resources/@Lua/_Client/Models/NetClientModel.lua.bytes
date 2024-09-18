@@ -98,6 +98,13 @@ end
 function NetClientModel:ConnectDsAddr(dsAddr)
 end
 
+function NetClientModel:GetGMAddr()
+    local data = self:GetSelectGsData()
+    if data then
+        return data.GM
+    end
+end
+
 ---------------------------------------- 客户端协议 ----------------------------------------
 function NetClientModel:CM_Login(userName, password)
     local data = {

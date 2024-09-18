@@ -6,6 +6,19 @@ function _M:Ctor()
     self.super.Ctor(netClient, _MOE.CommonEvents.GMConnectResult, _MOE.CommonEvents.GMConnectAbort)
 end
 
+function _M:GetNetAddr()
+    local GameApp = _MOE.GameApp
+    if not GameApp then
+        return
+    end
+    local clientModel = GameApp:GetModel("NetClientModel") 
+    if not clientModel then
+        return
+    end
+    local ret = clientModel:GetGMAddr()
+    return ret
+end
+
 -- 发送GM指令
 function _M:SendGM(command, paramStr)
     if not commnad then
@@ -13,7 +26,18 @@ function _M:SendGM(command, paramStr)
     end
     if not self:IsGsConnected() then
         -- 连接GM指令
+        local addr = self:GetNetAddr()
+        if not addr then
+            return false
+        end
+        self:ConnectServer(addr.ip, addr.port)
     end
+    self:SendMsg(_MOE.MsgIds.CM_GM,
+        {
+            command = command,
+            param = paramStr   
+        })
+    return true
 end
 
 return _M
