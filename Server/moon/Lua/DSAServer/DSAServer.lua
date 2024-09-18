@@ -27,6 +27,7 @@ end)
 
 socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
+    DSManager:OnDsSocketClose(fd)
 end)
 
 --[[

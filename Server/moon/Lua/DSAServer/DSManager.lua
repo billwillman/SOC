@@ -3,6 +3,7 @@ require("ServerCommon.GlobalServerConfig")
 local moon = require("moon")
 local json = require("json")
 local fs = require("fs")
+local socket = require "moon.socket"
 
 local ServerData = GetServerConfig("DSA")
 local battlSrvData = GetServerConfig("BattleSrv")
@@ -15,6 +16,13 @@ end
 
 ------------------------------------- 外部调用 -------------------------
 
+function _M:GetDsToknFromAddr(ip, port)
+    if not ip or not port then
+        return
+    end
+    return moon.md5(string.format("%s:%d", ip, port))
+end
+
 -- 启动一个DS(只负责启动，其他类逻辑不在DSA管)
 function _M:StartDSAsync(playerInfos)
     if not playerInfos then
@@ -22,7 +30,10 @@ function _M:StartDSAsync(playerInfos)
     end
     -- 获取一个空闲的端口号
     local ip, port = GetFreeAdress()
-    local dsToken = moon.md5(string.format("%s:%d", ip, port))
+    local dsToken = self:GetDsToknFromAddr(ip, port)
+    if not dsToken then
+        return
+    end
     local dsParam = {playerInfos = playerInfos, 
         dsData = {
             ip = ip,
@@ -67,6 +78,23 @@ function _M:StartDSAsync(playerInfos)
         connectTime = connectTime
     }
     return ret
+end
+
+-- Ds突然断线
+function _M:OnDsSocketClose(fd)
+    local ip, port = GetIpAndPort(socket, fd)
+    local dsToken = self:GetDsToknFromAddr(ip, port)
+    if not dsToken then
+        return
+    end
+    local data = self.DsTokenHandlerMap[dsToken]
+    if data then
+        local connectTime = data.connectTime
+        if connectTime then
+            moon.remove_timer(connectTime) -- 关掉定时器
+        end
+        self.DsTokenHandlerMap[dsToken] = nil
+    end
 end
 
 function _M:StopDS(dsToken)
