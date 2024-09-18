@@ -68,7 +68,7 @@ function _M:StartDSAsync(playerInfos)
         dsPort = port
     }
     -- 设置定时器，5秒必须连接上DSA，否则杀进程
-    local connectTime = moon.timeout(5 * 1000,
+    local connectTime = moon.timeout(30 * 1000,
         function ()
             self:StopDS(dsToken) -- 直接杀进程
             return
