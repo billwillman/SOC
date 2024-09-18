@@ -29,6 +29,7 @@ socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
 end)
 
+--[[
 local TokenToDSHandleMap = {}
 local DSHandleToTokens = {}
 local DSSeverMap = {} -- 已经连接成功的DS
@@ -78,6 +79,7 @@ local function StartDSAsync(playerInfos)
     --
     return true
 end
+]]
 
 local function SendLoginServer(msgId, msg)
     local loginSrvId = GetLoginSrvId()
