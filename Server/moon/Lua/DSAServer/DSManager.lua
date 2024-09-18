@@ -129,6 +129,7 @@ function _M:StopDS(dsToken)
             moon.remove_timer(connectTime) -- 关掉定时器
         end
         if handler then
+            print("[DSA] StopDS: " .. tostring(handler))
             handler:close() -- 杀进程
         end
         return true
