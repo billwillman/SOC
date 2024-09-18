@@ -80,6 +80,22 @@ function _M:StartDSAsync(playerInfos)
     return ret
 end
 
+function _M:OnDsSocketConnect(fd)
+    local ip, port = GetIpAndPort(socket, fd)
+    local dsToken = self:GetDsToknFromAddr(ip, port)
+    if not dsToken then
+        return
+    end
+    local data = self.DsTokenHandlerMap[dsToken]
+    if data then
+        local connectTime = data.connectTime
+        if connectTime then
+            moon.remove_timer(connectTime) -- 关掉定时器
+            data.connectTime = nil
+        end
+    end
+end
+
 -- Ds突然断线
 function _M:OnDsSocketClose(fd)
     local ip, port = GetIpAndPort(socket, fd)

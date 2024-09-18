@@ -23,6 +23,7 @@ socket.on("accept",function(fd, msg)
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
     --socket.set_enable_chunked(fd, "w")
+    DSManager:OnDsSocketConnect(fd)
 end)
 
 socket.on("close", function(fd, msg)
