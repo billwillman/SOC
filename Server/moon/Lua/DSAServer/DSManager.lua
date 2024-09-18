@@ -87,6 +87,7 @@ function _M:OnDsSocketConnect(fd)
     if not dsToken then
         return
     end
+    print(string.format("[DSA] OnDsSocketConnect ip: %s port: %d dsToken: %s", ip, port, dsToken))
     local data = self.DsTokenHandlerMap[dsToken]
     if data then
         local connectTime = data.connectTime
