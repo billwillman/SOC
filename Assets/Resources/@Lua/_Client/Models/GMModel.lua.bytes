@@ -1,0 +1,19 @@
+-- GM指令
+local _M = _MOE.class("GMModel", _MOE.BaseNetModel)
+
+function _M:Ctor()
+    local netClient = _MOE.NetClientClass()
+    self.super.Ctor(netClient, _MOE.CommonEvents.GMConnectResult, _MOE.CommonEvents.GMConnectAbort)
+end
+
+-- 发送GM指令
+function _M:SendGM(command, paramStr)
+    if not commnad then
+        return false
+    end
+    if not self:IsGsConnected() then
+        -- 连接GM指令
+    end
+end
+
+return _M
