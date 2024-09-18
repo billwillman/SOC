@@ -55,7 +55,17 @@ function _M:StartDSAsync(playerInfos)
         dsIp = ip,
         dsPort = port
     }
-    self.DsTokenHandlerMap[dsToken] = handler
+    -- 设置定时器，5秒必须连接上DSA，否则杀进程
+    local connectTime = moon.timeout(5 * 1000,
+        function ()
+            self:StopDS(dsToken) -- 直接杀进程
+            return
+        end
+        )
+    self.DsTokenHandlerMap[dsToken] = {
+        handler = handler,
+        connectTime = connectTime
+    }
     return ret
 end
 
@@ -63,10 +73,17 @@ function _M:StopDS(dsToken)
     if not dsToken then
         return false
     end
-    local handler = self.DsTokenHandlerMap[dsToken]
-    if handler then
+    local data = self.DsTokenHandlerMap[dsToken]
+    if data then
+        local handler = data.handler
+        local connectTime = data.connectTime
         self.DsTokenHandlerMap[dsToken] = nil
-        handler:close() -- 杀进程
+        if connectTime then
+            moon.remove_timer(connectTime) -- 关掉定时器
+        end
+        if handler then
+            handler:close() -- 杀进程
+        end
         return true
     end
     return false
