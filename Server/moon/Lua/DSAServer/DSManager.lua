@@ -93,6 +93,8 @@ function _M:OnDsSocketConnect(fd)
             moon.remove_timer(connectTime) -- 关掉定时器
             data.connectTime = nil
         end
+    else
+        self.DsTokenHandlerMap[dsToken] = {}
     end
 end
 
