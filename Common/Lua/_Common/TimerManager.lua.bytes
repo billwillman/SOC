@@ -225,6 +225,7 @@ end
 
 --update
 function TimerManager:TimeEventDoUpdate(dt)
+    --[[
     if _MOE.IsDS then
         return
     end
@@ -232,6 +233,7 @@ function TimerManager:TimeEventDoUpdate(dt)
     if not _MOE.LoginModel or not _MOE.LoginModel:IsLogged() then
         return
     end
+    ]]
 
     self.m_timeEventDt = self.m_timeEventDt + dt
     if self.m_timeEventDt > 1 then
