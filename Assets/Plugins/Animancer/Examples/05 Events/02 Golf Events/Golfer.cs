@@ -71,7 +71,7 @@ namespace Animancer.Examples.Events
         private void HitBall()
         {
             _Ball.isKinematic = false;
-            _Ball.velocity = _HitVelocity;
+            _Ball.linearVelocity = _HitVelocity;
         }
 
         /************************************************************************************************************************/

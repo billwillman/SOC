@@ -117,7 +117,7 @@ namespace Animancer.Examples.Locomotion
         private void FixedUpdate()
         {
             // Set the velocity so that Unity will move the Rigidbody in the desired direction.
-            _Body.velocity = _MoveState.Speed * _MovementSpeed * _MovementDirection;
+            _Body.linearVelocity = _MoveState.Speed * _MovementSpeed * _MovementDirection;
         }
 
         /************************************************************************************************************************/

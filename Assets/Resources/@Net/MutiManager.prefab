@@ -85,6 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LuaPath: _DS.GameMode
   SelfTarget: {fileID: 5949499150922470418}
+  CustomLuaFunctionName: []
+  bInitCustomLuaFunctionInStart: 0
 --- !u!114 &5695242431980455270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 0
+  m_UseWebSockets: 0
+  m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
