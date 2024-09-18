@@ -48,6 +48,8 @@ function _M:StartDSAsync(playerInfos)
         return
     end
     print(string.format("[DSA] DS Handle: %s", handler))
+    local result = handler:read("*a")
+    print("[DSA] DS Handler: " .. result)
     local ret = {
         dsToken = dsToken,
         dsIp = ip,
