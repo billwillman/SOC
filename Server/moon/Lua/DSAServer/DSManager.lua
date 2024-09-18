@@ -107,6 +107,7 @@ function _M:OnDsSocketClose(fd)
     if not dsToken then
         return
     end
+    print(string.format("[DSA] OnDsSocketClose ip: %s port: %d dsToken: %s", ip, port, dsToken))
     local data = self.DsTokenHandlerMap[dsToken]
     if data then
         local connectTime = data.connectTime
