@@ -16,6 +16,7 @@ local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET
 socket.start(listenfd)
 
 local DSManager = require("DSAServer.DSManager").New()
+local MsgProcesser = require("DSAServer/DSAServerProcesser").New()
 
 --注册网络事件
 socket.on("accept",function(fd, msg)
@@ -29,6 +30,10 @@ end)
 socket.on("close", function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
     DSManager:OnDsSocketClose(fd)
+end)
+
+socket.on("message", function(fd, msg)
+    MsgProcesser:OnMsg(msg, socket, fd)
 end)
 
 --[[
