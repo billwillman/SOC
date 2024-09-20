@@ -2,6 +2,7 @@ local baseClass = require("ServerCommon.CommonMsgProcesser")
 local _M = _MOE.class("GMServerProcesser", baseClass)
 
 local MsgIds = require("_NetMsg.MsgId")
+local moon = require("moon")
 
 local CurrentMsgProcess = {
     [MsgIds.CM_GM] = function (self, msg, socket, fd)
