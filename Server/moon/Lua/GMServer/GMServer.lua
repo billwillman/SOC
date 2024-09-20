@@ -22,18 +22,3 @@ end)
 socket.on("message", function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
 end)
-
--------------------------------------------- 服务器之间通信 ------------------------------------------
-
--- 跨服务器处理
-local _Server_GM_Process = {
-
-}
-
-moon.dispatch("lua", function(_, _, cmd, ...)
-    -- 处理 cmd
-    local OnProcess = _Server_GM_Process[cmd]
-    if OnProcess then
-        OnProcess(...)
-    end
-end)
