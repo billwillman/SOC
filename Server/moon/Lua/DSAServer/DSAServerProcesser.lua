@@ -5,6 +5,16 @@ local json = require("json")
 local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 
+local function SendLoginServer(msgId, msg)
+    local loginSrvId = GetLoginSrvId()
+    if not loginSrvId then
+        return false
+    end
+    -- print(string.format("[%d] msgId=%d msg=%s", loginSrvId, msgId, _MOE.TableUtils.Serialize(msg)))
+    moon.send("lua", loginSrvId, msgId, msg)
+    return true
+end
+
 local CurrentMsgProcess = {
 }
 
