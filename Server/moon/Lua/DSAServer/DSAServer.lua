@@ -8,14 +8,14 @@ require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
-require("ServerCommon.GlobalFuncs")
-require("ServerCommon.ServerMsgIds")
-local TableUtils = require("_Common.TableUtils")
+-- require("ServerCommon.GlobalFuncs")
+-- local TableUtils = require("_Common.TableUtils")
 
 local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
 socket.start(listenfd)
 
 local DSManager = require("DSAServer.DSManager").New()
+moon.exports.DSManager = DSManager
 local MsgProcesser = require("DSAServer/DSAServerProcesser").New()
 
 --注册网络事件
