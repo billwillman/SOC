@@ -59,6 +59,20 @@ if _MOE.IsDS then
         _MOE.GameApp:QuitGame()
     end
 
+    -------- 初始化检查 -------------
+    local function CheckDsAddr(GsSession)
+        if not GsSession then
+            return
+        end
+        if not GsSession.DsIp then
+            GsSession.DsIp = "127.0.0.1"
+        end
+        if not GsSession.DsPort then
+            GsSession.DsPort = 7777
+        end
+    end
+    --------------------------
+
     function GameMode:OnGsConnectResult(isOk)
         if not isOk or not self.Transport or not self.NetWorkMgr then
             _MOE.GameApp:QuitGame()
@@ -69,8 +83,9 @@ if _MOE.IsDS then
             _MOE.GameApp:QuitGame()
             return
         end
-        local ip = GsSession.DsIp or "127.0.0.1"
-        local port = GsSession.DsPort or 7777
+        CheckDsAddr(GsSession)
+        local ip = GsSession.DsIp
+        local port = GsSession.DsPort
         self.Transport:SetConnectionData(ip, port)
         if not self.NetWorkMgr:StartServer() then
             _MOE.Logger.LogError("[DS] NetManager:StartServer False")
