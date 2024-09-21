@@ -75,8 +75,8 @@ function _M:_OnHeartTimer()
         if not self.m_LastHeartTime then
             self.m_LastHeartTime = os.time()
         else
-            local now = os.time()
-            if now - self.m_LastHeartTime > 10 then
+            local delta = os.time() - self.m_LastHeartTime
+            if delta > 10 then
                 -- 心跳包超时
                 _MOE.Logger.LogWarning("[BaseNetModel] heart timeout: Disconnect~!")
                 self.NetClient:Disconnect()
