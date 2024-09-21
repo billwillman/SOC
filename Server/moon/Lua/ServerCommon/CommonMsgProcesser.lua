@@ -5,10 +5,14 @@ local moon = require("moon")
 
 _M.MsgDispatch = {
     [MsgIds.CM_Heart] = function (self, msg, socket, fd)
-        local sendMsg = {msgId = MsgIds.SM_Heart}
-        self:SendTableToJson(socket, fd, sendMsg)
+        self:SendHeartMsg(socket, fd)
     end
 }
+
+function _M:SendHeartMsg(socket, fd)
+    local sendMsg = {msgId = MsgIds.SM_Heart}
+    self:SendTableToJson(socket, fd, sendMsg)
+end
 
 function _M:SendTableToJson2(socket, fd, msgId, msg)
     msg = msg or {}
