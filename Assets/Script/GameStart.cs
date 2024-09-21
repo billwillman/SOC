@@ -43,7 +43,7 @@ namespace SOC.GamePlay
         void ServerAttachLogFile() {
             if (IsDS) {
                 // DS²ÅÄÜ²Å´æ´¢
-                Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog.log");
+                Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog");
             }
         }
 
@@ -56,7 +56,7 @@ namespace SOC.GamePlay
             Lua_DoMain();
         }
 
-        bool IsDS {
+        public static bool IsDS {
             get {
 #if UNITY_EDITOR
                 var subTarget = UnityEditor.EditorUserBuildSettings.standaloneBuildSubtarget;
