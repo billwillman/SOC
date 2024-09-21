@@ -15,10 +15,4 @@ function _M:ConnectGS()
     self:SendMsg(MsgIds.CM_DS_StartReady, data)
 end
 
-local GSMsgProcess = {
-
-}
-
-setmetatable(_M.ReceiveMsgProcess, {__index = GSMsgProcess})
-
 return _M
