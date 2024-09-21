@@ -70,7 +70,7 @@ if _MOE.IsDS then
             return
         end
         local ip = GsSession:GetDsIp()
-        local port = GsSession.GetDsPort()
+        local port = GsSession:GetDsPort()
         self.Transport:SetConnectionData(ip, port)
         if not self.NetWorkMgr:StartServer() then
             _MOE.Logger.LogError("[DS] NetManager:StartServer False")
