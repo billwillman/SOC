@@ -41,10 +41,10 @@ namespace SOC.GamePlay
         }
 
         void ServerAttachLogFile() {
-#if UNITY_SERVER
-            // DS才能才存储
-            Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog.log");
-#endif
+            if (IsDS) {
+                // DS才能才存储
+                Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog.log");
+            }
         }
 
         // 初始化Lua环境
@@ -56,22 +56,31 @@ namespace SOC.GamePlay
             Lua_DoMain();
         }
 
+        bool IsDS {
+            get {
+#if UNITY_EDITOR
+                var subTarget = UnityEditor.EditorUserBuildSettings.standaloneBuildSubtarget;
+                bool isServer = (subTarget == UnityEditor.StandaloneBuildSubtarget.Server);
+                return isServer;
+#else
+#if UNITY_SERVER
+            return true;
+#else
+            return false; 
+#endif
+#endif
+            }
+        }
+
         [XLua.Hotfix]
         // 初始化NetCode的Lua全局变量
         void InitNetCodeLuaGlobalVars(LuaTable _MOE) {
 #if UNITY_EDITOR
             _MOE.Set<string, bool>("IsEditor", true);
-            var subTarget = UnityEditor.EditorUserBuildSettings.standaloneBuildSubtarget;
-            bool isServer = (subTarget == UnityEditor.StandaloneBuildSubtarget.Server);
-            _MOE.Set<string, bool>("IsDS", isServer); // 是否是DS 
 #else
             _MOE.Set<string, bool>("IsEditor", false);
-#if UNITY_SERVER
-            _MOE.Set<string, bool>("IsDS", true);
-#else
-            _MOE.Set<string, bool>("IsDS", false); // 是否是DS 
 #endif
-#endif
+            _MOE.Set<string, bool>("IsDS", IsDS); // 是否是DS 
         }
 
         void Lua_DoMain() {
