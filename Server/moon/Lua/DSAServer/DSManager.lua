@@ -88,6 +88,37 @@ function _M:OnDsSocketConnect(fd)
     print(string.format("[DSA] OnDsSocketConnect ip: %s port: %d clientToken: %s", ip, port, clientToken))
 end
 
+function _M:GetDsClientToken(fd)
+    local ip, port = GetIpAndPort(socket, fd)
+    local clientToken = self:GetDsToknFromAddr(ip, port)
+    return clientToken
+end
+
+function _M:OnDsStartReady(msg, fd, msgProcesser)
+    if not msg then
+        return
+    end
+    local dsToken = msg.dsToken
+    if not dsToken then
+        local ip = msg.dsIp
+        local port = msg.dsPort
+        dsToken = self:GetDsToknFromAddr(ip, port)
+        local clientToken = self:GetDsClientToken(fd)
+        if clientToken and dsToken then
+            self.DsClientTokenToDsToken[clientToken] = dsToken
+            if not self.DsTokenHandlerMap[dsToken] then
+                self.DsTokenHandlerMap[dsToken] = {}
+            end
+            local data = self.DsTokenHandlerMap[dsToken]
+            data.clientToken = clientToken
+            -- 通知DS更新dsToken
+            msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
+        end
+    end
+    -- 关掉定时器关闭
+    self:ClearDs_ConnectStopTimer(dsToken)
+end
+
 function _M:GetDsTokenFromDsClientToken(clientToken)
     if not clientToken then
         return
@@ -96,26 +127,47 @@ function _M:GetDsTokenFromDsClientToken(clientToken)
     return dsToken
 end
 
+function _M:ClearDs_ConnectStopTimer(dsToken)
+    if not dsToken then
+        return
+    end
+    local data = self.DsTokenHandlerMap[dsToken]
+    if not data then
+        return
+    end
+    local connectTime = data.connectTime
+    if connectTime then
+        moon.remove_timer(connectTime) -- 关掉定时器
+        data.connectTime = nil
+    end
+end
+
+function _M:ClearDsData(dsToken)
+    if not dsToken then
+        return
+    end
+    local data = self.DsTokenHandlerMap[dsToken]
+    if not data then
+        return
+    end
+    local clientToken = data.clientToken
+    if clientToken then
+        self.DsClientTokenToDsToken[clientToken] = nil
+    end
+    self:ClearDs_ConnectStopTimer(dsToken)
+
+    self.DsTokenHandlerMap[dsToken] = nil
+end
+
 -- Ds突然断线
 function _M:OnDsSocketClose(fd)
-    local ip, port = GetIpAndPort(socket, fd)
-    local clientToken = self:GetDsToknFromAddr(ip, port)
+    local clientToken = self:GetDsClientToken(fd)
     if not clientToken then
         return
     end
     local dsToken = self:GetDsTokenFromDsClientToken(clientToken)
     print(string.format("[DSA] OnDsSocketClose ip: %s port: %d clientToken: %s dsToken: %s", ip, port, clientToken, dsToken))
-    self.DsClientTokenToDsToken[clientToken] = nil -- 清理掉
-    if dsToken then
-        local data = self.DsTokenHandlerMap[dsToken]
-        if data then
-            local connectTime = data.connectTime
-            if connectTime then
-                moon.remove_timer(connectTime) -- 关掉定时器
-            end
-            self.DsTokenHandlerMap[dsToken] = nil
-        end
-    end
+    self:ClearDsData(dsToken)
 end
 
 function _M:StopDS(dsToken)
@@ -125,15 +177,7 @@ function _M:StopDS(dsToken)
     local data = self.DsTokenHandlerMap[dsToken]
     if data then
         local handler = data.handler
-        local connectTime = data.connectTime
-        local clientToken = data.clientToken
-        self.DsTokenHandlerMap[dsToken] = nil
-        if clientToken then
-            self.DsClientTokenToDsToken[clientToken] = nil
-        end
-        if connectTime then
-            moon.remove_timer(connectTime) -- 关掉定时器
-        end
+        self:ClearDsData(dsToken)
         if handler then
             print("[DSA] StopDS: " .. tostring(handler))
             handler:close() -- 杀进程

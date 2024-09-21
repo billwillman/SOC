@@ -19,6 +19,9 @@ local function SendLoginServer(msgId, msg)
 end
 
 local CurrentMsgProcess = {
+    [MsgIds.CM_DS_StartReady] = function (self, msg, socket, fd)
+        DSManager:OnDsStartReady(msg, fd, self)
+    end
 }
 
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})

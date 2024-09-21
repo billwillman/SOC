@@ -10,6 +10,12 @@ _M.MsgDispatch = {
     end
 }
 
+function _M:SendTableToJson2(socket, fd, msgId, msg)
+    msg = msg or {}
+    msg.msgId = msgId
+    self:SendTableToJson(socket, fd, msg)
+end
+
 function _M:SendTableToJson(socket, fd, sendMsg)
     if not socket or not fd or not sendMsg or not sendMsg.msgId then
         return false

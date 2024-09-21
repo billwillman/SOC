@@ -68,8 +68,8 @@
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\WeakReferenceTable.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Task.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ScriptInfos.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BlackboardEditor.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsMetaType.cs" />
+    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BlackboardEditor.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\IGraphAssignableExtensions.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\IMigratable.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Attributes.cs" />
