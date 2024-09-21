@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1902
     height: 940
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 122
+  controlID: 114
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 733
     height: 890
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -300,8 +300,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 19
+    x: 10
+    y: 81
     width: 341
     height: 550
   m_SerializedDataModeController:
@@ -320,7 +320,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: d8d5ffff74d6ffffa4d6ffffa8d7ffff4ed8ffffd8e1ffffdef9ffff
+      m_ExpandedIDs: 8ab9ffff26baffff56baffff5abbfffff6bbffffb0c1ffff7cccffff18cdffff48cdffff4cceffffe8ceffff9ad4ffffb6e0ffff52e1ffff82e1ffff86e2ffff2ce3ffffb6ecffffdef9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.004499889, y: -0.005999931, z: -0.000026998523, w: 0.999972}
     speed: 2
-    m_Value: {x: 0.004499889, y: 0.0059999316, z: 0.000026998523, w: -0.99997205}
+    m_Value: {x: -0.0044998885, y: -0.00599993, z: -0.00002699852, w: 0.99997187}
   m_Size:
     m_Target: 9.250696
     speed: 2
@@ -1060,8 +1060,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 590
+    x: 10
+    y: 652
     width: 1168
     height: 298
   m_SerializedDataModeController:
@@ -1084,9 +1084,9 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 1
+    m_SearchArea: 3
     m_Folders:
-    - Assets/StreamingAssets
+    - Assets/Script
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1096,16 +1096,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/StreamingAssets
+  - Assets/Script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\SOC
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 62}
-    m_SelectedIDs: 5cc60000
-    m_LastClickedID: 50780
-    m_ExpandedIDs: 000000009ac500009cc500009ec50000a0c50000a2c50000a4c5000000ca9a3b
+    scrollPos: {x: 0, y: 78}
+    m_SelectedIDs: 58c60000
+    m_LastClickedID: 50776
+    m_ExpandedIDs: 000000009ac500009cc500009ec50000a0c50000a2c50000a4c5000058c6000062c6000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1251,8 +1251,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1170
-    y: 19
+    x: 1179
+    y: 81
     width: 732
     height: 869
   m_SerializedDataModeController:
@@ -1301,8 +1301,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 343
-    y: 19
+    x: 352
+    y: 81
     width: 825
     height: 550
   m_SerializedDataModeController:

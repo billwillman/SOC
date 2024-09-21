@@ -5,6 +5,7 @@ using XLua;
 
 namespace SOC.GamePlay
 {
+
     [LuaCallCSharp]
     public class GameStart : MonoBehaviour
     {
@@ -20,6 +21,7 @@ namespace SOC.GamePlay
         }
 
         private void Start() {
+            ServerAttachLogFile();
             ResourceMgr.Instance.LoadConfigs(OnResConfigResult, this, true);
         }
 
@@ -36,6 +38,13 @@ namespace SOC.GamePlay
 
         void OnInit() {
             InitLuaEnv();
+        }
+
+        void ServerAttachLogFile() {
+#if UNITY_SERVER
+            // DS才能才存储
+            Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog.log");
+#endif
         }
 
         // 初始化Lua环境
@@ -128,6 +137,13 @@ namespace SOC.GamePlay
                 m_LuaEnv.Dispose();
                 m_LuaEnv = null;
             }
+
+            // 日志写入文件
+            if (m_LogFileWriter != null) {
+                m_LogFileWriter.Dispose();
+                m_LogFileWriter = null;
+            }
+                
         }
 
         private static string[] _cLuaRootPathFormats = {
@@ -148,5 +164,6 @@ namespace SOC.GamePlay
 
         private LuaEnv m_LuaEnv = null;
         private LuaEnv.CustomLoader m_LuaLoaderCallBack = null;
+        private LogFileWriter m_LogFileWriter = null;
     }
 }
