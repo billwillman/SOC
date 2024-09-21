@@ -19,17 +19,28 @@ namespace SOC.GamePlay
             return ret;
         }
 
-        public LogFileWriter(string saveFileName) {
+        public LogFileWriter(string saveFileName, bool IsOutOldHandle) {
             if (string.IsNullOrEmpty(saveFileName))
                 saveFileName = "logWriter";
             saveFileName = GetSaveFileName(saveFileName);
-            m_FileStream = new FileStream(saveFileName, FileMode.Create, FileAccess.Write);
+            try {
+                m_FileStream = new FileStream(saveFileName, FileMode.Create, FileAccess.Write);
+                m_OldLogHandle = Debug.unityLogger.logHandler;
+                Debug.unityLogger.logHandler = this;
+                m_IsOutOldHandle = IsOutOldHandle;
+            } catch (Exception e) {
+                Debug.LogError(e.ToString());
+            }
         }
 
         protected override void OnFree(bool isManual) {
             if (m_FileStream != null) {
                 m_FileStream.Dispose();
                 m_FileStream = null;
+            }
+            if (m_OldLogHandle != null) {
+                Debug.unityLogger.logHandler = m_OldLogHandle;
+                m_OldLogHandle = null;
             }
         }
 
@@ -43,6 +54,9 @@ namespace SOC.GamePlay
         }
 
         public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args) {
+            if (m_IsOutOldHandle && m_OldLogHandle != null) {
+                m_OldLogHandle.LogFormat(logType, context, format, args);
+            }
             if (m_FileStream != null) {
                 string log = string.Format("LOG: [{0}] {1}==>> {2}", Enum.GetName(GetLogType(), logType), context != null ? context.name : string.Empty, string.Format(format, args));
                 WriteLog(log);
@@ -50,6 +64,9 @@ namespace SOC.GamePlay
         }
 
         public void LogException(Exception exception, UnityEngine.Object context) {
+            if (m_IsOutOldHandle && m_OldLogHandle != null) {
+                m_OldLogHandle.LogException(exception, context);
+            }
             if (m_FileStream != null) {
                 string log = string.Format("EXCEPTION: {0}==>> {1}", context != null ? context.name : string.Empty, exception != null ? exception.ToString() : string.Empty);
                 WriteLog(log);
@@ -64,5 +81,7 @@ namespace SOC.GamePlay
 
         private Type m_LogType = null;
         private FileStream m_FileStream = null;
+        private ILogHandler m_OldLogHandle = null;
+        private bool m_IsOutOldHandle = true;
     }
 }

@@ -13,6 +13,9 @@ namespace SOC.GamePlay
         public static GameStart Instance = null;
         private LuaFunction m_LuaUpdateFunc = null;
 
+        [DoNotGen]
+        public bool m_DS_OutputOldLogHandle = true;
+
         // Start is called before the first frame update
         void Awake() {
             DontDestroyOnLoad(this.gameObject);
@@ -43,7 +46,7 @@ namespace SOC.GamePlay
         void ServerAttachLogFile() {
             if (IsDS) {
                 // DS²ÅÄÜ²Å´æ´¢
-                Debug.unityLogger.logHandler = new LogFileWriter("dsRuntimeLog");
+                m_LogFileWriter = new LogFileWriter("dsRuntimeLog", m_DS_OutputOldLogHandle);
             }
         }
 
