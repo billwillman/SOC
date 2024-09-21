@@ -18,12 +18,14 @@ function _M:Ctor(netClient, connectEvent, abortEvent)
     self.NetClient = netClient or _MOE.NetManager
     self.ConnectEventName = connectEvent or _MOE.CommonEvents.GsConnectResult
     self.AbortEventName = abortEvent or _MOE.CommonEvents.GsConnectAbort
+    self.ReceiveMsgProcess = {}
 end
 
 function _M:OnInit()
     self:RegsterCSharpEvent(self.NetClient, "OnConnectResult", self._OnGSConnectResult)
     self:RegsterCSharpEvent(self.NetClient, "OnSocketAbort", self._OnGSSocketAbort)
     self:RegsterCSharpEvent(self.NetClient, "OnMoonPacketRead", self._OnMoonPacketRead)
+    self:RegisterReceiveMsgProcess(MsgIds.SM_Heart, self._OnMsg_SM_Heart)
     xpcall(self.NetModel_OnInit, _G.ErrorHandler, self)
 end
 
@@ -63,6 +65,7 @@ function _M:OnUnInit()
     self.NetClient.OnSocketAbort = nil
     self.NetClient.OnMoonPacketRead = nil
     StopHeartTimer(self)
+    self.ReceiveMsgProcess = {}
 end
 
 function _M:_OnHeartTimer()
@@ -97,10 +100,12 @@ function _M:SendMsg(msgId, data)
     self.NetClient:SendMoonStr(msg)
 end
 
-_M.ReceiveMsgProcess = {
-    [MsgIds.SM_Heart] = function (msg)
-    end
-}
+function _M:_OnMsg_SM_Heart(msg)
+end
+
+function _M:RegisterReceiveMsgProcess(msgId, func)
+    self.ReceiveMsgProcess[msgId] = func
+end
 
 function _M:_OnMoonPacketRead(packet)
     if packet:hasData() then
@@ -108,9 +113,9 @@ function _M:_OnMoonPacketRead(packet)
         local msg = _MOE.Json.decode(json)
         if msg and msg.msgId then
             self.m_LastHeartTime = os.time() -- 只要有包过来就认为协议是通的
-            local OnProcess = _M.ReceiveMsgProcess[msg.msgId]
+            local OnProcess = self.ReceiveMsgProcess[msg.msgId]
             if OnProcess then
-                OnProcess(msg)
+                OnProcess(self, msg)
             end
         else
             _MOE.Logger.LogError("[GS] OnMoonPacketRead not vaild data")
