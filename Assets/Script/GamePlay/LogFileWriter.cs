@@ -51,6 +51,7 @@ namespace SOC.GamePlay
                 return;
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log + "\n");
             m_FileStream.WriteAsync(buffer);
+            m_FileStream.FlushAsync();
         }
 
         public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args) {
