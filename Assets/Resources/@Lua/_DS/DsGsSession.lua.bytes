@@ -1,6 +1,21 @@
 --- Ds在GS上的Session
 local DsGsSession = _MOE.class("DsGsSession")
 
+local function _CheckDsAddr(tb)
+    if not tb then
+        return
+    end
+    if not tb.dsData then
+        tb.dsData = {}
+    end
+    local dsData = tb.dsData
+    if not dsData.ip then
+        dsData.ip = "127.0.0.1"
+    end
+    if not dsData.port then
+        dsData.port = 7777
+    end
+end
 
 function DsGsSession:Ctor(tb)
     self.tb = tb
@@ -10,6 +25,7 @@ function DsGsSession:GetDsIp()
     if not self.tb then
         return
     end
+    _CheckDsAddr(self.tb)
     local dsData = self.tb.dsData
     if not dsData then
         return
@@ -21,6 +37,7 @@ function DsGsSession:GetDsPort()
     if not self.tb then
         return
     end
+    _CheckDsAddr(self.tb)
     local dsData = self.tb.dsData
     if not dsData then
         return

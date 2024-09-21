@@ -13,4 +13,8 @@ function _M:ConnectDSA()
     self:ConnectServer(Session:GetDSAIp(), Session:GetDSAPort())
 end
 
+function _M:SendDsReady()
+    
+end
+
 return _M
