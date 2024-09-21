@@ -3,6 +3,7 @@ Temp/
 obj/
 outPath/
 Logs/
+log/
 .vs/
 .utmp/
 .vsconfig
