@@ -15,7 +15,7 @@ end
 local function ParseStartupCommands(self)
     local tb
     if _MOE.IsEditor then
-        local json = "{'playerInfos':[{'token':'7b604add895a37e1296756f9b8c7b2b2','session':'1fbabfb6abd657df321587792bdb8577'}],'dsaData':{'ip':'127.0.0.1','port':1991},'battleData':{'ip':'127.0.0.1','port':1990}}"
+        local json = "{'dsaData':{'ip':'127.0.0.1','port':1991},'battleData':{'ip':'127.0.0.1','port':1990}}"
         json = string.gsub(json, "'", "\"")
         tb = _MOE.Json.decode(json)
     end
