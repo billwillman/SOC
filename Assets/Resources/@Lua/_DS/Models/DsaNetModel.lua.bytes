@@ -27,4 +27,9 @@ function _M:SendDsReady()
     self:SendMsg(_MOE.MsgIds.CM_DS_StartReady, msg)
 end
 
+--------------------------------------- 继承方法 ---------------------------------------
+
+function _M:NetModel_OnInit()
+end
+
 return _M

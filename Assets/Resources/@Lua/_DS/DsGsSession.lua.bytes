@@ -100,6 +100,16 @@ function DsGsSession:GetDsToken()
     return dsData.token
 end
 
+function DsGsSession:SetDsToken(dsToken)
+    if not dsToken then
+        return
+    end
+    self.tb = self.tb or {}
+    self.tb.dsData = self.tb.dsData or {}
+    local dsData = self.tb.dsData
+    dsData.token = dsToken
+end
+
 function DsGsSession:GetPlayerInfos()
     if not self.tb then
         return
