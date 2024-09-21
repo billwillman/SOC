@@ -78,6 +78,7 @@ function _M:_OnHeartTimer()
             local now = os.time()
             if now - self.m_LastHeartTime > 10 then
                 -- 心跳包超时
+                print("[BaseNetModel] heart timeout: Disconnect~!")
                 self.NetClient:Disconnect()
                 self:_OnGSSocketAbort()
                 return
