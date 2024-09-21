@@ -14,7 +14,17 @@ function _M:ConnectDSA()
 end
 
 function _M:SendDsReady()
-    
+    local GsSession = _MOE.GameApp:GetGsDsSession()
+    if not GsSession then
+        return
+    end
+    -- 说明准备好了
+    local msg = {
+        dsIp = GsSession:GetDsIp(),
+        dsPort = GsSession:GetDsPort(),
+        dsToken = GsSession:GetDsToken()
+    }
+    self:SendMsg(_MOE.MsgIds.CM_DS_StartReady, msg)
 end
 
 return _M
