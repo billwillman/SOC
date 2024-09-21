@@ -9,6 +9,7 @@ local MsgIds = {
     SM_RepDsAddr = 1, -- 返回DS
     SM_Heart = 2, -- 心跳包
     SM_LoginRet = 3, -- 登录返回
+    SM_DS_ReadyRep = 4
 }
 
 _MOE.MsgIds = MsgIds
