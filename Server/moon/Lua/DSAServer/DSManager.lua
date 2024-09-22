@@ -60,6 +60,7 @@ function _M:StartDSAsync(playerInfos)
         print("[dsa] not run SOC.exe...")
         return
     end
+    handler:read("*a")
     print(string.format("[DSA] DS Handle: %s", handler))
     --local result = handler:read("*a")
     --print("[DSA] DS Handler: " .. result)
