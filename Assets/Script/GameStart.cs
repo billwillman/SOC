@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using XLua;
 
@@ -25,7 +26,24 @@ namespace SOC.GamePlay
 
         private void Start() {
             ServerAttachLogFile();
+            InitLuaSearchFormatPath();
             ResourceMgr.Instance.LoadConfigs(OnResConfigResult, this, true);
+        }
+
+        void InitLuaSearchFormatPath() {
+            string luaSearchPath;
+            if (IsDS) {
+                luaSearchPath = Application.dataPath + "/Lua/{0}.lua.bytes";
+            } else {
+                luaSearchPath = Application.persistentDataPath + "/Lua/{0}.lua.bytes";
+            }
+            if (!string.IsNullOrEmpty(luaSearchPath)) {
+                Debug.LogFormat("AddDynicLuaSearchPath: {0}", luaSearchPath);
+                _cLuaRootPathFormats.Add(new LuaPathFormatData(luaSearchPath, true));
+            }
+
+            _cLuaRootPathFormats.Add(new LuaPathFormatData("Resources/@Lua/{0}.lua.bytes", false));
+            _cLuaRootPathFormats.Add(new LuaPathFormatData("Resources/@Lua/_BehaviourTree/{0}.lua.bytes", false));
         }
 
         void OnResConfigResult(bool isOk) {
@@ -158,18 +176,34 @@ namespace SOC.GamePlay
                 
         }
 
-        private static string[] _cLuaRootPathFormats = {
-            "Resources/@Lua/{0}.lua.bytes",
-            "Resources/@Lua/_BehaviourTree/{0}.lua.bytes"
-        };
+        struct LuaPathFormatData
+        {
+            public string formatPath;
+            public bool isFileMode;
+
+            public LuaPathFormatData(string formatPath, bool isFileMode) {
+                this.formatPath = formatPath;
+                this.isFileMode = isFileMode;
+            }
+        }
+
+        private static List<LuaPathFormatData> _cLuaRootPathFormats = new List<LuaPathFormatData>();
 
         private byte[] OnLuaFileLoad(ref string filepath) {
             filepath = filepath.Replace(".", "/");
-            foreach (var pathFormat in _cLuaRootPathFormats) {
-                string luaPath = string.Format(pathFormat, filepath);
-                byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath, ResourceCacheType.rctRefAdd);
-                if (ret != null)
-                    return ret;
+            foreach (var pathData in _cLuaRootPathFormats) {
+                string luaPath = string.Format(pathData.formatPath, filepath);
+                if (pathData.isFileMode) {
+                    if (File.Exists(luaPath)) {
+                        byte[] ret = File.ReadAllBytes(luaPath);
+                        if (ret != null)
+                            return ret;
+                    }
+                } else {
+                    byte[] ret = ResourceMgr.Instance.LoadBytes(luaPath, ResourceCacheType.rctRefAdd);
+                    if (ret != null)
+                        return ret;
+                }
             }
             return null;
         }
