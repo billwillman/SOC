@@ -118,6 +118,7 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
     end
     -- 关掉定时器关闭
     self:ClearDs_ConnectStopTimer(dsToken)
+    print("[DSA] dsIp: %s dsPort: %d dsToken: %s Ds Ready", msg.dsIp, msg.dsPort, dsToken)
 end
 
 function _M:GetDsTokenFromDsClientToken(clientToken)
