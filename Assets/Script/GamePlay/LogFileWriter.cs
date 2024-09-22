@@ -49,7 +49,8 @@ namespace SOC.GamePlay
         protected void WriteLog(string log) {
             if (string.IsNullOrEmpty(log) || m_FileStream == null)
                 return;
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log + "\n");
+            log = string.Format("[%s] %s\n", DateTime.Now.ToString(), log);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log);
             m_FileStream.WriteAsync(buffer);
             m_FileStream.FlushAsync();
         }
