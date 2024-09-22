@@ -296,7 +296,11 @@ enum {
 #  define ENOTRECOVERABLE 44
 #endif
 
+#ifdef _WIN64 || _WIN32
+//#include "sched.h"
+#else
 #include <sched.h>
+#endif
 
 /*
  * To avoid including windows.h we define only those things that we
@@ -317,10 +321,12 @@ enum {
 #define HAVE_STRUCT_TIMESPEC
 #if !defined(_TIMESPEC_DEFINED)
 #define _TIMESPEC_DEFINED
+/*
 struct timespec {
         time_t tv_sec;
         long tv_nsec;
 };
+*/
 #endif /* _TIMESPEC_DEFINED */
 #endif /* HAVE_STRUCT_TIMESPEC */
 
