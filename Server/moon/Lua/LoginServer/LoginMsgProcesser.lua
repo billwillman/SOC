@@ -49,17 +49,6 @@ local _Server_TO_LOGIN = {
     end
 }
 
-setmetatable(_Server_TO_LOGIN, {__index = SERVER_COMMAND_PROCESS})
-
-
-------------------------------------------- 服务器交互协议 -----------------------
-
-moon.dispatch("lua", function(_, _, cmd, ...)
-    -- 处理 cmd
-    local OnProcess = _Server_TO_LOGIN[cmd]
-    if OnProcess then
-        OnProcess(...)
-    end
-end)
+RegisterServerCommandProcess(_Server_TO_LOGIN)
 
 return _M

@@ -79,14 +79,25 @@ function _M:OnMsg(msg, socket, fd)
     return true
 end
 
+moon.exports.RegisterServerCommandProcess = function (table)
+    if not table or type(table) ~= "table"  then
+        return false
+    end
+    if table ~= SERVER_COMMAND_PROCESS then
+        setmetatable(table, {__index = SERVER_COMMAND_PROCESS})
+    end
+    moon.dispatch("lua", function(_, _, cmd, ...)
+        -- 处理 cmd
+        local OnProcess = table[cmd]
+        if OnProcess then
+            OnProcess(...)
+        end
+    end)
+    return true
+end
+
 ------------------------------------------- 服务器交互协议 -----------------------
 
-moon.dispatch("lua", function(_, _, cmd, ...)
-    -- 处理 cmd
-    local OnProcess = SERVER_COMMAND_PROCESS[cmd]
-    if OnProcess then
-        OnProcess(...)
-    end
-end)
+RegisterServerCommandProcess(SERVER_COMMAND_PROCESS)
 
 return _M
