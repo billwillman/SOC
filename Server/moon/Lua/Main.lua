@@ -146,10 +146,13 @@ moon.async(
 
 
 moon.shutdown(function ()
+    print("receive shutdown")
     moon.async(function ()
         if server_ok then
+            print("---1")
             -- 无DB的服务关闭
             CallServerIds_Func( _MOE.ServicesCall.Shutdown)
+            print("----2")
             -- 等待
             local i = 5
             while i > 0 do
@@ -157,11 +160,13 @@ moon.shutdown(function ()
                 print(i .. "......")
                 i = i - 1
             end
+            print("----3")
             -- 有DB的服务关闭
             CallServerIds_Func(_MOE.ServicesCall.SaveAndQuit)
         else
             moon.exit(-1)
         end
+        print("----4")
         RuntimeServerIds = {}
         ---wait all service quit
         while true do
@@ -172,7 +177,7 @@ moon.shutdown(function ()
             moon.sleep(200)
             print("bootstrap wait all service quit, now count:", size)
         end
-        
+        print("-----5")
         moon.quit()
     end)
 end)
