@@ -16,23 +16,22 @@ moon.exports.DSManager = DSManager
 moon.exports.ServerData = ServerData
 local MsgProcesser = require("DSAServer/DSAServerProcesser").New()
 
---注册网络事件
-socket.on("accept",function(fd, msg)
+moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
     --socket.set_enable_chunked(fd, "w")
     DSManager:OnDsSocketConnect(fd)
-end)
+end
 
-socket.on("close", function(fd, msg)
+moon.exports.OnClose = function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
     DSManager:OnDsSocketClose(fd)
-end)
+end
 
-socket.on("message", function(fd, msg)
+moon.exports.OnMessage = function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
-end)
+end
 
 --[[
 local TokenToDSHandleMap = {}
