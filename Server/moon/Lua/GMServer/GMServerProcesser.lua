@@ -18,6 +18,8 @@ local _Server_GM_Process = {
 
 }
 
+setmetatable(_Server_GM_Process, {__index = SERVER_COMMAND_PROCESS})
+
 moon.dispatch("lua", function(_, _, cmd, ...)
     -- 处理 cmd
     local OnProcess = _Server_GM_Process[cmd]

@@ -2,10 +2,26 @@ local _M = _MOE.class("CommonMsgProcesser")
 local MsgIds = require("_NetMsg.MsgId")
 local json = require("json")
 local moon = require("moon")
+require("ServerCommon.ServerMsgIds")
 
 _M.MsgDispatch = {
     [MsgIds.CM_Heart] = function (self, msg, socket, fd)
         self:SendHeartMsg(socket, fd)
+    end
+}
+
+moon.exports.SERVER_COMMAND_PROCESS = {
+    [_MOE.ServicesCall.InitDB] = function ()
+        return 1
+    end,
+    [_MOE.ServicesCall.SaveAndQuit] = function ()
+        return 1
+    end,
+    [_MOE.ServicesCall.Shutdown] = function ()
+        return 1
+    end,
+    [_MOE.ServicesCall.Start] = function ()
+        return 1
     end
 }
 
@@ -62,5 +78,15 @@ function _M:OnMsg(msg, socket, fd)
     end
     return true
 end
+
+------------------------------------------- 服务器交互协议 -----------------------
+
+moon.dispatch("lua", function(_, _, cmd, ...)
+    -- 处理 cmd
+    local OnProcess = SERVER_COMMAND_PROCESS[cmd]
+    if OnProcess then
+        OnProcess(...)
+    end
+end)
 
 return _M

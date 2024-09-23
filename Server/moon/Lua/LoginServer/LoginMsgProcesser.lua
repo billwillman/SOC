@@ -32,7 +32,7 @@ local CurrentMsgProcess = {
 setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
 
 ----------------------------------------------- 服务器间通信 -------------------------------
-moon.exports._Server_TO_LOGIN = {
+local _Server_TO_LOGIN = {
     [_MOE.ServerMsgIds.SM_DS_STATUS] = function (msg)
         local playerInfos = msg.playerInfos
         if not playerInfos then
@@ -49,5 +49,17 @@ moon.exports._Server_TO_LOGIN = {
     end
 }
 
+setmetatable(_Server_TO_LOGIN, {__index = SERVER_COMMAND_PROCESS})
+
+
+------------------------------------------- 服务器交互协议 -----------------------
+
+moon.dispatch("lua", function(_, _, cmd, ...)
+    -- 处理 cmd
+    local OnProcess = _Server_TO_LOGIN[cmd]
+    if OnProcess then
+        OnProcess(...)
+    end
+end)
 
 return _M

@@ -15,3 +15,10 @@ _MOE.DsStatus = {
     KickOffPlayers = 5, -- DS主动踢出玩家
     PlayerExit = 6, -- 玩家主动退出
 }
+
+_MOE.ServicesCall = {
+    InitDB = "InitDB",
+    Start = "Listen",
+    Shutdown = "Shutdown", -- 非DB服务器先关闭端口
+    SaveAndQuit = "save_then_quit", -- redisd用
+}

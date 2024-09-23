@@ -76,6 +76,8 @@ local _Server_DSA_Process = {
     end
 }
 
+setmetatable(_Server_DSA_Process, {__index = SERVER_COMMAND_PROCESS})
+
 moon.dispatch("lua", function(_, _, cmd, ...)
     -- 处理 cmd
     local OnProcess = _Server_DSA_Process[cmd]

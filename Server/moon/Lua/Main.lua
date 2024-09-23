@@ -47,87 +47,53 @@ end)
 ]]
 
 require("ServerCommon.GlobalServerConfig")
+require("ServerCommon.ServerMsgIds")
 
--- 登录服务器
-moon.async(function ()
-    local id = moon.new_service(
-        {
-            name = "LoginServer",
-            file = "./LoginServer/LoginServer.lua",
-            unique = true
-        }
-    )
-    assert(id > 0, "Create LoginServer Fail")
-end)
+local server_ok = false
 
--- 区服服务器
-moon.async(function ()
-    local id = moon.new_service(
-        {
-            name = "ServerListServer",
-            file = "ServerListServer.lua",
-            unique = true
-        }
-    )
-    assert(id > 0, "Create ServerListServer Fail")
-end)
+local Services = {
+    -- 登录服务器
+    {
+        name = "LoginServer",
+        file = "./LoginServer/LoginServer.lua",
+        unique = true
+    },
+    -- 区服服务器
+    {
+        name = "ServerListServer",
+        file = "ServerListServer.lua",
+        unique = true
+    },
+    -- 战斗服务器
+    {
+        name = "DsBattleServer",
+        file = "./DsBattleServer/DsBattleServer.lua",
+        unique = true
+    },
+    -- DSA服务器：用来拉取和分配DS的服务器
+    {
+        name = "DSA",
+        file = "./DSAServer/DSAServer.lua",
+        unique = true
+    },
+    -- GM服务器
+    {
+        name = "GM",
+        file = "./GMServer/GMServer.lua",
+        unique = true
+    },
+    --[[
+    -- Cluster集群支持
+    {
+        name = "Cluster",
+        file = "../service/cluster.lua",
+        unique = true,
+        url = clusterUrl
+    }
+    ]]
+}
 
--- 战斗服务器
-moon.async(function ()
-    local id = moon.new_service(
-        {
-            name = "DsBattleServer",
-            file = "./DsBattleServer/DsBattleServer.lua",
-            unique = true
-        }
-    )
-    assert(id > 0, "Create DsBattleServer Fail")
-end)
-
--- DSA服务器：用来拉取和分配DS的服务器
-moon.async(
-    function ()
-        local id = moon.new_service(
-            {
-                name = "DSA",
-                file = "./DSAServer/DSAServer.lua",
-                unique = true
-            }
-        )
-        assert(id > 0, "Create DSAServer Fail")
-    end
-)
-
--- GM服务器
-moon.async(
-    function ()
-        local id = moon.new_service(
-            {
-                name = "GM",
-                file = "./GMServer/GMServer.lua",
-                unique = true
-            }
-        )
-        assert(id > 0, "Create GMServer Fail")
-    end
-)
-
--- Cluster集群支持
-local clusterUrl = GetServerConfig("Cluster").url
-moon.async(
-    function ()
-        local id = moon.new_service(
-            {
-                name = "Cluster",
-                file = "../service/cluster.lua",
-                unique = true,
-                url = clusterUrl
-            }
-        )
-        assert(id > 0, "Create Cluster Fail")
-    end
-)
-
+local RuntimeServerIds = {}
 
 --[[
 moon.async(function ()
@@ -142,13 +108,61 @@ moon.async(function ()
 end)
 ]]
 
+local function CallServerIds_Func(funcName)
+    if not RuntimeServerIds or not next(RuntimeServerIds) or not funcName or string.len(funcName) <= 0 then
+        return
+    end
+    for _, id in ipairs(RuntimeServerIds) do
+        moon.send("lua", id, funcName)
+        --assert(moon.send("lua", id, funcName))
+    end
+end
+
+local function Start()
+    RuntimeServerIds = {}
+    for _, service in ipairs(Services) do
+        local id = moon.new_service(service)
+        assert(id > 0, string.format("Create %s Fail", service.name))
+        table.insert(RuntimeServerIds, id)
+    end
+
+    -- 初始化DB
+    CallServerIds_Func(_MOE.ServicesCall.InitDB)
+    -- 开始监听
+    CallServerIds_Func(_MOE.ServicesCall.Start)
+end
+
+moon.async(
+    function ()
+        local ok, err = xpcall(Start, debug.traceback)
+        if not ok then
+            moon.error("server will abort, init error\n", err)
+            moon.exit(-1)
+            return
+        end
+        server_ok = true
+    end
+)
+
+
 moon.shutdown(function ()
     moon.async(function ()
-        --[[
-        -- 控制其它唯一服务的退出逻辑
-        assert(moon.call("lua", moon.queryservice("center"), "shutdown"))
-        moon.raw_send("system", moon.queryservice("db"), "wait_save")
-        ]]
+        if server_ok then
+            -- 无DB的服务关闭
+            CallServerIds_Func( _MOE.ServicesCall.Shutdown)
+            -- 等待
+            local i = 5
+            while i > 0 do
+                moon.sleep(1000)
+                print(i .. "......")
+                i = i - 1
+            end
+            -- 有DB的服务关闭
+            CallServerIds_Func(_MOE.ServicesCall.SaveAndQuit)
+        else
+            moon.exit(-1)
+        end
+        RuntimeServerIds = {}
         ---wait all service quit
         while true do
             local size = moon.server_stats("service.count")
