@@ -13,8 +13,7 @@ local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
 moon.exports.ServerData = ServerData
 
---注册网络事件
-socket.on("accept",function(fd, msg)
+moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
@@ -23,16 +22,16 @@ socket.on("accept",function(fd, msg)
     local serverInfo = moon.server_stats()
     print(serverInfo)
     ]]
-end)
+end
 
-socket.on("message", function(fd, msg)
+moon.exports.OnMessage = function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
-end)
+end
 
-socket.on("close", function(fd, msg)
+moon.OnClose = function(fd, msg)
     PlayerManager:RemovePlayer(fd)
     print("close ", fd, moon.decode(msg, "Z"))
-end)
+end
 
 --[[
 socket.on("error", function(fd, msg)

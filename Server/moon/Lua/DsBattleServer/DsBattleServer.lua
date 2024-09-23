@@ -14,18 +14,17 @@ moon.exports.ServerData = ServerData
 local MsgProcesser = require("DsBattleServer/DsBattleServerProcesser").New()
 
 --注册网络事件
-socket.on("accept",function(fd, msg)
+moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
     socket.settimeout(fd, 10)
     --socket.setnodelay(fd)
     --socket.set_enable_chunked(fd, "w")
+end
 
-end)
-
-socket.on("close", function(fd, msg)
+moon.exports.OnClose = function(fd, msg)
     print("close ", fd, moon.decode(msg, "Z"))
-end)
+end
 
-socket.on("message", function(fd, msg)
+moon.exports.OnMessage = function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
-end)
+end

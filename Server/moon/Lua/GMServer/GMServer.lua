@@ -12,11 +12,11 @@ local socket = require "moon.socket"
 moon.exports.ServerData = ServerData
 local MsgProcesser = require("GMServer/GMServerProcesser").New()
 
-socket.on("accept",function(fd, msg)
+moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
     socket.settimeout(fd, 10)
-end)
+end
 
-socket.on("message", function(fd, msg)
+moon.exports.OnMessage = function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
-end)
+end
