@@ -28,7 +28,7 @@ moon.exports.OnMessage = function(fd, msg)
     MsgProcesser:OnMsg(msg, socket, fd)
 end
 
-moon.OnClose = function(fd, msg)
+moon.exports.OnClose = function(fd, msg)
     PlayerManager:RemovePlayer(fd)
     print("close ", fd, moon.decode(msg, "Z"))
 end
