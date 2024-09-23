@@ -25,8 +25,12 @@ package.path = path .. ";"
 
 local moon = require("moon")
 
+local arg = moon.args()
+
 --保存为env所有服务共享PATH配置
 moon.env("PATH", string.format("package.path='%s'", package.path))
+
+moon.env("NODE", arg[1])
 -------------------------------以上代码是固定写法--------------------------------------
 --[[
 -- 启动HttpPayServer
@@ -109,17 +113,21 @@ moon.async(
 )
 
 -- Cluster集群支持
+local clusterUrl = GetServerConfig("Cluster").url
 moon.async(
-    local id = moon.new_service(
+    function ()
+        local id = moon.new_service(
             {
                 name = "Cluster",
-                file = "moon/service/cluster.lua",
+                file = "../service/cluster.lua",
                 unique = true,
-                url = GetServerConfig("Cluster").url,
+                url = clusterUrl
             }
         )
         assert(id > 0, "Create Cluster Fail")
+    end
 )
+
 
 --[[
 moon.async(function ()
