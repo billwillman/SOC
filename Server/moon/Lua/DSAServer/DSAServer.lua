@@ -11,11 +11,9 @@ local socket = require "moon.socket"
 -- require("ServerCommon.GlobalFuncs")
 -- local TableUtils = require("_Common.TableUtils")
 
-local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
-socket.start(listenfd)
-
 local DSManager = require("DSAServer.DSManager").New()
 moon.exports.DSManager = DSManager
+moon.exports.ServerData = ServerData
 local MsgProcesser = require("DSAServer/DSAServerProcesser").New()
 
 --注册网络事件

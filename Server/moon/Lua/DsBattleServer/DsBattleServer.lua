@@ -10,10 +10,8 @@ local json = require("json")
 local moon = require("moon")
 local socket = require "moon.socket"
 
+moon.exports.ServerData = ServerData
 local MsgProcesser = require("DsBattleServer/DsBattleServerProcesser").New()
-
-local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
-socket.start(listenfd)--auto accept
 
 --注册网络事件
 socket.on("accept",function(fd, msg)

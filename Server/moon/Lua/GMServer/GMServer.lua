@@ -9,10 +9,8 @@ require("LuaPanda").start("127.0.0.1", ServerData.Debug)
 local moon = require("moon")
 local socket = require "moon.socket"
 
+moon.exports.ServerData = ServerData
 local MsgProcesser = require("GMServer/GMServerProcesser").New()
-
-local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
-socket.start(listenfd)
 
 socket.on("accept",function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
