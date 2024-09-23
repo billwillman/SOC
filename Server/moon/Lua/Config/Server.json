@@ -23,5 +23,8 @@
         "ip": "127.0.0.1",
         "port": 1992,
         "Debug": 20004
+    },
+    "Cluster": {
+        "url": "http://127.0.0.1:8003/conf.cluster?node=%s"
     }
 }

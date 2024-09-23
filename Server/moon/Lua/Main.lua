@@ -42,6 +42,8 @@ moon.async(function ()
 end)
 ]]
 
+require("ServerCommon.GlobalServerConfig")
+
 -- 登录服务器
 moon.async(function ()
     local id = moon.new_service(
@@ -104,6 +106,19 @@ moon.async(
         )
         assert(id > 0, "Create GMServer Fail")
     end
+)
+
+-- Cluster集群支持
+moon.async(
+    local id = moon.new_service(
+            {
+                name = "Cluster",
+                file = "moon/service/cluster.lua",
+                unique = true,
+                url = GetServerConfig("Cluster").url,
+            }
+        )
+        assert(id > 0, "Create Cluster Fail")
 )
 
 --[[
