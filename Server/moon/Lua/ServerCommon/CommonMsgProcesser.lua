@@ -2,6 +2,7 @@ local _M = _MOE.class("CommonMsgProcesser")
 local MsgIds = require("_NetMsg.MsgId")
 local json = require("json")
 local moon = require("moon")
+local socket = require "moon.socket"
 require("ServerCommon.ServerMsgIds")
 
 _M.MsgDispatch = {
@@ -10,17 +11,30 @@ _M.MsgDispatch = {
     end
 }
 
+local listenfd = nil
+local ServerData = ServerData
+
 moon.exports.SERVER_COMMAND_PROCESS = {
     [_MOE.ServicesCall.InitDB] = function ()
         return 1
     end,
     [_MOE.ServicesCall.SaveAndQuit] = function ()
+        if ServerData and ServerData.isSaveQuit and listenfd then
+            socket.close(listenfd)
+        end
         return 1
     end,
     [_MOE.ServicesCall.Shutdown] = function ()
+        if ServerData and not ServerData.isSaveQuit and listenfd then
+            socket.close(listenfd)
+        end
         return 1
     end,
     [_MOE.ServicesCall.Start] = function ()
+        if ServerData then
+            local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
+            socket.start(listenfd)--auto accept
+        end
         return 1
     end
 }

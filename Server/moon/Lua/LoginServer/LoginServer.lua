@@ -10,10 +10,8 @@ local socket = require "moon.socket"
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
-local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
-socket.start(listenfd)--auto accept
-
 moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
+moon.exports.ServerData = ServerData
 
 --注册网络事件
 socket.on("accept",function(fd, msg)
