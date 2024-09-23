@@ -21,12 +21,14 @@ moon.exports.SERVER_COMMAND_PROCESS = {
     [_MOE.ServicesCall.SaveAndQuit] = function ()
         if ServerData and ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
+            listenfd = nil
         end
         return 1
     end,
     [_MOE.ServicesCall.Shutdown] = function ()
         if ServerData and not ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
+            listenfd = nil
         end
         return 1
     end,
