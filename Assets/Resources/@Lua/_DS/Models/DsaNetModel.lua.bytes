@@ -27,6 +27,8 @@ function _M:SendDsReady()
     self:SendMsg(_MOE.MsgIds.CM_DS_StartReady, msg)
 end
 
+------------------------------------------------------------ 网络消息 ----------------------------------------------
+
 function _M:_OnMsg_SM_DS_ReadyRep(msg)
     local dsToken = msg.dsToken
     if dsToken then
