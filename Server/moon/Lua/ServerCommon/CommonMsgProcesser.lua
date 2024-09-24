@@ -13,7 +13,7 @@ _M.MsgDispatch = {
 
 local listenfd = nil
 
-moon.exports.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
+_M.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
     [_MOE.ServicesCall.InitDB] = true,
     [_MOE.ServicesCall.SaveAndQuit] = true,
     [_MOE.ServicesCall.Shutdown]  = true,
@@ -21,7 +21,8 @@ moon.exports.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
     [_MOE.ServicesCall.Start] = true
 }
 
-local ServerCommandProcessCallMode = SERVER_COMMAND_PROCESS_IS_CALLMODE
+local ServerCommandProcessCallMode = _M.SERVER_COMMAND_PROCESS_IS_CALLMODE
+local ServerClientDispatch = _M.MsgDispatch
 
 moon.exports.IsServerCommandCallModel = function (funcName)
     if not funcName or not ServerCommandProcessCallMode then
@@ -30,7 +31,7 @@ moon.exports.IsServerCommandCallModel = function (funcName)
     return ServerCommandProcessCallMode[funcName]
 end
 
-moon.exports.SERVER_COMMAND_PROCESS = {
+_M.SERVER_COMMAND_PROCESS = {
     [_MOE.ServicesCall.InitDB] = function ()
         print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.InitDB))
         return true
@@ -105,11 +106,13 @@ function _M:SendTableToJson(socket, fd, sendMsg)
 end
 
 function _M:_OnMsg(msg, socket, fd)
-    -- print(_MOE.TableUtils.Serialize(msg))
-    local func = _M.MsgDispatch[msg.msgId]
-    if func then
-        func(self, msg, socket, fd)
-        return true
+    if ServerClientDispatch then
+        -- print(_MOE.TableUtils.Serialize(msg))
+        local func = ServerClientDispatch[msg.msgId]
+        if func then
+            func(self, msg, socket, fd)
+            return true
+        end
     end
     print("[OnMsg Error] MsgId: " .. msg.msgId)
     return false
@@ -141,8 +144,8 @@ moon.exports.RegisterServerCommandProcess = function (table)
     if not table or type(table) ~= "table"  then
         return false
     end
-    if table ~= SERVER_COMMAND_PROCESS then
-        setmetatable(table, {__index = SERVER_COMMAND_PROCESS})
+    if table ~= _M.SERVER_COMMAND_PROCESS then
+        setmetatable(table, {__index = _M.SERVER_COMMAND_PROCESS})
     end
     moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
@@ -163,8 +166,8 @@ moon.exports.RegisterServerCommandCallModel = function (table)
         return false
     end
     if table ~= ServerCommandProcessCallMode then
-        if table ~= SERVER_COMMAND_PROCESS_IS_CALLMODE then
-            setmetatable(table, {__index = SERVER_COMMAND_PROCESS_IS_CALLMODE})
+        if table ~= _M.SERVER_COMMAND_PROCESS_IS_CALLMODE then
+            setmetatable(table, {__index = _M.SERVER_COMMAND_PROCESS_IS_CALLMODE})
             ServerCommandProcessCallMode = table
         else
             ServerCommandProcessCallMode = table
@@ -173,10 +176,26 @@ moon.exports.RegisterServerCommandCallModel = function (table)
     return true
 end
 
+moon.exports.RegisterClientMsgProcess = function (table)
+    -- ServerClientDispatch
+    if not table or type(table) ~= "table"  then
+        return false
+    end
+    if table ~= ServerClientDispatch then
+        if table ~= _M.MsgDispatch then
+            setmetatable(table, {__index = _M.MsgDispatch})
+            ServerClientDispatch = table
+        else
+            ServerClientDispatch = table
+        end
+    end
+    return true
+end
+
 moon.exports.RegisterDefaultServerCommandProcess = function ()
     moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
-        local OnProcess = SERVER_COMMAND_PROCESS[cmd]
+        local OnProcess = _M.SERVER_COMMAND_PROCESS[cmd]
         if OnProcess then
             if IsServerCommandCallModel(cmd) then
                 moon.response("lua", sender, session, OnProcess(...))
@@ -185,16 +204,6 @@ moon.exports.RegisterDefaultServerCommandProcess = function ()
             end
         end
     end)
-    return true
-end
-
-moon.exports.RegisterClientMsgProcess = function (table)
-    if not table or type(table) ~= "table"  then
-        return false
-    end
-    if table ~= _M.MsgDispatch then
-        setmetatable(table, {__index = _M.MsgDispatch})
-    end
     return true
 end
 
