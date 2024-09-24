@@ -65,7 +65,8 @@ local Services = {
     {
         name = "ServerListServer",
         file = "ServerListServer.lua",
-        unique = true
+        unique = true,
+        NoInitCallFunc = true
     },
     -- 战斗服务器
     {
@@ -125,7 +126,9 @@ local function Start()
     for _, service in ipairs(Services) do
         local id = moon.new_service(service)
         assert(id > 0, string.format("Create %s Fail", service.name))
-        table.insert(RuntimeServerIds, id)
+        if not service.NoInitCallFunc then
+            table.insert(RuntimeServerIds, id)
+        end
         print(string.format("[%d] %s new service", id, service.name))
     end
     -- print (TableUtils.Serialize(RuntimeServerIds))
