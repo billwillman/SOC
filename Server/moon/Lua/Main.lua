@@ -48,6 +48,7 @@ end)
 
 require("ServerCommon.GlobalServerConfig")
 require("ServerCommon.ServerMsgIds")
+local TableUtils = require("_Common.TableUtils")
 
 local server_ok = false
 
@@ -126,6 +127,7 @@ local function Start()
         print(string.format("[%d] server new: %s", id, service.name))
         table.insert(RuntimeServerIds, id)
     end
+    print (TableUtils.Serialize(RuntimeServerIds))
 
     -- 初始化DB
     CallServerIds_Func(_MOE.ServicesCall.InitDB)
