@@ -25,6 +25,8 @@ package.path = path .. ";"
 
 local moon = require("moon")
 
+require("LuaPanda").start("127.0.0.1", 99999)
+
 local arg = moon.args()
 
 --保存为env所有服务共享PATH配置
