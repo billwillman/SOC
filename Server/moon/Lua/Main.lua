@@ -123,6 +123,7 @@ local function Start()
     for _, service in ipairs(Services) do
         local id = moon.new_service(service)
         assert(id > 0, string.format("Create %s Fail", service.name))
+        print(string.format("[%d] server new: %s", id, service.name))
         table.insert(RuntimeServerIds, id)
     end
 
