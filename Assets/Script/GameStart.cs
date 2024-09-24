@@ -35,7 +35,10 @@ namespace SOC.GamePlay
             if (IsDS) {
                 luaSearchPath = Application.dataPath + "/Lua/{0}.lua.bytes";
             } else {
-                luaSearchPath = Application.persistentDataPath + "/Lua/{0}.lua.bytes";
+                if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer)
+                    luaSearchPath = Application.dataPath + "/Lua/{0}.lua.bytes";
+                else
+                    luaSearchPath = Application.persistentDataPath + "/Lua/{0}.lua.bytes";
             }
             if (!string.IsNullOrEmpty(luaSearchPath)) {
                 Debug.LogFormat("AddDynicLuaSearchPath: {0}", luaSearchPath);
