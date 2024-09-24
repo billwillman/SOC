@@ -10,8 +10,8 @@ local socket = require "moon.socket"
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
-moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
 moon.exports.ServerData = ServerData
+moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
 
 moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))

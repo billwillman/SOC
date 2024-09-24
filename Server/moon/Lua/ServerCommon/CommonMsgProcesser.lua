@@ -12,7 +12,6 @@ _M.MsgDispatch = {
 }
 
 local listenfd = nil
-local ServerData = ServerData
 
 moon.exports.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
     [_MOE.ServicesCall.InitDB] = true,
