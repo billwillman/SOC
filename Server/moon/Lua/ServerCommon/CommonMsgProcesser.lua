@@ -123,6 +123,17 @@ moon.exports.RegisterServerCommandProcess = function (table)
     return true
 end
 
+moon.exports.RegisterDefaultServerCommandProcess = function ()
+    moon.dispatch("lua", function(_, _, cmd, ...)
+        -- 处理 cmd
+        local OnProcess = SERVER_COMMAND_PROCESS[cmd]
+        if OnProcess then
+            OnProcess(...)
+        end
+    end)
+    return true
+end
+
 moon.exports.RegisterClientMsgProcess = function (table)
     if not table or type(table) ~= "table"  then
         return false
