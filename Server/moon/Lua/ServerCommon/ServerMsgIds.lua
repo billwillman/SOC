@@ -18,7 +18,8 @@ _MOE.DsStatus = {
 
 _MOE.ServicesCall = {
     InitDB = "InitDB",
-    Start = "Listen",
+    Start = "Start",
+    Listen = "Listen",
     Shutdown = "Shutdown", -- 非DB服务器先关闭端口
     SaveAndQuit = "save_then_quit", -- redisd用
 }

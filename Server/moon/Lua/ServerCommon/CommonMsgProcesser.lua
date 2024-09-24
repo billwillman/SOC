@@ -35,10 +35,15 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         end
         return 1
     end,
-    [_MOE.ServicesCall.Start] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
+    [_MOE.ServicesCall.Listen] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Listen))
         if ServerData then
             listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
+        end
+    end,
+    [_MOE.ServicesCall.Start] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
+        if ServerData and listenfd then
             socket.start(listenfd)--auto accept
             print("Server Start: " .. tostring(serverId))
             --注册网络事件
