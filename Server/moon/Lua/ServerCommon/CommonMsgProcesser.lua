@@ -157,6 +157,4 @@ end
 
 ------------------------------------------- 服务器交互协议 -----------------------
 
-RegisterServerCommandProcess(SERVER_COMMAND_PROCESS)
-
 return _M
