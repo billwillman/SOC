@@ -16,9 +16,11 @@ local ServerData = ServerData
 
 moon.exports.SERVER_COMMAND_PROCESS = {
     [_MOE.ServicesCall.InitDB] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.InitDB))
         return 1
     end,
     [_MOE.ServicesCall.SaveAndQuit] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.SaveAndQuit))
         if ServerData and ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
             listenfd = nil
@@ -26,6 +28,7 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         return 1
     end,
     [_MOE.ServicesCall.Shutdown] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Shutdown))
         if ServerData and not ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
             listenfd = nil
@@ -33,6 +36,7 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         return 1
     end,
     [_MOE.ServicesCall.Start] = function (serverId)
+        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
         if ServerData then
             local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
             socket.start(listenfd)--auto accept
