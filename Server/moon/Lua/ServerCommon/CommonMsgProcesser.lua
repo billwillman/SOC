@@ -36,6 +36,7 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         if ServerData then
             local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
             socket.start(listenfd)--auto accept
+            print("Server Start: " .. tostring(listenfd))
             --注册网络事件
             if OnAccept then
                 socket.on("accept", OnAccept)
