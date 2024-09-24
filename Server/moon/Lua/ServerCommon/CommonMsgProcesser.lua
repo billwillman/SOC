@@ -122,6 +122,15 @@ moon.exports.RegisterServerCommandProcess = function (table)
     return true
 end
 
+moon.exports.RegisterClientMsgProcess = function (table)
+    if not table or type(table) ~= "table"  then
+        return false
+    end
+    if table ~= _M.MsgDispatch then
+        setmetatable(table, {__index = _M.MsgDispatch})
+    end
+end
+
 ------------------------------------------- 服务器交互协议 -----------------------
 
 RegisterServerCommandProcess(SERVER_COMMAND_PROCESS)

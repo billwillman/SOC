@@ -29,7 +29,7 @@ local CurrentMsgProcess = {
     end
 }
 
-setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
+RegisterClientMsgProcess(CurrentMsgProcess)
 
 ----------------------------------------------- 服务器间通信 -------------------------------
 local _Server_TO_LOGIN = {

@@ -14,6 +14,6 @@ local CurrentMsgProcess = {
     end
 }
 
-setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
+RegisterClientMsgProcess(CurrentMsgProcess)
 
 return _M

@@ -9,7 +9,7 @@ local CurrentMsgProcess = {
     end
 }
 
-setmetatable(_M.MsgDispatch, {__index = CurrentMsgProcess})
+RegisterClientMsgProcess(CurrentMsgProcess)
 
 -------------------------------------------- 服务器之间通信 ------------------------------------------
 
