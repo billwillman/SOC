@@ -20,16 +20,16 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         return 1
     end,
     [_MOE.ServicesCall.SaveAndQuit] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.SaveAndQuit))
         if ServerData and ServerData.isSaveQuit and listenfd then
+            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.SaveAndQuit))
             socket.close(listenfd)
             listenfd = nil
         end
         return 1
     end,
     [_MOE.ServicesCall.Shutdown] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Shutdown))
         if ServerData and not ServerData.isSaveQuit and listenfd then
+            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Shutdown))
             socket.close(listenfd)
             listenfd = nil
         end
@@ -39,13 +39,14 @@ moon.exports.SERVER_COMMAND_PROCESS = {
         print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Listen))
         if ServerData then
             listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
+        else
+            print(string.format("[%d] %s ERROR~!", serverId, _MOE.ServicesCall.Listen))
         end
     end,
     [_MOE.ServicesCall.Start] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
         if ServerData and listenfd then
+            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
             socket.start(listenfd)--auto accept
-            print("Server Start: " .. tostring(serverId))
             --注册网络事件
             if OnAccept then
                 socket.on("accept", OnAccept)
@@ -56,6 +57,8 @@ moon.exports.SERVER_COMMAND_PROCESS = {
             if OnMessage then
                 socket.on("message", OnMessage)
             end
+        else
+            print(string.format("[%d] %s ERROR", serverId, _MOE.ServicesCall.Start))
         end
         return 1
     end
