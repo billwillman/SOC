@@ -15,5 +15,6 @@ local CurrentMsgProcess = {
 }
 
 RegisterClientMsgProcess(CurrentMsgProcess)
+RegisterDefaultServerCommandProcess()
 
 return _M
