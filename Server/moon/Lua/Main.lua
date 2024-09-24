@@ -134,7 +134,7 @@ local function Start()
     CallServerIds_Func(_MOE.ServicesCall.InitDB)
     -- 开始监听
     CallServerIds_Func(_MOE.ServicesCall.Listen)
-    print("-----------------------------------")
+
     CallServerIds_Func(_MOE.ServicesCall.Start)
 end
 
