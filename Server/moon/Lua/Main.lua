@@ -127,6 +127,7 @@ local function Start()
         local id = moon.new_service(service)
         assert(id > 0, string.format("Create %s Fail", service.name))
         table.insert(RuntimeServerIds, id)
+        print(string.format("[%d] %s new service", id, service.name))
     end
     -- print (TableUtils.Serialize(RuntimeServerIds))
 
