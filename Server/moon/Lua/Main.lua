@@ -116,8 +116,9 @@ local function CallServerIds_Func(funcName, ...)
         return
     end
     for _, id in ipairs(RuntimeServerIds) do
-        moon.send("lua", id, funcName, id, ...)
-        --assert(moon.send("lua", id, funcName))
+        print(string.format("[%d] funcName: %s", id, funcName))
+        --moon.send("lua", id, funcName, id, ...)
+        assert(moon.send("lua", id, funcName, id, ...))
     end
 end
 
@@ -129,7 +130,7 @@ local function Start()
         print(string.format("[%d] server new: %s", id, service.name))
         table.insert(RuntimeServerIds, id)
     end
-    print (TableUtils.Serialize(RuntimeServerIds))
+    -- print (TableUtils.Serialize(RuntimeServerIds))
 
     -- 初始化DB
     CallServerIds_Func(_MOE.ServicesCall.InitDB)
