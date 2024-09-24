@@ -108,12 +108,12 @@ moon.async(function ()
 end)
 ]]
 
-local function CallServerIds_Func(funcName)
+local function CallServerIds_Func(funcName, ...)
     if not RuntimeServerIds or not next(RuntimeServerIds) or not funcName or string.len(funcName) <= 0 then
         return
     end
     for _, id in ipairs(RuntimeServerIds) do
-        moon.send("lua", id, funcName)
+        moon.send("lua", id, funcName, id, ...)
         --assert(moon.send("lua", id, funcName))
     end
 end

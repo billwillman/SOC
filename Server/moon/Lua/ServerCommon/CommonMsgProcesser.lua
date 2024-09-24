@@ -15,28 +15,28 @@ local listenfd = nil
 local ServerData = ServerData
 
 moon.exports.SERVER_COMMAND_PROCESS = {
-    [_MOE.ServicesCall.InitDB] = function ()
+    [_MOE.ServicesCall.InitDB] = function (serverId)
         return 1
     end,
-    [_MOE.ServicesCall.SaveAndQuit] = function ()
+    [_MOE.ServicesCall.SaveAndQuit] = function (serverId)
         if ServerData and ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
             listenfd = nil
         end
         return 1
     end,
-    [_MOE.ServicesCall.Shutdown] = function ()
+    [_MOE.ServicesCall.Shutdown] = function (serverId)
         if ServerData and not ServerData.isSaveQuit and listenfd then
             socket.close(listenfd)
             listenfd = nil
         end
         return 1
     end,
-    [_MOE.ServicesCall.Start] = function ()
+    [_MOE.ServicesCall.Start] = function (serverId)
         if ServerData then
             local listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
             socket.start(listenfd)--auto accept
-            print("Server Start: " .. tostring(listenfd))
+            print("Server Start: " .. tostring(serverId))
             --注册网络事件
             if OnAccept then
                 socket.on("accept", OnAccept)
