@@ -116,8 +116,7 @@ local function CallServerIds_Func(funcName, ...)
         return
     end
     for _, id in ipairs(RuntimeServerIds) do
-        moon.send("lua", id, funcName, id, ...)
-        --assert(moon.send("lua", id, funcName, id, ...))
+        assert(moon.call("lua", id, funcName, ...))
     end
 end
 

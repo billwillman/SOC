@@ -14,38 +14,57 @@ _M.MsgDispatch = {
 local listenfd = nil
 local ServerData = ServerData
 
+moon.exports.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
+    [_MOE.ServicesCall.InitDB] = true,
+    [_MOE.ServicesCall.SaveAndQuit] = true,
+    [_MOE.ServicesCall.Shutdown]  = true,
+    [_MOE.ServicesCall.Listen] = true,
+    [_MOE.ServicesCall.Start] = true
+}
+
+local ServerCommandProcessCallMode = SERVER_COMMAND_PROCESS_IS_CALLMODE
+
+moon.exports.IsServerCommandCallModel = function (funcName)
+    if not funcName or not ServerCommandProcessCallMode then
+        return false
+    end
+    return ServerCommandProcessCallMode[funcName]
+end
+
 moon.exports.SERVER_COMMAND_PROCESS = {
-    [_MOE.ServicesCall.InitDB] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.InitDB))
-        return 1
+    [_MOE.ServicesCall.InitDB] = function ()
+        print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.InitDB))
+        return true
     end,
-    [_MOE.ServicesCall.SaveAndQuit] = function (serverId)
+    [_MOE.ServicesCall.SaveAndQuit] = function ()
         if ServerData and ServerData.isSaveQuit and listenfd then
-            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.SaveAndQuit))
+            print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.SaveAndQuit))
             socket.close(listenfd)
             listenfd = nil
         end
-        return 1
+        return true
     end,
-    [_MOE.ServicesCall.Shutdown] = function (serverId)
+    [_MOE.ServicesCall.Shutdown] = function ()
         if ServerData and not ServerData.isSaveQuit and listenfd then
-            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Shutdown))
+            print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.Shutdown))
             socket.close(listenfd)
             listenfd = nil
         end
-        return 1
+        return true
     end,
-    [_MOE.ServicesCall.Listen] = function (serverId)
-        print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Listen))
+    [_MOE.ServicesCall.Listen] = function ()
+        print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.Listen))
         if ServerData then
             listenfd = socket.listen(ServerData.ip, ServerData.port, moon.PTYPE_SOCKET_MOON)
+            return true
         else
-            print(string.format("[%d] %s ERROR~!", serverId, _MOE.ServicesCall.Listen))
+            print(string.format("[%d] %s ERROR~!", moon.id, _MOE.ServicesCall.Listen))
+            return false
         end
     end,
-    [_MOE.ServicesCall.Start] = function (serverId)
+    [_MOE.ServicesCall.Start] = function ()
         if ServerData and listenfd then
-            print(string.format("[%d] %s", serverId, _MOE.ServicesCall.Start))
+            print(string.format("[%d] %s", moon.id, _MOE.ServicesCall.Start))
             socket.start(listenfd)--auto accept
             --注册网络事件
             if OnAccept then
@@ -57,10 +76,11 @@ moon.exports.SERVER_COMMAND_PROCESS = {
             if OnMessage then
                 socket.on("message", OnMessage)
             end
+            return true
         else
-            print(string.format("[%d] %s ERROR", serverId, _MOE.ServicesCall.Start))
+            print(string.format("[%d] %s ERROR", moon.id, _MOE.ServicesCall.Start))
+            return false
         end
-        return 1
     end
 }
 
@@ -125,22 +145,45 @@ moon.exports.RegisterServerCommandProcess = function (table)
     if table ~= SERVER_COMMAND_PROCESS then
         setmetatable(table, {__index = SERVER_COMMAND_PROCESS})
     end
-    moon.dispatch("lua", function(_, _, cmd, ...)
+    moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
         local OnProcess = table[cmd]
         if OnProcess then
-            OnProcess(...)
+            if IsServerCommandCallModel(cmd) then
+                moon.response("lua", sender, session, OnProcess(...))
+            else
+                OnProcess(...)
+            end
         end
     end)
     return true
 end
 
+moon.exports.RegisterServerCommandCallModel = function (table)
+    if not table or type(table) ~= "table"  then
+        return false
+    end
+    if table ~= ServerCommandProcessCallMode then
+        if table ~= SERVER_COMMAND_PROCESS_IS_CALLMODE then
+            setmetatable(table, {__index = SERVER_COMMAND_PROCESS_IS_CALLMODE})
+            ServerCommandProcessCallMode = table
+        else
+            ServerCommandProcessCallMode = table
+        end
+    end
+    return true
+end
+
 moon.exports.RegisterDefaultServerCommandProcess = function ()
-    moon.dispatch("lua", function(_, _, cmd, ...)
+    moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
         local OnProcess = SERVER_COMMAND_PROCESS[cmd]
         if OnProcess then
-            OnProcess(...)
+            if IsServerCommandCallModel(cmd) then
+                moon.response("lua", sender, session, OnProcess(...))
+            else
+                OnProcess(...)
+            end
         end
     end)
     return true
@@ -153,6 +196,7 @@ moon.exports.RegisterClientMsgProcess = function (table)
     if table ~= _M.MsgDispatch then
         setmetatable(table, {__index = _M.MsgDispatch})
     end
+    return true
 end
 
 ------------------------------------------- 服务器交互协议 -----------------------
