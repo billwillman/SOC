@@ -25,7 +25,7 @@ package.path = path .. ";"
 
 local moon = require("moon")
 
-require("LuaPanda").start("127.0.0.1", 99999)
+require("LuaPanda").start("127.0.0.1", 9999)
 
 local arg = moon.args()
 
