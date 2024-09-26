@@ -12,33 +12,40 @@ local function CreateNetworkManager()
     end
 end
 
+local function GetTestParams()
+    local json = "{'dsaData':{'ip':'127.0.0.1','port':1991},'battleData':{'ip':'127.0.0.1','port':1990}}"
+    json = string.gsub(json, "'", "\"")
+    return _MOE.Json.decode(json)
+end
+
 local function ParseStartupCommands(self)
     local tb
     if _MOE.IsEditor then
-        local json = "{'dsaData':{'ip':'127.0.0.1','port':1991},'battleData':{'ip':'127.0.0.1','port':1990}}"
-        json = string.gsub(json, "'", "\"")
-        tb = _MOE.Json.decode(json)
+        tb = GetTestParams()
+        self.IsLocalDS = true
     end
     if not _MOE.IsEditor then
         local commandLineArgs = CS.System.Environment.GetCommandLineArgs()
         if not commandLineArgs then
-            return false
-        end
-        local commandArgsType = type(commandLineArgs)
-        if commandArgsType == "userdata" then
-            if commandLineArgs.Length >= 2 then
-                local json = commandLineArgs[1]
-                xpcall(
-                    function ()
-                        tb = _MOE.Json.decode(json)
-                    end, function (err)
-                        tb = nil
-                        _G.ErrorHandler(err)
-                    end
-                )
-            end
+            tb = GetTestParams()
+            self.IsLocalDS = true
         else
-            _MOE.Logger.LogError("[DS] commandLineArgs type error: " .. commandArgsType)
+            local commandArgsType = type(commandLineArgs)
+            if commandArgsType == "userdata" then
+                if commandLineArgs.Length >= 2 then
+                    local json = commandLineArgs[1]
+                    xpcall(
+                        function ()
+                            tb = _MOE.Json.decode(json)
+                        end, function (err)
+                            tb = nil
+                            _G.ErrorHandler(err)
+                        end
+                    )
+                end
+            else
+                _MOE.Logger.LogError("[DS] commandLineArgs type error: " .. commandArgsType)
+            end
         end
     end
     if tb then
@@ -50,6 +57,10 @@ end
 
 function DSApp:GetGsDsSession()
     return self.GsDsSession
+end
+
+function DSApp:IsLocalDS()
+    return self.IsLocalDS
 end
 
 function DSApp:OnInit()
