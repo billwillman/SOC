@@ -3628,8 +3628,7 @@ class AssetBundleMgr
 			opts |= BuildOptions.AllowDebugging;
 		if (isDevelop)
 			opts |= BuildOptions.Development;
-		if (isServer)
-		{
+		if (isServer) {
 #if UNITY_2022_1_OR_NEWER
 			BuildPlayerOptions buildOpts = new BuildPlayerOptions();
 			buildOpts.scenes = levelNames;
@@ -3639,9 +3638,19 @@ class AssetBundleMgr
 			buildOpts.subtarget = (int)StandaloneBuildSubtarget.Server;
 			BuildPipeline.BuildPlayer(buildOpts);
 #endif
+		} else {
+#if UNITY_2022_1_OR_NEWER
+			BuildPlayerOptions buildOpts = new BuildPlayerOptions();
+			buildOpts.scenes = levelNames;
+			buildOpts.options = opts;
+			buildOpts.locationPathName = outputFileName;
+			buildOpts.target = platform;
+			buildOpts.subtarget = (int)StandaloneBuildSubtarget.Player;
+			BuildPipeline.BuildPlayer(buildOpts);
+#else
+			BuildPipeline.BuildPlayer(levelNames, outputFileName, platform, opts);
+#endif
 		}
-		else
-			BuildPipeline.BuildPlayer(levelNames, outputFileName, platform, opts); 
 	}
 
 	private bool m_TempIsNew;
