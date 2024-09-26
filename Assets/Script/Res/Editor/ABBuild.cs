@@ -2022,7 +2022,17 @@ class AssetBundleMgr
 		}
 		else
 		{
+#if UNITY_2022_1_OR_NEWER
+			BuildAssetBundlesParameters abBuildParams = new BuildAssetBundlesParameters();
+			abBuildParams.bundleDefinitions = abs;
+			abBuildParams.outputPath = exportDir;
+			abBuildParams.targetPlatform = BuildTarget.StandaloneWindows64;
+			abBuildParams.options = buildOpts;
+			abBuildParams.subtarget = (int)StandaloneBuildSubtarget.Player;
+			AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(abBuildParams);
+#else
 			AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(exportDir, abs, buildOpts, target);
+#endif
 			return manifest;
 		}
 	}
