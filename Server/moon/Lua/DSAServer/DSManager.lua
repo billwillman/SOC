@@ -107,11 +107,14 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
         local clientToken = self:GetDsClientToken(fd)
         if clientToken and dsToken then
             self.DsClientTokenToDsToken[clientToken] = dsToken
+            local isLocalDS
             if not self.DsTokenHandlerMap[dsToken] then
                 self.DsTokenHandlerMap[dsToken] = {}
+                isLocalDS = true
             end
             local data = self.DsTokenHandlerMap[dsToken]
             data.clientToken = clientToken
+            data.isLocalDS = isLocalDS
             -- 通知DS更新dsToken
             msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
         end
@@ -119,6 +122,14 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
     -- 关掉定时器关闭
     self:ClearDs_ConnectStopTimer(dsToken)
     print(string.format("[DSA] dsIp: %s dsPort: %d dsToken: %s Ds Ready", msg.dsIp, msg.dsPort, dsToken))
+end
+
+function _M:IsLocalDS(dsToken)
+    if not dsToken then
+        return false
+    end
+    local dsData = self.DsTokenHandlerMap[dsToken]
+    return dsData.isLocalDS
 end
 
 function _M:GetDsTokenFromDsClientToken(clientToken)
