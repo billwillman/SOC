@@ -1,0 +1,17 @@
+--- GM Command
+
+local GMCommands = {
+    {
+        desc = "使用本地Local DS连接",
+        Params = {
+            {
+                desc = "是否使用",
+                Text = true
+            }
+        }
+    }
+}
+
+local _M = _MOE.class("GMCommandModel", _MOE.BaseModel)
+
+return _M

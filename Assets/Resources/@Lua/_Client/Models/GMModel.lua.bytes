@@ -11,7 +11,7 @@ function _M:GetNetAddr()
     if not GameApp then
         return
     end
-    local clientModel = GameApp:GetModel("NetClientModel") 
+    local clientModel = GameApp:GetModel("NetClientModel")
     if not clientModel then
         return
     end
@@ -35,7 +35,7 @@ function _M:SendGM(command, paramStr)
     self:SendMsg(_MOE.MsgIds.CM_GM,
         {
             command = command,
-            param = paramStr   
+            param = paramStr
         })
     return true
 end
