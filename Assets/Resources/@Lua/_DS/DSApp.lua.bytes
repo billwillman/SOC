@@ -45,6 +45,8 @@ local function ParseStartupCommands(self)
                 end
             else
                 _MOE.Logger.LogError("[DS] commandLineArgs type error: " .. commandArgsType)
+                tb = GetTestParams()
+                self.IsLocalDS = true
             end
         end
     end
@@ -72,6 +74,9 @@ function DSApp:OnInit()
         self:QuitGame() -- 杀掉进程
         return
     end
+
+    _MOE.Logger.Log("[DS] IsLocalDS: " .. tostring(self:IsLocalDS()))
+
     self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
     self:RegisterModel("DsSessionManager", "_DS.Models.DsSessionManager", true)
     self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", true)
