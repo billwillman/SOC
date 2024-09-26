@@ -5268,7 +5268,7 @@ public static class AssetBundleBuild
 					// 判断是否是软链
 					if (dirInfo.Attributes.HasFlag(FileAttributes.ReparsePoint)) {
 						Debug.Log("[Delete] LinkDir: " + subDir);
-						System.IO.Directory.Delete(dir);
+						dirInfo.Delete();
 						continue;
 					}
 
