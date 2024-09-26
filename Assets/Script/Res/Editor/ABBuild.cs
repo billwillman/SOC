@@ -5264,7 +5264,13 @@ public static class AssetBundleBuild
             if (subDirs != null) {
                 for (int i = 0; i < subDirs.Length; ++i) {
                     string subDir = subDirs[i];
-                    DeleteDirectorAndFiles(subDir, isDebugLog);
+					var dirInfo = new DirectoryInfo(subDir);
+					// 判断是否是软链
+					if (dirInfo.Attributes.HasFlag(FileAttributes.ReparsePoint)) {
+						continue;
+					}
+
+					DeleteDirectorAndFiles(subDir, isDebugLog);
                 }
             }
 
