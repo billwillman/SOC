@@ -2,6 +2,7 @@
 
 local GMCommands = {
     {
+        name = "UseLocalDS",
         desc = "使用本地Local DS连接",
         Params = {
             {
