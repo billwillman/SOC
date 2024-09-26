@@ -22,14 +22,11 @@ local function ParseStartupCommands(self)
     local tb
     if _MOE.IsEditor then
         tb = GetTestParams()
-        self.IsLocalDS = true
+        self.isLocalDS = true
     end
     if not _MOE.IsEditor then
         local commandLineArgs = CS.System.Environment.GetCommandLineArgs()
-        if not commandLineArgs then
-            tb = GetTestParams()
-            self.IsLocalDS = true
-        else
+        if commandLineArgs then
             local commandArgsType = type(commandLineArgs)
             if commandArgsType == "userdata" then
                 if commandLineArgs.Length >= 2 then
@@ -42,11 +39,12 @@ local function ParseStartupCommands(self)
                             _G.ErrorHandler(err)
                         end
                     )
+                else
+                    tb = GetTestParams()
+                    self.isLocalDS = true
                 end
             else
                 _MOE.Logger.LogError("[DS] commandLineArgs type error: " .. commandArgsType)
-                tb = GetTestParams()
-                self.IsLocalDS = true
             end
         end
     end
@@ -62,7 +60,7 @@ function DSApp:GetGsDsSession()
 end
 
 function DSApp:IsLocalDS()
-    return self.IsLocalDS
+    return self.isLocalDS
 end
 
 function DSApp:OnInit()
