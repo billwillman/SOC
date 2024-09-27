@@ -16,7 +16,7 @@ local function TestConnectLocalDS(command, paramStr, loginToken, socket, fd)
             local reqMsg = {
                 loginToken = loginToken,
             }
-            MsgProcesser:SendServerMsg("DSA", "QueryLocalDS", reqMsg)
+            MsgProcesser:SendServerMsgAsync("DSA", "QueryLocalDS", reqMsg)
         end
     end
 end
