@@ -89,6 +89,9 @@ function _M:SendHeartMsg(socket, fd)
     self:SendTableToJson(socket, fd, sendMsg)
 end
 
+---@param serverName string
+---@param msgId number
+---@param ... any
 function _M:SendServerMsg(serverName, msgId, ...)
     if not serverName or not msgId then
         return false

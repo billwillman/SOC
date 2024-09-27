@@ -11,6 +11,7 @@ local socket = require "moon.socket"
 
 moon.exports.ServerData = ServerData
 local MsgProcesser = require("GMServer/GMServerProcesser").New()
+moon.exports.MsgProcesser = MsgProcesser
 
 moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
