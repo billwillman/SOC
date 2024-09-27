@@ -9,10 +9,40 @@ local GMCommands = {
                 desc = "是否使用",
                 Text = true
             }
-        }
+        },
     }
 }
 
 local _M = _MOE.class("GMCommandModel", _MOE.BaseModel)
+
+---------------------------------------- 对外接口 ------------------------------
+
+function _M:UseCommand(command, ...)
+    if not command then
+        return false
+    end
+    local command = GMCommands[command]
+    if command then
+        local msg = {...}
+        local paramStr
+        if next(msg) ~= nil then
+            local ret = true
+            xpcall(
+                function ()
+                    paramStr = _MOE.Json.encode(msg)
+                end,
+                function (err)
+                    ret = false
+                    _G.ErrorHandler(err)
+                end, nil
+            )
+            if not ret then
+                return false
+            end
+        end
+        return _MOE.GameApp:UseGM(command.name, paramStr)
+    end
+    return false
+end
 
 return _M

@@ -33,6 +33,17 @@ function ClientApp:OnInit()
     CreateMyPlayerInput()
 end
 
+function ClientApp:UseGM(command, paramStr)
+    if not command then
+        return false
+    end
+    local GMModel = self:GetModel("GMClientModel")
+    if not GMModel then
+        return false
+    end
+    return GMModel:SendGM(command, paramStr)
+end
+
 function ClientApp:OnQuit()
     self:DestroyDSNetManagerPrefab()
     _MOE.UIManager:FreeAllWindow()

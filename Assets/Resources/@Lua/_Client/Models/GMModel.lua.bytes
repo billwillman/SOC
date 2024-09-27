@@ -21,10 +21,10 @@ end
 
 -- 发送GM指令
 function _M:SendGM(command, paramStr)
-    if not commnad then
+    if not command then
         return false
     end
-    if not self:IsGsConnected() then
+    if not self:IsGsConnected() and not self:IsGsConnecting() then
         -- 连接GM指令
         local addr = self:GetNetAddr()
         if not addr then
