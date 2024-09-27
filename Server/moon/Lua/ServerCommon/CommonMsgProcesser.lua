@@ -89,6 +89,17 @@ function _M:SendHeartMsg(socket, fd)
     self:SendTableToJson(socket, fd, sendMsg)
 end
 
+function _M:SendServerMsg(serverName, msgId, ...)
+    if not serverName or not msgId then
+        return false
+    end
+    local serverId = moon.queryservice(serverName)
+    if not serverId or serverId <= 0 then
+        return false
+    end
+    moon.send("lua", serverId, msgId, ...)
+end
+
 function _M:SendTableToJson2(socket, fd, msgId, msg)
     msg = msg or {}
     msg.msgId = msgId
