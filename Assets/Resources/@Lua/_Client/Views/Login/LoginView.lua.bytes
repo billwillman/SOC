@@ -3,6 +3,7 @@ local Json = require("_Common.json")
 
 function LoginView:RegisterEvents()
     self:AddButtonClick(self.bp.BtnSubmit, self.OnBtnSubmit)
+    self:AddButtonClick(self.bp.BtnLocalDS, self.OnBtnDSSubmit)
 end
 
 function LoginView:RegisterCustomEvents()
@@ -25,6 +26,14 @@ function LoginView:OnBtnSubmit()
         netModel:ConnectGSServer()
         -- 登录协议
         netModel:CM_Login(self.bp.EdtUserName.text)
+    end
+end
+
+function LoginView:OnBtnDSSubmit()
+    -- DS测试链接
+    print("OnBtnDSSubmit")
+    local GMModel = _MOE.GameApp:GetModel("GMClientModel")
+    if GMModel then
     end
 end
 
