@@ -127,21 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6791519661136979084}
     m_Modifications:
-    - target: {fileID: 139050145283021612, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
-        type: 3}
-      propertyPath: m_Options.m_Options.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 139050145283021612, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
-        type: 3}
-      propertyPath: m_Options.m_Options.Array.data[0].m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 139050145283021612, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
-        type: 3}
-      propertyPath: m_Options.m_Options.Array.data[1].m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 721674369933049952, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -241,11 +226,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7445557520095635108, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
-        type: 3}
-      propertyPath: m_OverrideSorting
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9161157953403262015, guid: 479b2d2b8a9b6ce498738ab0d479e57f,
         type: 3}
