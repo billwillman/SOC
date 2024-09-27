@@ -117,8 +117,7 @@ function _M:SendServerMsgSync(serverName, msgId, ...)
     if not serverId or serverId <= 0 then
         return false
     end
-    assert(moon.call("lua", serverId, msgId, ...))
-    return true
+    return moon.call("lua", serverId, msgId, ...)
 end
 
 function _M:SendTableToJson2(socket, fd, msgId, msg)
