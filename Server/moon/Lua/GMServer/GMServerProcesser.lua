@@ -6,6 +6,10 @@ local moon = require("moon")
 
 local CurrentMsgProcess = {
     [MsgIds.CM_GM] = function (self, msg, socket, fd)
+        local command = msg.command
+        local paramStr = msg.param
+        if command then
+        end
     end
 }
 

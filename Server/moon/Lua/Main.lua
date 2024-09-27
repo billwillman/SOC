@@ -57,20 +57,20 @@ local server_ok = false
 local Services = {
     -- 登录服务器
     {
-        name = "LoginServer",
+        name = "LoginSrv",
         file = "./LoginServer/LoginServer.lua",
         unique = true
     },
     -- 区服服务器
     {
-        name = "ServerListServer",
+        name = "ServerListSrv",
         file = "ServerListServer.lua",
         unique = true,
         NoInitCallFunc = true
     },
     -- 战斗服务器
     {
-        name = "DsBattleServer",
+        name = "BattleSrv",
         file = "./DsBattleServer/DsBattleServer.lua",
         unique = true
     },
