@@ -90,7 +90,7 @@ function _M:SendHeartMsg(socket, fd)
 end
 
 ---@param serverName string
----@param msgId number
+---@param msgId string
 ---@param ... any
 function _M:SendServerMsgAsync(serverName, msgId, ...)
     if not serverName or not msgId then
@@ -101,6 +101,23 @@ function _M:SendServerMsgAsync(serverName, msgId, ...)
         return false
     end
     moon.send("lua", serverId, msgId, ...)
+end
+
+---comment
+---@param serverName string
+---@param msgId string
+---@param ... unknown
+---@return boolean
+function _M:SendServerMsgSync(serverName, msgId, ...)
+    if not serverName or not msgId then
+        return false
+    end
+    local serverId = moon.queryservice(serverName)
+    if not serverId or serverId <= 0 then
+        return false
+    end
+    assert(moon.call("lua", serverId, msgId, ...))
+    return true
 end
 
 function _M:SendTableToJson2(socket, fd, msgId, msg)
