@@ -89,6 +89,7 @@ function _M:SendHeartMsg(socket, fd)
     self:SendTableToJson(socket, fd, sendMsg)
 end
 
+---异步跨服务器请求数据
 ---@param serverName string
 ---@param msgId string
 ---@param ... any
@@ -103,7 +104,7 @@ function _M:SendServerMsgAsync(serverName, msgId, ...)
     moon.send("lua", serverId, msgId, ...)
 end
 
----comment
+---同步跨服务器请求数据
 ---@param serverName string
 ---@param msgId string
 ---@param ... unknown
