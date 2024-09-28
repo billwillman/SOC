@@ -114,6 +114,4 @@ function NetClientModel:CM_Login(userName, password)
     self:SendMsg(MsgIds.CM_Login, data)
 end
 
---------------------------------------- 客户端接收协议 -----------------------------------------
-
 return NetClientModel
