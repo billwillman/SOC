@@ -18,13 +18,13 @@ local CurrentMsgProcess = {
             if not playerInfo then
                 return
             end
-            moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
+            -- 不需要一登陆就开DSA
+            -- moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             local ret = {
                 session = playerInfo.session,
                 token = playerInfo.token,
-                msgId = MsgIds.SM_LoginRet, -- 消息ID
             }
-            self:SendTableToJson(socket, fd, ret)
+            self:SendTableToJson2(socket, fd, MsgIds.SM_LoginRet, ret)
         end
     end
 }
