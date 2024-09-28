@@ -8,6 +8,7 @@ function PlayerInfo:Ctor(info)
     self.dsData = {
         dsToken = info and info.dsToken,
         dsState = nil, -- 在DS的状态
+        gsState = nil, -- 在GS的状态
     }
 end
 
