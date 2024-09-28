@@ -24,7 +24,7 @@ function LoginView:OnBtnSubmit()
     if netModel then
         netModel:ConnectGSServer()
         -- 登录协议
-        netModel:CM_Login(self.bp.EdtUserName.text)
+        self.LoginModel:CM_Login(self.bp.EdtUserName.text)
     end
 end
 
@@ -39,10 +39,12 @@ function LoginView:OnOpen()
     if netModel then
         netModel:ReqHttpServerListData() -- 请求服务器列表
     end
+    self.LoginModel = _MOE.GameApp:GetModel("LoginModel")
 end
 
 function LoginView:OnClose()
     self:UnRegisterEvents()
+    self.LoginModel = nil
 end
 
 return LoginView

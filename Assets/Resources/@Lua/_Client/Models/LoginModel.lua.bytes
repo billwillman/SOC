@@ -1,8 +1,18 @@
 local LoginModel = _MOE.class("LoginModel", _MOE.BaseModel)
 
+local MsgIds = require("_NetMsg.MsgId")
+
 function LoginModel:OnInit()
     -- 打开登录界面
     _MOE.UIManager:OpenWindow(_MOE.WindowName.Login)
+end
+
+function LoginModel:CM_Login(userName, password)
+    local data = {
+        userName = userName,
+        password = password
+    }
+    _MOE.GameApp:SendLoginSrvMsg(MsgIds.CM_Login, data)
 end
 
 return LoginModel

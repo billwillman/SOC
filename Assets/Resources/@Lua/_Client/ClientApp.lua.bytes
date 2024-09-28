@@ -34,6 +34,14 @@ function ClientApp:OnInit()
     CreateMyPlayerInput()
 end
 
+function ClientApp:SendLoginSrvMsg(msgId, msg)
+    local model = self:GetModel("NetClientModel")
+    if model then
+        return model:SendMsg(msgId, msg)
+    end
+    return false
+end
+
 function ClientApp:GetMySelf()
     local ret = self:GetModel("MySelfModel")
     return ret
