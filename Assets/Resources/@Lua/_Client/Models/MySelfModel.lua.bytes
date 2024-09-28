@@ -1,0 +1,5 @@
+-- Client 个人角色数据
+
+local _M = _MOE.class("MySelfModel", _MOE.BaseModel)
+
+return _M
