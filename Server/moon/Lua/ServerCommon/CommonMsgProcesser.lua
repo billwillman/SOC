@@ -192,7 +192,8 @@ moon.exports.RegisterServerCommandProcess = function (table)
     return true
 end
 
-moon.exports.RegisterServerCommandCallModel = function (table)
+-- 注册消息是同步的
+moon.exports.RegisterServerCommandSync= function (table)
     if not table or type(table) ~= "table"  then
         return false
     end
