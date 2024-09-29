@@ -42,6 +42,14 @@ function ClientApp:SendLoginSrvMsg(msgId, msg)
     return false
 end
 
+function ClientApp:SendGMSrvMsg(msgId, msg)
+    local model = self:GetModel("GMClientModel")
+    if model then
+        return model:SendMsg(msgId, msg)
+    end
+    return false
+end
+
 function ClientApp:GetMySelf()
     local ret = self:GetModel("MySelfModel")
     return ret
