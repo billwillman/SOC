@@ -19,7 +19,7 @@ namespace FairyGUI
         /// if use AssetBundlesManager set value to false
         /// then unload UIAssetBundle by AssetBundlesManager
         /// </summary>
-        public static bool unloadBundleByFGUI = true;
+        public static bool unloadBundleByFGUI = false; // 不使用FairyGUI自带的AB管理
 
         /// <summary>
         /// The event is triggered when all reference to this package item dropped.
