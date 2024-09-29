@@ -49,6 +49,11 @@ local _Server_TO_LOGIN = {
     end
 }
 
+local _SERVER_SYNC_MSG = {
+
+}
+
+RegisterServerCommandSync(_SERVER_SYNC_MSG)
 RegisterServerCommandProcess(_Server_TO_LOGIN)
 
 return _M
