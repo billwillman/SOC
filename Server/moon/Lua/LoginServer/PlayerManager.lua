@@ -66,4 +66,11 @@ function _M:UpdateDsData(playerInfo, dsData)
     return true
 end
 
+function _M:GetPlayerInfo(token)
+    if not token then
+        return
+    end
+    return self.ClientPlayerInfos[token]
+end
+
 return _M

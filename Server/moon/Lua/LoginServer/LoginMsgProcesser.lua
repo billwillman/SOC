@@ -46,11 +46,23 @@ local _Server_TO_LOGIN = {
                 end
             end
         end
-    end
+    end,
+    -- 查询角色信息
+    [_MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO] = function (msg)
+        if not msg then
+            return
+        end
+        local token = msg.token
+        if not token then
+            return
+        end
+        local ret = PlayerManager:GetPlayerInfo(token)
+        return ret
+    end,
 }
 
 local _SERVER_SYNC_MSG = {
-
+    [_MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO] = true,
 }
 
 RegisterServerCommandSync(_SERVER_SYNC_MSG)
