@@ -1,0 +1,5 @@
+-- Fairly GUI的
+
+local FarilyGUIView = _MOE.class("FarilyGUIView", _MOE.BaseViewClass)
+
+return FarilyGUIView
