@@ -41,6 +41,19 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         return true;
     }
 
+    private static void DecPackageRef(string pkgId) {
+        if (string.IsNullOrEmpty(pkgId))
+            return;
+        uint refCnt;
+        if (m_PackagesRefCnt.TryGetValue(pkgId, out refCnt)) {
+            --refCnt;
+            if (refCnt <= 0)
+                m_PackagesRefCnt.Remove(pkgId);
+            else
+                m_PackagesRefCnt[pkgId] = refCnt;
+        }
+    }
+
     private static UnityEngine.Object OnLoadResource(string name, string extension, System.Type type, out DestroyMethod destroyMethod) {
         destroyMethod = DestroyMethod.Custom;
         if (type == m_TextAssetType)
