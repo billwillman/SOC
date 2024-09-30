@@ -18,6 +18,7 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     private static UIPackage.LoadResource m_LoadResourceFunc = null;
     private static System.Type m_TextAssetType = typeof(TextAsset);
     private static System.Type m_AudioType = typeof(AudioClip);
+    private static System.Type m_TexType = typeof(Texture);
     private static Dictionary<string, uint> m_PackagesRefCnt = new Dictionary<string, uint>();
 
     private HashSet<string> m_UsedPackageIds = new HashSet<string>();
@@ -78,6 +79,8 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
             return ResourceMgr.Instance.LoadTextAsset(name + extension);
         else if (type == m_AudioType)
             return ResourceMgr.Instance.LoadAudioClip(name + extension, ResourceCacheType.rctRefAdd);
+        else if (type == m_TexType)
+            return ResourceMgr.Instance.LoadTexture(name + extension, ResourceCacheType.rctRefAdd);
         return null;
     }
 
