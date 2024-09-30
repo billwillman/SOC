@@ -19,6 +19,20 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     private static System.Type m_TextAssetType = null;
     private static Dictionary<string, uint> m_PackagesRefCnt = new Dictionary<string, uint>();
 
+    private HashSet<string> m_UsedPackageIds = new HashSet<string>();
+
+    public override void ClearAllResources() {
+        var iter = m_UsedPackageIds.GetEnumerator();
+        while (iter.MoveNext()) {
+            if (DecPackageRef(iter.Current) == 0)
+                UIPackage.RemovePackage(iter.Current);
+        }
+        iter.Dispose();
+        m_UsedPackageIds.Clear();
+
+        base.ClearAllResources();
+    }
+
     private static void InitFairyGUI() {
         if (m_IsInitFairyGUI)
             return;
@@ -41,17 +55,21 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         return true;
     }
 
-    private static void DecPackageRef(string pkgId) {
+    private static int DecPackageRef(string pkgId) {
         if (string.IsNullOrEmpty(pkgId))
-            return;
+            return -1;
         uint refCnt;
         if (m_PackagesRefCnt.TryGetValue(pkgId, out refCnt)) {
             --refCnt;
-            if (refCnt <= 0)
+            if (refCnt <= 0) {
                 m_PackagesRefCnt.Remove(pkgId);
-            else
+                return 0;
+            } else {
                 m_PackagesRefCnt[pkgId] = refCnt;
+                return 1;
+            }
         }
+        return -1;
     }
 
     private static UnityEngine.Object OnLoadResource(string name, string extension, System.Type type, out DestroyMethod destroyMethod) {
@@ -64,11 +82,25 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     public static UIPackage LoadPackageDesc(string descPath) {
         if (string.IsNullOrEmpty(descPath))
             return null;
+        UIPackage ret = UIPackage.GetById(descPath);
+        if (ret != null)
+            return ret;
         InitFairyGUI();
-        UIPackage ret = UIPackage.AddPackage(descPath, m_LoadResourceFunc);
+        ret = UIPackage.AddPackage(descPath, m_LoadResourceFunc);
         if (!AddPackageRef(ret)) {
             UIPackage.RemovePackage(ret.id);
             ret = null;
+        }
+        return ret;
+    }
+
+    public UIPackage LoadPackage(string descPath) {
+        if (!string.IsNullOrEmpty(descPath))
+            return null;
+        UIPackage ret = LoadPackageDesc(descPath);
+        if (ret != null) {
+            if (!m_UsedPackageIds.Contains(ret.id))
+                m_UsedPackageIds.Add(ret.id);
         }
         return ret;
     }
