@@ -16,7 +16,8 @@ using FairyGUI;
 public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     private static bool m_IsInitFairyGUI = false;
     private static UIPackage.LoadResource m_LoadResourceFunc = null;
-    private static System.Type m_TextAssetType = null;
+    private static System.Type m_TextAssetType = typeof(TextAsset);
+    private static System.Type m_AudioType = typeof(AudioClip);
     private static Dictionary<string, uint> m_PackagesRefCnt = new Dictionary<string, uint>();
 
     private HashSet<string> m_UsedPackageIds = new HashSet<string>();
@@ -38,7 +39,6 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
             return;
         m_IsInitFairyGUI = true;
         m_LoadResourceFunc = new UIPackage.LoadResource(OnLoadResource);
-        m_TextAssetType = typeof(TextAsset);
     }
 
     private static bool AddPackageRef(UIPackage pkg) {
@@ -76,6 +76,8 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         destroyMethod = DestroyMethod.Custom;
         if (type == m_TextAssetType)
             return ResourceMgr.Instance.LoadTextAsset(name + extension);
+        else if (type == m_AudioType)
+            return ResourceMgr.Instance.LoadAudioClip(name + extension, ResourceCacheType.rctRefAdd);
         return null;
     }
 
