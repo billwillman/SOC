@@ -50,6 +50,7 @@ public abstract class IResourceLoader
 	public abstract bool LoadAudioClipAsync(string fileName, ResourceCacheType cacheType, Action<float, bool, AudioClip> onProcess, int priority = 0);
 	public abstract string LoadText(string fileName, ResourceCacheType cacheType);
 	public abstract byte[] LoadBytes(string fileName, ResourceCacheType cacheType);
+	public abstract TextAsset LoadTextAsset(string fileName, ResourceCacheType cacheType);
 	public abstract bool LoadTextAsync(string fileName, ResourceCacheType cacheType, Action<float, bool, TextAsset> onProcess, int priority = 0);
 	public abstract RuntimeAnimatorController LoadAniController(string fileName, ResourceCacheType cacheType);
 	public abstract bool LoadAniControllerAsync(string fileName, ResourceCacheType cacheType, Action<float, bool, RuntimeAnimatorController> onProcess, int priority = 0);

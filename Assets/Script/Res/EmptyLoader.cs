@@ -55,6 +55,9 @@ namespace NsLib.ResMgr {
         public override byte[] LoadBytes(string fileName, ResourceCacheType cacheType) {
             return null;
         }
+        public override TextAsset LoadTextAsset(string fileName, ResourceCacheType cacheType) {
+            return null;
+        }
         public override bool LoadTextAsync(string fileName, ResourceCacheType cacheType, Action<float, bool, TextAsset> onProcess, int priority = 0) {
             return false;
         }

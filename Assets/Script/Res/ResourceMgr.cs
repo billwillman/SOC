@@ -869,6 +869,21 @@ public class ResourceMgr : Singleton<ResourceMgr>
         return mResLoader.LoadBytes(fileName, cacheType);
     }
 
+    public TextAsset LoadTextAsset(string fileName, ResourceCacheType cacheType = ResourceCacheType.rctNone) {
+        TextAsset ret = mAssetLoader.LoadTextAsset(fileName, cacheType);
+        if (ret != null)
+            return ret;
+        return mResLoader.LoadTextAsset(fileName, cacheType);
+    }
+
+    public T Load<T>(string fileName, ResourceCacheType cacheType) where T: UnityEngine.Object {
+        T ret = (mAssetLoader as AssetLoader).LoadObject<T>(fileName, cacheType);
+        if (ret != null)
+            return ret;
+        ret = (mResLoader as ResourcesLoader).LoadObject<T>(fileName, cacheType);
+        return ret;
+    }
+
     public string LoadText(string fileName, ResourceCacheType cacheType = ResourceCacheType.rctNone)
     {
         string ret = mAssetLoader.LoadText(fileName, cacheType);

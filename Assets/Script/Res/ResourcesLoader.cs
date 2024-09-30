@@ -468,6 +468,11 @@ public sealed class ResourcesLoader: IResourceLoader
         return text.text;
 	}
 
+	public override TextAsset LoadTextAsset(string fileName, ResourceCacheType cacheType) {
+		TextAsset text = LoadObject<TextAsset>(fileName, cacheType);
+		return text;
+	}
+
 	public override byte[] LoadBytes(string fileName, ResourceCacheType cache)
 	{
 		TextAsset text = LoadObject<TextAsset>(fileName, cache);

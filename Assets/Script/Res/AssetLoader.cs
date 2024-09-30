@@ -1676,6 +1676,11 @@ public sealed class AssetLoader : IResourceLoader {
         return asset.bytes;
     }
 
+    public override TextAsset LoadTextAsset(string fileName, ResourceCacheType cacheType) {
+        TextAsset asset = LoadObject<TextAsset>(TransFileName(fileName, ".bytes"), cacheType);
+        return asset;
+    }
+
     public override bool LoadTextAsync(string fileName, ResourceCacheType cacheType, Action<float, bool, TextAsset> onProcess, int priority = 0) {
         return LoadObjectAsync(TransFileName(fileName, ".bytes"), cacheType, priority, onProcess);
     }
