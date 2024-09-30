@@ -17,6 +17,7 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     private static bool m_IsInitFairyGUI = false;
     private static UIPackage.LoadResource m_LoadResourceFunc = null;
     private static System.Type m_TextAssetType = null;
+    private static Dictionary<string, uint> m_PackagesRefCnt = new Dictionary<string, uint>();
 
     private static void InitFairyGUI() {
         if (m_IsInitFairyGUI)
@@ -24,6 +25,20 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         m_IsInitFairyGUI = true;
         m_LoadResourceFunc = new UIPackage.LoadResource(OnLoadResource);
         m_TextAssetType = typeof(TextAsset);
+    }
+
+    private static bool AddPackageRef(UIPackage pkg) {
+        if (pkg == null)
+            return false;
+        string id = pkg.id;
+        if (!string.IsNullOrEmpty(id))
+            return false;
+        uint refCnt;
+        if (!m_PackagesRefCnt.TryGetValue(id, out refCnt))
+            refCnt = 0;
+        ++refCnt;
+        m_PackagesRefCnt[id] = refCnt;
+        return true;
     }
 
     private static UnityEngine.Object OnLoadResource(string name, string extension, System.Type type, out DestroyMethod destroyMethod) {
@@ -37,7 +52,12 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         if (string.IsNullOrEmpty(descPath))
             return null;
         InitFairyGUI();
-        return UIPackage.AddPackage(descPath, m_LoadResourceFunc);
+        UIPackage ret = UIPackage.AddPackage(descPath, m_LoadResourceFunc);
+        if (!AddPackageRef(ret)) {
+            UIPackage.RemovePackage(ret.id);
+            ret = null;
+        }
+        return ret;
     }
 }
 

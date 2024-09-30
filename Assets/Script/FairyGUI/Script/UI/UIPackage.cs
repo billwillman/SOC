@@ -280,8 +280,7 @@ namespace FairyGUI
         /// <returns>UIPackage</returns>
         public static UIPackage AddPackage(string descFilePath)
         {
-            if (descFilePath.StartsWith("Assets/"))
-            {
+            if (descFilePath.StartsWith("Assets/")) {
 #if UNITY_EDITOR
                 return AddPackage(descFilePath, _loadFromAssetsPath);
 #else
@@ -289,9 +288,10 @@ namespace FairyGUI
                 Debug.LogWarning("FairyGUI: failed to load package in '" + descFilePath + "'");
                 return null;
 #endif
-            }
-            else
+            } else {
+
                 return AddPackage(descFilePath, _loadFromResourcesPath);
+            }
         }
 
         /// <summary>
