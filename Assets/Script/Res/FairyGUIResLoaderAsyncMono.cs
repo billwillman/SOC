@@ -82,11 +82,13 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     public static UIPackage LoadPackageDesc(string descPath) {
         if (string.IsNullOrEmpty(descPath))
             return null;
+        /*
         UIPackage ret = UIPackage.GetById(descPath);
         if (ret != null)
             return ret;
+        */
         InitFairyGUI();
-        ret = UIPackage.AddPackage(descPath, m_LoadResourceFunc);
+        UIPackage ret = UIPackage.AddPackage(descPath, m_LoadResourceFunc);
         if (!AddPackageRef(ret)) {
             UIPackage.RemovePackage(ret.id);
             ret = null;
@@ -101,8 +103,15 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         if (ret != null) {
             if (!m_UsedPackageIds.Contains(ret.id))
                 m_UsedPackageIds.Add(ret.id);
+            else {
+                DecPackageRef(ret.id); // 自身已经加载了这个package要减1一下。
+            }
         }
         return ret;
+    }
+
+    public void LoadPackageNoReturn(string descPath) {
+        LoadPackage(descPath);
     }
 }
 
