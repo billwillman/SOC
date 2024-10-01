@@ -121,6 +121,12 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     public void LoadPackageNoReturn(string descPath) {
         LoadPackage(descPath);
     }
+
+    public bool LoadPackageAsync(string descPath, int loadPriority = 0) {
+        if (!string.IsNullOrEmpty(descPath))
+            return false;
+        return LoadFairyGUIPackTextAssetAsync(descPath, this, loadPriority);
+    }
 }
 
 #endif

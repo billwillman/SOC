@@ -224,7 +224,7 @@ using NsLib.ResMgr;
 
         /*----------------------------------- 主动触发异步加载 -------------------------------------------------------------*/
 
-        public bool LoadFairyGUIPackageAsync(string fileName, MonoBehaviour obj, int loadPriority = 0) {
+        public bool LoadFairyGUIPackTextAssetAsync(string fileName, MonoBehaviour obj, int loadPriority = 0) {
         if (obj == null)
             return false;
         var mgr = BaseResLoaderAsyncMgr.GetInstance();
