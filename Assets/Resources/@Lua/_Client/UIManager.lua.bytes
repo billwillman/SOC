@@ -31,7 +31,7 @@ function UIManager:_GetWindowConfig(wndName)
     return ret
 end
 
-function UIManager:_CreateUIPrefab(wndName, loaderType)
+function UIManager:_CreateUIPrefab(wndName, loaderType, fairyDepPackages)
     if not wndName then
         return
     end
@@ -51,6 +51,19 @@ function UIManager:_CreateUIPrefab(wndName, loaderType)
             loaderType = _MOE.BaseResLoaderAsyncType
         end
         loader = ret:AddComponent(loaderType)
+        -- FairyGUI界面
+        if loader and loaderType == _MOE.FairyGUILoaderAsyncType then
+            -- FairyGUI
+            if fairyDepPackages ~= nil then
+                for _, depPackageName in ipairs(fairyDepPackages) do
+                    if depPackageName and string.len(depPackageName) > 0 then
+                        local packagePath = string.format("Resources/FairyGUIPackages/@%s/%s.bytes", depPackageName, depPackageName)
+                        loader:LoadPackageNoReturn(packagePath) -- 加载Package
+                    end
+                end
+            end
+        end
+        --
     end
     return ret, loader
 end
@@ -132,7 +145,7 @@ function UIManager:_CreateUIWindow(wndName, ...)
         return
     end
     local fairyGUIType = config.isFairyGUI and _MOE.FairyGUILoaderAsyncType or _MOE.BaseResLoaderAsyncType
-    local gameObj, loader = self:_CreateUIPrefab(wndName, fairyGUIType)
+    local gameObj, loader = self:_CreateUIPrefab(wndName, fairyGUIType, config.depPackages) -- depPackages 依赖的Package
     if not gameObj then
         return
     end

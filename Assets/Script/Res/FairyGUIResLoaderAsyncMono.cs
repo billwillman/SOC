@@ -118,8 +118,8 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         return ret;
     }
 
-    public void LoadPackageNoReturn(string descPath) {
-        LoadPackage(descPath);
+    public bool LoadPackageNoReturn(string descPath) {
+        return LoadPackage(descPath) != null;
     }
 
     public bool LoadPackageAsync(string descPath, int loadPriority = 0) {
