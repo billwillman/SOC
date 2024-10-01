@@ -2,9 +2,23 @@ local LoginModel = _MOE.class("LoginModel", _MOE.BaseModel)
 
 local MsgIds = require("_NetMsg.MsgId")
 
+local function SM_LoginRet(clientNetModel, msg)
+end
+
+function LoginModel:InitNetDisptchEvents()
+    -- 网络消息处理
+    _MOE.ClientApp:RegisterReceiveMsgProcess(MsgIds.SM_LoginRet, SM_LoginRet)
+end
+
+function LoginModel:OnUnInit()
+    self:UnRegisterReceiveMsgProcess(MsgIds.SM_LoginRet)
+end
+
 function LoginModel:OnInit()
+    self:InitNetDisptchEvents()
     -- 打开登录界面
     _MOE.UIManager:OpenWindow(_MOE.WindowName.Login)
+    
 end
 
 function LoginModel:CM_Login(userName, password)
