@@ -2,9 +2,6 @@ require("_Client.Views.UIConfig")
 
 -- UI管理器
 local UIManager = _MOE.class("UIManager")
-local BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
-local FairyGUILoaderAsyncType = typeof(CS.FairyGUIResLoaderAsyncMono)
---local BaseResLoaderType = typeof(CS.BaseResLoader)
 local UIBinderType = typeof(CS.SOC.GamePlay.UIBinder)
 local UILayerClass = require("_Client.UILayer")
 
@@ -51,7 +48,7 @@ function UIManager:_CreateUIPrefab(wndName, loaderType)
     local loader = nil
     if ret then
         if loaderType == nil then
-            loaderType = BaseResLoaderAsyncType
+            loaderType = _MOE.BaseResLoaderAsyncType
         end
         loader = ret:AddComponent(loaderType)
     end
@@ -134,7 +131,7 @@ function UIManager:_CreateUIWindow(wndName, ...)
     if not viewClass then
         return
     end
-    local fairyGUIType = config.isFairyGUI and FairyGUILoaderAsyncType or BaseResLoaderAsyncType
+    local fairyGUIType = config.isFairyGUI and _MOE.FairyGUILoaderAsyncType or _MOE.BaseResLoaderAsyncType
     local gameObj, loader = self:_CreateUIPrefab(wndName, fairyGUIType)
     if not gameObj then
         return

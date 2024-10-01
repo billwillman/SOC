@@ -55,6 +55,8 @@ _MOE.NetState = CS.NsTcpClient.eClientState
 _MOE.ILuaBinder = CS.SOC.GamePlay.ILuaBinder
 _MOE.LuaEvent_MonoEventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
 _MOE.FairyGUIResLoaderAsyncMono = CS.FairyGUIResLoaderAsyncMono
+_MOE.BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
+_MOE.FairyGUILoaderAsyncType = typeof(CS.FairyGUIResLoaderAsyncMono)
 if _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
     _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI()
 end
