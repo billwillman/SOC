@@ -221,6 +221,8 @@ using NsLib.ResMgr;
 
         /*----------------------------------- 主动触发异步加载 -------------------------------------------------------------*/
 
+        
+
         public bool LoadFontAsync(string fileName, TextMesh obj, int loadPriority = 0) {
             if (obj == null)
                 return false;
@@ -354,6 +356,10 @@ using NsLib.ResMgr;
 
 /*---------------------------------------------------- 异步加载回调 --------------------------------------------------------------*/
 
+        protected virtual bool OnTextLoaded(TextAsset target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, bool isMatInst, string resName, string tag) {
+        return false;
+    }
+
         protected virtual bool OnTextureLoaded(Texture target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, bool isMatInst, string resName, string tag) {
             if (target != null && obj != null) {
 
@@ -429,6 +435,17 @@ using NsLib.ResMgr;
             }
             return obj != null;
         }
+
+        public bool _OnTextLoaded(TextAsset target, ulong subID) {
+            bool isMatInst;
+            string resName, tag;
+        UnityEngine.Object obj = RemoveSubID(subID, out isMatInst, out resName, out tag);
+        if (obj != null) {
+            if (!OnTextLoaded(target, obj, GetSubType(subID), isMatInst, resName, tag))
+                return false;
+        }
+        return obj != null;
+    }
 
         protected virtual bool OnAniControlLoaded(RuntimeAnimatorController target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, string resName, string tag) {
             if (target != null && obj != null) {
