@@ -7,7 +7,7 @@ end
 
 function LoginModel:InitNetDisptchEvents()
     -- 网络消息处理
-    _MOE.ClientApp:RegisterReceiveMsgProcess(MsgIds.SM_LoginRet, SM_LoginRet)
+    self:RegisterReceiveMsgProcess(MsgIds.SM_LoginRet, SM_LoginRet)
 end
 
 function LoginModel:OnUnInit()
