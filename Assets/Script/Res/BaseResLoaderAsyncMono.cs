@@ -21,6 +21,7 @@ using NsLib.ResMgr;
         TextMeshFont,
 		NGUIUIFontFont,
 		NGUIUISpriteAtlas,
+        FairyGUIPackage,
     }
 
     [XLua.LuaCallCSharp]
@@ -116,7 +117,7 @@ using NsLib.ResMgr;
 
         }
 
-		private bool RemoveSUBID(string fileName, int subID, BaseResLoaderAsyncType asyncType, out bool isSame) {
+		private bool RemoveSUBID(string fileName, int subID, BaseResLoaderAsyncType asyncType, out bool isSame, bool isRemoveExists = true) {
 			isSame = false;
             if (m_LoadingList == null)
                 return false;
@@ -131,9 +132,11 @@ using NsLib.ResMgr;
 						isSame = string.Compare (fileName, n.fileName, true) == 0;
 						if (isSame)
 							return false;
-						
-                        n.Dispose();
-                        return true;
+
+                        if (isRemoveExists) {
+                            n.Dispose();
+                            return true;
+                        }
                     }
                 }
                 node = next;
@@ -193,13 +196,13 @@ using NsLib.ResMgr;
 			return ret;
         }
 
-		protected int ReMake(string fileName, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, bool isMatInst, out ulong id, string resName = "", string tag = "") {
+		protected int ReMake(string fileName, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, bool isMatInst, out ulong id, string resName = "", string tag = "", bool isRemoveExists = true) {
             id = 0;
             if (obj == null)
                 return -1;
             int subID = obj.GetInstanceID();
 			bool isSame;
-			RemoveSUBID(fileName, subID, asyncType, out isSame);
+			RemoveSUBID(fileName, subID, asyncType, out isSame, isRemoveExists);
 			if (!isSame) {
 				id = MakeLongSubID (subID, asyncType);
 				if (AddLoadingNode (fileName, id, obj, isMatInst, resName, tag))
@@ -221,7 +224,22 @@ using NsLib.ResMgr;
 
         /*----------------------------------- 主动触发异步加载 -------------------------------------------------------------*/
 
-        
+        public bool LoadFairyGUIPackageAsync(string fileName, MonoBehaviour obj, int loadPriority = 0) {
+        if (obj == null)
+            return false;
+        var mgr = BaseResLoaderAsyncMgr.GetInstance();
+        if (mgr != null) {
+            ulong id;
+            int rk = ReMake(fileName, obj, BaseResLoaderAsyncType.FairyGUIPackage, false, out id, string.Empty, string.Empty, false);
+            if (rk < 0)
+                return false;
+            if (rk == 0)
+                return true;
+
+            return mgr.LoadTextAssetAsync(fileName, this, id, loadPriority);
+        }
+        return false;
+    }
 
         public bool LoadFontAsync(string fileName, TextMesh obj, int loadPriority = 0) {
             if (obj == null)
