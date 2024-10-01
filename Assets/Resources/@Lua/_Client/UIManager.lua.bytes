@@ -57,7 +57,7 @@ function UIManager:_CreateUIPrefab(wndName, loaderType, fairyDepPackages)
             if fairyDepPackages ~= nil then
                 for _, depPackageName in ipairs(fairyDepPackages) do
                     if depPackageName and string.len(depPackageName) > 0 then
-                        local packagePath = string.format("Resources/FairyGUIPackages/@%s/%s.bytes", depPackageName, depPackageName)
+                        local packagePath = string.format("Resources/FairyGUIPackages/%s.bytes", depPackageName)
                         loader:LoadPackageNoReturn(packagePath) -- 加载Package
                     end
                 end
