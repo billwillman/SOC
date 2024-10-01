@@ -109,7 +109,10 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
             if (!m_UsedPackageIds.Contains(ret.id))
                 m_UsedPackageIds.Add(ret.id);
             else {
-                DecPackageRef(ret.id); // 自身已经加载了这个package要减1一下。
+                if (DecPackageRef(ret.id) <= 0) // 自身已经加载了这个package要减1一下。
+                {
+                    UIPackage.RemovePackage(ret.id); // 正常不应该会出现 <= 0 的情况
+                }
             }
         }
         return ret;
