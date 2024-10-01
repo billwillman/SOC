@@ -40,11 +40,12 @@ namespace SOC.GamePlay
                 else
                     luaSearchPath = Application.persistentDataPath + "/Lua/{0}.lua.bytes";
             }
+#if !UNITY_EDITOR
             if (!string.IsNullOrEmpty(luaSearchPath)) {
                 Debug.LogFormat("AddDynicLuaSearchPath: {0}", luaSearchPath);
                 _cLuaRootPathFormats.Add(new LuaPathFormatData(luaSearchPath, true));
             }
-
+#endif
             _cLuaRootPathFormats.Add(new LuaPathFormatData("Resources/@Lua/{0}.lua.bytes", false));
             _cLuaRootPathFormats.Add(new LuaPathFormatData("Resources/@Lua/_BehaviourTree/{0}.lua.bytes", false));
         }
