@@ -1,6 +1,14 @@
 local BaseAppClass = require("_Common.BaseApp")
 require("_Client.ClientEvents")
 
+if _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
+    _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI()
+    _MOE.FairyGUI_GRoot = CS.FairyGUI.GRoot.inst
+    if _MOE.FairyGUI_GRoot then
+        _MOE.FairyGUI_GRoot:SetContentScaleFactor(1280, 720, CS.FairyGUI.UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
+    end
+end
+
 local ClientApp = _MOE.class("ClientApp", BaseAppClass)
 
 local function CreateUIRoot()

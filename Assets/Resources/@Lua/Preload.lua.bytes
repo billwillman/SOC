@@ -57,13 +57,6 @@ _MOE.LuaEvent_MonoEventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
 _MOE.FairyGUIResLoaderAsyncMono = CS.FairyGUIResLoaderAsyncMono
 _MOE.BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
 _MOE.FairyGUILoaderAsyncType = typeof(CS.FairyGUIResLoaderAsyncMono)
-if _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
-    _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI()
-    _MOE.FairyGUI_GRoot = CS.FairyGUI.GRoot.inst
-    if _MOE.FairyGUI_GRoot then
-        _MOE.FairyGUI_GRoot:SetContentScaleFactor(1280, 720, CS.FairyGUI.UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
-    end
-end
 _MOE.class = require("_Common.BaseClass") -- class框架
 _MOE.Json = require("_Common.json")
 _MOE.TableUtils = require("_Common.TableUtils")
