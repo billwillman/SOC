@@ -35,7 +35,7 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         base.ClearAllResources();
     }
 
-    private static void InitFairyGUI() {
+    public static void InitFairyGUI() {
         if (m_IsInitFairyGUI)
             return;
         m_IsInitFairyGUI = true;

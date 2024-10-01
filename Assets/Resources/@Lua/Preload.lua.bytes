@@ -54,6 +54,10 @@ _MOE.Vector2 = CS.UnityEngine.Vector2
 _MOE.NetState = CS.NsTcpClient.eClientState
 _MOE.ILuaBinder = CS.SOC.GamePlay.ILuaBinder
 _MOE.LuaEvent_MonoEventType = CS.SOC.GamePlay.LuaEvent_MonoEventType
+_MOE.FairyGUIResLoaderAsyncMono = CS.FairyGUIResLoaderAsyncMono
+if _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
+    _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI()
+end
 _MOE.class = require("_Common.BaseClass") -- class框架
 _MOE.Json = require("_Common.json")
 _MOE.TableUtils = require("_Common.TableUtils")
