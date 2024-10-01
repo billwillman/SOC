@@ -105,13 +105,4 @@ function NetClientModel:GetGMAddr()
     end
 end
 
----------------------------------------- 客户端协议 ----------------------------------------
-function NetClientModel:CM_Login(userName, password)
-    local data = {
-        userName = userName,
-        password = password
-    }
-    self:SendMsg(MsgIds.CM_Login, data)
-end
-
 return NetClientModel
