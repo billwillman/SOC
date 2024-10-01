@@ -125,7 +125,57 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
     public bool LoadPackageAsync(string descPath, int loadPriority = 0) {
         if (!string.IsNullOrEmpty(descPath))
             return false;
+        UIPackage pkg = UIPackage.GetById(descPath);
+        if (pkg != null) {
+            if (!m_UsedPackageIds.Contains(pkg.id)) {
+                if (AddPackageRef(pkg)) {
+                    m_UsedPackageIds.Add(pkg.id);
+                } else
+                    return false;
+            }
+            CallOnUIPackageAsyncEvt(pkg.id);
+            return true;
+        }
+        InitFairyGUI();
         return LoadFairyGUIPackTextAssetAsync(descPath, this, loadPriority);
+    }
+
+    public Action<string> OnUIPackageAsyncEvt {
+        get;
+        set;
+    }
+
+    protected void CallOnUIPackageAsyncEvt(string pkgId) {
+        if (!string.IsNullOrEmpty(pkgId))
+            return;
+        if (OnUIPackageAsyncEvt != null)
+            OnUIPackageAsyncEvt(pkgId);
+    }
+
+    protected override bool OnTextLoaded(TextAsset target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, bool isMatInst, string resName, string tag) {
+        if (target != null && obj != null) {
+            switch (asyncType) {
+                case BaseResLoaderAsyncType.FairyGUIPackage: {
+                        UIPackage pkg = UIPackage.AddPackage(target.bytes, string.Empty, m_LoadResourceFunc);
+                        if (pkg != null) {
+                            if (!m_UsedPackageIds.Contains(pkg.id)) {
+                                if (AddPackageRef(pkg))
+                                    m_UsedPackageIds.Add(pkg.id);
+                                else {
+                                    UIPackage.RemovePackage(pkg.id);
+                                    return false;
+                                }
+                            }
+                            CallOnUIPackageAsyncEvt(pkg.id);
+                            return true;
+                        }
+                        break;
+                    }
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 }
 
