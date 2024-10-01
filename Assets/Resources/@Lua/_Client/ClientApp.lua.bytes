@@ -1,7 +1,7 @@
 local BaseAppClass = require("_Common.BaseApp")
 require("_Client.ClientEvents")
 
-if _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
+if _MOE.IsUseFairyGUI and _MOE.FairyGUIResLoaderAsyncMono and _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI then
     _MOE.FairyGUIResLoaderAsyncMono.InitFairyGUI()
     _MOE.FairyGUI_GRoot = CS.FairyGUI.GRoot.inst
     if _MOE.FairyGUI_GRoot then
