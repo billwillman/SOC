@@ -31,7 +31,6 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         }
         iter.Dispose();
         m_UsedPackageIds.Clear();
-
         base.ClearAllResources();
     }
 
