@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <component id="n2_bvuy" name="BtnGM" src="bvuy1" fileName="TextBtn.xml" pkg="xg0k0bz3" xy="2,3" size="67,43">
+      <relation target="" sidePair="left-left"/>
+      <Button title="GM"/>
+    </component>
+  </displayList>
+</component>
