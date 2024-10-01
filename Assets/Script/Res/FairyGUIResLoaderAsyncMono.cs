@@ -101,14 +101,44 @@ public class FairyGUIResLoaderAsyncMono: BaseResLoaderAsyncMono {
         return ret;
     }
 
+    protected void LoadDependPackages(UIPackage pkg) {
+        if (pkg == null)
+            return;
+        var dicts = pkg.dependencies;
+        if (dicts == null)
+            return;
+        foreach (var dict in dicts) {
+            if (dict != null) {
+                var iter = dict.GetEnumerator();
+                while (iter.MoveNext()) {
+                    string id = iter.Current.Key;
+                    if (!string.IsNullOrEmpty(id))
+                        continue;
+                    if (m_UsedPackageIds.Contains(id))
+                        continue;
+                    UIPackage depPkg = UIPackage.GetById(id);
+                    if (depPkg != null) {
+                        if (AddPackageRef(depPkg))
+                            m_UsedPackageIds.Add(id);
+                    } else {
+                        LoadPackage(iter.Current.Value);
+                    }
+
+                }
+                iter.Dispose();
+            }
+        }
+    }
+
     public UIPackage LoadPackage(string descPath) {
         if (!string.IsNullOrEmpty(descPath))
             return null;
         UIPackage ret = LoadPackageDesc(descPath);
         if (ret != null) {
-            if (!m_UsedPackageIds.Contains(ret.id))
+            if (!m_UsedPackageIds.Contains(ret.id)) {
+                LoadDependPackages(ret);
                 m_UsedPackageIds.Add(ret.id);
-            else {
+            } else {
                 if (DecPackageRef(ret.id) <= 0) // 自身已经加载了这个package要减1一下。
                 {
                     UIPackage.RemovePackage(ret.id); // 正常不应该会出现 <= 0 的情况
