@@ -15,7 +15,7 @@ local GMCommands = {
 
 local _M = _MOE.class("GMCommandModel", _MOE.BaseModel)
 
-function _MOE:OnInit()
+function _M:OnInit()
     self.GMCommandsMap = {}
     for _, cmd in pairs(GMCommands) do
         self.GMCommandsMap[cmd.name] = cmd
