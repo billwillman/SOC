@@ -4,11 +4,25 @@ local _M = _MOE.class("GMServerProcesser", baseClass)
 local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
 require("ServerCommon.GlobalFuncs")
+require("ServerCommon.ServerMsgIds")
+local json = require("json")
 
-local function TestConnectLocalDS(command, paramStr, loginToken, socket, fd)
-    if not command then
+local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
+    if not command or not msg or #msg < 2 then
         return
     end
+    local loginToken = msg.token
+    if not loginToken then
+        return
+    end
+    local playerInfo = msgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
+    if not playerInfo then
+        print(string.format("[GM] UseLocalDS: not found playerInfo: %s", loginToken))
+        return
+    end
+    print(string.format("[GM] UseLocalDS: %s(%s)", loginToken, playerInfo))
+    -- 查询下login服务器
+    local mapName = msg.mapName
     local ip, port = GetIpAndPort(socket, fd)
     if ip then
         local dsToken = GenerateToken(ip, 7777)
@@ -32,7 +46,11 @@ local CurrentMsgProcess = {
         if command then
             local func = GMCommands[command]
             if func then
-                func(command, paramStr, socket, fd)
+                local msg = nil
+                if paramStr and string.len(paramStr) > 0 then
+                    msg = json.decode(paramStr)
+                end
+                func(command, msg, socket, fd)
             end
         end
     end

@@ -98,6 +98,14 @@ function ClientApp:OnUpdate(deltaTime)
     end
 end
 
+function ClientApp:GetMySelfTokenAndSession()
+    local mySelf = self:GetMySelf()
+    if not mySelf then
+        return
+    end
+    return mySelf.token, mySelf.session
+end
+
 function ClientApp:RegisterLoginSrvMsgCallBack(msgId, obj, func)
     if not func then
         return false

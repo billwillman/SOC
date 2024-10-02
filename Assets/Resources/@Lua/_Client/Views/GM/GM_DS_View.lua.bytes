@@ -5,6 +5,15 @@ function GM_DS_View:OnInit()
 end
 
 function GM_DS_View:OnBtnDSMap()
+    local mapName = self.bp.EdtMapName.text
+    if not mapName or string.len(mapName) <= 0 then
+        return
+    end
+    local token = self:GetMySelfTokenAndSession()
+    if not token then
+        return
+    end
+    _MOE.GameApp:UseGMCommand("UseLocalDS", token, mapName)
 end
 
 function GM_DS_View:OnOpen()
