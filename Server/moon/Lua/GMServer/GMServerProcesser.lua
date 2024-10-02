@@ -12,9 +12,14 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
         print("[GM] UseLocalDS: command is not vaild or msg is not vaild")
         return
     end
-    local loginToken = msg.token
+    local loginToken = msg[1]
+    local mapName = msg[2]
     if not loginToken then
         print("[GM] UseLocalDS: loginToken is not vaild")
+        return
+    end
+    if not mapName then
+        print("[GM] UseLocalDS: mapName is not vaild")
         return
     end
     local playerInfo = msgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
