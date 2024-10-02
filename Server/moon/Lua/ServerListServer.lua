@@ -22,22 +22,30 @@ local G_StartTimer = os.clock() * 1000
 
 ---------------------------------------------- 服务之间通信 ------------------------------------------
 
+local function StartServer()
+    httpserver.listen(ServerData.ip, ServerData.port, 60)
+    print("[ServerListServer] ", ServerData.ip, ServerData.port)
+    httpserver.error = function (fd, err)
+        print("http server fd",fd," disconnected:",  err)
+    end
+    
+    httpserver.on("/serverlist", function(req, rep)
+        -- 返回区服数据
+        rep.status_code = 200
+        rep:write(clientServerListStr)
+    end)
+end
+
+--[[
 local _Server_List_Process = {
     [_MOE.ServicesCall.Start] = function ()
-        httpserver.listen(ServerData.ip, ServerData.port, 60)
-        print("[ServerListServer] ", ServerData.ip, ServerData.port)
-        httpserver.error = function (fd, err)
-            print("http server fd",fd," disconnected:",  err)
-        end
-        
-        httpserver.on("/serverlist", function(req, rep)
-            -- 返回区服数据
-            rep.status_code = 200
-            rep:write(clientServerListStr)
-        end)
+        StartServer()
     end,
     [_MOE.ServicesCall.Shutdown] = function ()
     end
 }
 
 RegisterServerCommandProcess(_Server_List_Process)
+]]
+
+StartServer()
