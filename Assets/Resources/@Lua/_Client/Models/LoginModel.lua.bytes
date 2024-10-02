@@ -4,7 +4,7 @@ local MsgIds = require("_NetMsg.MsgId")
 
 function LoginModel:InitNetDisptchEvents()
     -- 网络消息处理
-    _MOE.GameApp:RegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet, self, SM_LoginRet)
+    _MOE.GameApp:RegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet, self, self.SM_LoginRet)
 end
 
 function LoginModel:OnUnInit()
