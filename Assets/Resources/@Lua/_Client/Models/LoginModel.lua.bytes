@@ -2,12 +2,9 @@ local LoginModel = _MOE.class("LoginModel", _MOE.BaseModel)
 
 local MsgIds = require("_NetMsg.MsgId")
 
-local function SM_LoginRet(clientNetModel, msg)
-end
-
 function LoginModel:InitNetDisptchEvents()
     -- 网络消息处理
-    _MOE.GameApp:RegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet, SM_LoginRet)
+    _MOE.GameApp:RegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet, self, SM_LoginRet)
 end
 
 function LoginModel:OnUnInit()
@@ -27,6 +24,10 @@ function LoginModel:CM_Login(userName, password)
         password = password
     }
     _MOE.GameApp:SendLoginSrvMsg(MsgIds.CM_Login, data)
+end
+
+--------------------------------- 网络消息接收 ------------------------------------
+function LoginModel:SM_LoginRet(netModel, msg)
 end
 
 return LoginModel

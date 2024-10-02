@@ -86,10 +86,17 @@ function ClientApp:OnUpdate(deltaTime)
     end
 end
 
-function ClientApp:RegisterLoginSrvMsgCallBack(msgId, func)
+function ClientApp:RegisterLoginSrvMsgCallBack(msgId, obj, func)
+    if not func then
+        return false
+    end
     local model = self:GetModel("NetClientModel")
     if model then
-        model:RegisterReceiveMsgProcess(msgId, func)
+        model:RegisterReceiveMsgProcess(msgId,
+            function (netModel, msg)
+                func(obj, netModel, msg)
+            end
+        )
         return true
     end
     return false
