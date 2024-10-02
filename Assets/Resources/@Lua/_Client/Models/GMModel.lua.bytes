@@ -1,5 +1,6 @@
 -- GM指令
-local _M = _MOE.class("GMModel", _MOE.BaseNetModel)
+local baseNetModel = require("_Common.BaseNetModel")
+local _M = _MOE.class("GMModel", baseNetModel)
 
 function _M:Ctor()
     local netClient = _MOE.NetClientClass()
