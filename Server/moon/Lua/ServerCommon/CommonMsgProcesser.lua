@@ -23,6 +23,7 @@ _M.SERVER_COMMAND_PROCESS_IS_CALLMODE = {
 
 local ServerCommandProcessCallMode = _M.SERVER_COMMAND_PROCESS_IS_CALLMODE
 local ServerClientDispatch = _M.MsgDispatch
+local ServerToServerDispatch = _M.SERVER_COMMAND_PROCESS
 
 moon.exports.IsServerCommandCallModel = function (funcName)
     if not funcName or not ServerCommandProcessCallMode then
@@ -178,9 +179,10 @@ moon.exports.RegisterServerCommandProcess = function (table)
     if table ~= _M.SERVER_COMMAND_PROCESS then
         setmetatable(table, {__index = _M.SERVER_COMMAND_PROCESS})
     end
+    ServerToServerDispatch = table
     moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
-        local OnProcess = table[cmd]
+        local OnProcess = ServerToServerDispatch[cmd]
         if OnProcess then
             if IsServerCommandCallModel(cmd) then
                 -- print(string.format("[%s] callModel...", cmd))
@@ -226,9 +228,10 @@ moon.exports.RegisterClientMsgProcess = function (table)
 end
 
 moon.exports.RegisterDefaultServerCommandProcess = function ()
+    ServerToServerDispatch = _M.SERVER_COMMAND_PROCESS
     moon.dispatch("lua", function(sender, session, cmd, ...)
         -- 处理 cmd
-        local OnProcess = _M.SERVER_COMMAND_PROCESS[cmd]
+        local OnProcess = ServerToServerDispatch[cmd]
         if OnProcess then
             if IsServerCommandCallModel(cmd) then
                 moon.response("lua", sender, session, OnProcess(...))
