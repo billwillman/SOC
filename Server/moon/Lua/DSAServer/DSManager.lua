@@ -100,14 +100,14 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
         return
     end
     local dsToken = msg.dsToken
+    local isLocalDS = false
     if not dsToken then
         local ip = msg.dsIp
         local port = msg.dsPort
         dsToken = self:GetDsToknFromAddr(ip, port)
         local clientToken = self:GetDsClientToken(fd)
         if clientToken and dsToken then
-            self.DsClientTokenToDsToken[clientToken] = dsToken
-            local isLocalDS
+            self.DsClientTokenToDsToken[clientToken] = dsToken      
             if not self.DsTokenHandlerMap[dsToken] then
                 self.DsTokenHandlerMap[dsToken] = {}
                 isLocalDS = true
@@ -121,7 +121,7 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
     end
     -- 关掉定时器关闭
     self:ClearDs_ConnectStopTimer(dsToken)
-    print(string.format("[DSA] dsIp: %s dsPort: %d dsToken: %s Ds Ready", msg.dsIp, msg.dsPort, dsToken))
+    print(string.format("[DSA] IsLocalDs: %s dsIp: %s dsPort: %d dsToken: %s Ds Ready", isLocalDS, msg.dsIp, msg.dsPort, dsToken))
 end
 
 function _M:IsLocalDS(dsToken)
