@@ -9,11 +9,12 @@ local json = require("json")
 
 local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
     if not command or not msg or #msg < 2 then
-        print("[GM] command is not vaild or msg is not vaild")
+        print("[GM] UseLocalDS: command is not vaild or msg is not vaild")
         return
     end
     local loginToken = msg.token
     if not loginToken then
+        print("[GM] UseLocalDS: loginToken is not vaild")
         return
     end
     local playerInfo = msgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
