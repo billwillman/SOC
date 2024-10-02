@@ -10,6 +10,7 @@ local socket = require "moon.socket"
 
 local MsgProcesser = require("LoginServer/LoginMsgProcesser").New()
 
+moon.exports.MsgProcesser = MsgProcesser
 moon.exports.ServerData = ServerData
 moon.exports.PlayerManager = require("LoginServer.PlayerManager").New()
 

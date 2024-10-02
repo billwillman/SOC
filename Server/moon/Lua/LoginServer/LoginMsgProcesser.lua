@@ -20,6 +20,7 @@ local CurrentMsgProcess = {
             end
             -- 不需要一登陆就开DSA
             -- moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
+            -- MsgProcesser:SendServerMsgAsync("DSA", _MOE.ServerMsgIds.CM_ReqDS, playerInfo)
             local ret = {
                 session = playerInfo.session,
                 token = playerInfo.token,
