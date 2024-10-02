@@ -86,6 +86,24 @@ function ClientApp:OnUpdate(deltaTime)
     end
 end
 
+function ClientApp:RegisterLoginSrvMsgCallBack(msgId, func)
+    local model = self:GetModel("NetClientModel")
+    if model then
+        model:RegisterReceiveMsgProcess(msgId, func)
+        return true
+    end
+    return false
+end
+
+function ClientApp:UnRegisterLoginSrvMsgCallBack(msgId)
+    local model = self:GetModel("NetClientModel")
+    if model then
+        model:UnRegisterReceiveMsgProcess(msgId)
+        return true
+    end
+    return false
+end
+
 ----------------------------------------------------- DS链接对象 -----------------------------
 function ClientApp:CreateDSNetManagerPrefab()
     if self.DSNetManagerPrefab then

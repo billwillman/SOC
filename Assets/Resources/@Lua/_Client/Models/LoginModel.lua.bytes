@@ -7,11 +7,11 @@ end
 
 function LoginModel:InitNetDisptchEvents()
     -- 网络消息处理
-    --_MOE.GameApp:RegisterReceiveMsgProcess(MsgIds.SM_LoginRet, SM_LoginRet)
+    _MOE.GameApp:RegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet, SM_LoginRet)
 end
 
 function LoginModel:OnUnInit()
-    --_MOE.GameApp:UnRegisterReceiveMsgProcess(MsgIds.SM_LoginRet)
+    _MOE.GameApp:UnRegisterLoginSrvMsgCallBack(MsgIds.SM_LoginRet)
 end
 
 function LoginModel:OnInit()
