@@ -37,6 +37,7 @@ function ClientApp:OnInit()
     self:RegisterModel("NetClientModel", "_Client.Models.NetClientModel")
     self:RegisterModel("LoginModel", "_Client.Models.LoginModel", false)
     self:RegisterModel("GMClientModel", "_Client.Models.GMModel", true) -- 这个是Lazy模块
+    self:RegisterModel("GMCommand", "_Client.Models.GMCommandModel", true) -- 这个是Lazy模块
     self:RegisterModel("MySelfInfo", "_Client.Models.MySelfModel", false)
 
     CreateMyPlayerInput()
@@ -61,6 +62,17 @@ end
 function ClientApp:GetMySelf()
     local ret = self:GetModel("MySelfInfo")
     return ret
+end
+
+function ClientApp:UseGMCommand(command, ...)
+    if not command then
+        return false
+    end
+    local model = self:GetModel("GMCommand")
+    if not model then
+        return false
+    end
+    return model:UseCommand(command, ...)
 end
 
 function ClientApp:UseGM(command, paramStr)

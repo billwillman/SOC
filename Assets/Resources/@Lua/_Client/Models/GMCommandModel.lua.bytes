@@ -6,8 +6,8 @@ local GMCommands = {
         desc = "使用本地Local DS连接",
         Params = {
             {
-                desc = "是否使用",
-                Text = true
+                desc = "地图名",
+                Text = ""
             }
         },
     }
