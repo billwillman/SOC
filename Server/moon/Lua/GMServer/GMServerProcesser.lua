@@ -9,6 +9,7 @@ local json = require("json")
 
 local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
     if not command or not msg or #msg < 2 then
+        print("[GM] command is not vaild or msg is not vaild")
         return
     end
     local loginToken = msg.token
