@@ -100,10 +100,10 @@ end
 
 function ClientApp:GetMySelfTokenAndSession()
     local mySelf = self:GetMySelf()
-    if not mySelf then
+    if not mySelf or not mySelf.ServerData then
         return
     end
-    return mySelf.token, mySelf.session
+    return mySelf.ServerData.token, mySelf.ServerData.session
 end
 
 function ClientApp:RegisterLoginSrvMsgCallBack(msgId, obj, func)
