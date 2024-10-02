@@ -37,6 +37,9 @@ function LoginModel:SM_LoginRet(netModel, msg)
             session = session
         }
         mySelfInfo:UpdateServerData(playerData)
+
+        _MOE.UIManager:CloseWindow(_MOE.WindowName.Login)
+        _MOE.UIManager:OpenWindow(_MOE.WindowName.GM_DS)
     end
 end
 
