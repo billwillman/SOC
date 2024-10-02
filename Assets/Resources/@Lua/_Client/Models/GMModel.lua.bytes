@@ -4,7 +4,7 @@ local _M = _MOE.class("GMModel", baseNetModel)
 
 function _M:Ctor()
     local netClient = _MOE.NetClientClass()
-    self.super.Ctor(netClient, _MOE.CommonEvents.GMConnectResult, _MOE.CommonEvents.GMConnectAbort)
+    self.super.Ctor(self, netClient, _MOE.CommonEvents.GMConnectResult, _MOE.CommonEvents.GMConnectAbort)
 end
 
 function _M:GetNetAddr()
