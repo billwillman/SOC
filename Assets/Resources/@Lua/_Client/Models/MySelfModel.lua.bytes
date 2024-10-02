@@ -2,4 +2,12 @@
 
 local _M = _MOE.class("MySelfModel", _MOE.BaseModel)
 
+function _M:UpdateServerData(data)
+    self.ServerData = data
+end
+
+function _M:GetServerData()
+    return self.ServerData
+end
+
 return _M

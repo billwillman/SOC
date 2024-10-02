@@ -28,6 +28,16 @@ end
 
 --------------------------------- 网络消息接收 ------------------------------------
 function LoginModel:SM_LoginRet(netModel, msg)
+    local token = msg.token
+    local session = msg.session
+    local mySelfInfo = _MOE.GameApp:GetMySelf()
+    if mySelfInfo then
+        local playerData = {
+            token = token,
+            session = session
+        }
+        mySelfInfo:UpdateServerData(playerData)
+    end
 end
 
 return LoginModel
