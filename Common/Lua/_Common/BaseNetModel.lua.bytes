@@ -105,7 +105,17 @@ function _M:_OnMsg_SM_Heart(msg)
 end
 
 function _M:RegisterReceiveMsgProcess(msgId, func)
+    if not msgId or not func then
+        return
+    end
     self.ReceiveMsgProcess[msgId] = func
+end
+
+function _M:UnRegisterReceiveMsgProcess(msgId)
+    if not msgId then
+        return
+    end
+    self.ReceiveMsgProcess[msgId] = nil
 end
 
 function _M:_OnMoonPacketRead(packet)
