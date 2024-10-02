@@ -113,7 +113,7 @@ end)
 ]]
 
 local function CallServerIds_Func(funcName, ...)
-    if not RuntimeServerIds or not next(RuntimeServerIds) or not funcName or string.len(funcName) <= 0 then
+    if not RuntimeServerIds or not next(RuntimeServerIds) or not funcName then
         return
     end
     for _, id in ipairs(RuntimeServerIds) do
