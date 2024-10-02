@@ -58,7 +58,7 @@ function _M:IsGsConnected()
     return ret
 end
 
-function _M.IsGsConnecting()
+function _M:IsGsConnecting()
     local state = self.NetClient.ClietnState
     local ret = state == _MOE.NetState.eClient_STATE_CONNECTING
     return ret
