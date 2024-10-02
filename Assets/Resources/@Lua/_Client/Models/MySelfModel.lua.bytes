@@ -1,9 +1,11 @@
 -- Client 个人角色数据
 
 local _M = _MOE.class("MySelfModel", _MOE.BaseModel)
+local TableUtils = require("_Common.TableUtils")
 
 function _M:UpdateServerData(data)
     self.ServerData = data
+    print("[MySelf] " .. TableUtils.Serialize(data))
 end
 
 function _M:GetServerData()
