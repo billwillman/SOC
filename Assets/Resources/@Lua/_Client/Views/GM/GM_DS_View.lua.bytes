@@ -1,3 +1,13 @@
 local GM_DS_View = _MOE.class("GM_DS_View", _MOE.BaseViewClass)
 
+function GM_DS_View:OnInit()
+    self:AddButtonClick(self.bp.BtnDSMap, self.OnBtnDSMap)
+end
+
+function GM_DS_View:OnBtnDSMap()
+end
+
+function GM_DS_View:OnOpen()
+end
+
 return GM_DS_View
