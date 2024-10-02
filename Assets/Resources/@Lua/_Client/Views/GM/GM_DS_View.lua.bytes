@@ -9,7 +9,7 @@ function GM_DS_View:OnBtnDSMap()
     if not mapName or string.len(mapName) <= 0 then
         return
     end
-    local token = self:GetMySelfTokenAndSession()
+    local token = _MOE.GameApp:GetMySelfTokenAndSession()
     if not token then
         return
     end
