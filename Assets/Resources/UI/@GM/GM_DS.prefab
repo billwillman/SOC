@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 8369225077851384210}
   - component: {fileID: 8374812564529657777}
   - component: {fileID: 4472283169818316912}
+  - component: {fileID: 2800382985676317070}
   m_Layer: 5
   m_Name: GM_DS
   m_TagString: Untagged
@@ -465,7 +466,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4472283169818316912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +483,22 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
+--- !u!114 &2800382985676317070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721772166886106693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6977327a48b694e8210ff13407d014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindControls:
+  - {fileID: 8916475805142985317}
+  - {fileID: 7562051565940733133}
 --- !u!1 &7865002572163033182
 GameObject:
   m_ObjectHideFlags: 0
