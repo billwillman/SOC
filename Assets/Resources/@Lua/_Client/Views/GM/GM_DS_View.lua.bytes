@@ -1,0 +1,3 @@
+local GM_DS_View = _MOE.class("GM_DS_View", _MOE.BaseViewClass)
+
+return GM_DS_View
