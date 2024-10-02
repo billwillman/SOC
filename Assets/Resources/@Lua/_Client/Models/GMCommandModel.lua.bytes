@@ -15,13 +15,20 @@ local GMCommands = {
 
 local _M = _MOE.class("GMCommandModel", _MOE.BaseModel)
 
+function _MOE:OnInit()
+    self.GMCommandsMap = {}
+    for _, cmd in pairs(GMCommands) do
+        self.GMCommandsMap[cmd.name] = cmd
+    end
+end
+
 ---------------------------------------- 对外接口 ------------------------------
 
 function _M:UseCommand(command, ...)
     if not command then
         return false
     end
-    local command = GMCommands[command]
+    local command = self.GMCommandsMap[command]
     if command then
         local msg = {...}
         local paramStr
