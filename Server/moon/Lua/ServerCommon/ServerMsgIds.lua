@@ -3,7 +3,8 @@ _MOE.ServerMsgIds = {
     CM_ReqDS = 1, -- 请求一个新的DS服务器
     SM_DSReady = 2, -- DS 准备好了
     SM_DS_STATUS = 3, -- DS 状态更新
-    SM_LS_Exist_PLAYERINFO = "SM_LS_Exist_PLAYERINFO", -- 根据LS的Token查询PlayerInfo信息
+    SM_LS_Exist_PLAYERINFO = "SM_LS_Exist_PLAYERINFO", -- 根据LS的Token查询是否存在PlayerInfo
+    SM_DSA_Exist_DS = "SM_DSA_Exist_DS",
 }
 
 _MOE.DsStatus = {

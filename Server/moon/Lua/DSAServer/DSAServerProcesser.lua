@@ -73,9 +73,16 @@ local _Server_DSA_Process = {
     end,
     -- DS准备好
     [_MOE.ServerMsgIds.SM_DSReady] = function ()
-    end
+    end,
+    [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = function (msg)
+    end,
 }
 
+local _ServerToServer_SyncMsg = {
+    [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = true
+}
+
+RegisterServerCommandSync(_ServerToServer_SyncMsg)
 RegisterServerCommandProcess(_Server_DSA_Process)
 
 return _M

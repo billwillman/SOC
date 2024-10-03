@@ -41,7 +41,7 @@ function _M:AddPlayer(userName, password, fd)
     }
     local PlayerInfo = PlayerInfoClass.New(info)
     self.ClientPlayerInfos[token] = PlayerInfo
-    return info
+    return PlayerInfo
 end
 
 function _M:UpdateDsData(playerInfo, dsData)
@@ -55,13 +55,13 @@ function _M:UpdateDsData(playerInfo, dsData)
         print(string.format("[LoginSrv] UpdateDsData: token=%s is not found", token))
         return false
     end
-    if currentPlayerInfo.session ~= session then
+    if currentPlayerInfo.Data.session ~= session then
         print(string.format("[LoginSrv] UpdateDsData: token=%s currentSession=%s UpdateSession=%s is session not vaild", token,
             currentPlayerInfo.session, session))
         return false
     end
 
-    currentPlayerInfo.dsData = dsData or {}
+    currentPlayerInfo.Data.dsData = dsData or {}
 
     return true
 end

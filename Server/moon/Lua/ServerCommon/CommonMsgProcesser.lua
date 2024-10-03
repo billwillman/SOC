@@ -187,6 +187,7 @@ moon.exports.RegisterServerCommandProcess = function (table)
         if OnProcess then
             if IsServerCommandCallModel(cmd) then
                 -- print(string.format("[%s] callModel...", cmd))
+                
                 moon.response("lua", sender, session, OnProcess(...))
             else
                 OnProcess(...)

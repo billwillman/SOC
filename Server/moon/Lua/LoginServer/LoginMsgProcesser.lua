@@ -22,8 +22,8 @@ local CurrentMsgProcess = {
             -- moon.send("lua", dsa, _MOE.ServerMsgIds.CM_ReqDS, playerInfo) -- 从DSA请求服务器
             -- MsgProcesser:SendServerMsgAsync("DSA", _MOE.ServerMsgIds.CM_ReqDS, playerInfo)
             local ret = {
-                session = playerInfo.session,
-                token = playerInfo.token,
+                session = playerInfo.Data.session,
+                token = playerInfo.Data.token,
             }
             self:SendTableToJson2(socket, fd, MsgIds.SM_LoginRet, ret)
         end
@@ -63,7 +63,7 @@ local _Server_TO_LOGIN = {
         else
             print("[LoginSrv] SM_LS_Exist_PLAYERINFO is not found: " .. token)
         end
-        return ret ~= nil
+        return ret ~= nil, ret.Data
     end,
 }
 

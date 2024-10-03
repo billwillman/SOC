@@ -22,7 +22,7 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
         print("[GM] UseLocalDS: mapName is not vaild")
         return
     end
-    local isExits = MsgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_Exist_PLAYERINFO, {token = loginToken})
+    local isExits, playerData = MsgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_Exist_PLAYERINFO, {token = loginToken})
     --local playerInfo = moon.call("lua", GetLoginSrvId(), _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
     if not isExits then
         print(string.format("[GM] UseLocalDS: not found playerInfo: %s", loginToken))
@@ -33,7 +33,7 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
     local mapName = msg.mapName
     local ip, port = GetIpAndPort(socket, fd)
     if ip then
-        local dsToken = GenerateToken(ip, 7777)
+        local dsToken =  playerData.dsData.dsToken and playerData.dsData.dsToken or GenerateToken(ip, 7777)
         if dsToken then
             local reqMsg = {
                 loginToken = loginToken,
