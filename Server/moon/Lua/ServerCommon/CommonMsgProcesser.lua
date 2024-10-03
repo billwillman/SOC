@@ -142,7 +142,8 @@ function _M:_OnMsg(msg, socket, fd)
         -- print(_MOE.TableUtils.Serialize(msg))
         local func = ServerClientDispatch[msg.msgId]
         if func then
-            func(self, msg, socket, fd)
+            -- func(self, msg, socket, fd)
+            moon.async(func, self, msg, socket, fd)
             return true
         end
     end
