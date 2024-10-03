@@ -194,7 +194,7 @@ function _M:ClearDsData(dsToken)
     self.DsTokenHandlerMap[dsToken] = nil
 end
 
-function _M:GetDsTokenFromFd(fd)
+local function GetDsTokenFromFd(self, fd)
     if not fd then
         return
     end
@@ -204,8 +204,8 @@ end
 
 -- Ds突然断线
 function _M:OnDsSocketClose(fd)
-    local dsToken = self:GetDsTokenFromFd(fd)
-    print(string.format("[DSA] OnDsSocketClose ip: %s port: %d dsToken: %s", ip, port, dsToken))
+    local dsToken = GetDsTokenFromFd(self, fd)
+    print(string.format("[DSA] OnDsSocketClose dsToken: %s", dsToken))
     self:ClearDsData(dsToken)
 end
 
