@@ -39,7 +39,7 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
                 loginToken = loginToken,
                 dsToken = dsToken,
             }
-            isExits = MsgProcesser:SendServerMsgSync("DSA", _MOE.ServerMsgIds.SM_DSA_Exist_DS, reqMsg)
+            local isExits, dsServerData = MsgProcesser:SendServerMsgSync("DSA", _MOE.ServerMsgIds.SM_DSA_Exist_DS, reqMsg)
             if not isExits then
                 print("[GM] TestConnectLocalDS: not found dsToken: " .. dsToken)
             else

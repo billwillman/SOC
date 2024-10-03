@@ -115,7 +115,9 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
             local data = self.DsTokenHandlerMap[dsToken]
             data.ServerData = {
                 clientToken = clientToken,
-                isLocalDS = isLocalDS
+                isLocalDS = isLocalDS,
+                ip = ip, -- dsIp
+                port = port -- dsPort
             }
             -- 通知DS更新dsToken
             msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
