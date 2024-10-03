@@ -43,7 +43,7 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
             if not isExits then
                 print("[GM] TestConnectLocalDS: not found dsToken: " .. dsToken)
             else
-                print("[GM] TestConnectLocalDS: found dsToken: " .. dsToken)
+                print("[GM] TestConnectLocalDS: found dsToken: " .. _MOE.TableUtils.Serialize(dsServerData))
             end
             -- local locaDS = MsgProcesser:SendServerMsgSync("DSA", "QueryLocalDS", reqMsg)
         end
