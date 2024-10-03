@@ -46,6 +46,14 @@ local function TestConnectLocalDS(command, msg, socket, fd)
             else
                 print("[GM] TestConnectLocalDS: found dsToken: " .. _MOE.TableUtils.Serialize(dsServerData))
                 -- 发送DS加载地图
+                MsgProcesser:SendServerMsgAsync("LoginSrv", _MOE.ServerMsgIds.SM_LS_DS_Enter,
+                    {
+                        isLocalDS = dsServerData.isLocalDS,
+                        dsIp = dsServerData.ip,
+                        dsPort = dsServerData.port,
+                        loginToken = loginToken,
+                        dsToken = dsToken
+                })
             end
         end
     end

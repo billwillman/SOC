@@ -65,6 +65,9 @@ local _Server_TO_LOGIN = {
         end
         return ret ~= nil, ret.Data
     end,
+    -- Client进入DS
+    [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = function (msg)
+    end,
 }
 
 local _SERVER_SYNC_MSG = {
