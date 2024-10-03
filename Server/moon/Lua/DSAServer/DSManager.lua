@@ -122,6 +122,10 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
                 ip = ip, -- dsIp
                 port = port -- dsPort
             }
+            data.fd = fd
+            if fd then
+                self.FdToDsTokenMap[fd] = dsToken
+            end
             -- 通知DS更新dsToken
             msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
         end
@@ -191,13 +195,17 @@ function _M:ClearDsData(dsToken)
     self.DsTokenHandlerMap[dsToken] = nil
 end
 
--- Ds突然断线
-function _M:OnDsSocketClose(fd)
-    local clientToken = self:GetDsClientToken(fd)
-    if not clientToken then
+function _M:GetDsTokenFromFd(fd)
+    if not fd then
         return
     end
-    local dsToken = self:GetDsTokenFromDsClientToken(clientToken)
+    local ret = self.FdToDsTokenMap[fd]
+    return ret
+end
+
+-- Ds突然断线
+function _M:OnDsSocketClose(fd)
+    local dsToken = self:GetDsTokenFromFd(fd)
     print(string.format("[DSA] OnDsSocketClose ip: %s port: %d clientToken: %s dsToken: %s", ip, port, clientToken, dsToken))
     self:ClearDsData(dsToken)
 end
