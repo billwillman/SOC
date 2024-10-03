@@ -128,6 +128,12 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
             -- 通知DS更新dsToken
             msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
         end
+    else
+        local data = self.DsTokenHandlerMap[dsToken]
+        data.fd = fd
+        if fd then
+            self.FdToDsTokenMap[fd] = dsToken
+        end
     end
     -- 关掉定时器关闭
     self:ClearDs_ConnectStopTimer(dsToken)
