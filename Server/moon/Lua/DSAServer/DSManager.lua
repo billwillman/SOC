@@ -93,7 +93,6 @@ end
 
 function _M:GetDsClientToken(fd)
     local ip, port = GetIpAndPort(socket, fd)
-    print(ip .. " " .. tostring(port))
     local clientToken = self:GetDsToknFromAddr(ip, port)
     return clientToken
 end
@@ -206,7 +205,7 @@ end
 -- Ds突然断线
 function _M:OnDsSocketClose(fd)
     local dsToken = self:GetDsTokenFromFd(fd)
-    print(string.format("[DSA] OnDsSocketClose ip: %s port: %d clientToken: %s dsToken: %s", ip, port, clientToken, dsToken))
+    print(string.format("[DSA] OnDsSocketClose ip: %s port: %d dsToken: %s", ip, port, dsToken))
     self:ClearDsData(dsToken)
 end
 
