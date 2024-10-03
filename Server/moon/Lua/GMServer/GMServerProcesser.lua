@@ -45,6 +45,7 @@ local function TestConnectLocalDS(command, msg, socket, fd)
                 print("[GM] TestConnectLocalDS: not found dsToken: " .. dsToken)
             else
                 print("[GM] TestConnectLocalDS: found dsToken: " .. _MOE.TableUtils.Serialize(dsServerData))
+                -- 发送DS加载地图
             end
         end
     end
