@@ -12,6 +12,7 @@ local socket = require "moon.socket"
 
 moon.exports.ServerData = ServerData
 local MsgProcesser = require("DsBattleServer/DsBattleServerProcesser").New()
+moon.exports.MsgProcesser = MsgProcesser
 
 --注册网络事件
 moon.exports.OnAccept = function(fd, msg)

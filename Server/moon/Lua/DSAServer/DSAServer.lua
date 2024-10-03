@@ -15,6 +15,7 @@ local DSManager = require("DSAServer.DSManager").New()
 moon.exports.DSManager = DSManager
 moon.exports.ServerData = ServerData
 local MsgProcesser = require("DSAServer/DSAServerProcesser").New()
+moon.exports.MsgProcesser = MsgProcesser
 
 moon.exports.OnAccept = function(fd, msg)
     print("accept ", fd, moon.decode(msg, "Z"))
