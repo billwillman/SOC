@@ -50,7 +50,6 @@ local _Server_TO_LOGIN = {
     end,
     -- 查询角色信息
     [_MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO] = function (msg)
-        print("SM_LS_QUERY_PLAYERINFO")
         if not msg then
             return
         end
@@ -59,6 +58,11 @@ local _Server_TO_LOGIN = {
             return
         end
         local ret = PlayerManager:GetPlayerInfo(token)
+        if ret then
+            print("[LoginSrv] SM_LS_QUERY_PLAYERINFO is found: " .. token)
+        else
+            print("[LoginSrv] SM_LS_QUERY_PLAYERINFO is not found: " .. token)
+        end
         return ret
     end,
 }

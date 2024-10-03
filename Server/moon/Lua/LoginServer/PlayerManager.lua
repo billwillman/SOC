@@ -70,6 +70,12 @@ function _M:GetPlayerInfo(token)
     if not token then
         return
     end
+    --[[
+    print(token)
+    for _, info in pairs(self.ClientPlayerInfos) do
+        print(info.token)
+    end
+    ]]
     return self.ClientPlayerInfos[token]
 end
 
