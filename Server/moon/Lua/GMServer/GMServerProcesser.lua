@@ -46,7 +46,6 @@ local function TestConnectLocalDS(command, msg, socket, fd)
             else
                 print("[GM] TestConnectLocalDS: found dsToken: " .. _MOE.TableUtils.Serialize(dsServerData))
             end
-            -- local locaDS = MsgProcesser:SendServerMsgSync("DSA", "QueryLocalDS", reqMsg)
         end
     end
 end
