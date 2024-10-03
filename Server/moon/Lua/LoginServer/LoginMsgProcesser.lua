@@ -66,7 +66,8 @@ local _Server_TO_LOGIN = {
         return ret ~= nil, ret.Data
     end,
     -- Client进入DS
-    [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = function (msg)
+    [_MOE.ServerMsgIds.SM_LS_DS_Enter] = function (msg)
+        print("[LoginSrv] SM_LS_DS_Enter")
     end,
 }
 
