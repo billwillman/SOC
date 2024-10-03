@@ -141,7 +141,7 @@ local function Start()
 
     CallServerIds_Func(_MOE.ServicesCall.Start)
 
-    -- moon.call("lua", GetLoginSrvId(), _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = "111"})
+    -- moon.call("lua", GetLoginSrvId(), _MOE.ServerMsgIds.SM_LS_Exist_PLAYERINFO, {token = "111"})
 end
 
 moon.async(
