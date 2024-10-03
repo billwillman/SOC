@@ -21,7 +21,7 @@ function _M:GetDsToknFromAddr(ip, port)
     if not ip or not port then
         return
     end
-    return moon.md5(string.format("%s:%d", ip, port))
+    return GenerateToken2(ip, port)
 end
 
 -- 启动一个DS(只负责启动，其他类逻辑不在DSA管)

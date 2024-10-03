@@ -7,7 +7,7 @@ require("ServerCommon.GlobalFuncs")
 require("ServerCommon.ServerMsgIds")
 local json = require("json")
 
-local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
+local function TestConnectLocalDS(command, msg, socket, fd)
     if not command or not msg or #msg < 2 then
         print("[GM] UseLocalDS: command is not vaild or msg is not vaild")
         return
@@ -33,8 +33,9 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
     local mapName = msg.mapName
     local ip, port = GetIpAndPort(socket, fd)
     if ip then
-        local dsToken =  playerData.dsData.dsToken and playerData.dsData.dsToken or GenerateToken(ip, 7777)
+        local dsToken =  playerData.dsData.dsToken and playerData.dsData.dsToken or GenerateToken2(ip, 7777)
         if dsToken then
+            print(dsToken)
             local reqMsg = {
                 loginToken = loginToken,
                 dsToken = dsToken,

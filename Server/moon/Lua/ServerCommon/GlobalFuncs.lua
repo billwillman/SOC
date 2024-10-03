@@ -45,6 +45,14 @@ moon.exports.GetIpAndPort = function (socket, fd)
     return ip, port
 end
 
+moon.exports.GenerateToken2 = function (ip, port)
+    if not ip or not port then
+        return
+    end
+    local ret = moon.md5(string.format("%s:%d", ip, port))
+    return ret
+end
+
 moon.exports.GenerateToken = function (socket, fd)
     local addressStr = socket.getaddress(fd)
     local token = moon.md5(addressStr)
