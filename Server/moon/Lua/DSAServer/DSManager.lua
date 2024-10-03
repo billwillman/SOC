@@ -204,7 +204,7 @@ end
 
 -- Ds突然断线
 function _M:OnDsSocketClose(fd)
-    local dsToken = GetDsTokenFromFd(self, fd)
+    local dsToken = GetDsTokenFromFd(self, fd) -- 在CLOSE函数里无法使用 GetIpAndPort，会返回nil
     print(string.format("[DSA] OnDsSocketClose dsToken: %s", dsToken))
     self:ClearDsData(dsToken)
 end
