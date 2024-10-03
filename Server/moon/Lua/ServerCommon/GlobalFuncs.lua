@@ -33,6 +33,7 @@ moon.exports.GetIpAndPort = function (socket, fd)
         return
     end
     local addressStr = socket.getaddress(fd)
+    print(addressStr)
     if not addressStr or #addressStr <= 0 then
         return
     end

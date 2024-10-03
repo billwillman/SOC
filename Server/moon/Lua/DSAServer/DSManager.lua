@@ -21,7 +21,8 @@ function _M:GetDsToknFromAddr(ip, port)
     if not ip or not port then
         return
     end
-    return GenerateToken2(ip, port)
+    local ret = GenerateToken2(ip, port)
+    return ret
 end
 
 -- 启动一个DS(只负责启动，其他类逻辑不在DSA管)
