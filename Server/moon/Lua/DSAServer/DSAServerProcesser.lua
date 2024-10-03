@@ -74,9 +74,13 @@ local _Server_DSA_Process = {
     -- DS准备好
     [_MOE.ServerMsgIds.SM_DSReady] = function ()
     end,
+    -- 判断DS是否在连接中
     [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = function (msg)
-        local loginToken = msg.loginToken
+        -- local loginToken = msg.loginToken
         local dsToken = msg.dsToken
+        local dsData = DSManager:GetDsData(dsToken)
+        local ret = dsData ~= nil and dsData.ServerData ~= nil
+        return ret, dsData.ServerData
     end,
 }
 

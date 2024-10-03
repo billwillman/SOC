@@ -107,14 +107,16 @@ function _M:OnDsStartReady(msg, fd, msgProcesser)
         dsToken = self:GetDsToknFromAddr(ip, port)
         local clientToken = self:GetDsClientToken(fd)
         if clientToken and dsToken then
-            self.DsClientTokenToDsToken[clientToken] = dsToken      
+            self.DsClientTokenToDsToken[clientToken] = dsToken
             if not self.DsTokenHandlerMap[dsToken] then
                 self.DsTokenHandlerMap[dsToken] = {}
                 isLocalDS = true
             end
             local data = self.DsTokenHandlerMap[dsToken]
-            data.clientToken = clientToken
-            data.isLocalDS = isLocalDS
+            data.ServerData = {
+                clientToken = clientToken,
+                isLocalDS = isLocalDS
+            }
             -- 通知DS更新dsToken
             msgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DS_ReadyRep, {dsToken = dsToken})
         end
@@ -140,6 +142,13 @@ function _M:GetDsTokenFromDsClientToken(clientToken)
     return dsToken
 end
 
+function _M:GetDsData(dsToken)
+    if not dsToken then
+        return
+    end
+    return self.DsTokenHandlerMap[dsToken]
+end
+
 function _M:ClearDs_ConnectStopTimer(dsToken)
     if not dsToken then
         return
@@ -163,9 +172,11 @@ function _M:ClearDsData(dsToken)
     if not data then
         return
     end
-    local clientToken = data.clientToken
-    if clientToken then
-        self.DsClientTokenToDsToken[clientToken] = nil
+    if self.data.ServerData then
+        local clientToken = data.ServerData.clientToken
+        if clientToken then
+            self.DsClientTokenToDsToken[clientToken] = nil
+        end
     end
     self:ClearDs_ConnectStopTimer(dsToken)
 
