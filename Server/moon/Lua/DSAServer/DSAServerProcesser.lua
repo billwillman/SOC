@@ -75,6 +75,8 @@ local _Server_DSA_Process = {
     [_MOE.ServerMsgIds.SM_DSReady] = function ()
     end,
     [_MOE.ServerMsgIds.SM_DSA_Exist_DS] = function (msg)
+        local loginToken = msg.loginToken
+        local dsToken = msg.dsToken
     end,
 }
 
