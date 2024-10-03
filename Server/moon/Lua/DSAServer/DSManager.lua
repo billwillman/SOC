@@ -184,6 +184,9 @@ function _M:ClearDsData(dsToken)
         end
     end
     self:ClearDs_ConnectStopTimer(dsToken)
+    if data.fd then
+        self.FdToDsTokenMap[data.fd] = nil
+    end
 
     self.DsTokenHandlerMap[dsToken] = nil
 end
