@@ -49,6 +49,7 @@ end)
 ]]
 
 require("ServerCommon.GlobalServerConfig")
+require("ServerCommon.GlobalFuncs")
 require("ServerCommon.ServerMsgIds")
 local TableUtils = require("_Common.TableUtils")
 
@@ -139,6 +140,8 @@ local function Start()
     CallServerIds_Func(_MOE.ServicesCall.Listen)
 
     CallServerIds_Func(_MOE.ServicesCall.Start)
+
+    -- moon.call("lua", GetLoginSrvId(), _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = "111"})
 end
 
 moon.async(

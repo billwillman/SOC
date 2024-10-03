@@ -50,6 +50,7 @@ local _Server_TO_LOGIN = {
     end,
     -- 查询角色信息
     [_MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO] = function (msg)
+        print("SM_LS_QUERY_PLAYERINFO")
         if not msg then
             return
         end
