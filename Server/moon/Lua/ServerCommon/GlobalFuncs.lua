@@ -33,8 +33,7 @@ moon.exports.GetIpAndPort = function (socket, fd)
         return
     end
     local addressStr = socket.getaddress(fd)
-    print(addressStr)
-    if not addressStr or #addressStr <= 0 then
+    if not addressStr or string.len(addressStr) <= 0 then
         return
     end
     local idx = string.find(addressStr, ":")
@@ -42,7 +41,8 @@ moon.exports.GetIpAndPort = function (socket, fd)
         return
     end
     local ip = string.sub(addressStr, 1, idx - 1)
-    local port = tonumber(string.sub(addressStr, idx + 1))
+    local portStr = string.sub(addressStr, idx + 1)
+    local port = tonumber(portStr)
     return ip, port
 end
 

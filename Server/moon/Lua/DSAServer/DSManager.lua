@@ -13,6 +13,7 @@ local _M = _MOE.class("DSManager")
 function _M:Ctor()
     self.DsTokenHandlerMap = {}
     self.DsClientTokenToDsToken = {} -- DS Client端口 转 DsToken
+    self.FdToDsTokenMap = {}
 end
 
 ------------------------------------- 外部调用 -------------------------
@@ -92,6 +93,7 @@ end
 
 function _M:GetDsClientToken(fd)
     local ip, port = GetIpAndPort(socket, fd)
+    print(ip .. " " .. tostring(port))
     local clientToken = self:GetDsToknFromAddr(ip, port)
     return clientToken
 end
@@ -175,7 +177,7 @@ function _M:ClearDsData(dsToken)
     if not data then
         return
     end
-    if self.data.ServerData then
+    if data.ServerData then
         local clientToken = data.ServerData.clientToken
         if clientToken then
             self.DsClientTokenToDsToken[clientToken] = nil
