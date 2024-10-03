@@ -49,7 +49,7 @@ local _Server_TO_LOGIN = {
         end
     end,
     -- 查询角色信息
-    [_MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO] = function (msg)
+    [_MOE.ServerMsgIds.SM_LS_Exist_PLAYERINFO] = function (msg)
         if not msg then
             return
         end
@@ -63,7 +63,7 @@ local _Server_TO_LOGIN = {
         else
             print("[LoginSrv] SM_LS_QUERY_PLAYERINFO is not found: " .. token)
         end
-        return ret
+        return ret ~= nil
     end,
 }
 

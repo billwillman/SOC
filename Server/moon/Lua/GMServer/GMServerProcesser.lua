@@ -22,13 +22,13 @@ local function TestConnectLocalDS(command, msg, loginToken, socket, fd)
         print("[GM] UseLocalDS: mapName is not vaild")
         return
     end
-    local playerInfo = MsgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
+    local isExits = MsgProcesser:SendServerMsgSync("LoginSrv", _MOE.ServerMsgIds.SM_LS_Exist_PLAYERINFO, {token = loginToken})
     --local playerInfo = moon.call("lua", GetLoginSrvId(), _MOE.ServerMsgIds.SM_LS_QUERY_PLAYERINFO, {token = loginToken})
-    if not playerInfo then
+    if not isExits then
         print(string.format("[GM] UseLocalDS: not found playerInfo: %s", loginToken))
         return
     end
-    print(string.format("[GM] UseLocalDS: %s(%s)", loginToken, playerInfo))
+    print(string.format("[GM] UseLocalDS: %s(%s)", loginToken, isExits))
     -- 查询下login服务器
     local mapName = msg.mapName
     local ip, port = GetIpAndPort(socket, fd)
