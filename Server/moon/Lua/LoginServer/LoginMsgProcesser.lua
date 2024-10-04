@@ -88,6 +88,7 @@ local _Server_TO_LOGIN = {
             print("[LoginSrv] SM_LS_DS_Enter Error: fd is not vaild")
             return
         end
+        print("[LoginSrv] SM_LS_DS_Enter: SUCCESS")
         MsgProcesser:SendTableToJson2(socket, fd, MsgIds.SM_CLIENT_ENTER_DS,
             {
                 dsToken = dsToken,
