@@ -1,12 +1,52 @@
 -- 多人玩法
 local _M = _MOE.class("MultiGameModel", _MOE.BaseModel)
 
+function _M:OnInit()
+    self.Data = {}
+    self.m_IsMultiSceneLoaded = false
+end
+
+function _M:OnUnInit()
+    self.Data = nil
+end
+
 function _M:RegisterEvents()
     _MOE.GameApp:RegisterLoginSrvMsgCallBack(_MOE.MsgIds.SM_CLIENT_ENTER_DS, self, self.SM_CLIENT_ENTER_DS)
 end
 
 function _M:SM_CLIENT_ENTER_DS(netModel, msg)
     _MOE.Logger.Log("[MultiGame] SM_CLIENT_ENTER_DS: " .. _MOE.TableUtils.Serialize(msg))
+    self.Data = {
+        ip = msg.dsIp,
+        port = msg.dsPort,
+        token = msg.dsToken,
+        mapName = msg.mapName,
+    }
+    -- 场景切换
+    self:OnEnterMap()
+end
+
+function _M:OnEnterMap()
+    if not self.Data then
+        return
+    end
+    local mapName = self.Data.mapName
+    if not mapName then
+        return
+    end
+    self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(mapName)
+end
+
+function _M:OnExitMap()
+    if not self.m_IsMultiSceneLoaded then
+        return
+    end
+    
+    self.m_IsMultiSceneLoaded = false
+end
+
+function _M:GetData()
+    return self.Data
 end
 
 function _M:UnRegisterEvents()

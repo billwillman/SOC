@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
 using UnityEngine.SceneManagement;
 #endif
 
@@ -49,13 +49,13 @@ public class ResourceMgr : Singleton<ResourceMgr>
         }
 
         if (isAdd)
-#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
             SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 #else
 			Application.LoadLevelAdditive (sceneName);
 #endif
         else
-#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 #else
 			Application.LoadLevel (sceneName);
@@ -69,7 +69,7 @@ public class ResourceMgr : Singleton<ResourceMgr>
         AsyncOperation opt;
         if (isAdd)
         {
-#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
             opt = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 #else
 			opt = Application.LoadLevelAdditiveAsync (sceneName);
@@ -77,7 +77,7 @@ public class ResourceMgr : Singleton<ResourceMgr>
         }
         else
         {
-#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
             opt = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 #else
 			opt = Application.LoadLevelAsync(sceneName);
@@ -171,12 +171,43 @@ public class ResourceMgr : Singleton<ResourceMgr>
 
 #if UNITY_5_2
 		Application.UnloadLevel(sceneName);
-#elif UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017
+#elif UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
         SceneManager.UnloadScene(sceneName);
 #endif
         // 娓呴櫎
         AssetCacheManager.Instance.ClearUnUsed();
     }
+
+#if UNITY_2017_1_OR_NEWER
+    
+    protected System.Collections.IEnumerator _Scene_UnloadAsync(string sceneName, Action<float> onProgress, Action<bool> onResult) {
+        if (!mAssetLoader.OnSceneClose(sceneName))
+            mResLoader.OnSceneClose(sceneName);
+
+        AsyncOperation opt = SceneManager.UnloadSceneAsync(sceneName);
+        if (opt == null) {
+            if (onResult != null) {
+                onResult(false);
+            }
+            yield break;
+        }
+        while (!opt.isDone) {
+            onProgress(opt.progress);
+            yield return null;
+        }
+
+        if (onProgress != null)
+            onProgress(1.0f);
+        if (onResult != null)
+            onResult(true);
+
+        AssetCacheManager.Instance.ClearUnUsed();
+    }
+
+    public void CloseSceneAsync(string sceneName, MonoBehaviour dontDestroyScript, Action<bool> onResult = null, Action<float> onProgress = null) {
+        dontDestroyScript.StartCoroutine(_Scene_UnloadAsync(sceneName, onProgress, onResult));
+    }
+#endif
 
     public GameObject CreateGameObject(string fileName)
     {
