@@ -1,6 +1,8 @@
 -- 多人玩法
 local _M = _MOE.class("MultiGameModel", _MOE.BaseModel)
 
+local multiScene = "Multi_PlayerScene"
+
 function _M:OnInit()
     self.Data = {}
     self.m_IsMultiSceneLoaded = false
@@ -34,15 +36,19 @@ function _M:OnEnterMap()
     if not mapName then
         return
     end
-    self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(mapName)
+    self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(multiScene)
 end
 
 function _M:OnExitMap()
-    if not self.m_IsMultiSceneLoaded then
+    if not self.Data or not self.m_IsMultiSceneLoaded then
         return
     end
-    
+    local mapName = self.Data.mapName
+    if not mapName then
+        return
+    end
     self.m_IsMultiSceneLoaded = false
+    _MOE.ResourceManager:CloseScene(multiScene)
 end
 
 function _M:GetData()
