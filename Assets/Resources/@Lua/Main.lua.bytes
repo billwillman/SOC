@@ -10,6 +10,14 @@ print(string.format("[Main.lua] IsDS: %s IsEditor: %s", _MOE.IsDS, _MOE.IsEditor
 
 require("_Common.CommonEvents")
 
+function CreateNetworkManager()
+    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
+    if gameObj then
+        -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+        gameObj.name = "MutiManager"
+    end
+end
+
 local function InitGlobalVars()
     _MOE.BaseModel = require("_Common.BaseModel")
     _MOE.EventManager = require("_Common.EventManager").New()

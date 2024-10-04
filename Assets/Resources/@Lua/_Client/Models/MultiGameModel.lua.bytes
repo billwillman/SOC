@@ -37,6 +37,7 @@ function _M:OnEnterMap()
         return
     end
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
+    self.MultiSceneObj = CreateNetworkManager()
     self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(multiScene)
 end
 
@@ -49,7 +50,10 @@ function _M:OnExitMap()
         return
     end
     self.m_IsMultiSceneLoaded = false
-    _MOE.ResourceManager:CloseScene(multiScene)
+    if self.MultiSceneObj ~= nil then
+        _MOE.OjbectDestroy(self.MultiSceneObj)
+        self.MultiSceneObj = nil
+    end
 end
 
 function _M:GetData()

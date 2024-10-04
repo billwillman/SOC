@@ -4,14 +4,6 @@ local DSApp = _MOE.class("DSApp", BaseAppClass)
 local DsGsSessionClass = require("_DS.DsGsSession")
 require("_DS.ServerEvents")
 
-local function CreateNetworkManager()
-    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/MutiManager.prefab")
-    if gameObj then
-        -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
-        gameObj.name = "MutiManager"
-    end
-end
-
 local function GetTestParams()
     local json = "{'dsaData':{'ip':'127.0.0.1','port':1991},'battleData':{'ip':'127.0.0.1','port':1990}}"
     json = string.gsub(json, "'", "\"")

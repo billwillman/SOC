@@ -50,6 +50,7 @@ _MOE.AutoUpdateMgr = CS.AutoUpdate.AutoUpdateMgr:GetInstance() -- 资源更新�
 _MOE.GameStart = CS.SOC.GamePlay.GameStart.Instance
 _MOE.GameStartTransform = _MOE.GameStart.transform
 _MOE.RectTransformClass = typeof(CS.UnityEngine.RectTransform)
+_MOE.OjbectDestroy = CS.UnityEngine.Object.Destroy
 _MOE.RectClass = CS.UnityEngine.Rect
 _MOE.Vector2 = CS.UnityEngine.Vector2
 _MOE.NetState = CS.NsTcpClient.eClientState
