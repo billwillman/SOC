@@ -1,0 +1,10 @@
+-- 多人玩法
+local _M = _MOE.class("MultiGameModel", _MOE.BaseModel)
+
+function _M:RegisterEvents()
+end
+
+function _M:UnRegisterEvents()
+end
+
+return _M
