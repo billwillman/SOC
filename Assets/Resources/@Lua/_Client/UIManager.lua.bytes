@@ -156,6 +156,7 @@ function UIManager:_CreateUIWindow(wndName, ...)
             UIBinder:InitRegisterControls(view)
         end
         self.Wnds[wndName] = view
+        view.__wndName = wndName
         self:_AppendWndToLayerFromCfg(wndName)
         view:Init()
         view:Open(...)

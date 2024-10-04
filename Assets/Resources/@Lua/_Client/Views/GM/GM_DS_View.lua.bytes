@@ -2,6 +2,11 @@ local GM_DS_View = _MOE.class("GM_DS_View", _MOE.BaseViewClass)
 
 function GM_DS_View:OnInit()
     self:AddButtonClick(self.bp.BtnDSMap, self.OnBtnDSMap)
+    self:RegisterCustomEvent(_MOE.CommonEvents.MultiScenePreload, self.OnMultiScenePreload)
+end
+
+function GM_DS_View:OnMultiScenePreload()
+    self:DoCloseSelf()
 end
 
 function GM_DS_View:OnBtnDSMap()

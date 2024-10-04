@@ -36,6 +36,7 @@ function _M:OnEnterMap()
     if not mapName then
         return
     end
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
     self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(multiScene)
 end
 
