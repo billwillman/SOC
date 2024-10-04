@@ -229,6 +229,12 @@ function BaseView:DropListSetOptionData(dropList, optionArray)
     dropList.options:TrimExcess()
 end
 
+function BaseView:DoCloseSelf()
+    if self.__wndName then
+        _MOE.UIManager:CloseWindow(self.__wndName)
+    end
+end
+
 --------------------------------------- 虚方法
 function BaseView:OnDestroy()
 end
