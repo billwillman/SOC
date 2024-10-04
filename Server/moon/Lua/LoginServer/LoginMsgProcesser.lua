@@ -68,6 +68,28 @@ local _Server_TO_LOGIN = {
     -- Client进入DS
     [_MOE.ServerMsgIds.SM_LS_DS_Enter] = function (msg)
         print("[LoginSrv] SM_LS_DS_Enter")
+        local loginToken = msg.loginToken
+        if not loginToken then
+            return
+        end
+        local dsToken = msg.dsToken
+        if not dsToken then
+            return
+        end
+        local playerInfo = PlayerManager:GetPlayerInfo(loginToken)
+        if not playerInfo then
+            return
+        end
+        local fd = playerInfo:GetFD()
+        if not fd then
+            return
+        end
+        MsgProcesser:SendTableToJson2(socket, fd, MsgIds.SM_CLIENT_ENTER_DS,
+            {
+                dsToken = dsToken,
+                dsIp = msg.dsIp,
+                isLocalDS = msg.isLocalDS,
+            })
     end,
 }
 

@@ -15,4 +15,11 @@ function PlayerInfo:Ctor(info)
     }
 end
 
+function PlayerInfo:GetFD()
+    if not self.Data then
+        return
+    end
+    return self.Data.fd
+end
+
 return PlayerInfo
