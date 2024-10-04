@@ -67,7 +67,7 @@ local _Server_TO_LOGIN = {
     end,
     -- Client进入DS
     [_MOE.ServerMsgIds.SM_LS_DS_Enter] = function (msg)
-        print("[LoginSrv] SM_LS_DS_Enter")
+        -- print("[LoginSrv] SM_LS_DS_Enter")
         local loginToken = msg.loginToken
         if not loginToken then
             print("[LoginSrv] SM_LS_DS_Enter Error: loginToken is not vaild")
