@@ -88,11 +88,13 @@ local _Server_TO_LOGIN = {
             print("[LoginSrv] SM_LS_DS_Enter Error: fd is not vaild")
             return
         end
-        print("[LoginSrv] SM_LS_DS_Enter: SUCCESS")
+        print(string.format("[LoginSrv] SM_LS_DS_Enter: SUCCESS: fd(%d) dsToken(%s) dsIp(%s) dsPort(%d) isLocalDS(%s)", fd, dsToken,
+            msg.dsIp, msg.dsPort, tostring(msg.isLocalDS)))
         MsgProcesser:SendTableToJson2(socket, fd, MsgIds.SM_CLIENT_ENTER_DS,
             {
                 dsToken = dsToken,
                 dsIp = msg.dsIp,
+                dsPort = msg.dsPort,
                 isLocalDS = msg.isLocalDS,
             })
     end,
