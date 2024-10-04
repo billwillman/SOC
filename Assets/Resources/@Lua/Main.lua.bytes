@@ -16,6 +16,7 @@ function CreateNetworkManager()
         -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
         gameObj.name = "MutiManager"
     end
+    return gameObj
 end
 
 local function InitGlobalVars()
