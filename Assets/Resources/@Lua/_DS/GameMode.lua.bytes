@@ -88,15 +88,19 @@ else
         local EventType = _MOE.LuaEvent_MonoEventType
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
+        self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
     end
 
     function GameMode:OnAwake()
         _MOE.Logger.Log("[Client] GameMode Awake")
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
-        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClientConnected)
     end
 
-    function GameMode:OnClientConnected()
+    function GameMode:OnStart()
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClient_ClientConnected)
+    end
+
+    function GameMode:OnClient_ClientConnected()
     end
 end
 
