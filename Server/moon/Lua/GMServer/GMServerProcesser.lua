@@ -30,7 +30,6 @@ local function TestConnectLocalDS(command, msg, socket, fd)
     end
     print(string.format("[GM] UseLocalDS: %s(%s)", loginToken, isExits))
     -- 查询下login服务器
-    local mapName = msg.mapName
     local ip, port = GetIpAndPort(socket, fd)
     if ip then
         local dsToken =  playerData.dsData.dsToken and playerData.dsData.dsToken or GenerateToken2(ip, 7777)
