@@ -6,6 +6,7 @@ function _M:RegisterEvents()
 end
 
 function _M:SM_CLIENT_ENTER_DS(netModel, msg)
+    _MOE.Logger.Log("[MultiGame] SM_CLIENT_ENTER_DS: " .. _MOE.TableUtils.Serialize(msg))
 end
 
 function _M:UnRegisterEvents()
