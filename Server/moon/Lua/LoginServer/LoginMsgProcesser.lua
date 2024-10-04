@@ -4,6 +4,7 @@ local _M = _MOE.class("LoginMsgProcesser", baseClass)
 local json = require("json")
 local MsgIds = require("_NetMsg.MsgId")
 local moon = require("moon")
+local socket = require "moon.socket"
 require("ServerCommon.ServerMsgIds")
 require("ServerCommon.GlobalFuncs")
 
