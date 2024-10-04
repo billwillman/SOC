@@ -70,18 +70,22 @@ local _Server_TO_LOGIN = {
         print("[LoginSrv] SM_LS_DS_Enter")
         local loginToken = msg.loginToken
         if not loginToken then
+            print("[LoginSrv] SM_LS_DS_Enter Error: loginToken is not vaild")
             return
         end
         local dsToken = msg.dsToken
         if not dsToken then
+            print("[LoginSrv] SM_LS_DS_Enter Error: dsToken is not vaild")
             return
         end
         local playerInfo = PlayerManager:GetPlayerInfo(loginToken)
         if not playerInfo then
+            print(string.format("[LoginSrv] SM_LS_DS_Enter Error: playerInfo is not vaild(%s)", loginToken))
             return
         end
         local fd = playerInfo:GetFD()
         if not fd then
+            print("[LoginSrv] SM_LS_DS_Enter Error: fd is not vaild")
             return
         end
         MsgProcesser:SendTableToJson2(socket, fd, MsgIds.SM_CLIENT_ENTER_DS,
