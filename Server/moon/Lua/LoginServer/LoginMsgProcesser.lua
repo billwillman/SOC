@@ -97,6 +97,7 @@ local _Server_TO_LOGIN = {
                 dsIp = msg.dsIp,
                 dsPort = msg.dsPort,
                 isLocalDS = msg.isLocalDS,
+                mapName = msg.mapName,
             })
     end,
 }

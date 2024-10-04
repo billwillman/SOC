@@ -52,7 +52,8 @@ local function TestConnectLocalDS(command, msg, socket, fd)
                         dsIp = dsServerData.ip,
                         dsPort = dsServerData.port,
                         loginToken = loginToken,
-                        dsToken = dsToken
+                        dsToken = dsToken,
+                        mapName = mapName,
                 })
             end
         end
