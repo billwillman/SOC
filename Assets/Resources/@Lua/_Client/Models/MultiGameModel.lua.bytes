@@ -2,9 +2,14 @@
 local _M = _MOE.class("MultiGameModel", _MOE.BaseModel)
 
 function _M:RegisterEvents()
+    _MOE.GameApp:RegisterLoginSrvMsgCallBack(_MOE.MsgIds.SM_CLIENT_ENTER_DS, self, self.SM_CLIENT_ENTER_DS)
+end
+
+function _M:SM_CLIENT_ENTER_DS(netModel, msg)
 end
 
 function _M:UnRegisterEvents()
+    _MOE.GameApp:UnRegisterLoginSrvMsgCallBack(_MOE.MsgIds.SM_CLIENT_ENTER_DS)
 end
 
 return _M
