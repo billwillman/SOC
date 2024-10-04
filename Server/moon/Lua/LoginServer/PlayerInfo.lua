@@ -10,7 +10,8 @@ function PlayerInfo:Ctor(info)
             dsToken = info and info.dsToken,
             dsState = nil, -- 在DS的状态
             gsState = nil, -- 在GS的状态
-        }
+        },
+        fd = info.fd,   -- 通信用
     }
 end
 

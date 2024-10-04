@@ -37,7 +37,8 @@ function _M:AddPlayer(userName, password, fd)
     local token = GenerateToken(socket, fd) -- token
     local info = {
         token = token,
-        session = session
+        session = session,
+        fd = fd,
     }
     local PlayerInfo = PlayerInfoClass.New(info)
     self.ClientPlayerInfos[token] = PlayerInfo
