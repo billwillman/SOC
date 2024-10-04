@@ -91,6 +91,7 @@ else
     end
 
     function GameMode:OnAwake()
+        _MOE.Logger.Log("[Client] GameMode Awake")
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
         self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClientConnected)
     end
