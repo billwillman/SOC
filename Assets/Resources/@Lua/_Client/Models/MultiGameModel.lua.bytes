@@ -38,7 +38,7 @@ function _M:OnEnterMap()
     end
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
     self.MultiSceneObj = CreateNetworkManager()
-    self.m_IsMultiSceneLoaded = _MOE.ResourceManager:LoadScene(multiScene)
+    self.m_IsMultiSceneLoaded = true
 end
 
 function _M:OnExitMap()
