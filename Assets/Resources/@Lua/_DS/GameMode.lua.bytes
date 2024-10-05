@@ -90,8 +90,8 @@ else
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
 
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiScenePostLoad, self.OnScenePostLoad)
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiSceneExit, self.OnSceneExit)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiScenePostLoad, self, self.OnScenePostLoad)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiSceneExit, self, self.OnSceneExit)
     end
 
     function GameMode:OnScenePostLoad()
