@@ -35,6 +35,10 @@ if _MOE.IsDS then
 
     function GameMode:RegisterNetManagerServerEvents()
         self:RegsterCSharpEvent(self.NetWorkMgr, "ConnectionApprovalCallback", self.OnServer_ConnectionApprovalCallback)
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
+    end
+
+    function GameMode:OnServer_ClientConnectedCallback()
     end
 
     function GameMode:OnServer_ConnectionApprovalCallback(request, response)
