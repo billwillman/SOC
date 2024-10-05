@@ -89,9 +89,23 @@ else
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
+
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiScenePostLoad, self.OnScenePostLoad)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiSceneExit, self.OnSceneExit)
+    end
+
+    function GameMode:OnScenePostLoad()
+        self:SetConnectionApprovalData()
+    end
+
+    function GameMode:OnSceneExit()
+        self:ClearConnectionApprovalData()
     end
 
     function GameMode:SetConnectionApprovalData()
+    end
+
+    function GameMode:ClearConnectionApprovalData()
     end
 
     function GameMode:OnAwake()
