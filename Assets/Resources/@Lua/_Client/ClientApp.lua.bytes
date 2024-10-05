@@ -137,6 +137,18 @@ function ClientApp:GetMultiGame()
     return ret
 end
 
+function ClientApp:GetMultiGameIpAndPort()
+    local model = self:GetMultiGame()
+    if not model then
+        return
+    end
+    local data = model:GetData()
+    if not data then
+        return
+    end
+    return data.ip, data.port
+end
+
 ----------------------------------------------------- DS链接对象 -----------------------------
 function ClientApp:CreateDSNetManagerPrefab()
     if self.DSNetManagerPrefab then

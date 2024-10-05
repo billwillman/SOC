@@ -96,6 +96,17 @@ else
 
     function GameMode:OnScenePostLoad()
         self:SetConnectionApprovalData()
+        if self.Transport then
+            local dsIp, dsPort = _MOE.GameApp:GetMultiGameIpAndPort()
+            if dsIp and dsPort then
+                self.Transport:SetConnectionData(dsIp, dsPort)
+                if self.NetWorkMgr:StartClient() then
+                    _MOE.Logger.Log("[GameModel] StartClient: OK")
+                else
+                    _MOE.Logger.LogError("[GameModel] StartClient: Failed")
+                end
+            end
+        end
     end
 
     function GameMode:OnSceneExit()
