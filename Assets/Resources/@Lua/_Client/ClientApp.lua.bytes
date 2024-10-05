@@ -149,7 +149,7 @@ function ClientApp:DestroyDSNetManagerPrefab()
     if not self.DSNetManagerPrefab then
         return
     end
-    _MOE.GameObject.Destroy(self.DSNetManagerPrefab)
+    _MOE.ObjetDestroy(self.DSNetManagerPrefab)
     self.DSNetManagerPrefab = nil
 end
 
