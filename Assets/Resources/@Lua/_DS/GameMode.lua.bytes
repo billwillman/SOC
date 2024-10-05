@@ -59,7 +59,7 @@ if _MOE.IsDS then
         if response.Approved then
             response.CreatePlayerObject = false
         end
-        _MOE.Logger.LogFormat("[GameMode] response.Approved: %s", tostring(response.Approved))
+        _MOE.Logger.LogFormat("[GameMode] response.Approved: {0}", tostring(response.Approved))
     end
 
     function GameMode:OnAwake()
