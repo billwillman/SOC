@@ -6,4 +6,6 @@ _MOE.CommonEvents = {
     GMConnectResult = "GMConnectResult",
     GMConnectAbort = "GMConnectAbort",
     MultiScenePreload = "MultiScenePreload",
+    MultiScenePostLoad = "MultiScenePostLoad",
+    MultiSceneExit = "MultiSceneExit",
 }

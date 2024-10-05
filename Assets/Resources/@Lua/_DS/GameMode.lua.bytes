@@ -91,6 +91,9 @@ else
         self.Binder:RegisterLuaEvent(EventType.Start:GetHashCode(), self.OnStart)
     end
 
+    function GameMode:SetConnectionApprovalData()
+    end
+
     function GameMode:OnAwake()
         _MOE.Logger.Log("[Client] GameMode Awake")
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
@@ -101,6 +104,13 @@ else
     end
 
     function GameMode:OnClient_ClientStarted()
+    end
+    -------------------------------- 外部调用 --------------------------------------
+    
+    function GameMode:OnEnterMap()
+    end
+
+    function GameMode:OnExitMap()
     end
 end
 
