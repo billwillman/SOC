@@ -121,11 +121,11 @@ else
         local data = model:GetApprovalData()
         local str = _MOE.Json.encode(data)
         _MOE.Logger.LogFormat("[GameMode] SetConnectionApprovalData: {0}", str)
-        self.NetWorkMgr.ConnectionData = _MOE.StringToBytes(str)
+        self.NetWorkMgr.NetworkConfig.ConnectionData = _MOE.StringToBytes(str)
     end
 
     function GameMode:ClearConnectionApprovalData()
-        self.NetWorkMgr.ConnectionData = nil
+        self.NetWorkMgr.NetworkConfig.ConnectionData = nil
     end
 
     function GameMode:OnAwake()
