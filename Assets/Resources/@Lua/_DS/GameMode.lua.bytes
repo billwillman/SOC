@@ -38,7 +38,25 @@ if _MOE.IsDS then
     end
 
     function GameMode:OnServer_ConnectionApprovalCallback(request, response)
-        _MOE.Logger.Log("[GameMode] ConnectionApprovalCallback")
+        _MOE.Logger.LogFormat("[GameMode] ConnectionApprovalCallback Payload: {0}", request.Payload)
+        local Payload = nil
+        xpcall(function (PayloadStr)
+            Payload = _MOE.Json.decode(PayloadStr)
+        end, _G.ErrorHandler, request.Payload)
+        if not Payload then
+            response.Approved = false
+            return
+        end
+        -- 判断dsToken是否一致
+        local dsToken = Payload.token
+        if not dsToken then
+            response.Approved = false
+            return
+        end
+        response.Approved = dsToken == _MOE.GameApp:GetDsToken()
+        if response.Approved then
+            response.CreatePlayerObject = false
+        end
     end
 
     function GameMode:OnAwake()

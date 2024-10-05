@@ -83,6 +83,14 @@ function DSApp:OnInit()
     CreateNetworkManager()
 end
 
+function DSApp:GetDsToken()
+    local session = self:GetGsDsSession()
+    if not session then
+        return
+    end
+    return session:GetDsToken()
+end
+
 function DSApp:OnQuit()
     self.GsDsSession = nil
 end
