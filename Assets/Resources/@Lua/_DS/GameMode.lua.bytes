@@ -57,7 +57,9 @@ if _MOE.IsDS then
         end
         response.Approved = dsToken == _MOE.GameApp:GetDsToken()
         if response.Approved then
-            response.CreatePlayerObject = false
+            response.CreatePlayerObject = true
+            response.Position = _MOE.Vector3.zero
+            response.Rotation = _MOE.Quaternion.identity
         end
         _MOE.Logger.LogFormat("[GameMode] response.Approved: {0}", tostring(response.Approved))
     end
