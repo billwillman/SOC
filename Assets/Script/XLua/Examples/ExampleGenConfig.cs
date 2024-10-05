@@ -53,6 +53,9 @@ public static class ExampleGenConfig
                 typeof(UnityEngine.Debug),
                 typeof(UnityEngine.Application),
                 typeof(Action),
+                typeof(Action<float>),
+                typeof(Action<bool>),
+                typeof(Action<AsyncOperation, bool>),
             };
 
     //C#静态调用Lua的配置（包括事件的原型），仅可以配delegate，interface
@@ -63,6 +66,9 @@ public static class ExampleGenConfig
                 typeof(Action<string>),
                 typeof(Action<double>),
                 typeof(Action),
+                typeof(Action<float>),
+                typeof(Action<bool>),
+                typeof(Action<AsyncOperation, bool>),
                 typeof(UnityEngine.Events.UnityAction),
                 typeof(System.Collections.IEnumerator),
                 typeof(Action<HttpClient, HttpListenerStatus>),
