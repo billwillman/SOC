@@ -1,3 +1,10 @@
 local _M = _MOE.class("DsSceneMgr", _MOE.BaseModel)
 
+-- 只有异步
+function _M:LoadSceneAsync(sceneName)
+    if not sceneName then
+        return false
+    end
+end
+
 return _M

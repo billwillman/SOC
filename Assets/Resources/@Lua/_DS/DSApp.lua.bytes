@@ -84,6 +84,10 @@ function DSApp:OnInit()
     CreateNetworkManager()
 end
 
+function DSApp:GetGameMode()
+    return self.GameMode
+end
+
 function DSApp:GetSceneManager()
     local model = self:GetModel("DsSceneMgr")
     return model
