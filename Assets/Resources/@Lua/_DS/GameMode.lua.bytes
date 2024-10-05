@@ -45,18 +45,21 @@ if _MOE.IsDS then
         end, _G.ErrorHandler, request.Payload)
         if not Payload then
             response.Approved = false
+            _MOE.Logger.LogError("[GameMode] Payload is not vaild")
             return
         end
         -- 判断dsToken是否一致
         local dsToken = Payload.token
         if not dsToken then
             response.Approved = false
+            _MOE.Logger.LogError("[GameMode] dsToken is not vaild")
             return
         end
         response.Approved = dsToken == _MOE.GameApp:GetDsToken()
         if response.Approved then
             response.CreatePlayerObject = false
         end
+        _MOE.Logger.LogFormat("[GameMode] response.Approved: %s", tostring(response.Approved))
     end
 
     function GameMode:OnAwake()
