@@ -58,6 +58,16 @@ function _M:GetData()
     return self.Data
 end
 
+function _M:GetApprovalData()
+    if not self.Data then
+        return
+    end
+    local ret = {
+        token = self.Data.token
+    }
+    return ret
+end
+
 function _M:UnRegisterEvents()
     _MOE.GameApp:UnRegisterLoginSrvMsgCallBack(_MOE.MsgIds.SM_CLIENT_ENTER_DS)
 end

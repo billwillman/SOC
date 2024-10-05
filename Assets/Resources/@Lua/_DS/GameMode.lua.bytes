@@ -103,9 +103,18 @@ else
     end
 
     function GameMode:SetConnectionApprovalData()
+        local model = _MOE.GameApp:GetMultiGame()
+        if not model then
+            return
+        end
+        local data = model:GetApprovalData()
+        local str = _MOE.Json.encode(data)
+        _MOE.Logger.LogFormat("[GameMode] SetConnectionApprovalData: {0}", str)
+        self.NetWorkMgr.ConnectionData = _MOE.StringToBytes(str)
     end
 
     function GameMode:ClearConnectionApprovalData()
+        self.NetWorkMgr.ConnectionData = nil
     end
 
     function GameMode:OnAwake()

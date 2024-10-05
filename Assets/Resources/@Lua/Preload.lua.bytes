@@ -61,6 +61,7 @@ _MOE.BaseResLoaderAsyncType = typeof(CS.BaseResLoaderAsyncMono)
 if _MOE.IsUseFairyGUI then
     _MOE.FairyGUILoaderAsyncType = typeof(CS.FairyGUIResLoaderAsyncMono)
 end
+_MOE.StringToBytes = CS.System.Text.Encoding.UTF8.GetBytes
 _MOE.class = require("_Common.BaseClass") -- class框架
 _MOE.Json = require("_Common.json")
 _MOE.TableUtils = require("_Common.TableUtils")

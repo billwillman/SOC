@@ -132,6 +132,11 @@ function ClientApp:UnRegisterLoginSrvMsgCallBack(msgId)
     return false
 end
 
+function ClientApp:GetMultiGame()
+    local ret = self:GetModel("MultiGame")
+    return ret
+end
+
 ----------------------------------------------------- DS链接对象 -----------------------------
 function ClientApp:CreateDSNetManagerPrefab()
     if self.DSNetManagerPrefab then
