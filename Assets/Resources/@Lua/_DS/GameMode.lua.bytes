@@ -97,14 +97,10 @@ else
     end
 
     function GameMode:OnStart()
-        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnClient_ClientConnected)
-        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientDisconnectCallback", self.OnClient_Disconnect)
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClient_ClientStarted)
     end
 
-    function GameMode:OnClient_ClientConnected()
-    end
-
-    function GameMode:OnClient_Disconnect()
+    function GameMode:OnClient_ClientStarted()
     end
 end
 
