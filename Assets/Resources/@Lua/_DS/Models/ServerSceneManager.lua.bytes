@@ -5,6 +5,10 @@ function _M:LoadSceneAsync(sceneName)
     if not sceneName then
         return false
     end
+    local sceneManager = _MOE.GameApp:GetSceneManager()
+    if not sceneManager then
+        return false
+    end
 end
 
 return _M
