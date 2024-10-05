@@ -35,7 +35,7 @@ function _M:OnEnterMap()
     if not mapName then
         return
     end
-    _MOE.GameApp:DestroyDSNetManagerPrefab()
+    -- _MOE.GameApp:DestroyDSNetManagerPrefab()
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
     _MOE.GameApp:CreateDSNetManagerPrefab()
 end
@@ -48,7 +48,7 @@ function _M:OnExitMap()
     if not mapName then
         return
     end
-    _MOE.GameApp:DestroyDSNetManagerPrefab()
+    -- _MOE.GameApp:DestroyDSNetManagerPrefab()
     self.Data = {}
 end
 
