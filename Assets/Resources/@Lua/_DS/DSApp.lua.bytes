@@ -79,8 +79,14 @@ function DSApp:OnInit()
     self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
     self:RegisterModel("DsSessionManager", "_DS.Models.DsSessionManager", true)
     self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", true)
+    self:RegisterModel("DsSceneMgr", "_DS.Models.ServerSceneManager", true)
     -- 创建网络NetworkManager
     CreateNetworkManager()
+end
+
+function DSApp:GetSceneManager()
+    local model = self:GetModel("DsSceneMgr")
+    return model
 end
 
 function DSApp:GetDsToken()
