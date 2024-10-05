@@ -38,6 +38,9 @@ if _MOE.IsDS then
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
     end
 
+    function GameMode:LoadSceneAsync(sceneName)
+    end
+
     function GameMode:OnServer_ConnectionApprovalCallback(request, response)
         _MOE.Logger.LogFormat("[GameMode] ConnectionApprovalCallback Payload: {0}", request.Payload)
         local Payload = nil
