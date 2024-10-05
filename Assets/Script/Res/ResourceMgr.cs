@@ -207,6 +207,20 @@ public class ResourceMgr : Singleton<ResourceMgr>
     public void CloseSceneAsync(string sceneName, MonoBehaviour dontDestroyScript, Action<bool> onResult = null, Action<float> onProgress = null) {
         dontDestroyScript.StartCoroutine(_Scene_UnloadAsync(sceneName, onProgress, onResult));
     }
+
+    public bool CloseSceneAsync(string sceneName, Action<AsyncOperation, bool> onProcess = null) {
+        if (!mAssetLoader.OnSceneClose(sceneName))
+            mResLoader.OnSceneClose(sceneName);
+
+        AsyncOperation opt = SceneManager.UnloadSceneAsync(sceneName);
+        if (opt == null) {
+            if (onProcess != null) {
+                onProcess(opt, false);
+            }
+            return false;
+        }
+        return AsyncOperationMgr.GetInstance().AddAsyncOperation<AsyncOperation, System.Object>(opt, onProcess) != null;
+    }
 #endif
 
     public GameObject CreateGameObject(string fileName)
