@@ -125,6 +125,22 @@ public class ResourceMgr : Singleton<ResourceMgr>
 #endif
     }
 
+    public bool InteralLoadSceneAsync(string sceneName, Action onEnd = null, int priority = 0) {
+        if (mAssetLoader.OnSceneLoadAsync(sceneName, onEnd, priority)) {
+            LogMgr.Instance.Log(StringHelper.Format("Loading AssetBundle Scene: {0}", sceneName));
+        } else {
+#if UNITY_EDITOR
+            if (!Application.CanStreamedLevelBeLoaded(sceneName))
+                return false;
+#endif
+            if (mResLoader.OnSceneLoadAsync(sceneName, onEnd, priority))
+                LogMgr.Instance.Log(StringHelper.Format("Loading Resources Scene: {0}", sceneName));
+            else
+                return false;
+        }
+        return true;
+    }
+
     // isLoadedActive: 是否加载完就激活
     // bool isDone，是否已经完成
     public bool LoadSceneAsync(string sceneName, bool isAdd, Action<AsyncOperation, bool> onProcess, bool isLoadedActive = true, int priority = 0)
