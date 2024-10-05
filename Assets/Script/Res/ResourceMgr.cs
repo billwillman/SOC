@@ -158,6 +158,11 @@ public class ResourceMgr : Singleton<ResourceMgr>
         return true;
     }
 
+    public void InteralCloseScene(string sceneName) {
+        if (!mAssetLoader.OnSceneClose(sceneName))
+            mResLoader.OnSceneClose(sceneName);
+    }
+
     public void CloseScene(string sceneName)
     {
         /*
@@ -166,8 +171,7 @@ public class ResourceMgr : Singleton<ResourceMgr>
 		if (loader == null)
 			return;
 		loader.OnSceneClose (realSceneName);*/
-        if (!mAssetLoader.OnSceneClose(sceneName))
-            mResLoader.OnSceneClose(sceneName);
+        InteralCloseScene(sceneName);
 
 #if UNITY_5_2
 		Application.UnloadLevel(sceneName);
@@ -181,8 +185,7 @@ public class ResourceMgr : Singleton<ResourceMgr>
 #if UNITY_2017_1_OR_NEWER
     
     protected System.Collections.IEnumerator _Scene_UnloadAsync(string sceneName, Action<float> onProgress, Action<bool> onResult) {
-        if (!mAssetLoader.OnSceneClose(sceneName))
-            mResLoader.OnSceneClose(sceneName);
+        InteralCloseScene(sceneName);
 
         AsyncOperation opt = SceneManager.UnloadSceneAsync(sceneName);
         if (opt == null) {
@@ -209,8 +212,7 @@ public class ResourceMgr : Singleton<ResourceMgr>
     }
 
     public bool CloseSceneAsync(string sceneName, Action<AsyncOperation, bool> onProcess = null) {
-        if (!mAssetLoader.OnSceneClose(sceneName))
-            mResLoader.OnSceneClose(sceneName);
+        InteralCloseScene(sceneName);
 
         AsyncOperation opt = SceneManager.UnloadSceneAsync(sceneName);
         if (opt == null) {
