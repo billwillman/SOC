@@ -102,6 +102,7 @@ if _MOE.IsDS then
             _MOE.GameApp:QuitGame()
             return
         end
+        self.SceneManager = self.NetWorkMgr.SceneManager
         _MOE.Logger.Log("[DS] NetManager:StartServer True")
         self.DsaNetModel:SendDsReady()
     end

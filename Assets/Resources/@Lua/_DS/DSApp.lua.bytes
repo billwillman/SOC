@@ -89,6 +89,13 @@ function DSApp:GetGameMode()
 end
 
 function DSApp:GetSceneManager()
+    local gameMode = self:GetGameMode()
+    if gameMode then
+        return gameMode.SceneManager
+    end
+end
+
+function DSApp:GetDsSceneManager()
     local model = self:GetModel("DsSceneMgr")
     return model
 end
