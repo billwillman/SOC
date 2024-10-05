@@ -5,7 +5,6 @@ local multiScene = "Multi_PlayerScene"
 
 function _M:OnInit()
     self.Data = {}
-    self.m_IsMultiSceneLoaded = false
 end
 
 function _M:OnUnInit()
@@ -36,24 +35,21 @@ function _M:OnEnterMap()
     if not mapName then
         return
     end
+    _MOE.GameApp:DestroyDSNetManagerPrefab()
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
-    self.MultiSceneObj = CreateNetworkManager()
-    self.m_IsMultiSceneLoaded = true
+    _MOE.GameApp:CreateDSNetManagerPrefab()
 end
 
 function _M:OnExitMap()
-    if not self.Data or not self.m_IsMultiSceneLoaded then
+    if not self.Data then
         return
     end
     local mapName = self.Data.mapName
     if not mapName then
         return
     end
-    self.m_IsMultiSceneLoaded = false
-    if self.MultiSceneObj ~= nil then
-        _MOE.OjbectDestroy(self.MultiSceneObj)
-        self.MultiSceneObj = nil
-    end
+    _MOE.GameApp:DestroyDSNetManagerPrefab()
+    self.Data = {}
 end
 
 function _M:GetData()
