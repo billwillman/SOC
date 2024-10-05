@@ -123,7 +123,7 @@ else
     end
 
     function GameMode:OnStart()
-        self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClient_ClientStarted)
+        -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientStarted", self.OnClient_ClientStarted)
     end
 
     function GameMode:OnClient_ClientStarted()
