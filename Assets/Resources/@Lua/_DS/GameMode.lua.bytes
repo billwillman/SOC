@@ -38,6 +38,7 @@ if _MOE.IsDS then
     end
 
     function GameMode:OnServer_ConnectionApprovalCallback(request, response)
+        _MOE.Logger.Log("[GameMode] ConnectionApprovalCallback")
     end
 
     function GameMode:OnAwake()
