@@ -1,5 +1,16 @@
 local _M = _MOE.class("DsSceneMgr", _MOE.BaseModel)
 
+function _M:OnInit()
+    self.ActiveScenes = {}
+end
+
+function _M:OnUnInit()
+    self:ClearCurrentScene()
+end
+
+function _M:ClearCurrentScene()
+end
+
 -- 只有异步
 function _M:LoadSceneAsync(sceneName)
     if not sceneName then
@@ -9,6 +20,7 @@ function _M:LoadSceneAsync(sceneName)
     if not sceneManager then
         return false
     end
+    
 end
 
 return _M
