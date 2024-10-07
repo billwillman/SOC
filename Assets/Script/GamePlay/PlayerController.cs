@@ -32,6 +32,31 @@ namespace SOC.GamePlay
             onServerInt2Event = null;
             onServerInt3Event = null;
         }
+        
+        // ------------------- 调用Server ---------------------------------------
+        public void DispatchServer(string eventName, string paramStr) {
+            if (!IsClient)
+                return;
+            DispatchEvent_ServerRpc(eventName, paramStr);
+        }
+
+        public void DispatchServer(string eventName, int intParam) {
+            if (!IsClient)
+                return;
+            DispatchEvent_ServerRpc(eventName, intParam);
+        }
+
+        public void DispatchServer(string eventName, int intParam1, int intParam2) {
+            if (!IsClient)
+                return;
+            DispatchEvent_ServerRpc(eventName, intParam1, intParam2);
+        }
+
+        public void DispatchServer(string eventName, int intParam1, int intParam2, int intParam3) {
+            if (!IsClient)
+                return;
+            DispatchEvent_ServerRpc(eventName, intParam1, intParam2, intParam3);
+        }
 
         // ------------------- 广播所有Client -----------------------------------
         public void DispatchAllClientEvent(string eventName, string paramStr) {
