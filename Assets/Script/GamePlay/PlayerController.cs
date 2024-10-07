@@ -8,14 +8,12 @@ namespace SOC.GamePlay
     [XLua.LuaCallCSharp]
     public class PlayerController : BaseNetworkMono
     {
-        private void Awake() {
 #if UNITY_SERVER
+        private void Awake() {
             var networkObject = GetComponent<NetworkObject>();
             networkObject.CheckObjectVisibility = OnIsOwnerClient;
-#endif
         }
 
-#if UNITY_SERVER
         private bool OnIsOwnerClient(ulong clientId) {
             return this.OwnerClientId == clientId;
         }
