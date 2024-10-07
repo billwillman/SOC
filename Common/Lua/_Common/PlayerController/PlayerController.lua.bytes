@@ -8,6 +8,23 @@ function PlayerController:Ctor(playerController, binder)
 
     local EventType = _MOE.LuaEvent_MonoEventType
     self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
+
+    self:RegsterCSharpEvent(self.PlayerController, "onNetworkSpawn", self.OnNetworkSpawn)
+    self:RegsterCSharpEvent(self.PlayerController, "onNetworkDespawn", self.OnNetworkDespawn)
+end
+
+function PlayerController:GetClientId()
+    if self.PlayerController then
+        return self.PlayerController.OwnerClientId
+    end
+end
+
+function PlayerController:OnNetworkSpawn()
+    _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
+end
+
+function PlayerController:OnNetworkDespawn()
+    _MOE.Logger.LogFormat("[PlayerController] OnNetworkDespawn(ClientId:{0:D})", self:GetClientId())
 end
 
 function PlayerController:OnDestroy()
