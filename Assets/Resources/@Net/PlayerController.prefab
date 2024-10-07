@@ -52,7 +52,7 @@ MonoBehaviour:
   SynchronizeTransform: 0
   ActiveSceneSynchronization: 1
   SceneMigrationSynchronization: 1
-  SpawnWithObservers: 0
+  SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
 --- !u!114 &-5114226300154743174
