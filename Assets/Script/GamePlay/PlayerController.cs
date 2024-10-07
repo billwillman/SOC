@@ -160,6 +160,20 @@ namespace SOC.GamePlay
         public Action<string, int, int, int> onClientInt3Event {
             get; set;
         }
+
+        public Action<string, string> onServerStrEvent {
+            get; set;
+        }
+
+        public Action<string, int> onServerIntEvent {
+            get; set;
+        }
+        public Action<string, int, int> onServerInt2Event {
+            get; set;
+        }
+        public Action<string, int, int, int> onServerInt3Event {
+            get; set;
+        }
         // ----------------------------------------------------------------
     }
 }
