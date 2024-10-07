@@ -21,6 +21,9 @@ end
 
 local function RemovePlayerController(self)
     local clientId = self:GetClientId()
+    if not clientId then
+        return
+    end
     local data = _MOE.PlayerControllers[clientId]
     if data then
         if data.index then
@@ -28,6 +31,8 @@ local function RemovePlayerController(self)
         end
     end
     _MOE.PlayerControllers[clientId] = nil
+
+    self.ClientId = nil
 end
 
 function PlayerController:Ctor(playerController, binder)
@@ -43,6 +48,7 @@ end
 
 function PlayerController:OnNetworkSpawn()
     -- 优先设置上
+    -- 只有在OnNetworkSpawn才有ClientId
     self.ClientId = GetClientId()
     --
 
