@@ -14,6 +14,27 @@ function BaseApp:Update(deltaTime)
     xpcall(self.OnUpdate, _G.ErrorHandler, self, deltaTime)
 end
 
+function BaseApp:GetPlayerControllerByIndex(index)
+    if not index then
+        return
+    end
+    if _MOE.PlayerControllerList then
+        return _MOE.PlayerControllerList[index]
+    end
+end
+
+function BaseApp:GetPlayerControllerByClientId(clientId)
+    if not clientId then
+        return
+    end
+    if _MOE.PlayerControllers then
+        local data = _MOE.PlayerControllers[clientId]
+        if data then
+            return data.target
+        end
+    end
+end
+
 ------------------------------------------------------ 虚方法 ---------------------------------------------------
 function BaseApp:OnInit()
 end

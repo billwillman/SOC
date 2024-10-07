@@ -122,25 +122,4 @@ function DSApp:QuitGame(...)
     return _MOE.Application.Quit(...)
 end
 
-function DSApp:GetPlayerControllerByIndex(index)
-    if not index then
-        return
-    end
-    if _MOE.PlayerControllerList then
-        return _MOE.PlayerControllerList[index]
-    end
-end
-
-function DSApp:GetPlayerControllerByClientId(clientId)
-    if not clientId then
-        return
-    end
-    if _MOE.PlayerControllers then
-        local data = _MOE.PlayerControllers[clientId]
-        if data then
-            return data.target
-        end
-    end
-end
-
 return DSApp
