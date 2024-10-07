@@ -6,15 +6,8 @@ using Unity.Netcode;
 namespace SOC.GamePlay
 {
     [XLua.LuaCallCSharp]
-    public class PlayerController : NetworkBehaviour
+    public class PlayerController : BaseNetworkMono
     {
-        // Client和Server都会执行
-        [XLua.DoNotGen]
-        public override void OnNetworkSpawn() {
-            base.OnNetworkSpawn();
-        }
-
-        // Client和Server都会执行
         [XLua.DoNotGen]
         public override void OnNetworkDespawn() {
             ClearAllEvents();
