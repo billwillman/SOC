@@ -13,7 +13,7 @@ function PlayerController:Ctor(playerController, binder)
     self:RegsterCSharpEvent(self.PlayerController, "onNetworkDespawn", self.OnNetworkDespawn)
 end
 
-function PlayerController:GetClientId()
+local function GetClientId(self)
     if self.PlayerController then
         return self.PlayerController.OwnerClientId
     end
@@ -21,6 +21,11 @@ end
 
 function PlayerController:OnNetworkSpawn()
     _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
+    self.ClientId = GetClientId()
+end
+
+function PlayerController:GetClientId()
+    return self.ClientId
 end
 
 function PlayerController:OnNetworkDespawn()
