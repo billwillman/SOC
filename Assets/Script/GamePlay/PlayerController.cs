@@ -9,13 +9,17 @@ namespace SOC.GamePlay
     public class PlayerController : BaseNetworkMono
     {
         private void Awake() {
+#if UNITY_SERVER
             var networkObject = GetComponent<NetworkObject>();
             networkObject.CheckObjectVisibility = OnIsOwnerClient;
+#endif
         }
 
+#if UNITY_SERVER
         private bool OnIsOwnerClient(ulong clientId) {
             return this.OwnerClientId == clientId;
         }
+#endif
 
         [XLua.DoNotGen]
         public override void OnNetworkDespawn() {
