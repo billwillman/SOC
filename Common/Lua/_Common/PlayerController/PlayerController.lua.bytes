@@ -2,4 +2,17 @@ local CSharpEventContainer = require("_Common.CSharpEventContainer")
 
 local PlayerController = _MOE.class("PlayerController", CSharpEventContainer)
 
+function PlayerController:Ctor(playerController, binder)
+    self.PlayerController = playerController
+    self.Binder = binder
+
+    local EventType = _MOE.LuaEvent_MonoEventType
+    self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
+end
+
+function PlayerController:OnDestroy()
+    self.PlayerController = nil
+    self.Binder = nil
+end
+
 return PlayerController

@@ -17,6 +17,9 @@ function GameMode:OnDestroy()
     _MOE.EventManager:UnRegisterEvents(self)
     self:UnRegsterAllCsharpEvents()
     self.Transport = nil
+
+    self.NetWorkMgr = nil
+    self.Binder = nil
 end
 
 if _MOE.IsDS then
