@@ -28,6 +28,33 @@ namespace SOC.GamePlay
             onClientInt3Event = null;
         }
 
+        // ------------------- 广播所有Client -----------------------------------
+        public void DispatchAllClientEvent(string eventName, string paramStr) {
+            if (!IsServer)
+                return;
+            DispatchEvent_ClientRpc(eventName, paramStr);
+        }
+
+        public void DispatchAllClientEvent(string eventName, int intParam) {
+            if (!IsServer)
+                return;
+            DispatchEvent_ClientRpc(eventName, intParam);
+        }
+
+        public void DispatchAllClientEvent(string eventName, int intParam1, int intParam2) {
+            if (!IsServer)
+                return;
+            DispatchEvent_ClientRpc(eventName, intParam1, intParam2);
+        }
+
+        public void DispatchAllClientEvent(string eventName, int intParam1, int intParam2, int intParam3) {
+            if (!IsServer)
+                return;
+            DispatchEvent_ClientRpc(eventName, intParam1, intParam2, intParam3);
+        }
+
+        // ------------------- 调用到对应的Client上 ----------------------------------
+
         public void DispatchClientEvent(string eventName, string paramStr) {
             if (!IsServer)
                 return;
@@ -98,23 +125,23 @@ namespace SOC.GamePlay
 
         [ClientRpc]
         // Server To Client
-        protected void DispatchEvent_ClientRpc(string eventName, string paramStr, ClientRpcParams clientRpcParams) {
+        protected void DispatchEvent_ClientRpc(string eventName, string paramStr, ClientRpcParams clientRpcParams = default) {
             if (onClientStrEvent != null)
                 onClientStrEvent(eventName, paramStr);
         }
 
         [ClientRpc]
-        protected void DispatchEvent_ClientRpc(string eventName, int intParam, ClientRpcParams clientRpcParams) {
+        protected void DispatchEvent_ClientRpc(string eventName, int intParam, ClientRpcParams clientRpcParams = default) {
             if (onClientIntEvent != null)
                 onClientIntEvent(eventName, intParam);
         }
         [ClientRpc]
-        protected void DispatchEvent_ClientRpc(string eventName, int intParam1, int intParam2, ClientRpcParams clientRpcParams) {
+        protected void DispatchEvent_ClientRpc(string eventName, int intParam1, int intParam2, ClientRpcParams clientRpcParams = default) {
             if (onClientInt2Event != null)
                 onClientInt2Event(eventName, intParam1, intParam2);
         }
         [ClientRpc]
-        protected void DispatchEvent_ClientRpc(string eventName, int intParam1, int intParam2, int intParam3, ClientRpcParams clientRpcParams) {
+        protected void DispatchEvent_ClientRpc(string eventName, int intParam1, int intParam2, int intParam3, ClientRpcParams clientRpcParams = default) {
             if (onClientInt3Event != null)
                 onClientInt3Event(eventName, intParam1, intParam2, intParam3);
         }
