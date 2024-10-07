@@ -151,6 +151,31 @@ namespace SOC.GamePlay
                 onClientInt3Event(eventName, intParam1, intParam2, intParam3);
         }
 
+        // -------------------------------------- 任意客户端都可以调用
+        [ServerRpc(RequireOwnership = false)]
+        protected void DispatchEvent_ServerRpc(string eventName, string paramStr, ServerRpcParams serverRpcParams = default) {
+            if (onServerStrEvent != null)
+                onServerStrEvent(eventName, paramStr);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        protected void DispatchEvent_ServerRpc(string eventName, int intParam, ServerRpcParams serverRpcParams = default) {
+            if (onServerIntEvent != null)
+                onServerIntEvent(eventName, intParam);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        protected void DispatchEvent_ServerRpc(string eventName, int intParam1, int intParam2, ServerRpcParams serverRpcParams = default) {
+            if (onServerInt2Event != null)
+                onServerInt2Event(eventName, intParam1, intParam2);
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        protected void DispatchEvent_ServerRpc(string eventName, int intParam1, int intParam2, int intParam3, ServerRpcParams serverRpcParams = default) {
+            if (onServerInt3Event != null)
+                onServerInt3Event(eventName, intParam1, intParam2, intParam3);
+        }
+
         // ------------------------------ 外部设置 ------------------------
         public Action<string, string> onClientStrEvent {
             get; set;
