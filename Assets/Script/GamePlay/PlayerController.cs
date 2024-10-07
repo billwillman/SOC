@@ -26,6 +26,11 @@ namespace SOC.GamePlay
             onClientIntEvent = null;
             onClientInt2Event = null;
             onClientInt3Event = null;
+
+            onServerStrEvent = null;
+            onServerIntEvent = null;
+            onServerInt2Event = null;
+            onServerInt3Event = null;
         }
 
         // ------------------- ¹ã²¥ËùÓÐClient -----------------------------------
