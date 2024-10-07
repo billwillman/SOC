@@ -2,6 +2,34 @@ local CSharpEventContainer = require("_Common.CSharpEventContainer")
 
 local PlayerController = _MOE.class("PlayerController", CSharpEventContainer)
 
+local function GetClientId(self)
+    if self.PlayerController then
+        return self.PlayerController.OwnerClientId
+    end
+end
+
+local function AddPlayerController(self)
+    _MOE.PlayerControllers = _MOE.PlayerControllers or {}
+    _MOE.PlayerControllerList = _MOE.PlayerControllerList or {}
+    local data = {
+        index = #_MOE.PlayerControllerList + 1,
+        target = self,
+    }
+    _MOE.PlayerControllers[self:GetClientId()] = data
+    _MOE.PlayerControllerList[data.index] = data
+end
+
+local function RemovePlayerController(self)
+    local clientId = self:GetClientId()
+    local data = _MOE.PlayerControllers[clientId]
+    if data then
+        if data.index then
+            _MOE.PlayerControllerList[data.index] = nil
+        end
+    end
+    _MOE.PlayerControllers[clientId] = nil
+end
+
 function PlayerController:Ctor(playerController, binder)
     self.PlayerController = playerController
     self.Binder = binder
@@ -13,15 +41,13 @@ function PlayerController:Ctor(playerController, binder)
     self:RegsterCSharpEvent(self.PlayerController, "onNetworkDespawn", self.OnNetworkDespawn)
 end
 
-local function GetClientId(self)
-    if self.PlayerController then
-        return self.PlayerController.OwnerClientId
-    end
-end
-
 function PlayerController:OnNetworkSpawn()
-    _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
+    -- 优先设置上
     self.ClientId = GetClientId()
+    --
+
+    _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
+    AddPlayerController(self)
 end
 
 function PlayerController:GetClientId()
@@ -30,9 +56,11 @@ end
 
 function PlayerController:OnNetworkDespawn()
     _MOE.Logger.LogFormat("[PlayerController] OnNetworkDespawn(ClientId:{0:D})", self:GetClientId())
+    RemovePlayerController(self)
 end
 
 function PlayerController:OnDestroy()
+    RemovePlayerController(self)
     self.PlayerController = nil
     self.Binder = nil
 end
