@@ -1,0 +1,5 @@
+local CSharpEventContainer = require("_Common.CSharpEventContainer")
+
+local PlayerController = _MOE.class("PlayerController", CSharpEventContainer)
+
+return PlayerController
