@@ -56,6 +56,12 @@ public static class ExampleGenConfig
                 typeof(Action<float>),
                 typeof(Action<bool>),
                 typeof(Action<AsyncOperation, bool>),
+                // RPC Event
+                typeof(Action<string, string>),
+                typeof(Action<string, int>),
+                typeof(Action<string, int, int>),
+                typeof(Action<string, int, int, int>),
+                //--
             };
 
     //C#静态调用Lua的配置（包括事件的原型），仅可以配delegate，interface
@@ -68,6 +74,12 @@ public static class ExampleGenConfig
                 typeof(Action),
                 typeof(Action<float>),
                 typeof(Action<bool>),
+                // RPC Event
+                typeof(Action<string, string>),
+                typeof(Action<string, int>),
+                typeof(Action<string, int, int>),
+                typeof(Action<string, int, int, int>),
+                //--
                 typeof(Action<AsyncOperation, bool>),
                 typeof(UnityEngine.Events.UnityAction),
                 typeof(System.Collections.IEnumerator),
