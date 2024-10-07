@@ -9,6 +9,12 @@ local function GetClientId(self)
 end
 
 local function AddPlayerController(self)
+    -- 非DS则只是加自己
+    if not _MOE.IsDS then
+        if not self.PlayerController or not self.PlayerController.IsLocalPlayer then
+            return
+        end
+    end
     _MOE.PlayerControllers = _MOE.PlayerControllers or {}
     _MOE.PlayerControllerList = _MOE.PlayerControllerList or {}
     local data = {
@@ -20,6 +26,12 @@ local function AddPlayerController(self)
 end
 
 local function RemovePlayerController(self)
+     -- 非DS则只是删自己
+    if not _MOE.IsDS then
+        if not self.PlayerController or not self.PlayerController.IsLocalPlayer then
+            return
+        end
+    end
     local clientId = self:GetClientId()
     if not clientId then
         return
