@@ -49,7 +49,7 @@ end
 function PlayerController:OnNetworkSpawn()
     -- 优先设置上
     -- 只有在OnNetworkSpawn才有ClientId
-    self.ClientId = GetClientId()
+    self.ClientId = GetClientId(self)
     --
 
     _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
