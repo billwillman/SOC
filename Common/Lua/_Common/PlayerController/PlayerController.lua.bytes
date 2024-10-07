@@ -67,6 +67,10 @@ end
 
 function PlayerController:OnDestroy()
     RemovePlayerController(self)
+
+    self:UnRegsterCSharpEvent(self.PlayerController, "onNetworkSpawn")
+    self:UnRegsterCSharpEvent(self.PlayerController, "onNetworkDespawn")
+
     self.PlayerController = nil
     self.Binder = nil
 end
