@@ -11,6 +11,7 @@ namespace SOC.GamePlay
         private static Action<bool> m_OnClientStopped = null;
         private static Action m_OnClientStarted = null;
         private static Action m_OnTransportFailure = null;
+        private static Action<NetworkManager, ConnectionEventData> m_OnConnectionEvent = null;
 
         public static bool NetworkManager_SetOnClientStopped(Action<bool> onClientStopped) {
             if (NetworkManager.Singleton != null) {
@@ -48,6 +49,18 @@ namespace SOC.GamePlay
             return false;
         }
 
+        public static bool NetworkManager_SetOnConnectionEvent(Action<NetworkManager, ConnectionEventData> onConnectionEvent) {
+            if (NetworkManager.Singleton != null) {
+                if (m_OnConnectionEvent != null)
+                    NetworkManager.Singleton.OnConnectionEvent -= m_OnConnectionEvent;
+                if (onConnectionEvent != null)
+                    NetworkManager.Singleton.OnConnectionEvent += onConnectionEvent;
+                m_OnConnectionEvent = onConnectionEvent;
+                return true;
+            }
+            return false;
+        }
+
         public static void NetworkManager_ClearOnClientStopped() {
             if (m_OnClientStopped  != null && NetworkManager.Singleton != null) {
                 NetworkManager.Singleton.OnClientStopped -= m_OnClientStopped;
@@ -69,10 +82,18 @@ namespace SOC.GamePlay
             m_OnTransportFailure = null;
         }
 
+        public static void NetworkManager_ClearOnConnectionEvent() {
+            if (m_OnConnectionEvent != null && NetworkManager.Singleton != null) {
+                NetworkManager.Singleton.OnConnectionEvent -= m_OnConnectionEvent;
+            }
+            m_OnConnectionEvent = null;
+        }
+
         public static void NetworkManager_ClearAllEvents() {
             NetworkManager_ClearOnClientStopped();
             NetworkManager_ClearOnClientStarted();
             NetworkManager_ClearOnTransportFailure();
+            NetworkManager_ClearOnConnectionEvent();
         }
     }
 }
