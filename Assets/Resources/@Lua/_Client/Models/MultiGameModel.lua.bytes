@@ -64,7 +64,7 @@ function _M:GetApprovalData()
         return
     end
     local ret = {
-        dsToken = self.Data.token
+        dsToken = self.Data.token,
         loginToken = self.Data.loginToken
     }
     return ret
