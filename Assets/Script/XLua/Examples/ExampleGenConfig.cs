@@ -61,6 +61,7 @@ public static class ExampleGenConfig
                 typeof(Action<string, int>),
                 typeof(Action<string, int, int>),
                 typeof(Action<string, int, int, int>),
+                typeof(Action<NetworkManager, ConnectionEventData>),
                 //--
             };
 
@@ -79,6 +80,7 @@ public static class ExampleGenConfig
                 typeof(Action<string, int>),
                 typeof(Action<string, int, int>),
                 typeof(Action<string, int, int, int>),
+                typeof(Action<NetworkManager, ConnectionEventData>),
                 //--
                 typeof(Action<AsyncOperation, bool>),
                 typeof(UnityEngine.Events.UnityAction),
