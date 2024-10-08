@@ -68,6 +68,10 @@ function PlayerController:OnNetworkSpawn()
 
     _MOE.Logger.LogFormat("[PlayerController] OnNetworkSpawn(ClientId:{0:D})", self:GetClientId())
     AddPlayerController(self)
+
+    if _MOE.IsDS then
+        -- 通知GS连接成功
+    end
 end
 
 function PlayerController:GetClientId()
@@ -75,6 +79,10 @@ function PlayerController:GetClientId()
 end
 
 function PlayerController:OnNetworkDespawn()
+    if _MOE.IsDS then
+        -- 通知GS连接失败
+    end
+
     _MOE.Logger.LogFormat("[PlayerController] OnNetworkDespawn(ClientId:{0:D})", self:GetClientId())
     RemovePlayerController(self)
 end
