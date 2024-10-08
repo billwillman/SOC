@@ -50,7 +50,7 @@ local function RemovePlayerController(self)
 
     --- 这里删除下 SessionPlayer
     local GameMode = _MOE.GameApp.GameMode
-    if GameMode then
+    if GameMode and GameMode.RemoveSessionPlayer then
         GameMode:RemoveSessionPlayer(clientId)
     end
     ----
