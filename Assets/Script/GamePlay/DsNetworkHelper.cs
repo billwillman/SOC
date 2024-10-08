@@ -10,7 +10,8 @@ namespace SOC.GamePlay
     {
         private static Action<bool> m_OnClientStopped = null;
         private static Action m_OnClientStarted = null;
-        
+        private static Action m_OnTransportFailure = null;
+
         public static bool NetworkManager_SetOnClientStopped(Action<bool> onClientStopped) {
             if (NetworkManager.Singleton != null) {
                 if (m_OnClientStopped != null)
@@ -35,6 +36,18 @@ namespace SOC.GamePlay
             return false;
         }
 
+        public static bool NetworkManager_SetOnTransportFailure(Action onTransportFailure) {
+            if (NetworkManager.Singleton != null) {
+                if (m_OnTransportFailure != null)
+                    NetworkManager.Singleton.OnTransportFailure -= m_OnTransportFailure;
+                if (onTransportFailure != null)
+                    NetworkManager.Singleton.OnTransportFailure += onTransportFailure;
+                m_OnTransportFailure = onTransportFailure;
+                return true;
+            }
+            return false;
+        }
+
         public static void NetworkManager_ClearOnClientStopped() {
             if (m_OnClientStopped  != null && NetworkManager.Singleton != null) {
                 NetworkManager.Singleton.OnClientStopped -= m_OnClientStopped;
@@ -49,9 +62,17 @@ namespace SOC.GamePlay
             m_OnClientStarted = null;
         }
 
+        public static void NetworkManager_ClearOnTransportFailure() {
+            if (m_OnTransportFailure != null && NetworkManager.Singleton != null) {
+                NetworkManager.Singleton.OnTransportFailure -= m_OnTransportFailure;
+            }
+            m_OnTransportFailure = null;
+        }
+
         public static void NetworkManager_ClearAllEvents() {
             NetworkManager_ClearOnClientStopped();
             NetworkManager_ClearOnClientStarted();
+            NetworkManager_ClearOnTransportFailure();
         }
     }
 }
