@@ -47,6 +47,13 @@ local function RemovePlayerController(self)
     _MOE.PlayerControllers[clientId] = nil
 
     self.ClientId = nil
+
+    --- 这里删除下 SessionPlayer
+    local GameMode = _MOE.GameApp.GameMode
+    if GameMode then
+        GameMode:RemoveSessionPlayer(clientId)
+    end
+    ----
 end
 
 function PlayerController:Ctor(playerController, binder)

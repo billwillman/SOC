@@ -12,4 +12,12 @@ function _M:GetServerData()
     return self.ServerData
 end
 
+function _M:GetLoginToken()
+    local data = self:GetServerData()
+    if not data then
+        return
+    end
+    return data.token
+end
+
 return _M

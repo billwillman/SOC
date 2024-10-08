@@ -41,6 +41,22 @@ if _MOE.IsDS then
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
     end
 
+    function GameMode:AddSessionPlayer(clientId, loginToken)
+        if not clientId or not loginToken then
+            return false
+        end
+        self.SessionPlayers = self.SessionPlayers or {}
+        self.SessionPlayers[clientId] = loginToken
+        return true
+    end
+
+    function GameMode:RemoveSessionPlayer(clientId)
+        if not clientId or not self.SessionPlayers then
+            return
+        end
+        self.SessionPlayers[clientId] = nil
+    end
+
     function GameMode:OnServer_ConnectionApprovalCallback(request, response)
         _MOE.Logger.LogFormat("[GameMode] ConnectionApprovalCallback Payload: {0}", request.Payload)
         local Payload = nil
@@ -53,19 +69,29 @@ if _MOE.IsDS then
             return
         end
         -- 判断dsToken是否一致
-        local dsToken = Payload.token
+        local dsToken = Payload.dsToken
         if not dsToken then
             response.Approved = false
             _MOE.Logger.LogError("[GameMode] dsToken is not vaild")
             return
         end
+        local loginToken = Payload.loginToken
+        if not loginToken then
+            response.Approved = false
+            _MOE.Logger.LogError("[GameMode] loginToken is not vaild")
+            return
+        end
+        local clientId = request.ClientNetworkId
         response.Approved = dsToken == _MOE.GameApp:GetDsToken()
         if response.Approved then
             response.CreatePlayerObject = true
             response.Position = _MOE.Vector3.zero
             response.Rotation = _MOE.Quaternion.identity
+
+            -- 成功
+            self:AddSessionPlayer(clientId, loginToken)
         end
-        _MOE.Logger.LogFormat("[GameMode] response.Approved: {0}", tostring(response.Approved))
+        _MOE.Logger.LogFormat("[GameMode] response.Approved: {0}, clientId({1:D})", tostring(response.Approved), clientId)
     end
 
     function GameMode:OnAwake()

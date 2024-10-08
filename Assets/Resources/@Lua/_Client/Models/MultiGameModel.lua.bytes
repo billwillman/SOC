@@ -20,8 +20,9 @@ function _M:SM_CLIENT_ENTER_DS(netModel, msg)
     self.Data = {
         ip = msg.dsIp,
         port = msg.dsPort,
-        token = msg.dsToken,
+        dsToken = msg.dsToken,
         mapName = msg.mapName,
+        loginToken = _MOE.GameApp:GetMySelfTokenAndSession()
     }
     -- 场景切换
     self:OnEnterMap()
