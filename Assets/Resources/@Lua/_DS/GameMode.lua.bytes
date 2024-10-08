@@ -160,6 +160,9 @@ else
     function GameMode:OnClient_ClientStopped(b)
         _MOE.Logger.Log("[GameMode] OnConnectionEvent: " .. tostring(b))
         _MOE.DsNetworkHelper.NetworkManager_ClearAllEvents()
+        if not b then
+            _MOE.UIManager:OpenWindow(_MOE.WindowName.GM_DS)
+        end
     end
 
     function GameMode:OnClient_ClientStarted()
