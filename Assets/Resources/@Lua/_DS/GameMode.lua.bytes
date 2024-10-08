@@ -166,6 +166,19 @@ else
         _MOE.DsNetworkHelper.NetworkManager_ClearAllEvents()
     end
 
+    function GameMode:RegisterClientEvents()
+        _MOE.DsNetworkHelper.NetworkManager_SetOnClientStopped(
+                        function (b)
+                            self:OnClient_ClientStopped(b)
+                        end
+                    )
+        _MOE.DsNetworkHelper.NetworkManager_SetOnClientStarted(
+            function ()
+                self:OnClient_ClientStarted()
+            end
+        )
+    end
+
     function GameMode:OnScenePostLoad()
         self:SetConnectionApprovalData()
         if self.Transport then
@@ -174,16 +187,7 @@ else
                 self.Transport:SetConnectionData(dsIp, dsPort)
                 if self.NetWorkMgr:StartClient() then
                     _MOE.Logger.Log("[GameModel] StartClient: OK")
-                    _MOE.DsNetworkHelper.NetworkManager_SetOnClientStopped(
-                        function (b)
-                            self:OnClient_ClientStopped(b)
-                        end
-                    )
-                    _MOE.DsNetworkHelper.NetworkManager_SetOnClientStarted(
-                        function ()
-                            self:OnClient_ClientStarted()
-                        end
-                    )
+                    self:RegisterClientEvents()
                 else
                     _MOE.Logger.LogError("[GameModel] StartClient: Failed")
                 end
