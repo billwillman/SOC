@@ -39,6 +39,12 @@ if _MOE.IsDS then
     function GameMode:RegisterNetManagerServerEvents()
         self:RegsterCSharpEvent(self.NetWorkMgr, "ConnectionApprovalCallback", self.OnServer_ConnectionApprovalCallback)
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
+        local ConnectionManager = self.NetWorkMgr.ConnectionManager
+        self:RegsterCSharpEvent(ConnectionManager, "OnClientDisconnectCallback", self.OnServer_ClientDisconnectCallback)
+    end
+
+    function GameMode:OnServer_ClientDisconnectCallback(clientId)
+        self:RemoveSessionPlayer(clientId)
     end
 
     function GameMode:AddSessionPlayer(clientId, loginToken)
