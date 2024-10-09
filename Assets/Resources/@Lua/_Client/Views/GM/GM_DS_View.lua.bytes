@@ -4,7 +4,7 @@ function GM_DS_View:OnInit()
     self:AddButtonClick(self.bp.BtnDSMap, self.OnBtnDSMap)
     self:AddButtonClick(self.bp.BtnSingle, self.OnBtnSinglePlayMap)
     self:RegisterCustomEvent(_MOE.CommonEvents.MultiScenePreload, self.OnMultiScenePreload)
-    self:RegisterCustomEvent(_moe.CommonEvents.SinglePlayPreload, self.OnSinglePlayPreload)
+    self:RegisterCustomEvent(_MOE.CommonEvents.SinglePlayPreload, self.OnSinglePlayPreload)
 end
 
 function GM_DS_View:OnSinglePlayPreload()
@@ -24,6 +24,8 @@ function GM_DS_View:OnBtnDSMap()
     if not token then
         return
     end
+    -- 需要初始化一下多人Game接收
+    _MOE.GameApp:GetMultiGame()
     _MOE.GameApp:UseGMCommand("UseLocalDS", token, mapName)
 end
 
