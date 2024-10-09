@@ -2,6 +2,7 @@ local GM_DS_View = _MOE.class("GM_DS_View", _MOE.BaseViewClass)
 
 function GM_DS_View:OnInit()
     self:AddButtonClick(self.bp.BtnDSMap, self.OnBtnDSMap)
+    self:AddButtonClick(self.bp.BtnSingle, self.OnBtnSinglePlayMap)
     self:RegisterCustomEvent(_MOE.CommonEvents.MultiScenePreload, self.OnMultiScenePreload)
 end
 
@@ -19,6 +20,14 @@ function GM_DS_View:OnBtnDSMap()
         return
     end
     _MOE.GameApp:UseGMCommand("UseLocalDS", token, mapName)
+end
+
+function GM_DS_View:OnBtnSinglePlayMap()
+    local mapName = self.bp.EdtMapName.text
+    if not mapName or string.len(mapName) <= 0 then
+        return
+    end
+    _MOE.GameApp:GetSingleGame():StartMap(mapName)
 end
 
 function GM_DS_View:OnOpen()
