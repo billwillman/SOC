@@ -4,6 +4,11 @@ function GM_DS_View:OnInit()
     self:AddButtonClick(self.bp.BtnDSMap, self.OnBtnDSMap)
     self:AddButtonClick(self.bp.BtnSingle, self.OnBtnSinglePlayMap)
     self:RegisterCustomEvent(_MOE.CommonEvents.MultiScenePreload, self.OnMultiScenePreload)
+    self:RegisterCustomEvent(_moe.CommonEvents.SinglePlayPreload, self.OnSinglePlayPreload)
+end
+
+function GM_DS_View:OnSinglePlayPreload()
+    self:DoCloseSelf()
 end
 
 function GM_DS_View:OnMultiScenePreload()
