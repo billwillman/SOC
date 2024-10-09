@@ -8,4 +8,6 @@ _MOE.CommonEvents = {
     MultiScenePreload = "MultiScenePreload",
     MultiScenePostLoad = "MultiScenePostLoad",
     MultiSceneExit = "MultiSceneExit",
+    SinglePlayPreload = "SinglePlayPreload",
+    SinglePlayPostLoad = "SinglePlayPostLoad",
 }

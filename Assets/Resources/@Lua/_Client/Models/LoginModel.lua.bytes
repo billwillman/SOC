@@ -15,7 +15,6 @@ function LoginModel:OnInit()
     self:InitNetDisptchEvents()
     -- 打开登录界面
     _MOE.UIManager:OpenWindow(_MOE.WindowName.Login)
-    
 end
 
 function LoginModel:CM_Login(userName, password)

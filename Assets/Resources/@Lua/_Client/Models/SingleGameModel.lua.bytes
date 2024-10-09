@@ -4,4 +4,13 @@ local SingleGameModel = _MOE.class("SingleGameModel", _MOE.BaseModel)
 function SingleGameModel:RegisterEvents()
 end
 
+function SingleGameModel:StartMap(mapName)
+    if not mapName then
+        return
+    end
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.SinglePlayPreload)
+    _MOE.GameApp:CreateDSNetManagerPrefab()
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.SinglePlayPostLoad)
+end
+
 return SingleGameModel
