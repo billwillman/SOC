@@ -40,7 +40,7 @@ function ClientApp:OnInit()
     self:RegisterModel("GMCommand", "_Client.Models.GMCommandModel", true) -- 这个是Lazy模块
     self:RegisterModel("MySelfInfo", "_Client.Models.MySelfModel", false)
     self:RegisterModel("MultiGame", "_Client.Models.MultiGameModel", true)
-    self:RegisterModel("SingleGame", "_Client.Models.SingleGameModel", false)
+    self:RegisterModel("SingleGame", "_Client.Models.SingleGameModel", true)
 
     CreateMyPlayerInput()
 end
