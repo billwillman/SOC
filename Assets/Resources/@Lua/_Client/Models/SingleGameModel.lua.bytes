@@ -1,0 +1,4 @@
+-- 单机玩法
+local SingleGameModel = _MOE.class("SingleGameModel", _MOE.BaseModel)
+
+return SingleGameModel
