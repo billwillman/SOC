@@ -153,8 +153,9 @@ else
         self.Binder:RegisterLuaEvent(EventType.Awake:GetHashCode(), self.OnAwake)
         self.Binder:RegisterLuaEvent(EventType.Destroyed:GetHashCode(), self.OnDestroy)
 
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiScenePostLoad, self, self.OnScenePostLoad)
-        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiSceneExit, self, self.OnSceneExit)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiScenePostLoad, self, self.OnMultiScenePostLoad)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.MultiSceneExit, self, self.OnMultiSceneExit)
+        _MOE.EventManager:RegisterEvent(_MOE.CommonEvents.SinglePlayPostLoad, self, self.OnSinglePlayPostLoad)
     end
 
     function GameMode:OnClient_ClientStopped(b)
@@ -182,7 +183,7 @@ else
         )
     end
 
-    function GameMode:OnScenePostLoad()
+    function GameMode:OnMultiScenePostLoad()
         self:SetConnectionApprovalData()
         if self.Transport then
             local dsIp, dsPort = _MOE.GameApp:GetMultiGameIpAndPort()
@@ -198,7 +199,19 @@ else
         end
     end
 
-    function GameMode:OnSceneExit()
+    function GameMode:OnSinglePlayPostLoad()
+        -- 单机版本开自己的Host，RPC自己发给自己
+        if self.Transport then
+            self.Transport:SetConnectionData("127.0.0.1", 0)
+            if self.NetWorkMgr:StartHost() then
+                _MOE.Logger.Log("[GameModel] StartClient: OK")
+            else
+                _MOE.Logger.LogError("[GameModel] StartClient: Failed")
+            end
+        end
+    end
+
+    function GameMode:OnMultiSceneExit()
         self:ClearConnectionApprovalData()
     end
 
