@@ -1,4 +1,7 @@
--- 单机玩法
+-- 单机地图流程管理
 local SingleGameModel = _MOE.class("SingleGameModel", _MOE.BaseModel)
+
+function SingleGameModel:RegisterEvents()
+end
 
 return SingleGameModel
