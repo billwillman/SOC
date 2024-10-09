@@ -700,6 +700,7 @@ MonoBehaviour:
   m_BindControls:
   - {fileID: 1960305454698740672}
   - {fileID: 1724472166744846816}
+  - {fileID: 8828671504320692674}
 --- !u!1 &7865002572163033182
 GameObject:
   m_ObjectHideFlags: 0
