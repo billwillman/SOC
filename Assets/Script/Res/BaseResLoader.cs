@@ -929,6 +929,10 @@ public class BaseResLoader: CachedMonoBehaviour
 		target = null;
 	}
 
+	public void ClearMainSceneAB() {
+		SetResource(this.GetInstanceID(), null, typeof(UnityEngine.SceneManagement.Scene));
+    }
+
 	public bool LoadAnimationClip(ref AnimationClip target, string fileName)
 	{
 		if (string.IsNullOrEmpty(fileName))
@@ -938,6 +942,17 @@ public class BaseResLoader: CachedMonoBehaviour
 		if (target != null)
 			SetResource(target.GetInstanceID(), target, typeof(AnimationClip));
 		return target != null;
+	}
+
+	public bool LoadMainSceneAB(string sceneName) {
+		if (string.IsNullOrEmpty(sceneName))
+			return false;
+		ClearMainSceneAB();
+		bool ret = ResourceMgr.Instance.InteralLoadScene(sceneName);
+		if (ret) {
+			SetResource(this.GetInstanceID(), this, typeof(UnityEngine.SceneManagement.Scene), sceneName);
+        }
+		return ret;
 	}
 
 	public void ClearFont(TextMesh textMesh)

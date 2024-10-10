@@ -19,7 +19,24 @@ public class ResourceMgr : Singleton<ResourceMgr>
         }
     }
 
-    public bool LoadScene(string sceneName, bool isAdd)
+    public bool InteralLoadScene(string sceneName) {
+        if (mAssetLoader.OnSceneLoad(sceneName)) {
+            DebugSceneLoadInfo();
+            LogMgr.Instance.Log(StringHelper.Format("Loading AssetBundle Scene: {0}", sceneName));
+        } else {
+#if UNITY_EDITOR
+            if (!Application.CanStreamedLevelBeLoaded(sceneName))
+                return false;
+#endif
+            if (mResLoader.OnSceneLoad(sceneName))
+                LogMgr.Instance.Log(StringHelper.Format("Loading Resources Scene: {0}", sceneName));
+            else
+                return false;
+        }
+        return true;
+    }
+
+    public bool LoadScene(string sceneName, bool isAdd, bool IngoreABLoad = false)
     {
         /*string realSceneName = sceneName;
 
@@ -30,22 +47,20 @@ public class ResourceMgr : Singleton<ResourceMgr>
 
 		if (!loader.OnSceneLoad (realSceneName))
 			return false;*/
-
-        if (mAssetLoader.OnSceneLoad(sceneName))
-        {
-            DebugSceneLoadInfo();
-            LogMgr.Instance.Log(StringHelper.Format("Loading AssetBundle Scene: {0}", sceneName));
-        }
-        else
-        {
+        if (!IngoreABLoad) {
+            if (mAssetLoader.OnSceneLoad(sceneName)) {
+                DebugSceneLoadInfo();
+                LogMgr.Instance.Log(StringHelper.Format("Loading AssetBundle Scene: {0}", sceneName));
+            } else {
 #if UNITY_EDITOR
-            if (!Application.CanStreamedLevelBeLoaded(sceneName))
-                return false;
+                if (!Application.CanStreamedLevelBeLoaded(sceneName))
+                    return false;
 #endif
-            if (mResLoader.OnSceneLoad(sceneName))
-                LogMgr.Instance.Log(StringHelper.Format("Loading Resources Scene: {0}", sceneName));
-            else
-                return false;
+                if (mResLoader.OnSceneLoad(sceneName))
+                    LogMgr.Instance.Log(StringHelper.Format("Loading Resources Scene: {0}", sceneName));
+                else
+                    return false;
+            }
         }
 
         if (isAdd)
