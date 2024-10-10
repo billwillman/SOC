@@ -22,6 +22,7 @@ using NsLib.ResMgr;
 		NGUIUIFontFont,
 		NGUIUISpriteAtlas,
         FairyGUIPackage,
+        InternalLoadSceneAB, // 只加载场景AB以及依赖的（异步）
     }
 
     [XLua.LuaCallCSharp]
