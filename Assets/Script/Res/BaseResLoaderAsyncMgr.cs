@@ -14,6 +14,7 @@ namespace NsLib.ResMgr {
         bool _OnShaderLoaded(Shader target, ulong subID);
 		bool _OnTextureLoaded(Texture target, ulong subID);
         bool _OnAniControlLoaded(RuntimeAnimatorController target, ulong subID);
+        bool _OnMainSceneABLoaded(ulong subID);
         bool _OnFontLoaded(Font target, ulong subID);
         bool _OnTextLoaded(TextAsset target, ulong subID);
 		bool _OnMaterialLoaded (Material target, ulong subID);
@@ -211,6 +212,26 @@ namespace NsLib.ResMgr {
                     }
                 },
                 ResourceCacheType.rctRefAdd, loadPriority
+                );
+        }
+
+        public bool LoadMainSceneABAsync(string sceneName, IBaseResLoaderAsyncListener listener, ulong subID, int loadPriority = 0) {
+            if (listener == null || string.IsNullOrEmpty(sceneName))
+                return false;
+            int uuid = listener.UUID;
+            listener = null;
+            return ResourceMgr.Instance.InteralLoadSceneAsync(sceneName,
+                () =>
+                {
+                    IBaseResLoaderAsyncListener listen;
+                    if (m_ListernMap.TryGetValue(uuid, out listen) && listen != null) {
+                        if (!listener._OnMainSceneABLoaded(subID))
+                            ResourceMgr.Instance.InteralCloseScene(sceneName);
+
+                    } else {
+                        ResourceMgr.Instance.InteralCloseScene(sceneName);
+                    }
+                }
                 );
         }
 

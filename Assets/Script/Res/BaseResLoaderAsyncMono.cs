@@ -278,8 +278,26 @@ using NsLib.ResMgr;
             return false;
         }
 
-        // 加载
-        public bool LoadMainTextureAsync(string fileName, SpriteRenderer renderer, bool isMatInst = false, int loadPriority = 0) {
+    // 加载主场景（非ADD场景）
+    public bool LoadMainSceneABAsync(string sceneName, int loadPriority = 0) {
+        if (string.IsNullOrEmpty(sceneName))
+            return false;
+        var mgr = BaseResLoaderAsyncMgr.GetInstance();
+        if (mgr != null) {
+            ulong id;
+            int rk = ReMake(sceneName, this, BaseResLoaderAsyncType.InternalLoadSceneAB, false, out id);
+            if (rk < 0)
+                return false;
+            if (rk == 0)
+                return true;
+
+            return mgr.LoadMainSceneABAsync(sceneName, this, id, loadPriority);
+        }
+        return false;
+    }
+
+    // 加载
+    public bool LoadMainTextureAsync(string fileName, SpriteRenderer renderer, bool isMatInst = false, int loadPriority = 0) {
             if (renderer == null)
                 return false;
 
@@ -485,6 +503,16 @@ using NsLib.ResMgr;
             return false;
         }
 
+    protected virtual bool OnMainSceneLoaded(UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, string resName, string tag) {
+        if (obj != null) {
+            switch (asyncType) {
+                case BaseResLoaderAsyncType.InternalLoadSceneAB:
+                    return true;
+            }
+        }
+        return false;
+    }
+
         public bool _OnAniControlLoaded(RuntimeAnimatorController target, ulong subID) {
             bool isMatInst;
             string resName, tag;
@@ -498,7 +526,20 @@ using NsLib.ResMgr;
             return obj != null;
         }
 
-		protected virtual bool OnMaterialLoaded(Material target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, string resName, string tag)
+    public bool _OnMainSceneABLoaded(ulong subID) {
+        bool isMatInst;
+        string resName, tag;
+        UnityEngine.Object obj = RemoveSubID(subID, out isMatInst, out resName, out tag);
+        if (obj != null) {
+            if (!OnMainSceneLoaded(obj, GetSubType(subID), resName, tag))
+                return false;
+        }
+
+        return obj != null;
+    }
+
+
+        protected virtual bool OnMaterialLoaded(Material target, UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, string resName, string tag)
 		{
 			if (target != null && obj != null) {
 				switch (asyncType) {
