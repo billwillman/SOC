@@ -285,7 +285,7 @@ using NsLib.ResMgr;
         var mgr = BaseResLoaderAsyncMgr.GetInstance();
         if (mgr != null) {
             ulong id;
-            int rk = ReMake(sceneName, this, BaseResLoaderAsyncType.InternalLoadSceneAB, false, out id);
+            int rk = ReMake(sceneName, this, BaseResLoaderAsyncType.InternalLoadSceneAB, false, out id, sceneName);
             if (rk < 0)
                 return false;
             if (rk == 0)
@@ -507,7 +507,11 @@ using NsLib.ResMgr;
         if (obj != null) {
             switch (asyncType) {
                 case BaseResLoaderAsyncType.InternalLoadSceneAB:
-                    return true;
+                        if (!string.IsNullOrEmpty(resName)) {
+                            SetResource(obj.GetInstanceID(), this, typeof(UnityEngine.SceneManagement.Scene), resName, tag);
+                            return true;
+                        };
+                    break;
             }
         }
         return false;

@@ -274,6 +274,13 @@ public class BaseResLoader: CachedMonoBehaviour
 
 	protected virtual bool InternalDestroyResource(ResKey key, ResValue res)
 	{
+		// 场景AB加载
+		if (key.resType == typeof(UnityEngine.SceneManagement.Scene)) {
+			if (!string.IsNullOrEmpty(key.resName)) {
+				ResourceMgr.Instance.InteralCloseScene(key.resName);
+            }
+			return false;
+        }
 		return true;
 	}
 
