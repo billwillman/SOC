@@ -277,7 +277,10 @@ public class BaseResLoader: CachedMonoBehaviour
 		// 场景AB加载
 		if (key.resType == typeof(UnityEngine.SceneManagement.Scene)) {
 			if (!string.IsNullOrEmpty(key.resName)) {
-				ResourceMgr.Instance.InteralCloseScene(key.resName);
+				if (string.Compare(res.tag, "onlyAB", true) == 0)
+					ResourceMgr.Instance.InteralCloseScene(key.resName);
+				else
+					ResourceMgr.Instance.CloseScene(key.resName);
             }
 			return false;
         }

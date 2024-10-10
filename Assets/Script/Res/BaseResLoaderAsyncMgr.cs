@@ -14,7 +14,7 @@ namespace NsLib.ResMgr {
         bool _OnShaderLoaded(Shader target, ulong subID);
 		bool _OnTextureLoaded(Texture target, ulong subID);
         bool _OnAniControlLoaded(RuntimeAnimatorController target, ulong subID);
-        bool _OnMainSceneABLoaded(ulong subID);
+        bool _OnMainSceneLoaded(ulong subID);
         bool _OnFontLoaded(Font target, ulong subID);
         bool _OnTextLoaded(TextAsset target, ulong subID);
 		bool _OnMaterialLoaded (Material target, ulong subID);
@@ -215,24 +215,38 @@ namespace NsLib.ResMgr {
                 );
         }
 
-        public bool LoadMainSceneABAsync(string sceneName, IBaseResLoaderAsyncListener listener, ulong subID, int loadPriority = 0) {
+        public bool LoadMainSceneABAsync(string sceneName, IBaseResLoaderAsyncListener listener, ulong subID, bool isInternAB = true, int loadPriority = 0) {
             if (listener == null || string.IsNullOrEmpty(sceneName))
                 return false;
             int uuid = listener.UUID;
             listener = null;
-            return ResourceMgr.Instance.InteralLoadSceneAsync(sceneName,
-                () =>
+
+            if (isInternAB)
+                return ResourceMgr.Instance.InteralLoadSceneAsync(sceneName, () =>
                 {
                     IBaseResLoaderAsyncListener listen;
                     if (m_ListernMap.TryGetValue(uuid, out listen) && listen != null) {
-                        if (!listener._OnMainSceneABLoaded(subID))
+                        if (!listener._OnMainSceneLoaded(subID))
                             ResourceMgr.Instance.InteralCloseScene(sceneName);
 
                     } else {
                         ResourceMgr.Instance.InteralCloseScene(sceneName);
                     }
-                }
-                );
+                }, loadPriority);
+            else
+                return ResourceMgr.Instance.LoadSceneAsync(sceneName, false, (AsyncOperation opt, bool isDone) =>
+                    {
+                        if (isDone) {
+                            IBaseResLoaderAsyncListener listen;
+                            if (m_ListernMap.TryGetValue(uuid, out listen) && listen != null) {
+                                if (!listener._OnMainSceneLoaded(subID))
+                                    ResourceMgr.Instance.CloseScene(sceneName);
+
+                            } else {
+                                ResourceMgr.Instance.CloseScene(sceneName);
+                            }
+                        }
+            }, true, loadPriority);
         }
 
         public bool LoadAniControllerAsync(string fileName, IBaseResLoaderAsyncListener listener, ulong subID, int loadPriority = 0) {

@@ -22,7 +22,7 @@ using NsLib.ResMgr;
 		NGUIUIFontFont,
 		NGUIUISpriteAtlas,
         FairyGUIPackage,
-        InternalLoadSceneAB, // 只加载场景AB以及依赖的（异步）
+        LoadScene, // 可加载SCENE也可只加载SCENE的AB和依赖AB
     }
 
     [XLua.LuaCallCSharp]
@@ -279,19 +279,19 @@ using NsLib.ResMgr;
         }
 
     // 加载主场景（非ADD场景）
-    public bool LoadMainSceneABAsync(string sceneName, int loadPriority = 0) {
+    public bool LoadMainSceneABAsync(string sceneName, bool isInterAB = true, int loadPriority = 0) {
         if (string.IsNullOrEmpty(sceneName))
             return false;
         var mgr = BaseResLoaderAsyncMgr.GetInstance();
         if (mgr != null) {
             ulong id;
-            int rk = ReMake(sceneName, this, BaseResLoaderAsyncType.InternalLoadSceneAB, false, out id, sceneName);
+            int rk = ReMake(sceneName, this, BaseResLoaderAsyncType.LoadScene, false, out id, sceneName, isInterAB ? "onlyAB" : string.Empty);
             if (rk < 0)
                 return false;
             if (rk == 0)
                 return true;
 
-            return mgr.LoadMainSceneABAsync(sceneName, this, id, loadPriority);
+            return mgr.LoadMainSceneABAsync(sceneName, this, id, isInterAB, loadPriority);
         }
         return false;
     }
@@ -506,7 +506,7 @@ using NsLib.ResMgr;
     protected virtual bool OnMainSceneLoaded(UnityEngine.Object obj, BaseResLoaderAsyncType asyncType, string resName, string tag) {
         if (obj != null) {
             switch (asyncType) {
-                case BaseResLoaderAsyncType.InternalLoadSceneAB:
+                case BaseResLoaderAsyncType.LoadScene:
                         if (!string.IsNullOrEmpty(resName)) {
                             SetResource(obj.GetInstanceID(), this, typeof(UnityEngine.SceneManagement.Scene), resName, tag);
                             return true;
@@ -530,7 +530,7 @@ using NsLib.ResMgr;
             return obj != null;
         }
 
-    public bool _OnMainSceneABLoaded(ulong subID) {
+    public bool _OnMainSceneLoaded(ulong subID) {
         bool isMatInst;
         string resName, tag;
         UnityEngine.Object obj = RemoveSubID(subID, out isMatInst, out resName, out tag);
