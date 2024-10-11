@@ -38,6 +38,7 @@ local function TestConnectLocalDS(command, msg, socket, fd)
             local reqMsg = {
                 loginToken = loginToken,
                 dsToken = dsToken,
+                mapName = mapName, -- 地图加载的场景
             }
             local isExits, dsServerData = MsgProcesser:SendServerMsgSync("DSA", _MOE.ServerMsgIds.SM_DSA_Exist_DS, reqMsg)
             if not isExits then
