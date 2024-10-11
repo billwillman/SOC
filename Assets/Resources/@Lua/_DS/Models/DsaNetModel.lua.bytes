@@ -7,10 +7,6 @@ function _M:Ctor()
     self.super.Ctor(self, netClient, _MOE.CommonEvents.DsaConnectResult, _MOE.CommonEvents.DsaConnectResult)
 end
 
-function _M:OnInit()
-    self:RegisterReceiveMsgProcess(_MOE.MsgIds.SM_DSA_DS_ENTER_MAP, self.SM_DSA_DS_ENTER_MAP)
-end
-
 function _M:SM_DSA_DS_ENTER_MAP(msg)
     local mapName = msg.mapName
     if mapName and string.len(mapName) > 0 then
@@ -58,6 +54,7 @@ end
 
 function _M:NetModel_OnInit()
     self:RegisterReceiveMsgProcess(_MOE.MsgIds.SM_DS_ReadyRep, self._OnMsg_SM_DS_ReadyRep)
+    self:RegisterReceiveMsgProcess(_MOE.MsgIds.SM_DSA_DS_ENTER_MAP, self.SM_DSA_DS_ENTER_MAP)
 end
 
 return _M
