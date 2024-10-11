@@ -108,6 +108,16 @@ function DSApp:DestroySceneAsyncLoader()
     end
 end
 
+function DSApp:LoadSceneAsync(sceneName)
+    if not sceneName or string.len(sceneName) <= 0 then
+        return
+    end
+    local gameMode = self:GetGameMode()
+    if not gameMode then
+        return
+    end
+end
+
 function DSApp:GetGameMode()
     return self.GameMode
 end
