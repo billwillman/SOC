@@ -24,6 +24,8 @@ MonoBehaviour:
     m_path: Assets/Resources/Character/Player/Model/@hero_kof_kyo/Sample/Test.unity
   - m_enabled: 1
     m_path: Assets/Resources/Scene/Multi_PlayerScene.unity
+  - m_enabled: 1
+    m_path: Assets/Resources/DungeonModularPack/@Scenes/DemoScene.unity
   references:
     version: 2
     RefIds:
