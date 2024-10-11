@@ -14,10 +14,6 @@ function _M:SM_DSA_DS_ENTER_MAP(msg)
     end
 end
 
-function _M:OnUnInit()
-    self:UnRegisterReceiveMsgProcess(_MOE.MsgIds.SM_DSA_DS_ENTER_MAP)
-end
-
 -- 连DSA
 function _M:ConnectDSA()
     local Session = _MOE.GameApp:GetGsDsSession()
