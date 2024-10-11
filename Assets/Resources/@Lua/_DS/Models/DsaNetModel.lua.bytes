@@ -11,7 +11,7 @@ function _M:SM_DSA_DS_ENTER_MAP(msg)
     local mapName = msg.mapName
     if mapName and string.len(mapName) > 0 then
         _MOE.Logger.LogFormat("[DSANetModel] SM_DSA_DS_ENTER_MAP: {0}", mapName)
-        _MOE.GameApp:LoadSceneAsync(mapName)
+        _MOE.GameApp:LoadMainSceneAsync(mapName)
     end
 end
 

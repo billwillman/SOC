@@ -145,6 +145,18 @@ if _MOE.IsDS then
         self.DsaNetModel:SendDsReady()
     end
 
+    function GameMode:LoadMainSceneAsync(sceneName)
+        if not sceneName or string.len(sceneName) <= 0 then
+            return false
+        end
+        if not self.SceneManager then
+            return false
+        end
+        local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
+        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
+        return ret == _MOE.SceneEventProgressStatus.Started
+    end
+
 else
     ------------------------- 只在Client跑这个逻辑 -------------------
 
