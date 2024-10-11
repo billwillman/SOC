@@ -84,6 +84,30 @@ function DSApp:OnInit()
     CreateNetworkManager()
 end
 
+function DSApp:CreateSceneAsyncLoader()
+    if self.SceneLoader ~= nil then
+        return
+    end
+    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/GameSceneAsyncLoader.prefab")
+    if gameObj then
+        -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
+        gameObj.name = "SceneLoader"
+        self.SceneLoader = gameObj:GetComponent(_MOE.BaseResLoaderAsyncType)
+    end
+    return gameObj
+end
+
+function DSApp:DestroySceneAsyncLoader()
+    if self.SceneLoader  == nil then
+        return
+    end
+    local gameObj = self.SceneLoader.gameObject
+    self.SceneLoader = nil
+    if gameObj ~= nil then
+        _MOE.ObjetDestroy(gameObj)
+    end
+end
+
 function DSApp:GetGameMode()
     return self.GameMode
 end
