@@ -80,6 +80,12 @@ local _Server_DSA_Process = {
         local dsToken = msg.dsToken
         local dsData = DSManager:GetDsData(dsToken)
         local ret = dsData ~= nil and dsData.ServerData ~= nil
+        if ret then
+            -- 发送DS地图加载，如果传递了地图
+            if msg.mapName and (string.len(msg.mapName) > 0) then
+                DSManager:OnEnterMap(dsToken, msg.mapName)
+            end
+        end
         return ret, dsData.ServerData
     end,
 }

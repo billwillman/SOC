@@ -97,6 +97,21 @@ function _M:GetDsClientToken(fd)
     return clientToken
 end
 
+function _M:OnEnterMap(dsToken, mapName)
+    if not dsToken or not mapName or string.len(mapName) <= 0 then
+        return
+    end
+    local dsData = self:GetDsData(dsToken)
+    if not dsData then
+        return
+    end
+    local fd = dsData.fd
+    if not fd then
+        return
+    end
+    MsgProcesser:SendTableToJson2(socket, fd, _MOE.MsgIds.SM_DSA_DS_ENTER_MAP, {mapName = mapName})
+end
+
 function _M:OnDsStartReady(msg, fd, msgProcesser)
     if not msg then
         return

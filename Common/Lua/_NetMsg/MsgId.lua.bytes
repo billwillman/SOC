@@ -11,6 +11,7 @@ local MsgIds = {
     SM_LoginRet = 3, -- 登录返回
     SM_DS_ReadyRep = 4,
     SM_CLIENT_ENTER_DS = 5,
+    SM_DSA_DS_ENTER_MAP = 6,    -- DSA通知DS进入地图（用于长DS跳地图）
 }
 
 _MOE.MsgIds = MsgIds
