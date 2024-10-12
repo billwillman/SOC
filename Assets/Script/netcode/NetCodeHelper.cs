@@ -254,7 +254,7 @@ namespace Unity.Netcode
             BuildIndexToHash = null;
         }
 
-        public static void GenerateScenesInBuild2(this NetworkSceneManager networkManager, LuaTable arr) {
+        public static void GenerateScenesInBuild2(NetworkSceneManager networkManager, LuaTable arr) {
             if (arr == null || networkManager == null)
                 return;
             HashToBuildIndex.Clear();
