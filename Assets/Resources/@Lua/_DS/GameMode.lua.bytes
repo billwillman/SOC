@@ -152,6 +152,16 @@ if _MOE.IsDS then
         if not self.SceneManager then
             return false
         end
+        -- 创建场景加载节点
+        local loader = _MOE.GameApp:CreateSceneAsyncLoader()
+        if not loader then
+            return false
+        end
+        if not loader:LoadMainSceneABAsync(sceneName) then
+            _MOE.Logger.LogErrorFormat("[GameMode] loader.LoadMainSceneABAsync Error: not vaild sceneName({0})", sceneName)
+            return false
+        end
+        --
         local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
         _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
         return ret == _MOE.SceneEventProgressStatus.Started

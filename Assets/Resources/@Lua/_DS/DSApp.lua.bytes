@@ -94,7 +94,7 @@ function DSApp:CreateSceneAsyncLoader()
         gameObj.name = "SceneLoader"
         self.SceneLoader = gameObj:GetComponent(_MOE.BaseResLoaderAsyncType)
     end
-    return gameObj
+    return self.SceneLoader
 end
 
 function DSApp:DestroySceneAsyncLoader()
