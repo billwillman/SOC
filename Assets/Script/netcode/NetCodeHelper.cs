@@ -243,9 +243,11 @@ namespace Unity.Netcode
         private static Dictionary<int, uint> BuildIndexToHash;
         public static void InitHelper(NetworkSceneManager networkManager) {
             Type t = typeof(NetworkSceneManager);
-            var field = t.GetField("HashToBuildIndex");
+            var flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
+            // var ts = t.GetFields(flags);
+            var field = t.GetField("HashToBuildIndex", flags);
             HashToBuildIndex = field.GetValue(networkManager) as Dictionary<uint, int>;
-            field = t.GetField("BuildIndexToHash");
+            field = t.GetField("BuildIndexToHash", flags);
             BuildIndexToHash = field.GetValue(networkManager) as Dictionary<int, uint>;
         }
 
