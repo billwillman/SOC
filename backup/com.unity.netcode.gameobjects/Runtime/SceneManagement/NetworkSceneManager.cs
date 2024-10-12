@@ -714,16 +714,23 @@ namespace Unity.Netcode
             }
         }
 
+        internal int GetBuildIndexByScenePath(string sceneNameOrPath) {
+            // ---------------- 处理 ----------------
+            uint hasCode = XXHash.Hash32(sceneNameOrPath);
+            int buildIndex;
+            if (!HashToBuildIndex.TryGetValue(hasCode, out buildIndex))
+                buildIndex = -1;
+            // ---------------------------------------
+            return buildIndex;
+        }
+
         /// <summary>
         /// Gets the associated hash value for the scene name or path
         /// </summary>
         internal uint SceneHashFromNameOrPath(string sceneNameOrPath)
         {
             // ---------------- 处理 ----------------
-            uint hasCode = XXHash.Hash32(sceneNameOrPath);
-            int buildIndex;
-            if (!HashToBuildIndex.TryGetValue(hasCode, out buildIndex))
-                buildIndex = -1;
+            int buildIndex = GetBuildIndexByScenePath(sceneNameOrPath);
             // ---------------------------------------
 
             // var buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneNameOrPath);
@@ -849,7 +856,7 @@ namespace Unity.Netcode
         internal bool ValidateSceneBeforeLoading(uint sceneHash, LoadSceneMode loadSceneMode)
         {
             var sceneName = SceneNameFromHash(sceneHash);
-            var sceneIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
+            var sceneIndex = GetBuildIndexByScenePath(sceneName);
             return ValidateSceneBeforeLoading(sceneIndex, sceneName, loadSceneMode);
         }
 
@@ -1087,6 +1094,10 @@ namespace Unity.Netcode
                 return new SceneEventProgress(null, SceneEventProgressStatus.InvalidSceneName);
             }
             */
+            if (GetBuildIndexByScenePath(sceneName) == -1) {
+                Debug.LogError($"Scene '{sceneName}' couldn't be loaded because it has not been added to the build settings scenes in build list.");
+                return new SceneEventProgress(null, SceneEventProgressStatus.InvalidSceneName);
+            }
 
             var sceneEventProgress = new SceneEventProgress(NetworkManager)
             {
