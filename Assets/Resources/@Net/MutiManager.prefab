@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5949499150922470418}
   - component: {fileID: 5760698491225669932}
   - component: {fileID: 5695242431980455270}
+  - component: {fileID: 4185334360821795355}
   m_Layer: 0
   m_Name: MutiManager
   m_TagString: Untagged
@@ -117,3 +118,15 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+--- !u!114 &4185334360821795355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718511592331017207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab06854a3d03819439d5a3fbb160c308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
