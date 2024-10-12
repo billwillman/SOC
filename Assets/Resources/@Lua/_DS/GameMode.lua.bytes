@@ -129,10 +129,9 @@ if _MOE.IsDS then
         self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
     end
 
-    function GameMode:GenerateScenesInBuild()
-        local sceneManager = self.NetWorkMgr.SceneManager
-        _MOE.NetCodeHelper.InitHelper(sceneManager)
-        _MOE.NetCodeHelper.GenerateScenesInBuild2(sceneManager, MutiScenes)
+    function GameMode:GenerateScenesInBuild(SceneManager)
+        _MOE.NetCodeHelper.InitHelper(SceneManager)
+        _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
     end
 
     function GameMode:OnStart()
@@ -167,7 +166,7 @@ if _MOE.IsDS then
         end
         self.SceneManager = self.NetWorkMgr.SceneManager
         _MOE.Logger.Log("[DS] NetManager:StartServer True")
-        self:GenerateScenesInBuild()
+        self:GenerateScenesInBuild(self.SceneManager)
         self.DsaNetModel:SendDsReady()
     end
 
