@@ -130,8 +130,9 @@ if _MOE.IsDS then
     end
 
     function GameMode:GenerateScenesInBuild()
-        _MOE.NetCodeHelper.InitHelper(self.NetWorkMgr)
-        _MOE.NetCodeHelper.GenerateScenesInBuild2(self.NetWorkMgr, MutiScenes)
+        local sceneManager = self.NetWorkMgr.SceneManager
+        _MOE.NetCodeHelper.InitHelper(sceneManager)
+        _MOE.NetCodeHelper.GenerateScenesInBuild2(sceneManager, MutiScenes)
     end
 
     function GameMode:OnStart()
