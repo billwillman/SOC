@@ -63,9 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\Blackboard\Dictionary Specific\AddElementToDictionary.cs" />
-    <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\GameObject\FindAllWithLayer.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Modules\StateMachines\FSMStateNested.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\Movement\Pathfinding\Flee.cs" />
+    <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\GameObject\FindAllWithLayer.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\GameObject\FindClosestWithTag.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\Blackboard\SetEnum.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Actions\Blackboard\SetFloatRandom.cs" />
