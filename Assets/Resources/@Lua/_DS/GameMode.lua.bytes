@@ -28,7 +28,7 @@ end
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
     local SceneNameToScenePath = {
-        ["Test"] = "Resources/Character/Player/Model/@hero_kof_kyo/Sample/Test",
+        ["Test"] = "Assets/Resources/Character/Player/Model/@hero_kof_kyo/Sample/Test.unity",
     }
 
     function GameMode:RegisterSystemEvents()
