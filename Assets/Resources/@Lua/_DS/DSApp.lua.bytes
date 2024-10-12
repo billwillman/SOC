@@ -81,31 +81,14 @@ function DSApp:OnInit()
     self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", true)
     self:RegisterModel("DsSceneMgr", "_DS.Models.ServerSceneManager", true)
     -- 创建网络NetworkManager
-    CreateNetworkManager()
-end
-
-function DSApp:CreateSceneAsyncLoader()
-    if self.SceneLoader ~= nil then
-        return
-    end
-    local gameObj = _MOE.ResourceManager:CreateGameObject("Resources/@Net/GameSceneAsyncLoader.prefab")
-    if gameObj then
-        -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
-        gameObj.name = "SceneLoader"
+    local gameObj = CreateNetworkManager()
+    if gameObj ~= nil then
         self.SceneLoader = gameObj:GetComponent(_MOE.BaseResLoaderAsyncType)
     end
-    return self.SceneLoader
 end
 
-function DSApp:DestroySceneAsyncLoader()
-    if self.SceneLoader  == nil then
-        return
-    end
-    local gameObj = self.SceneLoader.gameObject
-    self.SceneLoader = nil
-    if gameObj ~= nil then
-        _MOE.ObjetDestroy(gameObj)
-    end
+function DSApp:GetSceneAsyncLoader()
+    return self.SceneLoader
 end
 
 function DSApp:LoadMainSceneAsync(sceneName)

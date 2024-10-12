@@ -44,6 +44,20 @@ if _MOE.IsDS then
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
         local ConnectionManager = self.NetWorkMgr.ConnectionManager
         self:RegsterCSharpEvent(ConnectionManager, "OnClientDisconnectCallback", self.OnServer_ClientDisconnectCallback)
+
+        local loader = _MOE.GameApp:GetSceneAsyncLoader()
+        if loader ~= nil then
+            self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnServer_OnMainSceneABLoad)
+        end
+    end
+
+    function GameMode:OnServer_OnMainSceneABLoad(sceneName, loadTag)
+        if not sceneName then
+            return
+        end
+        local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
+        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
+        return ret == _MOE.SceneEventProgressStatus.Started
     end
 
     function GameMode:OnServer_ClientDisconnectCallback(clientId)
@@ -153,7 +167,7 @@ if _MOE.IsDS then
             return false
         end
         -- 创建场景加载节点
-        local loader = _MOE.GameApp:CreateSceneAsyncLoader()
+        local loader = _MOE.GameApp:GetSceneAsyncLoader()
         if not loader then
             return false
         end
@@ -162,9 +176,7 @@ if _MOE.IsDS then
             return false
         end
         --
-        local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
-        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
-        return ret == _MOE.SceneEventProgressStatus.Started
+        return true
     end
 
 else
