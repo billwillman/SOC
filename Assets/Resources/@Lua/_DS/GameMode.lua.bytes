@@ -60,7 +60,7 @@ if _MOE.IsDS then
             return
         end
 
-        local ret = self.SceneManager:LoadScene(scenePath, _MOE.LoadSceneMode.Single)
+        local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
         _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", scenePath, ret)
         return ret == _MOE.SceneEventProgressStatus.Started
     end
