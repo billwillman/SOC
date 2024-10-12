@@ -705,8 +705,7 @@ namespace Unity.Netcode
         {
             if (HashToBuildIndex.ContainsKey(sceneHash))
             {
-                // return SceneUtility.GetScenePathByBuildIndex(HashToBuildIndex[sceneHash]);
-                return HashToBuildIndex[sceneHash];
+                return SceneUtility.GetScenePathByBuildIndex(HashToBuildIndex[sceneHash]);
             }
             else
             {
