@@ -19,6 +19,7 @@ function GameMode:OnDestroy()
         _MOE.DsNetworkHelper.NetworkManager_ClearAllEvents()
     end
     self:UnRegsterAllCsharpEvents()
+    _MOE.NetCodeHelper.UnInitHelper()
     self.Transport = nil
 
     self.NetWorkMgr = nil
@@ -27,8 +28,8 @@ end
 
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
-    local SceneNameToScenePath = {
-        ["Test"] = "Assets/Resources/Character/Player/Model/@hero_kof_kyo/Sample/Test.unity",
+    local MutiScenes = {
+        "Test"
     }
 
     function GameMode:RegisterSystemEvents()
@@ -56,10 +57,6 @@ if _MOE.IsDS then
 
     function GameMode:OnServer_OnMainSceneABLoad(sceneName, loadTag)
         if not sceneName or loadTag ~= "onlyAB" then
-            return
-        end
-        local scenePath = SceneNameToScenePath[sceneName]
-        if not scenePath or string.len(scenePath) <= 0 then
             return
         end
 
@@ -132,8 +129,14 @@ if _MOE.IsDS then
         self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
     end
 
+    function GameMode:GenerateScenesInBuild()
+        _MOE.NetCodeHelper.InitHelper(self.NetWorkMgr)
+        _MOE.NetCodeHelper.GenerateScenesInBuild2(self.NetWorkMgr, MutiScenes)
+    end
+
     function GameMode:OnStart()
         self:RegisterNetManagerServerEvents()
+        self:GenerateScenesInBuild()
         -- 连接到GS上
         self.DsGsNetModel:ConnectGS()
         self.DsaNetModel:ConnectDSA()
