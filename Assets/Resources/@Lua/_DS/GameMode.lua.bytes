@@ -137,7 +137,6 @@ if _MOE.IsDS then
 
     function GameMode:OnStart()
         self:RegisterNetManagerServerEvents()
-        self:GenerateScenesInBuild()
         -- 连接到GS上
         self.DsGsNetModel:ConnectGS()
         self.DsaNetModel:ConnectDSA()
@@ -168,6 +167,7 @@ if _MOE.IsDS then
         end
         self.SceneManager = self.NetWorkMgr.SceneManager
         _MOE.Logger.Log("[DS] NetManager:StartServer True")
+        self:GenerateScenesInBuild()
         self.DsaNetModel:SendDsReady()
     end
 
