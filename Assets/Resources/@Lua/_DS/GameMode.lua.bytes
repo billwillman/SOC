@@ -27,6 +27,9 @@ end
 
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
+    local SceneNameToScenePath = {
+        ["Test"] = "Resources/Character/Player/Model/@hero_kof_kyo/Sample/Test",
+    }
 
     function GameMode:RegisterSystemEvents()
         local EventType = _MOE.LuaEvent_MonoEventType
@@ -52,11 +55,16 @@ if _MOE.IsDS then
     end
 
     function GameMode:OnServer_OnMainSceneABLoad(sceneName, loadTag)
-        if not sceneName then
+        if not sceneName or loadTag ~= "onlyAB" then
             return
         end
-        local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
-        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
+        local scenePath = SceneNameToScenePath[sceneName]
+        if not scenePath or string.len(scenePath) <= 0 then
+            return
+        end
+
+        local ret = self.SceneManager:LoadScene(scenePath, _MOE.LoadSceneMode.Single)
+        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", scenePath, ret)
         return ret == _MOE.SceneEventProgressStatus.Started
     end
 
