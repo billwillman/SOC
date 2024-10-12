@@ -226,7 +226,7 @@ namespace NsLib.ResMgr {
                 {
                     IBaseResLoaderAsyncListener listen;
                     if (m_ListernMap.TryGetValue(uuid, out listen) && listen != null) {
-                        if (!listener._OnMainSceneLoaded(subID))
+                        if (!listen._OnMainSceneLoaded(subID))
                             ResourceMgr.Instance.InteralCloseScene(sceneName);
 
                     } else {
