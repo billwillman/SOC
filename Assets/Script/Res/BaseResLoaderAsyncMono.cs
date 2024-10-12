@@ -509,12 +509,19 @@ using NsLib.ResMgr;
                 case BaseResLoaderAsyncType.LoadScene:
                         if (!string.IsNullOrEmpty(resName)) {
                             SetResource(obj.GetInstanceID(), this, typeof(UnityEngine.SceneManagement.Scene), resName, tag);
+                            if (onSceneLoaded != null)
+                                onSceneLoaded(resName, tag);
                             return true;
                         };
                     break;
             }
         }
         return false;
+    }
+
+    public System.Action<string, string> onSceneLoaded {
+        get;
+        set;
     }
 
         public bool _OnAniControlLoaded(RuntimeAnimatorController target, ulong subID) {

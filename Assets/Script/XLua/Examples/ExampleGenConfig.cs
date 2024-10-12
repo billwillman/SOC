@@ -56,6 +56,7 @@ public static class ExampleGenConfig
                 typeof(Action<float>),
                 typeof(Action<bool>),
                 typeof(Action<AsyncOperation, bool>),
+                typeof(Action<string, string>),
                 // RPC Event
                 typeof(Action<string, string>),
                 typeof(Action<string, int>),
@@ -75,6 +76,7 @@ public static class ExampleGenConfig
                 typeof(Action),
                 typeof(Action<float>),
                 typeof(Action<bool>),
+                typeof(Action<string, string>),
                 // RPC Event
                 typeof(Action<string, string>),
                 typeof(Action<string, int>),
