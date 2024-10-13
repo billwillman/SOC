@@ -700,6 +700,12 @@ namespace Unity.Netcode
             return GetSceneNameFromPath(ScenePathFromHash(sceneHash));
         }
 
+        protected string GetScenePathByBuildIndex(int index) {
+            if (index < 0 || index >= BuildSceneArray.Count)
+                return string.Empty;
+            return BuildSceneArray[index];
+        }
+
         /// <summary>
         /// Gets the full scene path from a hash value
         /// </summary>
@@ -707,7 +713,8 @@ namespace Unity.Netcode
         {
             if (HashToBuildIndex.ContainsKey(sceneHash))
             {
-                return SceneUtility.GetScenePathByBuildIndex(HashToBuildIndex[sceneHash]);
+                // return SceneUtility.GetScenePathByBuildIndex(HashToBuildIndex[sceneHash]);
+                return GetScenePathByBuildIndex(HashToBuildIndex[sceneHash]);
             }
             else
             {
