@@ -730,7 +730,8 @@ namespace Unity.Netcode
         internal uint SceneHashFromNameOrPath(string sceneNameOrPath)
         {
             // ---------------- ´¦Àí ----------------
-            sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
+            if (sceneNameOrPath.IndexOf("/") >= 0 )
+                sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
             int buildIndex = GetBuildIndexByScenePath(sceneNameOrPath);
             // ---------------------------------------
 
