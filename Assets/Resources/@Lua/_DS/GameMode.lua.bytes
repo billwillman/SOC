@@ -280,9 +280,10 @@ else
     function GameMode:OnAwake()
         _MOE.Logger.Log("[Client] GameMode Awake")
         self.Transport = self.NetWorkMgr.gameObject:GetComponent(typeof(CS.Unity.Netcode.Transports.UTP.UnityTransport))
+        self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
     end
     -------------------------------- 外部调用 --------------------------------------
-    
+
     function GameMode:OnEnterMap()
     end
 
