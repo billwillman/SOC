@@ -26,17 +26,15 @@ function GameMode:OnDestroy()
     self.Binder = nil
 end
 
-local MutiScenes = {
-    "Test"
-}
-
-function GameMode:GenerateScenesInBuild(SceneManager)
-    _MOE.NetCodeHelper.InitHelper(SceneManager)
-    _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
-end
-
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
+    local MutiScenes = {
+        "Test"
+    }
+    function GameMode:GenerateScenesInBuild(SceneManager)
+        _MOE.NetCodeHelper.InitHelper(SceneManager)
+        _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
+    end
 
     function GameMode:RegisterSystemEvents()
         local EventType = _MOE.LuaEvent_MonoEventType
