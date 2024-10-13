@@ -265,6 +265,7 @@ namespace Unity.Netcode
                 return;
             HashToBuildIndex.Clear();
             BuildIndexToHash.Clear();
+            BuildSceneArray.Clear();
             for (int i = 1; i <= arr.Length; ++i) {
                 string sceneName = arr.Get<int, string>(i);
                 if (!string.IsNullOrEmpty(sceneName)) {
