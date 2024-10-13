@@ -26,6 +26,11 @@ function GameMode:OnDestroy()
     self.Binder = nil
 end
 
+function GameMode:GenerateScenesInBuild(SceneManager)
+    _MOE.NetCodeHelper.InitHelper(SceneManager)
+    _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
+end
+
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
     local MutiScenes = {
@@ -127,11 +132,6 @@ if _MOE.IsDS then
         self.DsGsNetModel = _MOE.GameApp:GetModel("DsGsNetModel")
         self.DsaNetModel = _MOE.GameApp:GetModel("DsaNetModel")
         self.DsSessionManager = _MOE.GameApp:GetModel("DsSessionManager")
-    end
-
-    function GameMode:GenerateScenesInBuild(SceneManager)
-        _MOE.NetCodeHelper.InitHelper(SceneManager)
-        _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
     end
 
     function GameMode:OnStart()
