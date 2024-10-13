@@ -646,9 +646,12 @@ namespace Unity.Netcode
         /// </summary>
         internal string GetSceneNameFromPath(string scenePath)
         {
-            var begin = scenePath.LastIndexOf("/", StringComparison.Ordinal) + 1;
-            var end = scenePath.LastIndexOf(".", StringComparison.Ordinal);
-            return scenePath.Substring(begin, end - begin);
+            if (sceneNameOrPath.IndexOf("/") >= 0) {
+                var begin = scenePath.LastIndexOf("/", StringComparison.Ordinal) + 1;
+                var end = scenePath.LastIndexOf(".", StringComparison.Ordinal);
+                return scenePath.Substring(begin, end - begin);
+            }
+            return scenePath;
         }
 
         /// <summary>
@@ -725,8 +728,7 @@ namespace Unity.Netcode
 
         internal int GetBuildIndexByScenePath(string sceneNameOrPath) {
             // ---------------- 处理 ----------------
-			if (sceneNameOrPath.IndexOf("/") >= 0 )
-                sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
+            sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
             uint hasCode = XXHash.Hash32(sceneNameOrPath);
             int buildIndex;
             if (!HashToBuildIndex.TryGetValue(hasCode, out buildIndex))
@@ -741,8 +743,7 @@ namespace Unity.Netcode
         internal uint SceneHashFromNameOrPath(string sceneNameOrPath)
         {
             // ---------------- 处理 ----------------
-            if (sceneNameOrPath.IndexOf("/") >= 0 )
-                sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
+            sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
             int buildIndex = GetBuildIndexByScenePath(sceneNameOrPath);
             // ---------------------------------------
 
