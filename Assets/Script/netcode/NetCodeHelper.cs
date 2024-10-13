@@ -255,6 +255,7 @@ namespace Unity.Netcode
         }
 
         public static void UnInitHelper() {
+            BuildSceneArray = null;
             HashToBuildIndex = null;
             BuildIndexToHash = null;
         }
