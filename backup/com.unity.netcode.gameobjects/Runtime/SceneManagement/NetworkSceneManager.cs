@@ -510,6 +510,8 @@ namespace Unity.Netcode
         /// </summary>
         internal Dictionary<int, uint> BuildIndexToHash = new Dictionary<int, uint>();
 
+        internal List<string> BuildSceneArray = new List<string>();
+
         /// <summary>
         /// The Condition: While a scene is asynchronously loaded in single loading scene mode, if any new NetworkObjects are spawned
         /// they need to be moved into the do not destroy temporary scene
@@ -716,7 +718,7 @@ namespace Unity.Netcode
 
         internal int GetBuildIndexByScenePath(string sceneNameOrPath) {
             // ---------------- ´¦Àí ----------------
-            if (sceneNameOrPath.IndexOf("/") >= 0)
+			if (sceneNameOrPath.IndexOf("/") >= 0 )
                 sceneNameOrPath = GetSceneNameFromPath(sceneNameOrPath);
             uint hasCode = XXHash.Hash32(sceneNameOrPath);
             int buildIndex;
