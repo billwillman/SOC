@@ -646,7 +646,7 @@ namespace Unity.Netcode
         /// </summary>
         internal string GetSceneNameFromPath(string scenePath)
         {
-            if (sceneNameOrPath.IndexOf("/") >= 0) {
+            if (scenePath.IndexOf("/") >= 0) {
                 var begin = scenePath.LastIndexOf("/", StringComparison.Ordinal) + 1;
                 var end = scenePath.LastIndexOf(".", StringComparison.Ordinal);
                 return scenePath.Substring(begin, end - begin);
