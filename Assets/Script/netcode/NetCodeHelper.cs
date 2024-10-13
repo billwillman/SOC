@@ -241,6 +241,7 @@ namespace Unity.Netcode
     {
         private static Dictionary<uint, int> HashToBuildIndex;
         private static Dictionary<int, uint> BuildIndexToHash;
+        private static List<string> BuildSceneArray;
         public static void InitHelper(NetworkSceneManager networkManager) {
             Type t = typeof(NetworkSceneManager);
             var flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
@@ -249,6 +250,8 @@ namespace Unity.Netcode
             HashToBuildIndex = field.GetValue(networkManager) as Dictionary<uint, int>;
             field = t.GetField("BuildIndexToHash", flags);
             BuildIndexToHash = field.GetValue(networkManager) as Dictionary<int, uint>;
+            field = t.GetField("BuildSceneArray", flags);
+            BuildSceneArray = field.GetValue(networkManager) as List<string>;
         }
 
         public static void UnInitHelper() {
@@ -266,8 +269,10 @@ namespace Unity.Netcode
                 if (!string.IsNullOrEmpty(sceneName)) {
                     var hash = XXHash.Hash32(sceneName);
                     if (!HashToBuildIndex.ContainsKey(hash)) {
-                        HashToBuildIndex.Add(hash, i);
-                        BuildIndexToHash.Add(i, hash);
+                        int index = BuildSceneArray.Count;
+                        BuildSceneArray.Add(sceneName);
+                        HashToBuildIndex.Add(hash, index);
+                        BuildIndexToHash.Add(index, hash);
                     } else {
                         Debug.LogError($"{nameof(NetworkSceneManager)} is skipping duplicate scene path entry {sceneName}. Make sure your scenes in build list does not contain duplicates!");
                     }
