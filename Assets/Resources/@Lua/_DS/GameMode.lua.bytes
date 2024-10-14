@@ -245,7 +245,8 @@ else
         end
     end
 
-    function GameMode:OnSinglePlayPostLoad()
+    -- HOST模式
+    function GameMode:OnSinglePlayPostLoad(mapName)
         -- 单机版本开自己的Host，RPC自己发给自己
         if self.Transport then
             self.Transport:SetConnectionData("127.0.0.1", 0)
@@ -253,6 +254,16 @@ else
                 _MOE.Logger.Log("[GameModel] StartClient: OK")
                 self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
                 self:RegisterClientEvents()
+                if mapName and string.len(mapName) > 0 then
+                    local loader = _MOE.GameApp:GetSceneAsyncLoader()
+                    if loader then
+                        if not loader:LoadMainSceneABAsync(mapName, false) then
+                            _MOE.Logger.LogErrorFormat(
+                            "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", mapName)
+                            return
+                        end
+                    end
+                end
             else
                 _MOE.Logger.LogError("[GameModel] StartClient: Failed")
             end

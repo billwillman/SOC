@@ -10,7 +10,7 @@ function SingleGameModel:StartMap(mapName)
     end
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.SinglePlayPreload)
     _MOE.GameApp:CreateDSNetManagerPrefab()
-    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.SinglePlayPostLoad)
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.SinglePlayPostLoad, mapName)
 end
 
 return SingleGameModel

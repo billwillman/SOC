@@ -164,8 +164,13 @@ function ClientApp:CreateDSNetManagerPrefab()
     if gameObj then
         -- gameObj.transform:SetParent(_MOE.GameStartTransform, false)
         gameObj.name = "MutiManager"
+        self.SceneLoader = gameObj:GetComponent(_MOE.BaseResLoaderAsyncType)
     end
     self.DSNetManagerPrefab = gameObj
+end
+
+function ClientApp:GetSceneAsyncLoader()
+    return self.SceneLoader
 end
 
 function ClientApp:DestroyDSNetManagerPrefab()
