@@ -66,7 +66,7 @@ if _MOE.IsDS then
         end
 
         local ret = self.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
-        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", scenePath, ret)
+        _MOE.Logger.LogFormat("[GameMode] LoadSceneAsync: {0} status {1:D}", sceneName, ret)
         return ret == _MOE.SceneEventProgressStatus.Started
     end
 
@@ -245,6 +245,16 @@ else
         end
     end
 
+    function GameMode:OnClient_OnMainSceneABLoad(sceneName, loadTag)
+        if not sceneName or loadTag ~= "onlyAB" then
+            return
+        end
+
+        local ret = self.NetWorkMgr.SceneManager:LoadScene(sceneName, _MOE.LoadSceneMode.Single)
+        _MOE.Logger.LogFormat("[GameMode] OnClient_OnMainSceneABLoad: {0} status {1:D}", sceneName, ret)
+        return ret == _MOE.SceneEventProgressStatus.Started
+    end
+
     -- HOST模式
     function GameMode:OnSinglePlayPostLoad(mapName)
         -- 单机版本开自己的Host，RPC自己发给自己
@@ -257,7 +267,8 @@ else
                 if mapName and string.len(mapName) > 0 then
                     local loader = _MOE.GameApp:GetSceneAsyncLoader()
                     if loader then
-                        if not loader:LoadMainSceneABAsync(mapName, false) then
+                        self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_OnMainSceneABLoad)
+                        if not loader:LoadMainSceneABAsync(mapName) then
                             _MOE.Logger.LogErrorFormat(
                             "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", mapName)
                             return
