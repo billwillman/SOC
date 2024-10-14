@@ -26,15 +26,16 @@ function GameMode:OnDestroy()
     self.Binder = nil
 end
 
+local MutiScenes = {
+    "Test"
+}
+function GameMode:GenerateScenesInBuild(SceneManager)
+    _MOE.NetCodeHelper.InitHelper(SceneManager)
+    _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
+end
+
 if _MOE.IsDS then
     ----------------------------- 只有DS上才跑这个逻辑
-    local MutiScenes = {
-        "Test"
-    }
-    function GameMode:GenerateScenesInBuild(SceneManager)
-        _MOE.NetCodeHelper.InitHelper(SceneManager)
-        _MOE.NetCodeHelper.GenerateScenesInBuild2(SceneManager, MutiScenes)
-    end
 
     function GameMode:RegisterSystemEvents()
         local EventType = _MOE.LuaEvent_MonoEventType
@@ -228,7 +229,6 @@ else
     end
 
     function GameMode:OnMultiScenePostLoad()
-        -- self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
         self:SetConnectionApprovalData()
         if self.Transport then
             local dsIp, dsPort = _MOE.GameApp:GetMultiGameIpAndPort()
@@ -236,6 +236,7 @@ else
                 self.Transport:SetConnectionData(dsIp, dsPort)
                 if self.NetWorkMgr:StartClient() then
                     _MOE.Logger.Log("[GameModel] StartClient: OK")
+                    self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
                     self:RegisterClientEvents()
                 else
                     _MOE.Logger.LogError("[GameModel] StartClient: Failed")
