@@ -228,7 +228,7 @@ else
     end
 
     function GameMode:OnMultiScenePostLoad()
-        self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
+        -- self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
         self:SetConnectionApprovalData()
         if self.Transport then
             local dsIp, dsPort = _MOE.GameApp:GetMultiGameIpAndPort()
