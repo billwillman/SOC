@@ -251,6 +251,7 @@ else
             self.Transport:SetConnectionData("127.0.0.1", 0)
             if self.NetWorkMgr:StartHost() then
                 _MOE.Logger.Log("[GameModel] StartClient: OK")
+                self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
                 self:RegisterClientEvents()
             else
                 _MOE.Logger.LogError("[GameModel] StartClient: Failed")
