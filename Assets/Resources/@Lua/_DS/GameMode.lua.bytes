@@ -22,6 +22,8 @@ function GameMode:OnDestroy()
     _MOE.NetCodeHelper.UnInitHelper()
     self.Transport = nil
 
+    self.OnClientSceneLoadCallBack = nil
+
     self.NetWorkMgr = nil
     self.Binder = nil
 end
@@ -228,6 +230,31 @@ else
         )
     end
 
+    function GameMode:OnClient_MultiPlay_OnMainSceneABLoad(sceneName, loadTag)
+        if not sceneName or loadTag ~= "onlyAB" then
+            return
+        end
+
+        if self.OnClientSceneLoadCallBack then
+            self.OnClientSceneLoadCallBack()
+        end
+    end
+
+    function GameMode:OnClient_PreCheckLoadSceneAndCallNext(sceneName, onNextCallBack)
+        local loader = _MOE.GameApp:GetSceneAsyncLoader()
+        if not loader then
+            return true
+        end
+        self.OnClientSceneLoadCallBack = onNextCallBack
+        self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_MultiPlay_OnMainSceneABLoad)
+        if not loader:LoadMainSceneABAsync(sceneName) then
+            _MOE.Logger.LogErrorFormat(
+            "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", sceneName)
+            return true -- 让他报错
+        end
+        return false
+    end
+
     function GameMode:OnMultiScenePostLoad()
         self:SetConnectionApprovalData()
         if self.Transport then
@@ -238,6 +265,10 @@ else
                     _MOE.Logger.Log("[GameModel] StartClient: OK")
                     self:GenerateScenesInBuild(self.NetWorkMgr.SceneManager)
                     self:RegisterClientEvents()
+                    -- 多人Client模式，需要AB先加载再去操作
+                    -- 只有再这个阶段客户端才有SceneManager
+                    self:RegsterCSharpEvent(self.NetWorkMgr.SceneManager, "OnClientPreCheckLoadSceneAndCallNext",
+                        self.OnClient_PreCheckLoadSceneAndCallNext)
                 else
                     _MOE.Logger.LogError("[GameModel] StartClient: Failed")
                 end
@@ -245,7 +276,7 @@ else
         end
     end
 
-    function GameMode:OnClient_OnMainSceneABLoad(sceneName, loadTag)
+    function GameMode:OnClient_SinglePlay_OnMainSceneABLoad(sceneName, loadTag)
         if not sceneName or loadTag ~= "onlyAB" then
             return
         end
@@ -267,7 +298,7 @@ else
                 if mapName and string.len(mapName) > 0 then
                     local loader = _MOE.GameApp:GetSceneAsyncLoader()
                     if loader then
-                        self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_OnMainSceneABLoad)
+                        self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_SinglePlay_OnMainSceneABLoad)
                         if not loader:LoadMainSceneABAsync(mapName) then
                             _MOE.Logger.LogErrorFormat(
                             "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", mapName)
