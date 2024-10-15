@@ -130,3 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab06854a3d03819439d5a3fbb160c308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bClearAllResourcesOnDestroy: 1
