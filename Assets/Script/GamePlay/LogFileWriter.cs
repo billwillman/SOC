@@ -7,6 +7,8 @@ namespace SOC.GamePlay
 {
     public class LogFileWriter : DisposeObject, ILogHandler
     {
+        public bool IsLogWriteAsync = true;
+
         string GetSaveFileName(string localFileName) {
             string dateTimeStr = DateTime.Now.ToString().Replace("-", "_").Replace("/", "_").Replace(":", "_");
             string ret = localFileName;
@@ -51,8 +53,13 @@ namespace SOC.GamePlay
                 return;
             log = string.Format("[{0}] {1}\n", DateTime.Now.ToString(), log);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log);
-            m_FileStream.WriteAsync(buffer);
-            m_FileStream.FlushAsync();
+            if (IsLogWriteAsync) {
+                m_FileStream.WriteAsync(buffer);
+                m_FileStream.FlushAsync();
+            } else {
+                m_FileStream.Write(buffer);
+                m_FileStream.Flush();
+            }
         }
 
         public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args) {

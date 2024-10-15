@@ -20,6 +20,9 @@ namespace SOC.GamePlay
         [DoNotGen]
         public bool m_ClientOutputOldLogHandle = true;
 
+        [DoNotGen]
+        public bool m_LogWriteAsync = true;
+
         // Start is called before the first frame update
         void Awake() {
             DontDestroyOnLoad(this.gameObject);
@@ -72,9 +75,11 @@ namespace SOC.GamePlay
             if (IsDS) {
                 // DS²ÅÄÜ²Å´æ´¢
                 m_LogFileWriter = new LogFileWriter("dsRuntimeLog", m_DS_OutputOldLogHandle);
+                m_LogFileWriter.IsLogWriteAsync = m_LogWriteAsync;
             } else {
 #if !UNITY_EDITOR
                 m_LogFileWriter = new LogFileWriter("ClientRuntimeLog", m_ClientOutputOldLogHandle);
+                m_LogFileWriter.IsLogWriteAsync = m_LogWriteAsync;
 #endif
             }
         }
