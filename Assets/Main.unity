@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DS_OutputOldLogHandle: 1
   m_ClientOutputOldLogHandle: 1
+  m_LogWriteAsync: 0
 --- !u!114 &1031043706
 MonoBehaviour:
   m_ObjectHideFlags: 0
