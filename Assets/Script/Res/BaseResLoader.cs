@@ -17,6 +17,8 @@ public class BaseResLoader: CachedMonoBehaviour
 
 	private Dictionary<ResKey, ResValue> m_ResMap = null;
 
+	public bool bClearAllResourcesOnDestroy = true;
+
 	#if USE_CHECK_VISIBLE
 	private bool m_IsCheckedVisible = false;
 #endif
@@ -408,7 +410,8 @@ public class BaseResLoader: CachedMonoBehaviour
 
 	protected virtual void OnDestroy()
 	{
-		ClearAllResources();
+		if (bClearAllResourcesOnDestroy)
+			ClearAllResources();
 	}
 
 	protected void DestroySprite(Sprite sp)
