@@ -172,6 +172,8 @@ namespace Unity.Netcode
         /// </summary>
         public event SceneEventDelegate OnSceneEvent;
 
+        public Func<string, Action, bool> OnClientPreCheckLoadSceneAndCallNext;
+
         /// <summary>
         /// Delegate declaration for the OnLoad event.<br />
         /// See also: <br />
@@ -1885,6 +1887,24 @@ namespace Unity.Netcode
         }
 
         /// <summary>
+        /// Client Side
+        /// 客户端场景必须在AB加载之前，这里会处理AB的加载判断
+        /// </summary>
+        /// <param name="sceneName">场景名</param>
+        /// <param name="onNextCallBack">下一步回调</param>
+        private void CheckPreSceneLoadAndNext(string sceneName, Action onNextCallBack) {
+            if (string.IsNullOrEmpty(sceneName) || OnClientPreCheckLoadSceneAndCallNext == null) {
+                if (onNextCallBack != null)
+                    onNextCallBack();
+                return;
+            }
+            if (OnClientPreCheckLoadSceneAndCallNext(sceneName, onNextCallBack)) {
+                if (onNextCallBack != null)
+                    onNextCallBack();
+            }
+        }
+
+        /// <summary>
         /// This is called when the client receives the <see cref="SceneEventType.Synchronize"/> event
         /// Note: This can recurse one additional time by the client if the current scene loaded by the client
         /// is already loaded.
@@ -1943,19 +1963,23 @@ namespace Unity.Netcode
                     SceneEventId = sceneEventId,
                     OnSceneEventCompleted = ClientLoadedSynchronization
                 };
-                sceneLoad = SceneManagerHandler.LoadSceneAsync(sceneName, loadSceneMode, sceneEventProgress);
-
-                // Notify local client that a scene load has begun
-                OnSceneEvent?.Invoke(new SceneEvent()
+                // 改为需要判断下AB是否加载完，否则加载一下
+                Action onNextCallBack = () =>
                 {
-                    AsyncOperation = sceneLoad,
-                    SceneEventType = SceneEventType.Load,
-                    LoadSceneMode = loadSceneMode,
-                    SceneName = sceneName,
-                    ClientId = NetworkManager.LocalClientId,
-                });
+                    sceneLoad = SceneManagerHandler.LoadSceneAsync(sceneName, loadSceneMode, sceneEventProgress);
 
-                OnLoad?.Invoke(NetworkManager.LocalClientId, sceneName, loadSceneMode, sceneLoad);
+                    // Notify local client that a scene load has begun
+                    OnSceneEvent?.Invoke(new SceneEvent() {
+                        AsyncOperation = sceneLoad,
+                        SceneEventType = SceneEventType.Load,
+                        LoadSceneMode = loadSceneMode,
+                        SceneName = sceneName,
+                        ClientId = NetworkManager.LocalClientId,
+                    });
+
+                    OnLoad?.Invoke(NetworkManager.LocalClientId, sceneName, loadSceneMode, sceneLoad);
+                };
+                CheckPreSceneLoadAndNext(sceneName, onNextCallBack);
             }
             else
             {
