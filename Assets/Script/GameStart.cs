@@ -73,9 +73,11 @@ namespace SOC.GamePlay
 
         void ServerAttachLogFile() {
             if (IsDS) {
+#if !UNITY_EDITOR
                 // DS²ÅÄÜ²Å´æ´¢
                 m_LogFileWriter = new LogFileWriter("dsRuntimeLog", m_DS_OutputOldLogHandle);
                 m_LogFileWriter.IsLogWriteAsync = m_LogWriteAsync;
+#endif
             } else {
 #if !UNITY_EDITOR
                 m_LogFileWriter = new LogFileWriter("ClientRuntimeLog", m_ClientOutputOldLogHandle);
