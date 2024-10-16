@@ -204,6 +204,10 @@ if _MOE.IsDS then
         if not self.SceneManager then
             return false
         end
+        local currentSceneName = self.SceneManager.SceneName
+        if currentSceneName == sceneName then
+            return true
+        end
         -- 创建场景加载节点
         local loader = _MOE.GameApp:GetSceneAsyncLoader()
         if not loader then
