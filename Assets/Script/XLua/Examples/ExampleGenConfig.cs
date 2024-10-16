@@ -58,6 +58,7 @@ public static class ExampleGenConfig
                 typeof(Action<AsyncOperation, bool>),
                 typeof(Action<string, string>),
                 typeof(Func<string, Action, bool>),
+                typeof(List<ulong>),
                 typeof(NetworkSceneManager.OnEventCompletedDelegateHandler),
                 // RPC Event
                 typeof(Action<string, string>),
@@ -80,6 +81,7 @@ public static class ExampleGenConfig
                 typeof(Action<bool>),
                 typeof(Action<string, string>),
                 typeof(Func<string, Action, bool>),
+                typeof(List<ulong>),
                 typeof(NetworkSceneManager.OnEventCompletedDelegateHandler),
                 // RPC Event
                 typeof(Action<string, string>),
