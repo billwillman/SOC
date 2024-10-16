@@ -187,8 +187,14 @@ if _MOE.IsDS then
                 self:OnServer_ClientsUnLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
             end
         )
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnSceneManagerClear", self.OnServer_OnSceneManagerClear)
 
         self.DsaNetModel:SendDsReady()
+    end
+
+    function GameMode:OnServer_OnSceneManagerClear()
+        _MOE.DsNetworkHelper.NetworkManager_ClearOnUnloadEventCompleted()
+        _MOE.DsNetworkHelper.NetworkManager_ClearOnLoadEventCompleted()
     end
 
     function GameMode:LoadMainSceneAsync(sceneName)

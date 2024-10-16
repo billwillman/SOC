@@ -1143,6 +1143,11 @@ namespace Unity.Netcode
             }
         }
 
+        public Action OnSceneManagerClear {
+            get;
+            set;
+        }
+
         internal void ShutdownInternal()
         {
             if (NetworkLog.CurrentLogLevel <= LogLevel.Developer)
@@ -1180,6 +1185,10 @@ namespace Unity.Netcode
             SpawnManager = null;
 
             // Let the NetworkSceneManager clean up its two SceneEvenData instances
+            if (OnSceneManagerClear != null) {
+                OnSceneManagerClear();
+                OnSceneManagerClear = null;
+            }
             SceneManager?.Dispose();
             SceneManager = null;
             IsListening = false;
