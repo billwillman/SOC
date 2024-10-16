@@ -55,7 +55,7 @@ if _MOE.IsDS then
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
         local ConnectionManager = self.NetWorkMgr.ConnectionManager
         self:RegsterCSharpEvent(ConnectionManager, "OnClientDisconnectCallback", self.OnServer_ClientDisconnectCallback)
-        _MOE.DsNetworkHelper.NetworkManager_SetOnUnloadEventCompleted(
+        _MOE.DsNetworkHelper.NetworkManager_SetOnLoadEventCompleted(
             function (sceneName, loadSceneMode, clientsComplete, clientsTimeout)
                 self:OnServer_ClientsLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
             end
