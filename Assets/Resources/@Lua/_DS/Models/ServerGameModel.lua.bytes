@@ -1,4 +1,4 @@
--- 游戏玩法Model
+-- 游戏Game基类
 local _M = _MOE.class("ServerGame")
 
 return _M
