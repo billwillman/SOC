@@ -135,6 +135,7 @@ namespace SOC.GamePlay
             NetworkManager_ClearOnTransportFailure();
             NetworkManager_ClearOnConnectionEvent();
             NetworkManager_ClearOnLoadEventCompleted();
+            NetworkManager_ClearOnUnloadEventCompleted();
         }
     }
 }
