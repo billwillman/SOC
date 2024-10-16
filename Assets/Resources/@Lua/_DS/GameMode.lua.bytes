@@ -199,6 +199,7 @@ if _MOE.IsDS then
     function GameMode:OnServer_OnSceneManagerClear()
         _MOE.DsNetworkHelper.NetworkManager_ClearOnUnloadEventCompleted()
         _MOE.DsNetworkHelper.NetworkManager_ClearOnLoadEventCompleted()
+        self.MainSceneName = nil
     end
 
     function GameMode:GetMainScene()
