@@ -214,7 +214,8 @@ if _MOE.IsDS then
         end
         local currentSceneName = self.MainSceneName
         if currentSceneName == sceneName then
-            _MOE.Logger.LogFormat("[GameMode] Current SameScene: {0}", sceneName)
+            _MOE.Logger.LogFormat("[GameMode] Current SameScene: {0} SceneManager.SceneName: {1}", sceneName,
+                self.SceneManager.SceneName)
             return true
         end
         -- 创建场景加载节点
