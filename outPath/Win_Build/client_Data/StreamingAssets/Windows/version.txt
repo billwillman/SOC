@@ -1,2 +1,0 @@
-res=1.000
-fileList=39f4b783e099222d4cbcf51caf2276d8
