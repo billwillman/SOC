@@ -1,0 +1,4 @@
+-- 游戏玩法Model
+local _M = _MOE.class("ServerGame")
+
+return _M

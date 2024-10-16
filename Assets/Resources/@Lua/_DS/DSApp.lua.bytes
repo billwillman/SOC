@@ -79,6 +79,7 @@ function DSApp:OnInit()
     self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
     self:RegisterModel("DsSessionManager", "_DS.Models.DsSessionManager", true)
     self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", true)
+    self:RegisterModel("ServerGame", "_DS.Models.ServerGameModel", true)
     -- 创建网络NetworkManager
     local gameObj = CreateNetworkManager()
     if gameObj ~= nil then
