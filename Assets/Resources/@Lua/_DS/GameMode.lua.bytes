@@ -201,6 +201,10 @@ if _MOE.IsDS then
         _MOE.DsNetworkHelper.NetworkManager_ClearOnLoadEventCompleted()
     end
 
+    function GameMode:GetMainScene()
+        return self.MainSceneName
+    end
+
     function GameMode:LoadMainSceneAsync(sceneName)
         if not sceneName or string.len(sceneName) <= 0 then
             return false
@@ -208,7 +212,7 @@ if _MOE.IsDS then
         if not self.SceneManager then
             return false
         end
-        local currentSceneName = self.SceneManager.SceneName
+        local currentSceneName = self.MainSceneName
         if currentSceneName == sceneName then
             _MOE.Logger.LogFormat("[GameMode] Current SameScene: {0}", sceneName)
             return true
@@ -222,6 +226,7 @@ if _MOE.IsDS then
             _MOE.Logger.LogErrorFormat("[GameMode] loader.LoadMainSceneABAsync Error: not vaild sceneName({0})", sceneName)
             return false
         end
+        self.MainSceneName = sceneName
         --
         return true
     end
