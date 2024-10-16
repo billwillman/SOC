@@ -24,7 +24,7 @@ namespace SOC.GamePlay
 
         public static bool NetworkManager_SetOnUnloadEventCompleted(NetworkSceneManager.OnEventCompletedDelegateHandler onServerEvt) {
             if (NetworkManager.Singleton != null) {
-                if (m_OnLoadEventCompleted != null)
+                if (m_OnUnloadEventCompleted != null)
                     NetworkManager.Singleton.SceneManager.OnUnloadEventCompleted -= m_OnUnloadEventCompleted;
                 if (onServerEvt != null)
                     NetworkManager.Singleton.SceneManager.OnUnloadEventCompleted += onServerEvt;
