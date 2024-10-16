@@ -12,6 +12,46 @@ namespace SOC.GamePlay
         private static Action m_OnClientStarted = null;
         private static Action m_OnTransportFailure = null;
         private static Action<NetworkManager, ConnectionEventData> m_OnConnectionEvent = null;
+        private static NetworkSceneManager.OnEventCompletedDelegateHandler m_OnLoadEventCompleted = null;
+        private static NetworkSceneManager.OnEventCompletedDelegateHandler m_OnUnloadEventCompleted = null;
+
+        public static void NetworkManager_ClearOnUnloadEventCompleted() {
+            if (m_OnUnloadEventCompleted != null && NetworkManager.Singleton != null) {
+                NetworkManager.Singleton.SceneManager.OnUnloadEventCompleted -= m_OnUnloadEventCompleted;
+            }
+            m_OnUnloadEventCompleted = null;
+        }
+
+        public static bool NetworkManager_SetOnUnloadEventCompleted(NetworkSceneManager.OnEventCompletedDelegateHandler onServerEvt) {
+            if (NetworkManager.Singleton != null) {
+                if (m_OnLoadEventCompleted != null)
+                    NetworkManager.Singleton.SceneManager.OnUnloadEventCompleted -= m_OnUnloadEventCompleted;
+                if (onServerEvt != null)
+                    NetworkManager.Singleton.SceneManager.OnUnloadEventCompleted += onServerEvt;
+                m_OnUnloadEventCompleted = onServerEvt;
+                return true;
+            }
+            return false;
+        }
+
+        public static void NetworkManager_ClearOnLoadEventCompleted() {
+            if (m_OnLoadEventCompleted != null && NetworkManager.Singleton != null) {
+                NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= m_OnLoadEventCompleted;
+            }
+            m_OnLoadEventCompleted = null;
+        }
+
+        public static bool NetworkManager_SetOnLoadEventCompleted(NetworkSceneManager.OnEventCompletedDelegateHandler onServerEvt) {
+            if (NetworkManager.Singleton != null) {
+                if (m_OnLoadEventCompleted != null)
+                    NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= m_OnLoadEventCompleted;
+                if (onServerEvt != null)
+                    NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += onServerEvt;
+                m_OnLoadEventCompleted = onServerEvt;
+                return true;
+            }
+            return false;
+        }
 
         public static bool NetworkManager_SetOnClientStopped(Action<bool> onClientStopped) {
             if (NetworkManager.Singleton != null) {
@@ -94,6 +134,7 @@ namespace SOC.GamePlay
             NetworkManager_ClearOnClientStarted();
             NetworkManager_ClearOnTransportFailure();
             NetworkManager_ClearOnConnectionEvent();
+            NetworkManager_ClearOnLoadEventCompleted();
         }
     }
 }
