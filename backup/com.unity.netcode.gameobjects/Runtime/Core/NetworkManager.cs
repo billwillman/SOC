@@ -856,6 +856,8 @@ namespace Unity.Netcode
             CustomMessagingManager = new CustomMessagingManager(this);
 
             SceneManager = new NetworkSceneManager(this);
+            if (OnSceneManagerCreate != null)
+                OnSceneManagerCreate();
 
             BehaviourUpdater = new NetworkBehaviourUpdater();
             BehaviourUpdater.Initialize(this);
@@ -1144,6 +1146,11 @@ namespace Unity.Netcode
         }
 
         public Action OnSceneManagerClear {
+            get;
+            set;
+        }
+
+        public Action OnSceneManagerCreate {
             get;
             set;
         }

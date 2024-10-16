@@ -53,6 +53,8 @@ if _MOE.IsDS then
     function GameMode:RegisterNetManagerServerEvents()
         self:RegsterCSharpEvent(self.NetWorkMgr, "ConnectionApprovalCallback", self.OnServer_ConnectionApprovalCallback)
         -- self:RegsterCSharpEvent(self.NetWorkMgr, "OnClientConnectedCallback", self.OnServer_ClientConnectedCallback)
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnSceneManagerCreate", self.OnServer_OnSceneManagerCreate)
+        self:RegsterCSharpEvent(self.NetWorkMgr, "OnSceneManagerClear", self.OnServer_OnSceneManagerClear)
         local ConnectionManager = self.NetWorkMgr.ConnectionManager
         self:RegsterCSharpEvent(ConnectionManager, "OnClientDisconnectCallback", self.OnServer_ClientDisconnectCallback)
 
@@ -60,6 +62,21 @@ if _MOE.IsDS then
         if loader ~= nil then
             self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnServer_OnMainSceneABLoad)
         end
+    end
+
+    function GameMode:OnServer_OnSceneManagerCreate()
+        self.SceneManager = self.NetWorkMgr.SceneManager
+        self:GenerateScenesInBuild(self.SceneManager)
+        _MOE.DsNetworkHelper.NetworkManager_SetOnLoadEventCompleted(
+            function (sceneName, loadSceneMode, clientsComplete, clientsTimeout)
+                self:OnServer_ClientsLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
+            end
+        )
+        _MOE.DsNetworkHelper.NetworkManager_SetOnUnloadEventCompleted(
+            function (sceneName, loadSceneMode, clientsComplete, clientsTimeout)
+                self:OnServer_ClientsUnLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
+            end
+        )
     end
 
     function GameMode:OnServer_ClientsUnLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
@@ -176,19 +193,6 @@ if _MOE.IsDS then
         end
         self.SceneManager = self.NetWorkMgr.SceneManager
         _MOE.Logger.Log("[DS] NetManager:StartServer True")
-        self:GenerateScenesInBuild(self.SceneManager)
-        _MOE.DsNetworkHelper.NetworkManager_SetOnLoadEventCompleted(
-            function (sceneName, loadSceneMode, clientsComplete, clientsTimeout)
-                self:OnServer_ClientsLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
-            end
-        )
-        _MOE.DsNetworkHelper.NetworkManager_SetOnUnloadEventCompleted(
-            function (sceneName, loadSceneMode, clientsComplete, clientsTimeout)
-                self:OnServer_ClientsUnLoadSceneComplete(sceneName, loadSceneMode, clientsComplete, clientsTimeout)
-            end
-        )
-        self:RegsterCSharpEvent(self.NetWorkMgr, "OnSceneManagerClear", self.OnServer_OnSceneManagerClear)
-
         self.DsaNetModel:SendDsReady()
     end
 
