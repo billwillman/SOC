@@ -29,7 +29,8 @@ function GameMode:OnDestroy()
 end
 
 local MutiScenes = {
-    "Test"
+    "Test",
+    "DemoScene",
 }
 function GameMode:GenerateScenesInBuild(SceneManager)
     _MOE.NetCodeHelper.InitHelper(SceneManager)
