@@ -1631,18 +1631,28 @@ namespace Unity.Netcode
                 SceneEventId = sceneEventId,
                 OnSceneEventCompleted = OnSceneLoaded
             };
-            var sceneLoad = SceneManagerHandler.LoadSceneAsync(sceneName, sceneEventData.LoadSceneMode, sceneEventProgress);
 
-            OnSceneEvent?.Invoke(new SceneEvent()
+            Action onSceneABLoaded = ()=>
             {
-                AsyncOperation = sceneLoad,
-                SceneEventType = sceneEventData.SceneEventType,
-                LoadSceneMode = sceneEventData.LoadSceneMode,
-                SceneName = sceneName,
-                ClientId = NetworkManager.LocalClientId
-            });
 
-            OnLoad?.Invoke(NetworkManager.LocalClientId, sceneName, sceneEventData.LoadSceneMode, sceneLoad);
+                var sceneLoad = SceneManagerHandler.LoadSceneAsync(sceneName, sceneEventData.LoadSceneMode, sceneEventProgress);
+
+                OnSceneEvent?.Invoke(new SceneEvent() {
+                    AsyncOperation = sceneLoad,
+                    SceneEventType = sceneEventData.SceneEventType,
+                    LoadSceneMode = sceneEventData.LoadSceneMode,
+                    SceneName = sceneName,
+                    ClientId = NetworkManager.LocalClientId
+                });
+
+                OnLoad?.Invoke(NetworkManager.LocalClientId, sceneName, sceneEventData.LoadSceneMode, sceneLoad);
+            }
+
+            if (CheckPreSceneLoadAndNext == null)
+                onSceneABLoaded();
+            else {
+                CheckPreSceneLoadAndNext(sceneName, onSceneABLoaded);
+            }
         }
 
         /// <summary>
