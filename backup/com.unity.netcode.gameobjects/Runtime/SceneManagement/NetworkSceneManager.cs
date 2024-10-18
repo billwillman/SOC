@@ -1632,7 +1632,7 @@ namespace Unity.Netcode
                 OnSceneEventCompleted = OnSceneLoaded
             };
 
-            Action onSceneABLoaded = ()=>
+            Action onSceneABLoaded = () =>
             {
 
                 var sceneLoad = SceneManagerHandler.LoadSceneAsync(sceneName, sceneEventData.LoadSceneMode, sceneEventProgress);
@@ -1646,13 +1646,9 @@ namespace Unity.Netcode
                 });
 
                 OnLoad?.Invoke(NetworkManager.LocalClientId, sceneName, sceneEventData.LoadSceneMode, sceneLoad);
-            }
+            };
 
-            if (CheckPreSceneLoadAndNext == null)
-                onSceneABLoaded();
-            else {
-                CheckPreSceneLoadAndNext(sceneName, onSceneABLoaded);
-            }
+            CheckPreSceneLoadAndNext(sceneName, onSceneABLoaded);
         }
 
         /// <summary>
