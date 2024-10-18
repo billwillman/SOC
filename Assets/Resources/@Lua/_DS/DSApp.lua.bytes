@@ -105,7 +105,6 @@ function DSApp:LoadMainSceneAsync(sceneName)
     if not gameMode then
         return false
     end
-    self:ClearMainSceneAB()
     return gameMode:LoadMainSceneAsync(sceneName)
 end
 
