@@ -280,6 +280,7 @@ else
 
         if self.OnClientSceneLoadCallBack then
             self.OnClientSceneLoadCallBack()
+            self.OnClientSceneLoadCallBack = nil
         end
     end
 
@@ -310,8 +311,10 @@ else
                     self:RegisterClientEvents()
                     -- 多人Client模式，需要AB先加载再去操作
                     -- 只有再这个阶段客户端才有SceneManager
+                    --[[
                     self:RegsterCSharpEvent(self.NetWorkMgr.SceneManager, "OnClientPreCheckLoadSceneAndCallNext",
                         self.OnClient_PreCheckLoadSceneAndCallNext)
+                    ]]
                 else
                     _MOE.Logger.LogError("[GameModel] StartClient: Failed")
                 end
