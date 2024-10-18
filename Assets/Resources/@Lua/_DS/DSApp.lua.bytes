@@ -87,12 +87,6 @@ function DSApp:OnInit()
     end
 end
 
-function DSApp:ClearMainSceneAB()
-    if self.SceneLoader then
-        self.SceneLoader:ClearMainSceneAB()
-    end
-end
-
 function DSApp:GetSceneAsyncLoader()
     return self.SceneLoader
 end

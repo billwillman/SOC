@@ -226,7 +226,6 @@ if _MOE.IsDS then
         if not loader then
             return false
         end
-        loader:ClearSceneAB(currentSceneName)
         if not loader:LoadMainSceneABAsync(sceneName) then
             _MOE.Logger.LogErrorFormat("[GameMode] loader.LoadMainSceneABAsync Error: not vaild sceneName({0})", sceneName)
             return false
