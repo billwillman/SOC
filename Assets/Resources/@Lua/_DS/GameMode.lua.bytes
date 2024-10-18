@@ -273,6 +273,7 @@ else
         )
     end
 
+    --[[
     function GameMode:OnClient_MultiPlay_OnMainSceneABLoad(sceneName, loadTag)
         if not sceneName or loadTag ~= "onlyAB" then
             return
@@ -297,6 +298,7 @@ else
         end
         return false
     end
+    ]]
 
     function GameMode:OnMultiScenePostLoad()
         self:SetConnectionApprovalData()
@@ -310,8 +312,10 @@ else
                     self:RegisterClientEvents()
                     -- 多人Client模式，需要AB先加载再去操作
                     -- 只有再这个阶段客户端才有SceneManager
+                    --[[
                     self:RegsterCSharpEvent(self.NetWorkMgr.SceneManager, "OnClientPreCheckLoadSceneAndCallNext",
                         self.OnClient_PreCheckLoadSceneAndCallNext)
+                    ]]
                 else
                     _MOE.Logger.LogError("[GameModel] StartClient: Failed")
                 end

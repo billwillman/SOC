@@ -169,6 +169,19 @@ function ClientApp:CreateDSNetManagerPrefab()
     self.DSNetManagerPrefab = gameObj
 end
 
+function ClientApp:ClearMainSceneAB()
+    if self.SceneLoader then
+        self.SceneLoader:ClearMainSceneAB()
+    end
+end
+
+function ClientApp:LoadMainSceneABAsync(sceneName)
+    if not self.SceneLoader or not sceneName or string.len(sceneName) <= 0 then
+        return false
+    end
+    return self.SceneLoader:LoadMainSceneABAsync(sceneName)
+end
+
 function ClientApp:GetSceneAsyncLoader()
     return self.SceneLoader
 end
