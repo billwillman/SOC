@@ -345,6 +345,7 @@ else
                 if mapName and string.len(mapName) > 0 then
                     local loader = _MOE.GameApp:GetSceneAsyncLoader()
                     if loader then
+                        loader:ClearMainSceneAB()
                         self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_SinglePlay_OnMainSceneABLoad)
                         if not loader:LoadMainSceneABAsync(mapName) then
                             _MOE.Logger.LogErrorFormat(
