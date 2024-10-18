@@ -290,8 +290,12 @@ using NsLib.ResMgr;
                 return false;
             if (rk == 0)
                 return true;
-
-            return mgr.LoadMainSceneABAsync(sceneName, this, id, isInterAB, loadPriority);
+            bool ret = mgr.LoadMainSceneABAsync(sceneName, this, id, isInterAB, loadPriority);
+            if (ret) {
+                ClearMainSceneAB();
+                m_CurrentMainSceneAB = sceneName;
+            }
+            return ret;
         }
         return false;
     }
