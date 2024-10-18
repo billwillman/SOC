@@ -42,6 +42,8 @@ function ClientApp:OnInit()
     self:RegisterModel("MultiGame", "_Client.Models.MultiGameModel", true)
     self:RegisterModel("SingleGame", "_Client.Models.SingleGameModel", true)
 
+    self.CurrentMainSceneName = ""
+
     CreateMyPlayerInput()
 end
 
@@ -171,7 +173,7 @@ end
 
 function ClientApp:ClearMainSceneAB()
     if self.SceneLoader then
-        self.SceneLoader:ClearMainSceneAB()
+        self.SceneLoader:ClearSceneAB(self.CurrentMainSceneName)
     end
 end
 
@@ -180,7 +182,11 @@ function ClientApp:LoadMainSceneABAsync(sceneName)
         return false
     end
     self:ClearMainSceneAB()
-    return self.SceneLoader:LoadMainSceneABAsync(sceneName)
+    local ret = self.SceneLoader:LoadMainSceneABAsync(sceneName)
+    if ret then
+        self.CurrentMainSceneName = sceneName
+    end
+    return ret
 end
 
 function ClientApp:GetSceneAsyncLoader()

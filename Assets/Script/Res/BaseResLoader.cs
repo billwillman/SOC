@@ -935,8 +935,8 @@ public class BaseResLoader: CachedMonoBehaviour
 		target = null;
 	}
 
-	public void ClearMainSceneAB() {
-		SetResource(this.GetInstanceID(), null, typeof(UnityEngine.SceneManagement.Scene));
+	public void ClearSceneAB(string lastSceneName) {
+		SetResource(this.GetInstanceID(), null, typeof(UnityEngine.SceneManagement.Scene), lastSceneName);
     }
 
 	public bool LoadAnimationClip(ref AnimationClip target, string fileName)

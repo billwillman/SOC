@@ -226,7 +226,7 @@ if _MOE.IsDS then
         if not loader then
             return false
         end
-        loader:ClearMainSceneAB()
+        loader:ClearSceneAB(currentSceneName)
         if not loader:LoadMainSceneABAsync(sceneName) then
             _MOE.Logger.LogErrorFormat("[GameMode] loader.LoadMainSceneABAsync Error: not vaild sceneName({0})", sceneName)
             return false
@@ -291,8 +291,7 @@ else
         end
         self.OnClientSceneLoadCallBack = onNextCallBack
         self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_MultiPlay_OnMainSceneABLoad)
-        loader:ClearMainSceneAB()
-        if not loader:LoadMainSceneABAsync(sceneName) then
+        if not _MOE.GameApp:LoadMainSceneABAsync(sceneName) then
             _MOE.Logger.LogErrorFormat(
             "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", sceneName)
             return true -- 让他报错
@@ -344,8 +343,7 @@ else
                     local loader = _MOE.GameApp:GetSceneAsyncLoader()
                     if loader then
                         self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_SinglePlay_OnMainSceneABLoad)
-                        loader:ClearMainSceneAB()
-                        if not loader:LoadMainSceneABAsync(mapName) then
+                        if not _MOE.GameApp:LoadMainSceneABAsync(mapName) then
                             _MOE.Logger.LogErrorFormat(
                             "[GameMode] OnSinglePlayPostLoad Error: not vaild sceneName({0})", mapName)
                             return
