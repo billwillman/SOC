@@ -39,13 +39,15 @@ function _M:OnEnterMap()
     -- _MOE.GameApp:DestroyDSNetManagerPrefab()
     _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePreload)
     _MOE.GameApp:CreateDSNetManagerPrefab()
-    -- _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePostLoad)
+    _MOE.EventManager:DispatchEvent(_MOE.CommonEvents.MultiScenePostLoad)
 
+    --[[
     local loader = _MOE.GameApp:GetSceneAsyncLoader()
     if loader then
         self:RegsterCSharpEvent(loader, "onSceneLoaded", self.OnClient_MultiPlay_OnMainSceneABLoad)
         _MOE.GameApp:LoadMainSceneABAsync(mapName)
     end
+    ]]
 end
 
 function _M:OnClient_MultiPlay_OnMainSceneABLoad(sceneName, loadTag)
