@@ -968,6 +968,8 @@ public class BaseResLoader: CachedMonoBehaviour
 	public bool LoadMainSceneAB(string sceneName) {
 		if (string.IsNullOrEmpty(sceneName))
 			return false;
+		if (string.Compare(m_CurrentMainSceneAB, sceneName, true) == 0)
+			return true;
 		bool ret = ResourceMgr.Instance.InteralLoadScene(sceneName);
 		if (ret) {
 			ClearMainSceneAB();
