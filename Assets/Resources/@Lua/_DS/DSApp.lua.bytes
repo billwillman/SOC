@@ -76,9 +76,9 @@ function DSApp:OnInit()
 
     _MOE.Logger.Log("[DS] IsLocalDS: " .. tostring(self:IsLocalDS()))
 
-    self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", false)
+    self:RegisterModel("DsGsNetModel", "_DS.Models.DsGsNetModel", true)
     self:RegisterModel("DsSessionManager", "_DS.Models.DsSessionManager", true)
-    self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", false)
+    self:RegisterModel("DsaNetModel", "_DS.Models.DsaNetModel", true)
     self:RegisterModel("ServerGame", "_DS.Models.ServerGameModel", true)
     -- 创建网络NetworkManager
     local gameObj = CreateNetworkManager()
