@@ -282,8 +282,10 @@ using NsLib.ResMgr;
     public bool LoadMainSceneABAsync(string sceneName, bool isInterAB = true, int loadPriority = 0) {
         if (string.IsNullOrEmpty(sceneName))
             return false;
-        if (string.Compare(m_CurrentMainSceneAB, sceneName, true) == 0)
-            return true;
+        if (isInterAB) {
+            if (string.Compare(m_CurrentMainSceneAB, sceneName, true) == 0)
+                return true;
+        }
         var mgr = BaseResLoaderAsyncMgr.GetInstance();
         if (mgr != null) {
             ulong id;
