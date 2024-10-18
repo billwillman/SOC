@@ -29,6 +29,7 @@ function GameMode:OnDestroy()
 end
 
 local MutiScenes = {
+    "Main",
     "Test",
     "DemoScene",
 }
