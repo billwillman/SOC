@@ -950,10 +950,12 @@ public class BaseResLoader: CachedMonoBehaviour
 		return target != null;
 	}
 
-	public bool LoadMainSceneAB(string sceneName) {
+	public bool LoadMainSceneAB(string sceneName, string lastSceneName = null) {
 		if (string.IsNullOrEmpty(sceneName))
 			return false;
-		ClearMainSceneAB();
+		if (!string.IsNullOrEmpty(lastSceneName)) {
+			ClearSceneAB(lastSceneName);
+        }
 		bool ret = ResourceMgr.Instance.InteralLoadScene(sceneName);
 		if (ret) {
 			SetResource(this.GetInstanceID(), this, typeof(UnityEngine.SceneManagement.Scene), sceneName);
