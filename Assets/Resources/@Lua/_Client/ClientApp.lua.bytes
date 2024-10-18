@@ -179,6 +179,7 @@ function ClientApp:LoadMainSceneABAsync(sceneName)
     if not self.SceneLoader or not sceneName or string.len(sceneName) <= 0 then
         return false
     end
+    self:ClearMainSceneAB()
     return self.SceneLoader:LoadMainSceneABAsync(sceneName)
 end
 
