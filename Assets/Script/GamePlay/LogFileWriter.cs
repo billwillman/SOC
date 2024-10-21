@@ -16,6 +16,10 @@ namespace SOC.GamePlay
                 if (!Directory.Exists("log"))
                     Directory.CreateDirectory("log");
                 ret = string.Format("log/{0}_{1}.log", ret, dateTimeStr);
+            } else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer) {
+                if (!Directory.Exists("log"))
+                    Directory.CreateDirectory("log");
+                ret = string.Format("log/{0}_{1}.log", ret, dateTimeStr);
             } else
                 ret = string.Format("{0}/{1}_{2}.log", Application.persistentDataPath, ret, dateTimeStr);
             return ret;
