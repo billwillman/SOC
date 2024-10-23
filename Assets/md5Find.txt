@@ -22,6 +22,7 @@ cf5b322a6295f39257f2a6150ef2660f=assets$resources$ui$@gm.assets
 6a63ae9503a9c6e490698f3776526d61=assets$resources$dungeonmodularpack$scenes$@demoscene.assets
 0ad882195192c9f2f55c5804f9bc61e0=assets$resources$dungeonmodularpack$scenes$demoscene.unity.assets
 60bf3c46111da985f3d11ef6f81d86bf=assets$resources$dungeonmodularpack$@textures.assets
+1bf816dc7035fc0121c79613b228194e=assets$resources$dungeonmodularpack$@shaders.assets
 e2942a2513f695060e07a4bd9440340c=assets$resources$dungeonmodularpack$@prefabs.assets
 f1381f05a65712ab6782b79939770f54=assets$resources$dungeonmodularpack$@meshes.assets
 89d3f721158de3a3955b4f5908b0862e=assets$resources$dungeonmodularpack$@materials.assets
