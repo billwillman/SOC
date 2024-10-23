@@ -3713,7 +3713,7 @@ public static class AssetBundleBuild
 													 ".controller", ".shader", ".anim", ".unity", ".mat",
 													 ".wav", ".mp3", ".ogg",
 													 ".ttf", ".otf",
-													 ".shadervariants", ".asset"};
+													 ".shadervariants", ".asset", ".shadergraph"};
 	
 	private static readonly string[] ResourceXmlExts = {".prefab", ".fbx",
 														".tex", ".tex",  ".tex", ".tex", ".tex", ".tex", ".tex",
@@ -3721,7 +3721,7 @@ public static class AssetBundleBuild
 														".controller", ".shader", ".anim", ".unity", ".mat",
 														".audio", ".audio", ".audio",
 													    ".ttf", ".otf",
-														".shaderVar", ".asset"};
+														".shaderVar", ".asset", ".shadergraph"};
 
 	private static readonly Type[] ResourceExtTypes = {
 														typeof(UnityEngine.GameObject), typeof(UnityEngine.GameObject),
@@ -3730,7 +3730,7 @@ public static class AssetBundleBuild
 														typeof(UnityEngine.Object), typeof(UnityEngine.Shader), typeof(UnityEngine.AnimationClip), null, typeof(UnityEngine.Material),
 														typeof(UnityEngine.AudioClip), typeof(UnityEngine.AudioClip), typeof(UnityEngine.AudioClip),
 														typeof(UnityEngine.Font), typeof(UnityEngine.Font),
-														typeof(UnityEngine.ShaderVariantCollection), typeof(UnityEngine.ScriptableObject)
+														typeof(UnityEngine.ShaderVariantCollection), typeof(UnityEngine.ScriptableObject), typeof(UnityEngine.Shader)
 	};
 
 	private static readonly string[] _DirSplit = {"\\"};
