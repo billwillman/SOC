@@ -69,6 +69,8 @@ public class SkinnedMeshOutput: Editor
         ExportPosition(dir, name, bones);
         ExportRotation(dir, name, bones);
         ExportBoneLink(dir, name, bones);
+
+        AssetDatabase.Refresh();
     }
 
     static void ExportBoneLink(string dir, string name, List<Transform> bones) {
@@ -86,7 +88,8 @@ public class SkinnedMeshOutput: Editor
                     boneLinks[i] = idx;
             }
         }
-        string str = JsonUtility.ToJson(boneLinks);
+        
+        string str = LitJson.JsonMapper.ToJson(boneLinks);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
@@ -103,7 +106,7 @@ public class SkinnedMeshOutput: Editor
         for (int i = 0; i < positions.Length; ++i) {
             positions[i] = bones[i].position;
         }
-        string str = JsonUtility.ToJson(positions);
+        string str = LitJson.JsonMapper.ToJson(positions);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
@@ -120,7 +123,7 @@ public class SkinnedMeshOutput: Editor
         for (int i = 0; i < rotAngles.Length; ++i) {
             rotAngles[i] = bones[i].eulerAngles;
         }
-        string str = JsonUtility.ToJson(rotAngles);
+        string str = LitJson.JsonMapper.ToJson(rotAngles);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
