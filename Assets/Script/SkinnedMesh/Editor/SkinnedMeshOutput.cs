@@ -69,6 +69,7 @@ public class SkinnedMeshOutput: Editor
         ExportPosition(dir, name, bones);
         ExportRotation(dir, name, bones);
         ExportBoneLink(dir, name, bones);
+        ExportBoneVertexWeight(dir, name, bones, skl);
 
         AssetDatabase.Refresh();
     }
@@ -132,5 +133,13 @@ public class SkinnedMeshOutput: Editor
             stream.Flush();
             stream.Close();
         }
+    }
+
+    private static bool IsForceTextMode() {
+        return UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceText;
+    }
+
+    static void ExportBoneVertexWeight(string dir, string name, List<Transform> bones, SkinnedMeshRenderer sklRender) {
+
     }
 }
