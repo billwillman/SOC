@@ -20,6 +20,7 @@ public class SkinnedMeshOutput: Editor
         return skl != null;
     }
 
+    /*
     static void AddBoneToList(List<Transform> bones, Transform rootNode) {
         bones.Add(rootNode);
         for (int i = 0; i < rootNode.childCount; ++i) {
@@ -28,6 +29,7 @@ public class SkinnedMeshOutput: Editor
                 AddBoneToList(bones, childNode);
         }
     }
+    */
 
     [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式")]
     public static void Output() {
@@ -62,8 +64,8 @@ public class SkinnedMeshOutput: Editor
         }
         if (!isFound)
             return;
-        List<Transform> bones = new List<Transform>();
-        AddBoneToList(bones, rootNode);
+        List<Transform> bones = new List<Transform>(skl.bones);
+        // AddBoneToList(bones, rootNode);
         
         string name = gameObj.name;
         ExportPosition(dir, name, bones);
@@ -139,7 +141,56 @@ public class SkinnedMeshOutput: Editor
         return UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceText;
     }
 
-    static void ExportBoneVertexWeight(string dir, string name, List<Transform> bones, SkinnedMeshRenderer sklRender) {
+    private static void FileStrReplace(string fileName, string oldStr, string newStr) {
+        if (!System.IO.File.Exists(fileName))
+            return;
+        string str = System.IO.File.ReadAllText(fileName);
+        str = str.Replace(oldStr, newStr);
+        System.IO.File.WriteAllText(fileName, str);
+    }
 
+    static void ExportBoneVertexWeight(string dir, string name, List<Transform> bones, SkinnedMeshRenderer sklRender) {
+        if (!IsForceTextMode()) {
+            Debug.LogError("序列化方式不是ForceText, 关闭Read/Write方式失败");
+            return;
+        }
+        string metaFileName = dir + "/" + name + ".fbx.meta";
+        FileStrReplace(metaFileName, "isReadable: 0", "isReadable: 1");
+        AssetDatabase.Refresh();
+        try {
+            var mesh = sklRender.sharedMesh;
+            var boneWeights = mesh.boneWeights;
+            List<List<float>> arr = new List<List<float>>(bones.Count);
+            for (int boneIdx = 0; boneIdx < bones.Count; ++boneIdx) {
+                List<float> vertexWeightList = new List<float>(boneWeights.Length);
+                arr.Add(vertexWeightList);
+                for (int vertIdx = 0; vertIdx < boneWeights.Length; ++vertIdx) {
+                    var boneWeight = boneWeights[vertIdx];
+                    if (boneWeight.boneIndex0 == boneIdx)
+                        vertexWeightList.Add(boneWeight.weight0);
+                    else if (boneWeight.boneIndex1 == boneIdx)
+                        vertexWeightList.Add(boneWeight.weight1);
+                    else if (boneWeight.boneIndex2 == boneIdx)
+                        vertexWeightList.Add(boneWeight.weight2);
+                    else if (boneWeight.boneIndex3 == boneIdx)
+                        vertexWeightList.Add(boneWeight.weight3);
+                    else
+                        vertexWeightList.Add(0f);
+                }
+            }
+            string fileName = dir + "/" + name + "_mesh.json";
+            string str = LitJson.JsonMapper.ToJson(arr);
+            byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+            FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+            try {
+                stream.Write(buffer, 0, buffer.Length);
+            } finally {
+                stream.Flush();
+                stream.Close();
+            }
+        } finally {
+            FileStrReplace(metaFileName, "isReadable: 1", "isReadable: 0");
+        }
+        AssetDatabase.Refresh();
     }
 }
