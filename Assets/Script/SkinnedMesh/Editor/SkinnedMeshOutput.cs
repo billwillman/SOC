@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -33,6 +34,13 @@ public class SkinnedMeshOutput: Editor
         var gameObj = Selection.activeGameObject;
         if (!gameObj)
             return;
+        string dir = AssetDatabase.GetAssetPath(gameObj);
+        if (string.IsNullOrEmpty(dir))
+            return;
+        dir = Path.GetDirectoryName(dir);
+        if (string.IsNullOrEmpty(dir))
+            return;
+        dir = dir.Replace("\\", "/");
         SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
         if (skl == null)
             return;
@@ -56,5 +64,43 @@ public class SkinnedMeshOutput: Editor
             return;
         List<Transform> bones = new List<Transform>();
         AddBoneToList(bones, rootNode);
+        
+        string name = gameObj.name;
+        ExportPosition(dir, name, bones);
+        ExportRotation(dir, name, bones);
+    }
+
+    static void ExportPosition(string dir, string name, List<Transform> bones) {
+        string fileName = dir + "/" + name + "_joints.json";
+        Vector3[] positions = new Vector3[bones.Count];
+        for (int i = 0; i < positions.Length; ++i) {
+            positions[i] = bones[i].position;
+        }
+        string str = JsonUtility.ToJson(positions);
+        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
+    }
+
+    static void ExportRotation(string dir, string name, List<Transform> bones) {
+        string fileName = dir + "/" + name + "_rots.json";
+        Vector3[] rotAngles = new Vector3[bones.Count];
+        for (int i = 0; i < rotAngles.Length; ++i) {
+            rotAngles[i] = bones[i].eulerAngles;
+        }
+        string str = JsonUtility.ToJson(positions);
+        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
     }
 }
