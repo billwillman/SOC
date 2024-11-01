@@ -73,8 +73,8 @@
     <Compile Include="Assets\Plugins\Animancer\Examples\10 Animation Jobs\01 Two Bone IK\TwoBoneIK.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\09 Animator Controllers\02 Hybrid Character\HybridIdleState.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\10 Animation Jobs\02 Damping\Damping.cs" />
-    <Compile Include="Assets\Plugins\Animancer\Examples\06 State Machines\04 Weapons\Equipment.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\09 Animator Controllers\02 Hybrid Character\HybridMoveState.cs" />
+    <Compile Include="Assets\Plugins\Animancer\Examples\06 State Machines\04 Weapons\Equipment.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\06 State Machines\01 Characters\CharacterStatePriority.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\09 Animator Controllers\03 3D Game Kit\States\FlinchState.cs" />
     <Compile Include="Assets\Plugins\Animancer\Examples\09 Animator Controllers\03 3D Game Kit\States\RespawnState.cs" />
