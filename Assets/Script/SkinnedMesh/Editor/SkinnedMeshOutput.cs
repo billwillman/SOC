@@ -68,6 +68,33 @@ public class SkinnedMeshOutput: Editor
         string name = gameObj.name;
         ExportPosition(dir, name, bones);
         ExportRotation(dir, name, bones);
+        ExportBoneLink(dir, name, bones);
+    }
+
+    static void ExportBoneLink(string dir, string name, List<Transform> bones) {
+        string fileName = dir + "/" + name + "_parents.json";
+        int[] boneLinks = new int[bones.Count];
+        for (int i = 0; i < boneLinks.Length; ++i) {
+            var bone = bones[i];
+            if (bone.parent == null)
+                boneLinks[i] = -1;
+            else {
+                int idx = bones.IndexOf(bone.parent);
+                if (idx < 0)
+                    boneLinks[i] = -1;
+                else
+                    boneLinks[i] = idx;
+            }
+        }
+        string str = JsonUtility.ToJson(boneLinks);
+        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
     }
 
     static void ExportPosition(string dir, string name, List<Transform> bones) {
@@ -93,7 +120,7 @@ public class SkinnedMeshOutput: Editor
         for (int i = 0; i < rotAngles.Length; ++i) {
             rotAngles[i] = bones[i].eulerAngles;
         }
-        string str = JsonUtility.ToJson(positions);
+        string str = JsonUtility.ToJson(rotAngles);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
