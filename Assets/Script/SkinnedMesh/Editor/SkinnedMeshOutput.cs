@@ -18,6 +18,12 @@ public class SkinnedMeshOutput: Editor
     }
     [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式")]
     public static void Output() {
+        var gameObj = Selection.activeGameObject;
+        if (!gameObj)
+            return;
+        SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (skl == null)
+            return;
 
     }
 }
