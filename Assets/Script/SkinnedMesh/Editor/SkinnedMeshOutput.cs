@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class SkinnedMeshOutput: Editor
 {
-    [MenuItem("Assets/SkinnedMesh/导出AI-FBX格式", validate = true)]
+    [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式", validate = true)]
     public static bool IsCanOutput() {
         var gameObj = Selection.activeGameObject;
         if (!gameObj)
@@ -13,7 +13,7 @@ public class SkinnedMeshOutput: Editor
         SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
         return skl != null;
     }
-    [MenuItem("Assets/SkinnedMesh/导出AI-FBX格式")]
+    [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式")]
     public static void Output() {
 
     }
