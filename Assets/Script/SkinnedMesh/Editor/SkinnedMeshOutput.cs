@@ -120,6 +120,23 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
+    static void ExportScale(string dir, string name, List<Transform> bones) {
+        string fileName = dir + "/" + name + "_scales.json";
+        Vector3[] scales = new Vector3[bones.Count];
+        for (int i = 0; i < scales.Length; ++i) {
+            scales[i] = bones[i].lossyScale;
+        }
+        string str = LitJson.JsonMapper.ToJson(scales);
+        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
+    }
+
     static void ExportRotation(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_rots.json";
         Vector3[] rotAngles = new Vector3[bones.Count];
