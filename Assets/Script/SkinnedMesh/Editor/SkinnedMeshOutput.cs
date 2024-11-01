@@ -8,6 +8,9 @@ public class SkinnedMeshOutput: Editor
         var gameObj = Selection.activeGameObject;
         if (!gameObj)
             return false;
+        var objs = Selection.objects;
+        if (objs != null && objs.Length >= 2)
+            return false;
         if (gameObj.scene.IsValid())
             return false;
         SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
