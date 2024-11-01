@@ -24,6 +24,9 @@ public class SkinnedMeshOutput: Editor
         SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
         if (skl == null)
             return;
+        var rootNode = skl.rootBone;
+        if (rootNode == null)
+            return;
 
     }
 }
