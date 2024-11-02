@@ -237,8 +237,9 @@ public class SkinnedMeshOutput: Editor
                             string log = string.Format("boneIndex: {0:D} vertexIndex: {1:D} vertexWeight: {2}", boneIdx, vertIdx, boneWeight.weight3.ToString());
                             Debug.Log(log);
                             writeLog(log);
-                        } else
+                        } else {
                             vertexWeightList.Add(0f);
+                        }
                     }
                 }
             } finally {
