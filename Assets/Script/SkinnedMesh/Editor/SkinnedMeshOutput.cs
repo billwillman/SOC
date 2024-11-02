@@ -20,7 +20,7 @@ public class SkinnedMeshOutput: Editor
         return skl != null;
     }
 
-    /*
+
     static void AddBoneToList(List<Transform> bones, Transform rootNode) {
         bones.Add(rootNode);
         for (int i = 0; i < rootNode.childCount; ++i) {
@@ -29,7 +29,6 @@ public class SkinnedMeshOutput: Editor
                 AddBoneToList(bones, childNode);
         }
     }
-    */
 
     [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式")]
     public static void Output() {
@@ -64,8 +63,9 @@ public class SkinnedMeshOutput: Editor
         }
         if (!isFound)
             return;
-        List<Transform> bones = new List<Transform>(skl.bones);
-        // AddBoneToList(bones, rootNode);
+        // List<Transform> bones = new List<Transform>(skl.bones);
+        List<Transform> bones = new List<Transform>();
+        AddBoneToList(bones, rootNode);
         
         string name = gameObj.name;
         ExportPosition(dir, name, bones);
@@ -190,19 +190,30 @@ public class SkinnedMeshOutput: Editor
         try {
             var mesh = sklRender.sharedMesh;
             var boneWeights = mesh.boneWeights;
+            var sklBones = sklRender.bones;
+            Dictionary<Transform, int> sklBonesToIndexMap = new Dictionary<Transform, int>();
+            for (int i = 0; i < sklBones.Length; ++i) {
+                var trans = sklBones[i];
+                int index = bones.IndexOf(trans);
+                sklBonesToIndexMap.Add(trans, index);
+            }
             List<List<float>> arr = new List<List<float>>(bones.Count);
             for (int boneIdx = 0; boneIdx < bones.Count; ++boneIdx) {
                 List<float> vertexWeightList = new List<float>(boneWeights.Length);
                 arr.Add(vertexWeightList);
                 for (int vertIdx = 0; vertIdx < boneWeights.Length; ++vertIdx) {
                     var boneWeight = boneWeights[vertIdx];
-                    if (boneWeight.boneIndex0 == boneIdx)
+                    var boneIndex0 = boneWeight.boneIndex0 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex0]] : -1;
+                    var boneIndex1 = boneWeight.boneIndex1 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex1]] : -1;
+                    var boneIndex2 = boneWeight.boneIndex2 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex2]] : -1;
+                    var boneIndex3 = boneWeight.boneIndex3 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex3]] : -1;
+                    if (boneIndex0 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight0);
-                    else if (boneWeight.boneIndex1 == boneIdx)
+                    else if (boneIndex1 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight1);
-                    else if (boneWeight.boneIndex2 == boneIdx)
+                    else if (boneIndex2 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight2);
-                    else if (boneWeight.boneIndex3 == boneIdx)
+                    else if (boneIndex3 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight3);
                     else
                         vertexWeightList.Add(0f);
