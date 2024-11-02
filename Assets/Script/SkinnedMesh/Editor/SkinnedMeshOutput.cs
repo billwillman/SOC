@@ -206,8 +206,8 @@ public class SkinnedMeshOutput: Editor
                 logStream.Write(buffer, 0, buffer.Length);
                 logStream.Flush();
             };
+            List<List<float>> arr = new List<List<float>>(bones.Count);
             try {
-                List<List<float>> arr = new List<List<float>>(bones.Count);
                 for (int boneIdx = 0; boneIdx < bones.Count; ++boneIdx) {
                     List<float> vertexWeightList = new List<float>(boneWeights.Length);
                     arr.Add(vertexWeightList);
