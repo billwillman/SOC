@@ -202,7 +202,7 @@ public class SkinnedMeshOutput: Editor
             {
                 if (string.IsNullOrEmpty(log))
                     return;
-                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log + "\n");
                 logStream.Write(buffer, 0, buffer.Length);
                 logStream.Flush();
             };
