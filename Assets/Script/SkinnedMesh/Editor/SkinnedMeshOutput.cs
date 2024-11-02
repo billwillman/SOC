@@ -197,27 +197,53 @@ public class SkinnedMeshOutput: Editor
                 int index = bones.IndexOf(trans);
                 sklBonesToIndexMap.Add(trans, index);
             }
-            List<List<float>> arr = new List<List<float>>(bones.Count);
-            for (int boneIdx = 0; boneIdx < bones.Count; ++boneIdx) {
-                List<float> vertexWeightList = new List<float>(boneWeights.Length);
-                arr.Add(vertexWeightList);
-                for (int vertIdx = 0; vertIdx < boneWeights.Length; ++vertIdx) {
-                    var boneWeight = boneWeights[vertIdx];
-                    var boneIndex0 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex0]];
-                    var boneIndex1 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex1]];
-                    var boneIndex2 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex2]];
-                    var boneIndex3 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex3]];
-                    if (MathF.Abs(boneWeight.weight0) >= float.Epsilon && boneIndex0 == boneIdx)
-                        vertexWeightList.Add(boneWeight.weight0);
-                    else if (MathF.Abs(boneWeight.weight1) >= float.Epsilon && boneIndex1 == boneIdx)
-                        vertexWeightList.Add(boneWeight.weight1);
-                    else if (MathF.Abs(boneWeight.weight2) >= float.Epsilon && boneIndex2 == boneIdx)
-                        vertexWeightList.Add(boneWeight.weight2);
-                    else if (MathF.Abs(boneWeight.weight3) >= float.Epsilon && boneIndex3 == boneIdx)
-                        vertexWeightList.Add(boneWeight.weight3);
-                    else
-                        vertexWeightList.Add(0f);
+            FileStream logStream = new FileStream("vertexWeight.log", FileMode.Create, FileAccess.Write);
+            Action<string> writeLog = (string log) =>
+            {
+                if (string.IsNullOrEmpty(log))
+                    return;
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(log);
+                logStream.Write(buffer, 0, buffer.Length);
+                logStream.Flush();
+            };
+            try {
+                List<List<float>> arr = new List<List<float>>(bones.Count);
+                for (int boneIdx = 0; boneIdx < bones.Count; ++boneIdx) {
+                    List<float> vertexWeightList = new List<float>(boneWeights.Length);
+                    arr.Add(vertexWeightList);
+                    for (int vertIdx = 0; vertIdx < boneWeights.Length; ++vertIdx) {
+                        var boneWeight = boneWeights[vertIdx];
+                        var boneIndex0 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex0]];
+                        var boneIndex1 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex1]];
+                        var boneIndex2 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex2]];
+                        var boneIndex3 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex3]];
+                        if (MathF.Abs(boneWeight.weight0) >= float.Epsilon && boneIndex0 == boneIdx) {
+                            vertexWeightList.Add(boneWeight.weight0);
+                            string log = string.Format("boneIndex: {0:D} vertexIndex: {1:D} vertexWeight: {2}", boneIdx, vertIdx, boneWeight.weight0.ToString());
+                            Debug.Log(log);
+                            writeLog(log);
+                        } else if (MathF.Abs(boneWeight.weight1) >= float.Epsilon && boneIndex1 == boneIdx) {
+                            vertexWeightList.Add(boneWeight.weight1);
+                            string log = string.Format("boneIndex: {0:D} vertexIndex: {1:D} vertexWeight: {2}", boneIdx, vertIdx, boneWeight.weight1.ToString());
+                            Debug.Log(log);
+                            writeLog(log);
+                        } else if (MathF.Abs(boneWeight.weight2) >= float.Epsilon && boneIndex2 == boneIdx) {
+                            vertexWeightList.Add(boneWeight.weight2);
+                            string log = string.Format("boneIndex: {0:D} vertexIndex: {1:D} vertexWeight: {2}", boneIdx, vertIdx, boneWeight.weight2.ToString());
+                            Debug.Log(log);
+                            writeLog(log);
+                        } else if (MathF.Abs(boneWeight.weight3) >= float.Epsilon && boneIndex3 == boneIdx) {
+                            vertexWeightList.Add(boneWeight.weight3);
+                            string log = string.Format("boneIndex: {0:D} vertexIndex: {1:D} vertexWeight: {2}", boneIdx, vertIdx, boneWeight.weight3.ToString());
+                            Debug.Log(log);
+                            writeLog(log);
+                        } else
+                            vertexWeightList.Add(0f);
+                    }
                 }
+            } finally {
+                logStream.Flush();
+                logStream.Close();
             }
             string fileName = dir + "/" + name + "_mesh.json";
             string str = LitJson.JsonMapper.ToJson(arr);
