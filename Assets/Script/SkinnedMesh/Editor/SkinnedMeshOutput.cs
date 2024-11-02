@@ -109,9 +109,9 @@ public class SkinnedMeshOutput: Editor
         List<float[]> positions = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].position.x;
-            vs[1] = bones[i].position.y;
-            vs[2] = bones[i].position.z;
+            vs[0] = bones[i].localPosition.x;
+            vs[1] = bones[i].localPosition.y;
+            vs[2] = bones[i].localPosition.z;
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
@@ -130,9 +130,9 @@ public class SkinnedMeshOutput: Editor
         List<float[]> scales = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].lossyScale.x;
-            vs[1] = bones[i].lossyScale.y;
-            vs[2] = bones[i].lossyScale.z;
+            vs[0] = bones[i].localScale.x;
+            vs[1] = bones[i].localScale.y;
+            vs[2] = bones[i].localScale.z;
             scales.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(scales);
@@ -151,9 +151,9 @@ public class SkinnedMeshOutput: Editor
         List<float[]> rotAngles = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].eulerAngles.x;
-            vs[1] = bones[i].eulerAngles.y;
-            vs[2] = bones[i].eulerAngles.z;
+            vs[0] = bones[i].localEulerAngles.x;
+            vs[1] = bones[i].localEulerAngles.y;
+            vs[2] = bones[i].localEulerAngles.z;
             rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
@@ -203,17 +203,17 @@ public class SkinnedMeshOutput: Editor
                 arr.Add(vertexWeightList);
                 for (int vertIdx = 0; vertIdx < boneWeights.Length; ++vertIdx) {
                     var boneWeight = boneWeights[vertIdx];
-                    var boneIndex0 = boneWeight.boneIndex0 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex0]] : -1;
-                    var boneIndex1 = boneWeight.boneIndex1 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex1]] : -1;
-                    var boneIndex2 = boneWeight.boneIndex2 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex2]] : -1;
-                    var boneIndex3 = boneWeight.boneIndex3 >= 0 ? sklBonesToIndexMap[sklBones[boneWeight.boneIndex3]] : -1;
-                    if (boneIndex0 == boneIdx)
+                    var boneIndex0 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex0]];
+                    var boneIndex1 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex1]];
+                    var boneIndex2 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex2]];
+                    var boneIndex3 = sklBonesToIndexMap[sklBones[boneWeight.boneIndex3]];
+                    if (MathF.Abs(boneWeight.weight0) >= float.Epsilon && boneIndex0 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight0);
-                    else if (boneIndex1 == boneIdx)
+                    else if (MathF.Abs(boneWeight.weight1) >= float.Epsilon && boneIndex1 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight1);
-                    else if (boneIndex2 == boneIdx)
+                    else if (MathF.Abs(boneWeight.weight2) >= float.Epsilon && boneIndex2 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight2);
-                    else if (boneIndex3 == boneIdx)
+                    else if (MathF.Abs(boneWeight.weight3) >= float.Epsilon && boneIndex3 == boneIdx)
                         vertexWeightList.Add(boneWeight.weight3);
                     else
                         vertexWeightList.Add(0f);
