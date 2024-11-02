@@ -106,9 +106,13 @@ public class SkinnedMeshOutput: Editor
 
     static void ExportPosition(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_joints.json";
-        Vector3[] positions = new Vector3[bones.Count];
-        for (int i = 0; i < positions.Length; ++i) {
-            positions[i] = bones[i].position;
+        List<float[]> positions = new List<float[]>(bones.Count);
+        for (int i = 0; i < bones.Count; ++i) {
+            float[] vs = new float[3];
+            vs[0] = bones[i].position.x;
+            vs[1] = bones[i].position.y;
+            vs[2] = bones[i].position.z;
+            positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
@@ -123,9 +127,13 @@ public class SkinnedMeshOutput: Editor
 
     static void ExportScale(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_scales.json";
-        Vector3[] scales = new Vector3[bones.Count];
-        for (int i = 0; i < scales.Length; ++i) {
-            scales[i] = bones[i].lossyScale;
+        List<float[]> scales = new List<float[]>(bones.Count);
+        for (int i = 0; i < bones.Count; ++i) {
+            float[] vs = new float[3];
+            vs[0] = bones[i].lossyScale.x;
+            vs[1] = bones[i].lossyScale.y;
+            vs[2] = bones[i].lossyScale.z;
+            scales.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(scales);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
@@ -140,9 +148,13 @@ public class SkinnedMeshOutput: Editor
 
     static void ExportRotation(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_rots.json";
-        Vector3[] rotAngles = new Vector3[bones.Count];
-        for (int i = 0; i < rotAngles.Length; ++i) {
-            rotAngles[i] = bones[i].eulerAngles;
+        List<float[]> rotAngles = new List<float[]>(bones.Count);
+        for (int i = 0; i < bones.Count; ++i) {
+            float[] vs = new float[3];
+            vs[0] = bones[i].eulerAngles.x;
+            vs[1] = bones[i].eulerAngles.y;
+            vs[2] = bones[i].eulerAngles.z;
+            rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
         byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
