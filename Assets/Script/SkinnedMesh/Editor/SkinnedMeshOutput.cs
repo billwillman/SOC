@@ -71,6 +71,7 @@ public class SkinnedMeshOutput: Editor
         ExportPosition(dir, name, bones);
         ExportRotation(dir, name, bones);
         ExportScale(dir, name, bones);
+        ExportBoneNames(dir, name, bones);
         ExportBoneLink(dir, name, bones);
         ExportBoneVertexWeight(dir, name, bones, skl);
 
@@ -94,7 +95,7 @@ public class SkinnedMeshOutput: Editor
         }
         
         string str = LitJson.JsonMapper.ToJson(boneLinks);
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
             stream.Write(buffer, 0, buffer.Length);
@@ -115,7 +116,7 @@ public class SkinnedMeshOutput: Editor
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
             stream.Write(buffer, 0, buffer.Length);
@@ -136,7 +137,24 @@ public class SkinnedMeshOutput: Editor
             scales.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(scales);
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
+    }
+
+    static void ExportBoneNames(string dir, string name, List<Transform> bones) {
+        string fileName = dir + "/" + name + "_names.json";
+        List<string> names = new List<string>(bones.Count);
+        for (int i = 0; i < bones.Count; ++i) {
+            names.Add(bones[i].name);
+        }
+        string str = LitJson.JsonMapper.ToJson(names);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
             stream.Write(buffer, 0, buffer.Length);
@@ -157,7 +175,7 @@ public class SkinnedMeshOutput: Editor
             rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
-        byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
             stream.Write(buffer, 0, buffer.Length);
@@ -248,7 +266,7 @@ public class SkinnedMeshOutput: Editor
             }
             string fileName = dir + "/" + name + "_mesh.json";
             string str = LitJson.JsonMapper.ToJson(arr);
-            byte[] buffer = System.Text.Encoding.ASCII.GetBytes(str);
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
             FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             try {
                 stream.Write(buffer, 0, buffer.Length);
