@@ -110,8 +110,8 @@
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\RectOffset_DirectConverter.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AssetTracker.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\GraphLoadData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2Int_DirectConverter.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\fsUnityObjectConverter.cs" />
+    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2Int_DirectConverter.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsBaseConverter.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.cs" />
     <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\CanvasGroup(NC).cs" />
