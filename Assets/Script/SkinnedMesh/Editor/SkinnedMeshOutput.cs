@@ -105,14 +105,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportPosition(string dir, string name, List<Transform> bones) {
+    static void ExportPosition(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_joints.json";
         List<float[]> positions = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].localPosition.x;
-            vs[1] = bones[i].localPosition.y;
-            vs[2] = bones[i].localPosition.z;
+            vs[0] = useLocalSpace ? bones[i].localPosition.x : bones[i].position.x;
+            vs[1] = useLocalSpace ? bones[i].localPosition.y : bones[i].position.y;
+            vs[2] = useLocalSpace ? bones[i].localPosition.z : bones[i].position.z;
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
@@ -126,14 +126,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportScale(string dir, string name, List<Transform> bones) {
+    static void ExportScale(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_scales.json";
         List<float[]> scales = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].localScale.x;
-            vs[1] = bones[i].localScale.y;
-            vs[2] = bones[i].localScale.z;
+            vs[0] = useLocalSpace ? bones[i].localScale.x : bones[i].lossyScale.x;
+            vs[1] = useLocalSpace ? bones[i].localScale.y : bones[i].lossyScale.y;
+            vs[2] = useLocalSpace ? bones[i].localScale.z : bones[i].lossyScale.z;
             scales.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(scales);
@@ -164,14 +164,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportRotation(string dir, string name, List<Transform> bones) {
+    static void ExportRotation(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_rots.json";
         List<float[]> rotAngles = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = bones[i].localEulerAngles.x;
-            vs[1] = bones[i].localEulerAngles.y;
-            vs[2] = bones[i].localEulerAngles.z;
+            vs[0] = useLocalSpace ? bones[i].localEulerAngles.x : bones[i].eulerAngles.x;
+            vs[1] = useLocalSpace ? bones[i].localEulerAngles.y : bones[i].eulerAngles.y;
+            vs[2] = useLocalSpace ? bones[i].localEulerAngles.z : bones[i].eulerAngles.z; 
             rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
