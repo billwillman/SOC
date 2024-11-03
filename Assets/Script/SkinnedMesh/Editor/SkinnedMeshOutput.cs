@@ -105,6 +105,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
+    static float _NormalDegree(float degree) {
+        if (degree > 180.0f)
+            degree = degree - 360.0f;
+        else if (degree < -180.0f)
+            degree = 360 + degree;
+        return degree;
+    }
+
     static void ExportPosition(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_joints.json";
         List<float[]> positions = new List<float[]>(bones.Count);
@@ -169,9 +177,9 @@ public class SkinnedMeshOutput: Editor
         List<float[]> rotAngles = new List<float[]>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = useLocalSpace ? bones[i].localEulerAngles.x : bones[i].eulerAngles.x;
-            vs[1] = useLocalSpace ? bones[i].localEulerAngles.y : bones[i].eulerAngles.y;
-            vs[2] = useLocalSpace ? bones[i].localEulerAngles.z : bones[i].eulerAngles.z; 
+            vs[0] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.x : bones[i].eulerAngles.x);
+            vs[1] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.y : bones[i].eulerAngles.y);
+            vs[2] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.z : bones[i].eulerAngles.z); 
             rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
