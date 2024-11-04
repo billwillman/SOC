@@ -15,7 +15,6 @@ public class TestRot : MonoBehaviour
         q1.eulerAngles = -parentDegree;
         q2.eulerAngles = currDegree;
         Quaternion q = q1 * q2;
-        Debug.Log(q.ToString());
         Vector3 ret = q.eulerAngles;
         ret.x = _NormalDegree(ret.x);
         ret.y = _NormalDegree(ret.y);
