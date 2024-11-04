@@ -1,153 +1,403 @@
 fileFormatVersion: 2
 guid: e4589503436491c4f9caffc2ace29fd8
-timeCreated: 1471119282
-licenseType: Store
+AssetOrigin:
+  serializedVersion: 1
+  productId: 69507
+  packageName: HuMan 3D Project [Animated/HandPainted]Male
+  packageVersion: 1.1
+  assetPath: Assets/HuMan/Assets/Models/HuMan.fbx
+  uploadId: 134066
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Armature
-    100002: Cylinder_000_Cylinder_001
-    100004: Elbow_R
-    100006: Elbow_R_001
-    100008: Foot_R
-    100010: Foot_R_001
-    100012: FootIK_L
-    100014: FootIK_R
-    100016: ForeArm_R
-    100018: ForeArm_R_001
-    100020: Head_R
-    100022: //RootNode
-    100024: IndexF1_R
-    100026: IndexF1_R_001
-    100028: IndexF2_R
-    100030: IndexF2_R_001
-    100032: IndexF3_R
-    100034: IndexF3_R_001
-    100036: LittleF1_R
-    100038: LittleF1_R_001
-    100040: LittleF2_R
-    100042: LittleF2_R_001
-    100044: LittleF3_R
-    100046: LittleF3_R_001
-    100048: MiddleF1_R
-    100050: MiddleF1_R_001
-    100052: MiddleF2_R
-    100054: MiddleF2_R_001
-    100056: MIddleF3_R
-    100058: MIddleF3_R_001
-    100060: Neck_R
-    100062: Palm_R
-    100064: Palm_R_001
-    100066: RingF1_R
-    100068: RingF1_R_001
-    100070: RingF2_R
-    100072: RingF2_R_001
-    100074: RingF3_R
-    100076: RingF3_R_001
-    100078: Shin_R
-    100080: Shin_R_001
-    100082: Stomach_R
-    100084: Thigh_R
-    100086: Thigh_R_001
-    100088: Thumb1_R
-    100090: Thumb1_R_001
-    100092: Thumb2_R
-    100094: Thumb2_R_001
-    100096: ThumbRoot_R
-    100098: ThumbRoot_R_001
-    100100: Toes_R
-    100102: Toes_R_001
-    100104: Torso_R
-    400000: Armature
-    400002: Cylinder_000_Cylinder_001
-    400004: Elbow_R
-    400006: Elbow_R_001
-    400008: Foot_R
-    400010: Foot_R_001
-    400012: FootIK_L
-    400014: FootIK_R
-    400016: ForeArm_R
-    400018: ForeArm_R_001
-    400020: Head_R
-    400022: //RootNode
-    400024: IndexF1_R
-    400026: IndexF1_R_001
-    400028: IndexF2_R
-    400030: IndexF2_R_001
-    400032: IndexF3_R
-    400034: IndexF3_R_001
-    400036: LittleF1_R
-    400038: LittleF1_R_001
-    400040: LittleF2_R
-    400042: LittleF2_R_001
-    400044: LittleF3_R
-    400046: LittleF3_R_001
-    400048: MiddleF1_R
-    400050: MiddleF1_R_001
-    400052: MiddleF2_R
-    400054: MiddleF2_R_001
-    400056: MIddleF3_R
-    400058: MIddleF3_R_001
-    400060: Neck_R
-    400062: Palm_R
-    400064: Palm_R_001
-    400066: RingF1_R
-    400068: RingF1_R_001
-    400070: RingF2_R
-    400072: RingF2_R_001
-    400074: RingF3_R
-    400076: RingF3_R_001
-    400078: Shin_R
-    400080: Shin_R_001
-    400082: Stomach_R
-    400084: Thigh_R
-    400086: Thigh_R_001
-    400088: Thumb1_R
-    400090: Thumb1_R_001
-    400092: Thumb2_R
-    400094: Thumb2_R_001
-    400096: ThumbRoot_R
-    400098: ThumbRoot_R_001
-    400100: Toes_R
-    400102: Toes_R_001
-    400104: Torso_R
-    4300000: Cylinder_000_Cylinder_001
-    7400000: Idle
-    7400002: Walk
-    7400004: Run
-    7400006: Use
-    7400008: PickUp
-    7400010: Hit
-    7400012: Death
-    7400014: Falling
-    7400016: Jump
-    7400018: Gather
-    9500000: //RootNode
-    13700000: Cylinder_000_Cylinder_001
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armature
+  - first:
+      1: 100002
+    second: Cylinder_000_Cylinder_001
+  - first:
+      1: 100004
+    second: Elbow_R
+  - first:
+      1: 100006
+    second: Elbow_R_001
+  - first:
+      1: 100008
+    second: Foot_R
+  - first:
+      1: 100010
+    second: Foot_R_001
+  - first:
+      1: 100012
+    second: FootIK_L
+  - first:
+      1: 100014
+    second: FootIK_R
+  - first:
+      1: 100016
+    second: ForeArm_R
+  - first:
+      1: 100018
+    second: ForeArm_R_001
+  - first:
+      1: 100020
+    second: Head_R
+  - first:
+      1: 100022
+    second: //RootNode
+  - first:
+      1: 100024
+    second: IndexF1_R
+  - first:
+      1: 100026
+    second: IndexF1_R_001
+  - first:
+      1: 100028
+    second: IndexF2_R
+  - first:
+      1: 100030
+    second: IndexF2_R_001
+  - first:
+      1: 100032
+    second: IndexF3_R
+  - first:
+      1: 100034
+    second: IndexF3_R_001
+  - first:
+      1: 100036
+    second: LittleF1_R
+  - first:
+      1: 100038
+    second: LittleF1_R_001
+  - first:
+      1: 100040
+    second: LittleF2_R
+  - first:
+      1: 100042
+    second: LittleF2_R_001
+  - first:
+      1: 100044
+    second: LittleF3_R
+  - first:
+      1: 100046
+    second: LittleF3_R_001
+  - first:
+      1: 100048
+    second: MiddleF1_R
+  - first:
+      1: 100050
+    second: MiddleF1_R_001
+  - first:
+      1: 100052
+    second: MiddleF2_R
+  - first:
+      1: 100054
+    second: MiddleF2_R_001
+  - first:
+      1: 100056
+    second: MIddleF3_R
+  - first:
+      1: 100058
+    second: MIddleF3_R_001
+  - first:
+      1: 100060
+    second: Neck_R
+  - first:
+      1: 100062
+    second: Palm_R
+  - first:
+      1: 100064
+    second: Palm_R_001
+  - first:
+      1: 100066
+    second: RingF1_R
+  - first:
+      1: 100068
+    second: RingF1_R_001
+  - first:
+      1: 100070
+    second: RingF2_R
+  - first:
+      1: 100072
+    second: RingF2_R_001
+  - first:
+      1: 100074
+    second: RingF3_R
+  - first:
+      1: 100076
+    second: RingF3_R_001
+  - first:
+      1: 100078
+    second: Shin_R
+  - first:
+      1: 100080
+    second: Shin_R_001
+  - first:
+      1: 100082
+    second: Stomach_R
+  - first:
+      1: 100084
+    second: Thigh_R
+  - first:
+      1: 100086
+    second: Thigh_R_001
+  - first:
+      1: 100088
+    second: Thumb1_R
+  - first:
+      1: 100090
+    second: Thumb1_R_001
+  - first:
+      1: 100092
+    second: Thumb2_R
+  - first:
+      1: 100094
+    second: Thumb2_R_001
+  - first:
+      1: 100096
+    second: ThumbRoot_R
+  - first:
+      1: 100098
+    second: ThumbRoot_R_001
+  - first:
+      1: 100100
+    second: Toes_R
+  - first:
+      1: 100102
+    second: Toes_R_001
+  - first:
+      1: 100104
+    second: Torso_R
+  - first:
+      4: 400000
+    second: Armature
+  - first:
+      4: 400002
+    second: Cylinder_000_Cylinder_001
+  - first:
+      4: 400004
+    second: Elbow_R
+  - first:
+      4: 400006
+    second: Elbow_R_001
+  - first:
+      4: 400008
+    second: Foot_R
+  - first:
+      4: 400010
+    second: Foot_R_001
+  - first:
+      4: 400012
+    second: FootIK_L
+  - first:
+      4: 400014
+    second: FootIK_R
+  - first:
+      4: 400016
+    second: ForeArm_R
+  - first:
+      4: 400018
+    second: ForeArm_R_001
+  - first:
+      4: 400020
+    second: Head_R
+  - first:
+      4: 400022
+    second: //RootNode
+  - first:
+      4: 400024
+    second: IndexF1_R
+  - first:
+      4: 400026
+    second: IndexF1_R_001
+  - first:
+      4: 400028
+    second: IndexF2_R
+  - first:
+      4: 400030
+    second: IndexF2_R_001
+  - first:
+      4: 400032
+    second: IndexF3_R
+  - first:
+      4: 400034
+    second: IndexF3_R_001
+  - first:
+      4: 400036
+    second: LittleF1_R
+  - first:
+      4: 400038
+    second: LittleF1_R_001
+  - first:
+      4: 400040
+    second: LittleF2_R
+  - first:
+      4: 400042
+    second: LittleF2_R_001
+  - first:
+      4: 400044
+    second: LittleF3_R
+  - first:
+      4: 400046
+    second: LittleF3_R_001
+  - first:
+      4: 400048
+    second: MiddleF1_R
+  - first:
+      4: 400050
+    second: MiddleF1_R_001
+  - first:
+      4: 400052
+    second: MiddleF2_R
+  - first:
+      4: 400054
+    second: MiddleF2_R_001
+  - first:
+      4: 400056
+    second: MIddleF3_R
+  - first:
+      4: 400058
+    second: MIddleF3_R_001
+  - first:
+      4: 400060
+    second: Neck_R
+  - first:
+      4: 400062
+    second: Palm_R
+  - first:
+      4: 400064
+    second: Palm_R_001
+  - first:
+      4: 400066
+    second: RingF1_R
+  - first:
+      4: 400068
+    second: RingF1_R_001
+  - first:
+      4: 400070
+    second: RingF2_R
+  - first:
+      4: 400072
+    second: RingF2_R_001
+  - first:
+      4: 400074
+    second: RingF3_R
+  - first:
+      4: 400076
+    second: RingF3_R_001
+  - first:
+      4: 400078
+    second: Shin_R
+  - first:
+      4: 400080
+    second: Shin_R_001
+  - first:
+      4: 400082
+    second: Stomach_R
+  - first:
+      4: 400084
+    second: Thigh_R
+  - first:
+      4: 400086
+    second: Thigh_R_001
+  - first:
+      4: 400088
+    second: Thumb1_R
+  - first:
+      4: 400090
+    second: Thumb1_R_001
+  - first:
+      4: 400092
+    second: Thumb2_R
+  - first:
+      4: 400094
+    second: Thumb2_R_001
+  - first:
+      4: 400096
+    second: ThumbRoot_R
+  - first:
+      4: 400098
+    second: ThumbRoot_R_001
+  - first:
+      4: 400100
+    second: Toes_R
+  - first:
+      4: 400102
+    second: Toes_R_001
+  - first:
+      4: 400104
+    second: Torso_R
+  - first:
+      43: 4300000
+    second: Cylinder_000_Cylinder_001
+  - first:
+      74: 7400000
+    second: Idle
+  - first:
+      74: 7400002
+    second: Walk
+  - first:
+      74: 7400004
+    second: Run
+  - first:
+      74: 7400006
+    second: Use
+  - first:
+      74: 7400008
+    second: PickUp
+  - first:
+      74: 7400010
+    second: Hit
+  - first:
+      74: 7400012
+    second: Death
+  - first:
+      74: 7400014
+    second: Falling
+  - first:
+      74: 7400016
+    second: Jump
+  - first:
+      74: 7400018
+    second: Gather
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Cylinder_000_Cylinder_001
+  externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Idle
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 15
       lastFrame: 15
       wrapMode: 0
@@ -282,6 +532,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 90
       lastFrame: 180
       wrapMode: 0
@@ -416,6 +667,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 195
       lastFrame: 250
       wrapMode: 0
@@ -550,6 +802,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Use
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 265
       lastFrame: 405
       wrapMode: 0
@@ -684,6 +937,7 @@ ModelImporter:
     - serializedVersion: 16
       name: PickUp
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 420
       lastFrame: 620
       wrapMode: 0
@@ -818,6 +1072,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Hit
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 635
       lastFrame: 725
       wrapMode: 0
@@ -952,6 +1207,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Death
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 740
       lastFrame: 790
       wrapMode: 0
@@ -1086,6 +1342,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Falling
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 805
       lastFrame: 835
       wrapMode: 0
@@ -1220,6 +1477,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 850
       lastFrame: 995
       wrapMode: 0
@@ -1354,6 +1612,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Gather
       takeName: ArmatureAction_002
+      internalID: 0
       firstFrame: 1010
       lastFrame: 1270
       wrapMode: 0
@@ -1485,31 +1744,55 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 100
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
-  copyAvatar: 0
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -1519,19 +1802,20 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 69507
-  packageName: HuMan 3D Project [Animated/HandPainted]Male
-  packageVersion: 1.1
-  assetPath: Assets/HuMan/Assets/Models/HuMan.fbx
-  uploadId: 134066
