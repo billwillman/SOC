@@ -68,7 +68,7 @@ public class SkinnedMeshOutput: Editor
         AddBoneToList(bones, rootNode);
         
         string name = gameObj.name;
-        const bool isUseLocalSpace = false;
+        const bool isUseLocalSpace = true;
         ExportPosition(dir, name, bones, isUseLocalSpace);
         ExportRotation(dir, name, bones, isUseLocalSpace);
         ExportScale(dir, name, bones, isUseLocalSpace);

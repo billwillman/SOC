@@ -15,6 +15,7 @@ public class TestRot : MonoBehaviour
         q1.eulerAngles = -parentDegree;
         q2.eulerAngles = currDegree;
         Quaternion q = q1 * q2;
+        Debug.Log(q.ToString());
         Vector3 ret = q.eulerAngles;
         ret.x = _NormalDegree(ret.x);
         ret.y = _NormalDegree(ret.y);
@@ -28,6 +29,9 @@ public class TestRot : MonoBehaviour
         Vector3 childDegree = childNode.eulerAngles;
         Vector3 subDegree = _RelativeDegree(parentDegree, childDegree);
         Debug.Log(subDegree.ToString());
+
+        Quaternion q = new Quaternion(0.00000f, 0.27060f, -0.27060f, 0.92388f);
+        Debug.LogWarning(q.eulerAngles.ToString());
     }
 
     public Transform parentNode;
