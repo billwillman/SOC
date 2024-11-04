@@ -1,0 +1,11 @@
+# 
+# Wavefront material file
+# Created with Kaydara FBX
+# 
+
+newmtl Material_002__HuManDefuse_png_001
+map_Kd HuManDefuse.png
+Ka 1.000000 1.000000 1.000000
+Kd 0.409600 0.409600 0.409600
+illum 1
+Tr 1.000000
