@@ -32,6 +32,9 @@ public class TestRot : MonoBehaviour
         var m = parentNode.worldToLocalMatrix * Matrix4x4.TRS(childNode.position, childNode.rotation, childNode.lossyScale);
         var degrees = m.rotation.eulerAngles;
         Debug.Log(degrees.ToString());
+        var m1 = Matrix4x4.TRS(childNode.position, childNode.rotation, childNode.lossyScale);
+        Debug.Log(m1.ToString());
+        Debug.Log(childNode.localToWorldMatrix);
     }
 
     public Transform parentNode;
