@@ -28,6 +28,10 @@ public class TestRot : MonoBehaviour
         Vector3 childDegree = childNode.eulerAngles;
         Vector3 subDegree = _RelativeDegree(parentDegree, childDegree);
         Debug.Log(subDegree.ToString());
+
+        var m = parentNode.worldToLocalMatrix * Matrix4x4.TRS(childNode.position, childNode.rotation, childNode.lossyScale);
+        var degrees = m.rotation.eulerAngles;
+        Debug.Log(degrees.ToString());
     }
 
     public Transform parentNode;
