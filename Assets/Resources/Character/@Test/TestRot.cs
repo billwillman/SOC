@@ -35,6 +35,13 @@ public class TestRot : MonoBehaviour
         var m1 = Matrix4x4.TRS(childNode.position, childNode.rotation, childNode.lossyScale);
         Debug.Log(m1.ToString());
         Debug.Log(childNode.localToWorldMatrix);
+
+        var q = new Quaternion();
+         q.eulerAngles = new Vector3(-97.512f, 90.152f, 269.847f);
+        //q.eulerAngles = new Vector3(-90, 0, 180);
+        //q.Normalize();
+        Debug.LogError(q.ToString());
+        Debug.LogError(q.eulerAngles);
     }
 
     public Transform parentNode;

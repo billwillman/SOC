@@ -72,7 +72,7 @@ public class SkinnedMeshOutput: Editor
         ExportPosition(dir, name, bones, isUseLocalSpace);
         ExportRotation(dir, name, bones, isUseLocalSpace);
         ExportScale(dir, name, bones, isUseLocalSpace);
-        ExportBoneNames(dir, name, bones);
+        ExportNodesNames(dir, name, bones);
         ExportBoneLink(dir, name, bones);
         ExportBoneVertexWeight(dir, name, bones, skl);
 
@@ -156,7 +156,7 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportBoneNames(string dir, string name, List<Transform> bones) {
+    static void ExportNodesNames(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_names.json";
         List<string> names = new List<string>(bones.Count);
         for (int i = 0; i < bones.Count; ++i) {
