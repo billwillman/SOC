@@ -147,7 +147,7 @@ public class SkinnedMeshOutput: Editor
         foreach (var bone in bones) {
             boneIndexMap.Add(bone, nodes.IndexOf(bone));
         }
-        var boneIndexList = boneIndexMap.Values;
+        List<int> boneIndexList = new List<int>(boneIndexMap.Values);
         string str = LitJson.JsonMapper.ToJson(boneIndexList);
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
