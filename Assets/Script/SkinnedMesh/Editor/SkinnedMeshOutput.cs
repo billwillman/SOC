@@ -64,22 +64,22 @@ public class SkinnedMeshOutput: Editor
         if (!isFound)
             return;
         // List<Transform> bones = new List<Transform>(skl.bones);
-        List<Transform> bones = new List<Transform>();
-        AddBoneToList(bones, rootNode);
+        List<Transform> nodes = new List<Transform>();
+        AddBoneToList(nodes, rootNode);
         
         string name = gameObj.name;
         const bool isUseLocalSpace = false;
-        ExportPosition(dir, name, bones, isUseLocalSpace);
-        ExportRotation(dir, name, bones, isUseLocalSpace);
-        ExportScale(dir, name, bones, isUseLocalSpace);
-        ExportNodesNames(dir, name, bones);
-        ExportBoneLink(dir, name, bones);
-        ExportBoneVertexWeight(dir, name, bones, skl);
+        ExportPosition(dir, name, nodes, isUseLocalSpace);
+        ExportRotation(dir, name, nodes, isUseLocalSpace);
+        ExportScale(dir, name, nodes, isUseLocalSpace);
+        ExportNodesNames(dir, name, nodes);
+        ExportNodeLink(dir, name, nodes);
+        ExportBoneVertexWeight(dir, name, nodes, skl);
 
         AssetDatabase.Refresh();
     }
 
-    static void ExportBoneLink(string dir, string name, List<Transform> bones) {
+    static void ExportNodeLink(string dir, string name, List<Transform> bones) {
         string fileName = dir + "/" + name + "_parents.json";
         int[] boneLinks = new int[bones.Count];
         for (int i = 0; i < boneLinks.Length; ++i) {
@@ -210,7 +210,7 @@ public class SkinnedMeshOutput: Editor
         System.IO.File.WriteAllText(fileName, str);
     }
 
-    static void ExportBoneVertexWeight(string dir, string name, List<Transform> bones, SkinnedMeshRenderer sklRender) {
+    static void ExportBoneVertexWeight(string dir, string name, List<Transform> nodes, SkinnedMeshRenderer sklRender) {
         if (!IsForceTextMode()) {
             Debug.LogError("序列化方式不是ForceText, 关闭Read/Write方式失败");
             return;
@@ -225,7 +225,7 @@ public class SkinnedMeshOutput: Editor
             Dictionary<Transform, int> sklBonesToIndexMap = new Dictionary<Transform, int>();
             for (int i = 0; i < sklBones.Length; ++i) {
                 var trans = sklBones[i];
-                int index = bones.IndexOf(trans);
+                int index = nodes.IndexOf(trans);
                 sklBonesToIndexMap.Add(trans, index);
             }
             FileStream logStream = new FileStream("vertexWeight.log", FileMode.Create, FileAccess.Write);
