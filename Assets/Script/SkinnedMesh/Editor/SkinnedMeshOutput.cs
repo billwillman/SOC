@@ -74,6 +74,7 @@ public class SkinnedMeshOutput: Editor
         ExportScale(dir, name, nodes, isUseLocalSpace);
         ExportNodesNames(dir, name, nodes);
         ExportNodeLink(dir, name, nodes);
+        ExportBoneIndexs(dir, name, skl, nodes);
         ExportBoneVertexWeight(dir, name, nodes, skl);
 
         AssetDatabase.Refresh();
@@ -129,6 +130,25 @@ public class SkinnedMeshOutput: Editor
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
+    }
+
+    static void ExportBoneIndexs(string dir, string name, SkinnedMeshRenderer skl, List<Transform> nodes) {
+        string fileName = dir + "/" + name + "_boneIndexs.json";
+        var bones = skl.bones;
+        Dictionary<Transform, int> boneIndexMap = new Dictionary<Transform, int>(bones.Length);
+        foreach (var bone in bones) {
+            boneIndexMap.Add(bone, nodes.IndexOf(bone));
+        }
+        var boneIndexList = boneIndexMap.Values;
+        string str = LitJson.JsonMapper.ToJson(boneIndexList);
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
