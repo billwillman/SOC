@@ -114,14 +114,18 @@ public class SkinnedMeshOutput: Editor
         return degree;
     }
 
-    static void ExportPosition(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
+    static void ExportBoneIndexs(string dir, string name, Transform[] bones) {
+
+    }
+
+    static void ExportPosition(string dir, string name, List<Transform> nodes, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_joints.json";
-        List<float[]> positions = new List<float[]>(bones.Count);
-        for (int i = 0; i < bones.Count; ++i) {
+        List<float[]> positions = new List<float[]>(nodes.Count);
+        for (int i = 0; i < nodes.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = useLocalSpace ? bones[i].localPosition.x : bones[i].position.x;
-            vs[1] = useLocalSpace ? bones[i].localPosition.y : bones[i].position.y;
-            vs[2] = useLocalSpace ? bones[i].localPosition.z : bones[i].position.z;
+            vs[0] = useLocalSpace ? nodes[i].localPosition.x : nodes[i].position.x;
+            vs[1] = useLocalSpace ? nodes[i].localPosition.y : nodes[i].position.y;
+            vs[2] = useLocalSpace ? nodes[i].localPosition.z : nodes[i].position.z;
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
@@ -135,14 +139,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportScale(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
+    static void ExportScale(string dir, string name, List<Transform> nodes, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_scales.json";
-        List<float[]> scales = new List<float[]>(bones.Count);
-        for (int i = 0; i < bones.Count; ++i) {
+        List<float[]> scales = new List<float[]>(nodes.Count);
+        for (int i = 0; i < nodes.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = useLocalSpace ? bones[i].localScale.x : bones[i].lossyScale.x;
-            vs[1] = useLocalSpace ? bones[i].localScale.y : bones[i].lossyScale.y;
-            vs[2] = useLocalSpace ? bones[i].localScale.z : bones[i].lossyScale.z;
+            vs[0] = useLocalSpace ? nodes[i].localScale.x : nodes[i].lossyScale.x;
+            vs[1] = useLocalSpace ? nodes[i].localScale.y : nodes[i].lossyScale.y;
+            vs[2] = useLocalSpace ? nodes[i].localScale.z : nodes[i].lossyScale.z;
             scales.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(scales);
@@ -156,11 +160,11 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportNodesNames(string dir, string name, List<Transform> bones) {
+    static void ExportNodesNames(string dir, string name, List<Transform> nodes) {
         string fileName = dir + "/" + name + "_names.json";
-        List<string> names = new List<string>(bones.Count);
-        for (int i = 0; i < bones.Count; ++i) {
-            names.Add(bones[i].name);
+        List<string> names = new List<string>(nodes.Count);
+        for (int i = 0; i < nodes.Count; ++i) {
+            names.Add(nodes[i].name);
         }
         string str = LitJson.JsonMapper.ToJson(names);
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
@@ -173,14 +177,14 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
-    static void ExportRotation(string dir, string name, List<Transform> bones, bool useLocalSpace = true) {
+    static void ExportRotation(string dir, string name, List<Transform> nodes, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_rots.json";
-        List<float[]> rotAngles = new List<float[]>(bones.Count);
-        for (int i = 0; i < bones.Count; ++i) {
+        List<float[]> rotAngles = new List<float[]>(nodes.Count);
+        for (int i = 0; i < nodes.Count; ++i) {
             float[] vs = new float[3];
-            vs[0] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.x : bones[i].eulerAngles.x);
-            vs[1] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.y : bones[i].eulerAngles.y);
-            vs[2] = _NormalDegree(useLocalSpace ? bones[i].localEulerAngles.z : bones[i].eulerAngles.z); 
+            vs[0] = _NormalDegree(useLocalSpace ? nodes[i].localEulerAngles.x : nodes[i].eulerAngles.x);
+            vs[1] = _NormalDegree(useLocalSpace ? nodes[i].localEulerAngles.y : nodes[i].eulerAngles.y);
+            vs[2] = _NormalDegree(useLocalSpace ? nodes[i].localEulerAngles.z : nodes[i].eulerAngles.z); 
             rotAngles.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(rotAngles);
