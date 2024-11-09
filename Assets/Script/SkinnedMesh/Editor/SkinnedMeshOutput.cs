@@ -238,6 +238,9 @@ public class SkinnedMeshOutput: Editor
             var mesh = sklRender.sharedMesh;
             var boneWeights = mesh.boneWeights;
             var sklBones = sklRender.bones;
+            // ×ª»»Ò»ÏÂ
+            bones = new List<Transform>(sklRender.bones);
+            // ---------
             Dictionary<Transform, int> sklBonesToIndexMap = new Dictionary<Transform, int>();
             for (int i = 0; i < sklBones.Length; ++i) {
                 var trans = sklBones[i];
