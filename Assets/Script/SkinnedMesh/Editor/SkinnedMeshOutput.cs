@@ -115,10 +115,6 @@ public class SkinnedMeshOutput: Editor
         return degree;
     }
 
-    static void ExportBoneIndexs(string dir, string name, Transform[] bones) {
-
-    }
-
     static void ExportPosition(string dir, string name, List<Transform> nodes, bool useLocalSpace = true) {
         string fileName = dir + "/" + name + "_joints.json";
         List<float[]> positions = new List<float[]>(nodes.Count);
