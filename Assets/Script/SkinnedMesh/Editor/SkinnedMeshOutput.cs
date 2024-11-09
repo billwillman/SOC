@@ -210,7 +210,7 @@ public class SkinnedMeshOutput: Editor
         System.IO.File.WriteAllText(fileName, str);
     }
 
-    static void ExportBoneVertexWeight(string dir, string name, List<Transform> nodes, SkinnedMeshRenderer sklRender) {
+    static void ExportBoneVertexWeight(string dir, string name, List<Transform> bones, SkinnedMeshRenderer sklRender) {
         if (!IsForceTextMode()) {
             Debug.LogError("序列化方式不是ForceText, 关闭Read/Write方式失败");
             return;
@@ -225,7 +225,7 @@ public class SkinnedMeshOutput: Editor
             Dictionary<Transform, int> sklBonesToIndexMap = new Dictionary<Transform, int>();
             for (int i = 0; i < sklBones.Length; ++i) {
                 var trans = sklBones[i];
-                int index = nodes.IndexOf(trans);
+                int index = bones.IndexOf(trans);
                 sklBonesToIndexMap.Add(trans, index);
             }
             FileStream logStream = new FileStream("vertexWeight.log", FileMode.Create, FileAccess.Write);
