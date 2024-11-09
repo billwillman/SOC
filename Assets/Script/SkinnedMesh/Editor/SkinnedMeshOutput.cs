@@ -30,6 +30,24 @@ public class SkinnedMeshOutput: Editor
         }
     }
 
+    [MenuItem("Assets/SkinnedMesh(AI-FBX)/打印骨骼数量")]
+    public static void DebugBoneNum() {
+        var gameObj = Selection.activeGameObject;
+        if (!gameObj)
+            return;
+        string dir = AssetDatabase.GetAssetPath(gameObj);
+        if (string.IsNullOrEmpty(dir))
+            return;
+        dir = Path.GetDirectoryName(dir);
+        if (string.IsNullOrEmpty(dir))
+            return;
+        dir = dir.Replace("\\", "/");
+        SkinnedMeshRenderer skl = gameObj.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (skl == null)
+            return;
+        Debug.Log(skl.bones.Length);
+    }
+
     [MenuItem("Assets/SkinnedMesh(AI-FBX)/导出AI-FBX格式")]
     public static void Output() {
         var gameObj = Selection.activeGameObject;
