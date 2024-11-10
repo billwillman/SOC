@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FCE6CB74-3C96-9DF8-E101-D79FFCE330FA}</ProjectGuid>
+    <ProjectGuid>{8A796A26-9C2B-D3B2-38DC-9798487AFAAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>ParadoxNotion</AssemblyName>
+    <AssemblyName>Autodesk.Fbx.PlayModeTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -62,186 +62,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BBParameterEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\WelcomeWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\XMLDocs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\WeakReferenceTable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Task.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ScriptInfos.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BlackboardEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsMetaType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\IGraphAssignableExtensions.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\IMigratable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Attributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsTypeConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\GraphAssetPostProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BBObjectParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ContextMenus.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\TaskDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\EventRouter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\AssetBlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\GUIStyleUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BBMappingParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Rect_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\DesignAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\AnimationCurve_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\OperationTools.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Panels.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Variable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\TaskAgentParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\Logger.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Delegates.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\IBlackboardExtensions.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Graph.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AOTClassesGenerator.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\ExternalInspectorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsJsonPrinter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\MissingBBParameterType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsArrayConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\DeserializeFromAttribute.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\JSONSerializer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\BBParameterDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\GUIStyleState_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\CopyBuffer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Blackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.GUIEditors.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsJsonParser.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\RectOffset_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AssetTracker.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\GraphLoadData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\fsUnityObjectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2Int_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsBaseConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\CanvasGroup(NC).cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\IMissingRecoverable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Graph.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\IBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\HierarchyTree.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GraphOwnerInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\MissingConnection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GlobalBlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Bounds_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\Threader.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\MonoManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GraphInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\GenericInspectorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\HierarchyIcons.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Status.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\WeakReferenceList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedWrapper.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\TaskEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\GraphOwner.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\fsRecoveryProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsResult.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsObjectProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedTypeInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector3Int_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\EventRouterAnimatorMove.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\ActiveOwnersOverview.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\ExposedParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Enums.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorWrapperFactory.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\StringUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\DrawerAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AttributeDrawers.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\MissingCondition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\InspectedFieldInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\NodeReference.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Prefs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsReflectedConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsSerializer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\fsBBParameterProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsGlobalConfig.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\ObjectUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\ColorUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\AssetBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Gradient_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\TypePrefs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializationPair.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedAction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\LayerUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\BlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.AssetDatabase.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Connection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Events.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\CurveUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\TypePrefsEditorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Interfaces.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsForwardConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ReorderableList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsDictionaryConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Events\SignalDefinition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ReflectedInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphExplorer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\SyncBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphRefactor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\TaskWizardWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\GraphEditorUtility.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\ISerializedMethodBaseInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\LogTag.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\MissingNode.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\MissingVariableType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsMetaProperty.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\ISerializationCollector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\GUIStyle_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Toolbar.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\QuickPopup.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedFieldInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\GlobalBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphConsole.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsEnumConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Animation\Easing.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\LayerMask_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Colors.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\Editor\DefinesManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\MissingAction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\SignalDefinitionInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ConditionTask.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ConditionList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\IEventData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\TypeConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\GenericMenuBrowser.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\NodeReferenceDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\RectUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedUnityEventInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Node.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ITaskSystem.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\BlackboardSourceDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\StyleSheet.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsPrimitiveConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsDirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedFunction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedMethodInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Keyframe_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BlackboardSource.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedConstructorInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Connection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\PropertyDrawerFactory.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\GraphSource.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ActionTask.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\VariableSeparator.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Node.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedEventInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Icons.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\UndoUtility.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\BBParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsListConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsCyclicReferenceManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\ISerializedReflectedInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ActionList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\DynamicParameterDefinition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Styles.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\ReflectionTools.cs" />
+    <Compile Include="Assets\Script\FBX\com.autodesk.fbx\Tests\Editor\PlayModeTests\FbxExporterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\License (FullSerializer).txt" />
-    <None Include="Assets\ParadoxNotion\CanvasCore\ParadoxNotion.asmdef" />
+    <None Include="Assets\Script\FBX\com.autodesk.fbx\Tests\Editor\PlayModeTests\Autodesk.Fbx.PlayModeTests.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -680,76 +504,8 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.UWP.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\MetroSupport\UnityEditor.UWP.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets\Script\Res\Plugins\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>Library\PackageCache\com.unity.collections\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1260,6 +1016,14 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
@@ -1270,6 +1034,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Autodesk.Fbx.csproj">
+      <Project>{E741151A-91A6-B7AF-79A5-C4B6C92936F0}</Project>
+      <Name>Autodesk.Fbx</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

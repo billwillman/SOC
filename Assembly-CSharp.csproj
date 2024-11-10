@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FCE6CB74-3C96-9DF8-E101-D79FFCE330FA}</ProjectGuid>
+    <ProjectGuid>{D27377E1-E53F-88D4-45A3-63385FB6AA95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>ParadoxNotion</AssemblyName>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -62,186 +62,370 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BBParameterEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\WelcomeWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\XMLDocs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\WeakReferenceTable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Task.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ScriptInfos.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\BlackboardEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsMetaType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\IGraphAssignableExtensions.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\IMigratable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Attributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsTypeConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\GraphAssetPostProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BBObjectParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ContextMenus.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\TaskDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\EventRouter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\AssetBlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\GUIStyleUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BBMappingParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Rect_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\DesignAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\AnimationCurve_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\OperationTools.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Panels.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Variable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\TaskAgentParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\Logger.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Delegates.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\IBlackboardExtensions.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Graph.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AOTClassesGenerator.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\ExternalInspectorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsJsonPrinter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\MissingBBParameterType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsArrayConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\DeserializeFromAttribute.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\JSONSerializer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\BBParameterDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\GUIStyleState_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\CopyBuffer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Blackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.GUIEditors.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsJsonParser.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\RectOffset_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AssetTracker.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\GraphLoadData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\fsUnityObjectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2Int_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsBaseConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\CanvasGroup(NC).cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\IMissingRecoverable.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Graph.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\IBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\HierarchyTree.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GraphOwnerInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\MissingConnection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GlobalBlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Bounds_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\Threader.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\MonoManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\GraphInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\GenericInspectorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\HierarchyIcons.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Status.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\WeakReferenceList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedWrapper.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editors\TaskEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\GraphOwner.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\fsRecoveryProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsResult.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsObjectProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedTypeInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector3Int_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Services\EventRouterAnimatorMove.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\ActiveOwnersOverview.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\ExposedParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Enums.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorWrapperFactory.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\StringUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\DrawerAttributes.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\AttributeDrawers.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\MissingCondition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\InspectedFieldInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\NodeReference.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Prefs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsReflectedConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsSerializer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\fsBBParameterProcessor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsGlobalConfig.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\ObjectUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\ColorUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\AssetBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Gradient_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\TypePrefs.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializationPair.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedAction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\LayerUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\BlackboardInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.AssetDatabase.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Connection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Events.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\CurveUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\TypePrefsEditorWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Interfaces.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsForwardConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ReorderableList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsDictionaryConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Events\SignalDefinition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\EditorUtils\EditorUtils.ReflectedInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphExplorer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\SyncBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphRefactor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\TaskWizardWindow.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\GraphEditorUtility.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\ISerializedMethodBaseInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\LogTag.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\MissingNode.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\MissingVariableType.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsMetaProperty.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\ISerializationCollector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\GUIStyle_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphEditor.Toolbar.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\QuickPopup.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedFieldInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\GlobalBlackboard.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Windows\GraphConsole.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsEnumConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Animation\Easing.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\LayerMask_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Colors.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\Editor\DefinesManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Vector2_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\Internal\MissingAction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\Editor\Inspectors\SignalDefinitionInspector.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ConditionTask.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ConditionList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\IEventData.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\TypeConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\GenericMenuBrowser.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\NodeReferenceDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Utility\RectUtils.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedUnityEventInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Node.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ITaskSystem.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Drawers\BlackboardSourceDrawer.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\StyleSheet.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsPrimitiveConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsDirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\ReflectionWrappers\ReflectedFunction.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedMethodInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\Unity\Keyframe_DirectConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\Internal\BlackboardSource.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedConstructorInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Connection.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\PropertyDrawerFactory.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Graphs\Internal\GraphSource.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ActionTask.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\VariableSeparator.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Design\PartialEditor\Editor.Node.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\SerializedEventInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Icons.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\UndoUtility.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Variables\BBParameter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\Converters\fsListConverter.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\fsCyclicReferenceManager.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\ISerializedReflectedInfo.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Framework\Runtime\Tasks\ActionList.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\DynamicParameterDefinition.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Design\PartialEditor\Databases\Styles.cs" />
-    <Compile Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\ReflectionTools.cs" />
+    <Compile Include="Assets\Script\LitJson\Lexer.cs" />
+    <Compile Include="Assets\Script\Res\FilePathMgr.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpClientStrResponse.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_AnimationClipWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_LuaBehaviourWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_Vector2Wrap.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ResourcesWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\Tutorial_ICalcWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\ParalAllSuccess.cs" />
+    <Compile Include="Assets\Resources\Character\@Test\TestRot.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\12- NoClip state\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ColorWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BaseCondition.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\Res\Utils\Loom.cs" />
+    <Compile Include="Assets\XLua\Gen\WrapPusher.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\09_GenericMethod\Foo.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BTNode.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_PeddingWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\BaseResLoaderWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaTable.cs" />
+    <Compile Include="Assets\Script\XLua\Tutorial\CSharpCallLua\CSCallLua.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ParticleSystemWrap.cs" />
+    <Compile Include="Assets\Script\GamePlay\BaseMonoBehaviour.cs" />
+    <Compile Include="Assets\XLua\Gen\NsTcpClient_NetClientWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateStates.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaFunction.cs" />
+    <Compile Include="Assets\Script\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\Script\tcp\AbstractClientMessage.cs" />
+    <Compile Include="Assets\Script\Res\Utils\MeshUtil.cs" />
+    <Compile Include="Assets\Script\Res\DependBinaryFile.cs" />
+    <Compile Include="Assets\Script\tcp\ITcpClient.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterController.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_MathfWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\RandomSelector.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_TextAssetWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\GenAttributes.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\RepeatDecorationNode.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\ParalOneSuccess.cs" />
+    <Compile Include="Assets\Script\Res\XmlParser\XMLParser.cs" />
+    <Compile Include="Assets\Script\Res\Utils\ObjectPool.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\2- Basic Movement and Gravity\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\XLua\Src\ObjectPool.cs" />
+    <Compile Include="Assets\Script\Res\ResInstDestroy.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\SetShareInt.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\Teleporter.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\CompareShareFloat.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\CompareShareInt.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateUnZipState.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\ParalNode.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\10_SignatureLoader\SignatureLoaderTest.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_DebugWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateCheckVersionState.cs" />
+    <Compile Include="Assets\XLua\Gen\DelegatesGensBridge.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_GameStartWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateMgr.cs" />
+    <Compile Include="Assets\Script\XLua\Tutorial\LoadLuaScript\ByFile\ByFile.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\12_ReImplementInLua\ReImplementInLua.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleAIController.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_Vector3Wrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\7- Orienting towards arbitrary up direction\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\10- Multiple movement states setup\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BTCustomVariable.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_InvokeLua_ICalcBridge.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\4- Landing and leaving ground\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\tcp\RecyclableMemory\RecyclableMemoryStream.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\06_Coroutine\Coroutine_Runner.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\BehaviorTree.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BTUtilities.cs" />
+    <Compile Include="Assets\XLua\Gen\Tutorial_DerivedClassWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\DecorationNode.cs" />
+    <Compile Include="Assets\Script\tcp\NetManager.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterSystem.cs" />
+    <Compile Include="Assets\Script\XLua\Src\ObjectCasters.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyPlayer.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_Vector4Wrap.cs" />
+    <Compile Include="Assets\Script\tcp\Pool.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\ThreadMsgList.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BaseAction.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\Singleton\SingletonTemplate.cs" />
+    <Compile Include="Assets\Script\Res\XmlParser\XMLNodeList.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpHelper.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_Foo1ChildWrap.cs" />
+    <Compile Include="Assets\Script\Res\ResourceMgrMonitor.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\StressTestManager.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_IExchangerBridge.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\CompareShareString.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\07_AsyncTest\AsyncTest.cs" />
+    <Compile Include="Assets\Script\XLua\Src\StaticLuaCallbacks.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_BaseNetworkMonoWrap.cs" />
+    <Compile Include="Assets\Script\Res\ResListFile.cs" />
+    <Compile Include="Assets\Script\XLua\Tutorial\LuaCallCSharp\LuaCallCs.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_BoundsWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_TimeWrap.cs" />
+    <Compile Include="Assets\Script\Res\Utils\AnimationTimeLineHelper.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\BaseNode.cs" />
+    <Compile Include="Assets\Script\Res\FairyGUIResLoaderAsyncMono.cs" />
+    <Compile Include="Assets\Script\Res\IResourceLoader.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Blackboard.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateGetFileListState.cs" />
+    <Compile Include="Assets\Script\XLua\Src\TemplateEngine\TemplateEngine.cs" />
+    <Compile Include="Assets\Script\XLua\Src\TypeExtensions.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\NodePrecondition.cs" />
+    <Compile Include="Assets\Resources\@Input\PlayerControlMapping.cs" />
+    <Compile Include="Assets\Script\XLua\Tutorial\LoadLuaScript\Loader\CustomLoader.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlayableMover.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\5- Adding velocities and impulses\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ComponentWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_QuaternionWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\13- Swimming state\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\4- Landing and leaving ground\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\a- Simple Jumping\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\Res\Utils\MPQ.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_Ray2DWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_ILuaBinderWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\ENodeRunningState.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_LightWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\Tutorial_BaseClassWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\CodeEmit.cs" />
+    <Compile Include="Assets\Script\GamePlay\LogFileWriter.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_FooWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\System_ObjectWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaBase.cs" />
+    <Compile Include="Assets\Script\tcp\Crc.cs" />
+    <Compile Include="Assets\Script\UGCUI\UICustomMeshRenderer.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\LuaCondition.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\06_Coroutine\CoroutineTest.cs" />
+    <Compile Include="Assets\Script\tcp\RecyclableMemory\RecyclableMemoryStreamManager.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\SetShareBool.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaDLL.cs" />
+    <Compile Include="Assets\XLua\Gen\EnumWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\MethodWarpsCache.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Script\XLua\Src\RawObject.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\7- Orienting towards arbitrary up direction\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\SetShareString.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_PlayerControllerWrap.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonExtend.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\13- Swimming state\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExamplePlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\1- Player Camera Character Setup\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpClientFileStream.cs" />
+    <Compile Include="Assets\Script\Res\ResInstDelayDestroy.cs" />
+    <Compile Include="Assets\Script\XLua\Src\GenericDelegateBridge.cs" />
+    <Compile Include="Assets\Script\XLua\Src\SignatureLoader.cs" />
+    <Compile Include="Assets\Script\tcp\uTcpClient.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_WaitForSecondsWrap.cs" />
+    <Compile Include="Assets\Script\tcp\Req.cs" />
+    <Compile Include="Assets\XLua\Gen\FairyGUIResLoaderAsyncMonoWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ApplicationWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\FrameratePanel.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\10- Multiple movement states setup\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\b- Double Jumping\MyPlayer.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Selector.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Entry.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Composition.cs" />
+    <Compile Include="Assets\Script\GamePlay\DsNetworkHelper.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_UIBinderWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\SetShareFloat.cs" />
+    <Compile Include="Assets\Script\Res\Utils\CachedMonoBehaviour.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\9- Custom collision filtering\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\XLua\Src\InternalGlobals.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateFileDownloadState.cs" />
+    <Compile Include="Assets\Script\Res\Utils\StringHelper.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\5- Adding velocities and impulses\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpClientUpFileStream.cs" />
+    <Compile Include="Assets\Script\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_DsNetworkHelperWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_BaseTestWrap.cs" />
+    <Compile Include="Assets\Script\Res\Utils\UnZipThread.cs" />
+    <Compile Include="Assets\Script\GamePlay\PlayerController.cs" />
+    <Compile Include="Assets\XLua\Gen\PackUnpack.cs" />
+    <Compile Include="Assets\Script\Res\AssetCache.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BaseParal.cs" />
+    <Compile Include="Assets\Script\Res\BaseResLoaderAsyncMgr.cs" />
+    <Compile Include="Assets\XLua\Gen\NsTcpClient_NetManagerWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\BehaviorTreeBuilder.cs" />
+    <Compile Include="Assets\Script\Res\BaseResLoaderAsyncMono.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterMotor.cs" />
+    <Compile Include="Assets\Script\tcp\AbstractServerMessage.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Sequence.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_SkinnedMeshRendererWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateCfgFile.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\ExampleGenConfig.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\Decoration.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Script\Res\LoaderNode.cs" />
+    <Compile Include="Assets\Script\Res\Utils\ArraySize.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateFinishState.cs" />
+    <Compile Include="Assets\Script\tcp\NetClient.cs" />
+    <Compile Include="Assets\Script\Res\Utils\NoLockPool.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\BuildManager.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_NoGcWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaEnv.cs" />
+    <Compile Include="Assets\Script\Res\Utils\StructComparser.cs" />
+    <Compile Include="Assets\Script\XLua\Src\LuaException.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\SelectorNode.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_MoeCharacterControllerWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\RepeatedDecoration.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\02_U3DScripting\LuaBehaviour.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_RayWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\KCCSettings.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\XLua\Gen\System_Collections_IEnumeratorBridge.cs" />
+    <Compile Include="Assets\Script\XLua\Src\ObjectTranslator.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_AnimationCurveWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_FooExtensionWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\LuaBTNode.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_BehaviourWrap.cs" />
+    <Compile Include="Assets\Script\Res\TaskList.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BTGraph.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\01_Helloworld\Helloworld.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_MyStructWrap.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonException.cs" />
+    <Compile Include="Assets\XLua\Gen\System_Collections_Generic_List_1_System_UInt64_Wrap.cs" />
+    <Compile Include="Assets\Script\netcode\NetCodeHelper.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\a- Simple Jumping\MyPlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\tcp\uProtoMessageMgr.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\CompositionNode.cs" />
+    <Compile Include="Assets\XLua\Gen\Tutorial_DerivedClassExtensionsWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlanetManager.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\ENodeAbortType.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyLadder.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaGenAutoRegister.cs" />
+    <Compile Include="Assets\Script\GamePlay\MoeCharacterController.cs" />
+    <Compile Include="Assets\Script\XLua\Tutorial\LoadLuaScript\ByString\ByString.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\08_Hotfix\HotfixTest2.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\InverterDecoration.cs" />
+    <Compile Include="Assets\Script\GamePlay\BaseNetworkMono.cs" />
+    <Compile Include="Assets\Script\XLua\Src\CopyByValue.cs" />
+    <Compile Include="Assets\Script\Res\Utils\Singleton.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\12- NoClip state\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\05_NoGc\NoGc.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\08_Hotfix\StatefullTest.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\ICharacterController.cs" />
+    <Compile Include="Assets\Script\tcp\NetByteArrayPool.cs" />
+    <Compile Include="Assets\Script\tcp\TcpClient.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\PhysicsMover.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_Foo2ParentWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\Coroutine\CoroutineManager.cs" />
+    <Compile Include="Assets\Script\Res\LoaderGroup.cs" />
+    <Compile Include="Assets\Script\Res\BaseResLoader.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_TransformWrap.cs" />
+    <Compile Include="Assets\Script\Res\NGUI\NGUIResLoader.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\GamePlay\UIBinder.cs" />
+    <Compile Include="Assets\Script\Res\Utils\State.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_Foo1ParentWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\09_GenericMethod\GenericMethodExample.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\11_RawObject\RawObjectTest.cs" />
+    <Compile Include="Assets\XLua\Gen\BaseResLoaderAsyncMonoWrap.cs" />
+    <Compile Include="Assets\Script\Res\Utils\ObjectTimePool.cs" />
+    <Compile Include="Assets\Script\Res\Utils\EventManager.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\ZipTools.cs" />
+    <Compile Include="Assets\Script\Res\ResourceMgr.cs" />
+    <Compile Include="Assets\Script\tcp\GamePacketMonitor.cs" />
+    <Compile Include="Assets\Script\XLua\Src\DelegateBridge.cs" />
+    <Compile Include="Assets\Script\GamePlay\Player\MoePlayerController.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_MonoBehaviourWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\04_LuaObjectOrented\InvokeLua.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleMovingPlatform.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\TBehaviourTreeManager.cs" />
+    <Compile Include="Assets\Script\XLua\Src\Utils.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\SequenceNode.cs" />
+    <Compile Include="Assets\Script\Res\Utils\CustomThread.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\9- Custom collision filtering\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\Res\AsyncOptionMgr.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PrefabLauncher.cs" />
+    <Compile Include="Assets\XLua\Gen\NsHttpClient_HttpClientWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\Singleton\SingletonMonoBehaviourTemplate.cs" />
+    <Compile Include="Assets\Script\GamePlay\ILuaBinder.cs" />
+    <Compile Include="Assets\Script\Res\XmlParser\XMLNode.cs" />
+    <Compile Include="Assets\Script\Res\Utils\LogMgr.cs" />
+    <Compile Include="Assets\Script\Res\Utils\CsvReader.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\08_Hotfix\HotfixTest.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_RendererWrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\ConditionNode.cs" />
+    <Compile Include="Assets\XLua\Gen\System_Collections_Generic_List_1_System_Int32_Wrap.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\GeneralModule\Pool\ObjectPool.cs" />
+    <Compile Include="Assets\XLua\Gen\XLuaTest_Foo2ChildWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\2- Basic Movement and Gravity\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\1- Player Camera Character Setup\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\Script\Res\Utils\ThreadPool.cs" />
+    <Compile Include="Assets\Script\Res\ResourcesLoader.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\BTData.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdatePrepareState.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\Blackboard.cs" />
+    <Compile Include="Assets\XLua\Gen\NsHttpClient_HttpHelperWrap.cs" />
+    <Compile Include="Assets\Script\Res\AssetLoader.cs" />
+    <Compile Include="Assets\Script\LitJson\JsonData.cs" />
+    <Compile Include="Assets\XLua\Gen\ResourceMgrWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Core\IMoverController.cs" />
+    <Compile Include="Assets\Script\Res\Utils\TimerMgr.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpPicResponse.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\LuaAction.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateGetZipVerReqState.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\CompareShareBool.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_GameObjectWrap.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\b- Double Jumping\MyCharacterController.cs" />
+    <Compile Include="Assets\Script\tcp\RecyclableMemory\Events.cs" />
+    <Compile Include="Assets\Script\Res\EmptyLoader.cs" />
+    <Compile Include="Assets\XLua\Gen\Tutorial_CSCallLua_ItfDBridge.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterCamera.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_KeyframeWrap.cs" />
+    <Compile Include="Assets\XLua\Gen\Unity_Netcode_NetCodeHelperWrap.cs" />
+    <Compile Include="Assets\Script\XLua\Src\ObjectTranslatorPool.cs" />
+    <Compile Include="Assets\Script\GameStart.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\InverterDecorationNode.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\CSBT\ActionNode.cs" />
+    <Compile Include="Assets\Script\Res\Utils\DisposeObject.cs" />
+    <Compile Include="Assets\Script\XLua\Examples\07_AsyncTest\MessageBox.cs" />
+    <Compile Include="Assets\Script\BehaviorTree\LuaBT\TBehaviourTree.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\XLua\Gen\SOC_GamePlay_Player_MoePlayerControllerWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\AutoUpdateResZipReqState.cs" />
+    <Compile Include="Assets\XLua\Gen\UnityEngine_ObjectWrap.cs" />
+    <Compile Include="Assets\Script\Res\AutoUpdate\HttpClient.cs" />
+    <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyMovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ParadoxNotion\CanvasCore\Common\Runtime\Serialization\Full Serializer\License (FullSerializer).txt" />
-    <None Include="Assets\ParadoxNotion\CanvasCore\ParadoxNotion.asmdef" />
+    <None Include="Assets\Script\XLua\Examples\07_AsyncTest\Resources\async_test.lua.txt" />
+    <None Include="Assets\Script\XLua\Tutorial\LoadLuaScript\ByFile\Resources\byfile.lua.txt" />
+    <None Include="Assets\Script\Res\Plugins\ICSharpCode.SharpZipLib.dll" />
+    <None Include="Assets\Resources\@Shader\@Character\SevenDeadlySins_Character_Matcap_Eyebrow.shader" />
+    <None Include="Assets\gmcs.rsp" />
+    <None Include="Assets\StreamingAssets\Windows\fileList.txt" />
+    <None Include="Assets\Script\XLua\Examples\06_Coroutine\Resources\coruntine_test.lua.txt" />
+    <None Include="Assets\Script\XLua\Resources\xlua\util.lua.txt" />
+    <None Include="Assets\StreamingAssets\Windows\version.txt" />
+    <None Include="Assets\csc.rsp" />
+    <None Include="Assets\Resources\DungeonModularPack\@Shaders\GeneratedFromGraph-DungeonKitShader.shader" />
+    <None Include="Assets\Resources\@Shader\@Character\SevenDeadlySins_Character_Matcap.shader" />
+    <None Include="Assets\HuMan\Documentation\AnimationsStart&amp;End.txt" />
+    <None Include="Assets\Resources\@Shader\@FairyGUI\FairyGUI-Text.shader" />
+    <None Include="Assets\Resources\@Shader\@FairyGUI\FairyGUI-Image.shader" />
+    <None Include="Assets\mcs.rsp" />
+    <None Include="Assets\Script\XLua\Resources\perf\profiler.lua.txt" />
+    <None Include="Assets\Resources\@Shader\@FairyGUI\_AddOn\FairyGUI-BlurFilter.shader" />
+    <None Include="Assets\AssetBundles.xml" />
+    <None Include="Assets\Script\XLua\Resources\perf\memory.lua.txt" />
+    <None Include="Assets\HuMan\Assets\Models\HuMan.obj.txt" />
+    <None Include="Assets\Script\XLua\Examples\03_UIEvent\ButtonInteraction.lua.txt" />
+    <None Include="Assets\Script\XLua\Examples\02_U3DScripting\LuaTestScript.lua.txt" />
+    <None Include="Assets\Script\XLua\Examples\07_AsyncTest\Resources\message_box.lua.txt" />
+    <None Include="Assets\md5Find.txt" />
+    <None Include="Assets\Resources\@Shader\@FairyGUI\FairyGUI-BMFont.shader" />
+    <None Include="Assets\Script\XLua\Resources\tdr\tdr.lua.txt" />
+    <None Include="Assets\Script\XLua\CHANGELOG.txt" />
+    <None Include="Assets\XLua\Gen\link.xml" />
+    <None Include="Assets\Script\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
+    <None Include="Assets\Resources\@Shader\@Character\SevenDeadlySins_Shadow.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -680,30 +864,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.UWP.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\MetroSupport\UnityEditor.UWP.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\Script\Res\Plugins\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>False</Private>
@@ -716,36 +876,12 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>Library\PackageCache\com.unity.visualscripting\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
@@ -1260,16 +1396,372 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.3.0b10\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.MetricEvents">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.MetricEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStatsMonitor.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.MetricTestData">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.MetricTestData.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.Common">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Networking.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Networking.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Implementation">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStatsMonitor.Implementation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Cinemachine.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Component">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStatsMonitor.Component.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Netcode.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Netcode.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Splines">
+      <HintPath>Library\ScriptAssemblies\Unity.Splines.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStats">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStats.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Netcode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Netcode.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Unity.Cinemachine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetworkProfiler.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkProfiler.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetworkSimulator.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkSimulator.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Netcode.Editor.PackageChecker">
+      <HintPath>Library\ScriptAssemblies\Unity.Netcode.Editor.PackageChecker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Splines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Splines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetworkProfiler.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkProfiler.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Configuration">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStatsMonitor.Configuration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Collections.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Profiling.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetworkSimulator.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkSimulator.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.Adapters">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Adapters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Networking.Transport">
+      <HintPath>Library\ScriptAssemblies\Unity.Networking.Transport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetStatsReporting">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetStatsReporting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.Initialization">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.Initialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.MetricTypes">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.MetricTypes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Multiplayer.Tools.NetworkSolutionInterface">
+      <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Tools.NetworkSolutionInterface.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Netcode.Components">
+      <HintPath>Library\ScriptAssemblies\Unity.Netcode.Components.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rendering.LightTransport.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Rendering.LightTransport.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NodeCanvas.csproj">
+      <Project>{11994645-0688-2849-FA32-C2760A1F5DEF}</Project>
+      <Name>NodeCanvas</Name>
+    </ProjectReference>
+    <ProjectReference Include="ParadoxNotion.csproj">
+      <Project>{FCE6CB74-3C96-9DF8-E101-D79FFCE330FA}</Project>
+      <Name>ParadoxNotion</Name>
+    </ProjectReference>
+    <ProjectReference Include="Animancer.FSM.csproj">
+      <Project>{0E084193-F4DA-0BEE-08EB-21D8BF53A4DD}</Project>
+      <Name>Animancer.FSM</Name>
+    </ProjectReference>
+    <ProjectReference Include="Animancer.csproj">
+      <Project>{DC30ACAA-1518-5EDD-98EC-F99C6538BF49}</Project>
+      <Name>Animancer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PlayableGraphVisualizer.Editor.csproj">
+      <Project>{8D55652A-D619-8F01-D5AA-8D447AD34873}</Project>
+      <Name>Unity.PlayableGraphVisualizer.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Fbx.Editor.csproj">
+      <Project>{32AF5E6F-43B7-76AB-9929-DB58B4DEBCC6}</Project>
+      <Name>Unity.Formats.Fbx.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Autodesk.Fbx.csproj">
+      <Project>{E741151A-91A6-B7AF-79A5-C4B6C92936F0}</Project>
+      <Name>Autodesk.Fbx</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PlayableGraphVisualizer.csproj">
+      <Project>{75F4BA23-9FD6-17EA-D0C4-7C482E9A505C}</Project>
+      <Name>Unity.PlayableGraphVisualizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Autodesk.Fbx.Editor.csproj">
+      <Project>{38AC49F4-A1B5-8A05-F39F-C9EFEF06011F}</Project>
+      <Name>Autodesk.Fbx.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Fbx.Runtime.csproj">
+      <Project>{18032518-D7A9-F060-E3B3-E604F898867F}</Project>
+      <Name>Unity.Formats.Fbx.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="FairyGUI.csproj">
+      <Project>{4CCBB624-00EA-2A90-B6DD-7EB0B5246F9A}</Project>
+      <Name>FairyGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="FairyGUI-Editor.csproj">
+      <Project>{68ED23C4-BF47-34C1-A1F9-3A07AF4ED972}</Project>
+      <Name>FairyGUI-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Animancer.Examples.csproj">
+      <Project>{0FE47661-551E-C9F7-BF2C-CF19AC57210F}</Project>
+      <Name>Animancer.Examples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
