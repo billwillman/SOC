@@ -98,6 +98,7 @@ public class SkinnedMeshOutput: Editor
         ExportNodeLink(dir, name, nodes);
         ExportBoneIndexs(dir, name, skl, nodes);
         ExportBoneVertexWeight(dir, name, nodes, skl);
+        ExportVertexsData(dir, name, skl);
 
         AssetDatabase.Refresh();
     }
@@ -148,6 +149,20 @@ public class SkinnedMeshOutput: Editor
             positions.Add(vs);
         }
         string str = LitJson.JsonMapper.ToJson(positions);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
+        FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+        try {
+            stream.Write(buffer, 0, buffer.Length);
+        } finally {
+            stream.Flush();
+            stream.Close();
+        }
+    }
+
+    static void ExportVertexsData(string dir, string name, SkinnedMeshRenderer skl) {
+        string fileName = dir + "/" + name + "_vertexs.json";
+        var vertexs = skl.sharedMesh.vertices;
+        string str = LitJson.JsonMapper.ToJson(vertexs);
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
