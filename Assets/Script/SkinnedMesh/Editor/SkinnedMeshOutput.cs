@@ -162,7 +162,15 @@ public class SkinnedMeshOutput: Editor
     static void ExportVertexsData(string dir, string name, SkinnedMeshRenderer skl) {
         string fileName = dir + "/" + name + "_vertexs.json";
         var vertexs = skl.sharedMesh.vertices;
-        string str = LitJson.JsonMapper.ToJson(vertexs);
+        List<float[]> vertList = new List<float[]>(vertexs.Length);
+        for (int i = 0; i < vertexs.Length; ++i) {
+            float[] v = new float[3];
+            v[0] = vertexs[i].x;
+            v[1] = vertexs[i].y;
+            v[2] = vertexs[i].z;
+            vertList.Add(v);
+        }
+        string str = LitJson.JsonMapper.ToJson(vertList);
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
         FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
         try {
