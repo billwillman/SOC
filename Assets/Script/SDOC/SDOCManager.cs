@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace SDOC
 {
@@ -7,10 +8,10 @@ namespace SDOC
         private void* m_pSDOCInstance = null;
 
         // 这个需要根据相机fov设置
-        public uint m_Width = 1024;
-        public uint m_Height = 576;
-        public float m_NearPlane = 0.3f;
+        public int m_MaxPixelHeight = 256;
         // ---------------
+
+        public Camera m_TargetCam = null;
 
         protected void DestroySDOCInstance()
         {
@@ -27,11 +28,18 @@ namespace SDOC
             DestroySDOCInstance();
         }
 
-        void OnEnable()
-        {
-            if (m_pSDOCInstance != null)
+        void OnEnable() {
+            if (m_pSDOCInstance != null || m_TargetCam == null)
                 return;
-            m_pSDOCInstance = SDOCHelper.CreateInstance(m_Width, m_Height, m_NearPlane);
+
+            uint width = (uint)m_TargetCam.scaledPixelWidth;
+            uint height = (uint)m_TargetCam.scaledPixelHeight;
+            if (m_MaxPixelHeight > 0 && height > m_MaxPixelHeight) {
+                height = (uint)m_MaxPixelHeight;
+                width = (uint)Mathf.FloorToInt(m_TargetCam.aspect * m_MaxPixelHeight);
+            }
+
+            m_pSDOCInstance = SDOCHelper.CreateInstance(width, height, m_TargetCam.nearClipPlane);
         }
 
         void OnApplicationQuit()
