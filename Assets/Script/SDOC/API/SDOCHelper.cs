@@ -7,6 +7,8 @@ namespace SDOC
 
     public static unsafe class SDOCHelper
     {
+        public static readonly uint SDOC_DestroySDOC = 240;
+
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
         [DllImport("libSDOC.quic")]
         public static extern void* sdocInit(uint width, uint height, float nearPlane);
@@ -31,5 +33,12 @@ namespace SDOC
         [DllImport("libSDOC.quic")]
         public static extern void sdocRenderBakedOccluder(void * pSDOC, ushort *compressedModel, float *localToWorld);
 #endif
+
+        public static bool DestroyInstance(void* pInstance)
+        {
+            if (pInstance == null)
+                return false;
+            return sdocSet(pInstance, SDOC_DestroySDOC, 1);
+        }
     }
 }
