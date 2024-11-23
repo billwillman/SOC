@@ -250,7 +250,7 @@ namespace SDOC
 	 *            provide reasonable targetFaceNum to avoid the simplified model lose the shape.
 	*******************************************************************************************************************************/
         [DllImport("libSDOC.quic")]
-        public static extern bool sdocMeshLod(float* vertices, ushort* indices, uint nVert, uint nIdx, int modelId, uint targetFaceNum, bool saveModel);
+        public static extern bool sdocMeshLod(float* vertices, ushort* indices, uint* nVert, uint* nIdx, int modelId, uint targetFaceNum, bool saveModel);
 
 
 	/*******************************************************************************************************************************
