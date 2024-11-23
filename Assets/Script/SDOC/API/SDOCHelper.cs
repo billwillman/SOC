@@ -29,7 +29,7 @@ namespace SDOC
         [DllImport("libSDOC.quic")]
         public static extern bool sdocMeshLod(float* vertices, ushort* indices, uint& nVert, uint& nIdx, int modelId, uint targetFaceNum, bool saveModel);
         [DllImport("libSDOC.quic")]
-        void sdocRenderBakedOccluder(void * pSDOC, ushort *compressedModel, float *localToWorld);
+        public static extern void sdocRenderBakedOccluder(void * pSDOC, ushort *compressedModel, float *localToWorld);
 #endif
     }
 }
