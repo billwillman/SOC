@@ -8,7 +8,7 @@ namespace SDOC
 
         // 这个需要根据相机fov设置
         public uint m_Width = 1024;
-        public uint m_Height = 512;
+        public uint m_Height = 576;
         public float m_NearPlane = 0.3f;
         // ---------------
 
