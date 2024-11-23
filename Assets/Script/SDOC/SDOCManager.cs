@@ -11,5 +11,10 @@ namespace SDOC
             if (SDOCHelper.DestroyInstance(m_pSDOCInstance))
                 m_pSDOCInstance = null;
         }
+
+        void OnDisable()
+        {
+            DestroySDOCInstance();
+        }
     }
 }
