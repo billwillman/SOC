@@ -40,5 +40,13 @@ namespace SDOC
                 return false;
             return sdocSet(pInstance, SDOC_DestroySDOC, 1);
         }
+
+        public static void* CreateInstance(uint width, uint height, float nearPlane)
+        {
+            if (nearPlane < 0f)
+                return null;
+            void* ret = sdocInit(width, height, nearPlane);
+            return ret;
+        }
     }
 }
