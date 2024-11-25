@@ -4,7 +4,7 @@ namespace SDOC
 {
     public unsafe class SDOCMeshOccluder : MonoBehaviour
     {
-        public Mesh m_TargetMesh = null;
+        public ScriptableObject m_TargetMesh = null;
         private ushort* m_OccluderMesh = null;
 
         protected void DestroyOccluderMesh() {
