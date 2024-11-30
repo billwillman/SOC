@@ -8,7 +8,7 @@ namespace SDOC
     public unsafe class SDOCMeshData : ScriptableObject
     {
         public ushort[] Data = null;
-        public SDOCMeshData(ushort* buf, int size) {
+        public void Init(ushort* buf, int size) {
             if (buf != null && size > 0) {
                 int num = size / 2;
                 Data = new ushort[num];
