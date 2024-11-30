@@ -17,7 +17,7 @@ namespace SDOC
 
         private void OnGUI() {
             EditorGUILayout.BeginVertical();
-            m_TargetMesh = EditorGUILayout.ObjectField("×èµ²Mesh", m_TargetMesh, typeof(Mesh), true) as Mesh;
+            m_TargetMesh = EditorGUILayout.ObjectField("×èµ²Mesh", m_TargetMesh, typeof(Mesh), false) as Mesh;
             if (m_TargetMesh != null) {
                 string assetPath = AssetDatabase.GetAssetPath(m_TargetMesh);
                 if (string.IsNullOrEmpty(assetPath))
