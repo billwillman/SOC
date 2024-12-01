@@ -7,6 +7,12 @@ namespace SDOC
         public SDOCMeshData m_TargetMesh = null;
         private ushort* m_OccluderMesh = null;
 
+        public ushort* OccluderMesh {
+            get {
+                return m_OccluderMesh;
+            }
+        }
+
         protected void DestroyOccluderMesh() {
             if (m_OccluderMesh == null)
                 return;

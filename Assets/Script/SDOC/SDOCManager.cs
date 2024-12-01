@@ -9,12 +9,39 @@ namespace SDOC
 
         private static SDOCManager m_SDOCManager = null;
 
+        private ISDOCMeshOccludersProxy m_MeshOccludersProxy = null;
+
+
+        public ISDOCMeshOccludersProxy MeshOccludersProxy {
+            get {
+                return m_MeshOccludersProxy;
+            }
+        }
+
         public static SDOCManager Instance {
             get {
                 return m_SDOCManager;
             }
         }
-            
+
+        private void Update() {
+            if (m_pSDOCInstance == null || m_TargetCam == null)
+                return;
+            Vector3 viewPos = m_TargetCam.transform.position;
+            Vector3 viewDir = m_TargetCam.transform.forward;
+            Matrix4x4 mat = m_TargetCam.worldToCameraMatrix;
+            SDOCHelper.sdocStartNewFrame(m_pSDOCInstance, &viewPos.x, &viewDir.x, &mat.m00);
+            if (m_MeshOccludersProxy != null) {
+                for (int i = 0; i < m_MeshOccludersProxy.Count; ++i) {
+                    SDOCMeshOccluder occluder = m_MeshOccludersProxy[i];
+                    if (occluder != null && occluder.OccluderMesh != null) {
+                        Matrix4x4 mat1 = occluder.transform.localToWorldMatrix;
+                        SDOCHelper.sdocRenderBakedOccluder(m_pSDOCInstance, occluder.OccluderMesh, &mat1.m00);
+                    }
+                }
+            }
+        }
+
 
         // 这个需要根据相机fov设置
         public int m_MaxPixelHeight = 256;
