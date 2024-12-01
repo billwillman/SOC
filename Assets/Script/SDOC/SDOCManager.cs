@@ -7,6 +7,15 @@ namespace SDOC
     {
         private void* m_pSDOCInstance = null;
 
+        private static SDOCManager m_SDOCManager = null;
+
+        public static SDOCManager Instance {
+            get {
+                return m_SDOCManager;
+            }
+        }
+            
+
         // 这个需要根据相机fov设置
         public int m_MaxPixelHeight = 256;
         // ---------------
@@ -15,6 +24,7 @@ namespace SDOC
 
         protected void DestroySDOCInstance()
         {
+            m_SDOCManager = null;
             if (m_pSDOCInstance == null)
                 return;
 
@@ -26,6 +36,11 @@ namespace SDOC
         void OnDisable()
         {
             DestroySDOCInstance();
+        }
+
+        private void Awake() {
+            DontDestroyOnLoad(this.gameObject);
+            m_SDOCManager = this;
         }
 
         void OnEnable() {
