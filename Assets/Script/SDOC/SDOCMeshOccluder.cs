@@ -7,7 +7,7 @@ namespace SDOC
         public SDOCMeshData m_TargetMesh = null;
         
         public void SDOCRender(void* pSDOCInstance) {
-            if (pSDOCInstance == null || m_TargetMesh == null || m_TargetMesh.Data == null)
+            if (pSDOCInstance == null || m_TargetMesh == null || !m_TargetMesh.IsVaildData())
                 return;
             
             ushort* pOccluderMesh = m_TargetMesh.ReadOnlyDataPtr;
