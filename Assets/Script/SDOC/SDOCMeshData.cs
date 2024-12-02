@@ -8,7 +8,7 @@ namespace SDOC
     [Serializable]
     public unsafe class SDOCMeshData : ScriptableObject
     {
-        public NativeArray<ushort> Data;
+        private NativeArray<ushort> Data;
 
         public bool IsVaildData() {
             bool ret = Data.IsCreated && Data.Length > 0;
