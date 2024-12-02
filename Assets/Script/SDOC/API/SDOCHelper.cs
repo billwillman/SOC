@@ -8,23 +8,24 @@ namespace SDOC
     public static unsafe class SDOCHelper
     {
         public static readonly uint SDOC_DestroySDOC = 240;
+		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-    /*******************************************************************************************************************************
-	 *   sdocInit
-	 *   @brief
-	 *       Initialize SDOC.
-	 *   @param width
-	 *       Depth buffer width, must be divisible by 64, 64 is selected for max possible performance,
-	 *       in the range of [64, 65535), suggest not larger than 1024
-	 *   @param height
-	 *       Depth buffer height, must be divisible by 8, in the range of [8, 65535), recommend 256
-	 *   @param nearPlane
-	 *       Near clip plane.
-	 *   @return
-	 *       TRUE if initialized successfully.
-	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+		/*******************************************************************************************************************************
+		 *   sdocInit
+		 *   @brief
+		 *       Initialize SDOC.
+		 *   @param width
+		 *       Depth buffer width, must be divisible by 64, 64 is selected for max possible performance,
+		 *       in the range of [64, 65535), suggest not larger than 1024
+		 *   @param height
+		 *       Depth buffer height, must be divisible by 8, in the range of [8, 65535), recommend 256
+		 *   @param nearPlane
+		 *       Near clip plane.
+		 *   @return
+		 *       TRUE if initialized successfully.
+		*******************************************************************************************************************************/
+		[DllImport("libSDOC.quic")]
         public static extern void* sdocInit(uint width, uint height, float nearPlane);
 
 

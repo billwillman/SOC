@@ -5,26 +5,31 @@ namespace SDOC
     public unsafe class SDOCMeshOccluder : MonoBehaviour
     {
         public SDOCMeshData m_TargetMesh = null;
-        private ushort* m_OccluderMesh = null;
-
-        public ushort* OccluderMesh {
-            get {
-                return m_OccluderMesh;
+        
+        public void SDOCRender(void* pSDOCInstance) {
+            if (pSDOCInstance == null || m_TargetMesh == null || m_TargetMesh.Data == null)
+                return;
+            
+            ushort* pOccluderMesh = m_TargetMesh.ReadOnlyDataPtr;
+            if (pOccluderMesh != null) {
+                Matrix4x4 mat = transform.localToWorldMatrix;
+                SDOCHelper.sdocRenderBakedOccluder(pSDOCInstance, pOccluderMesh, &mat.m00);
             }
         }
 
-        protected void DestroyOccluderMesh() {
-            if (m_OccluderMesh == null)
-                return;
-            m_OccluderMesh = SDOCHelper.sdocMeshBake((int*)m_OccluderMesh, null, null, 0, 0, 0, false, false, 0);
-        }
-
-        private void OnApplicationQuit() {
-            DestroyOccluderMesh();
+        void DestroyData() {
+            if (m_TargetMesh != null) {
+                m_TargetMesh.Dispose();
+                m_TargetMesh = null;
+            }
         }
 
         private void OnDestroy() {
-            DestroyOccluderMesh();
+            DestroyData();
+        }
+
+        private void OnApplicationQuit() {
+            DestroyData();
         }
     }
 }

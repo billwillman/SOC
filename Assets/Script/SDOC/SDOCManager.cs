@@ -31,14 +31,17 @@ namespace SDOC
             Vector3 viewDir = m_TargetCam.transform.forward;
             Matrix4x4 mat = m_TargetCam.worldToCameraMatrix;
             SDOCHelper.sdocStartNewFrame(m_pSDOCInstance, &viewPos.x, &viewDir.x, &mat.m00);
-            if (m_MeshOccludersProxy != null) {
-                for (int i = 0; i < m_MeshOccludersProxy.Count; ++i) {
-                    SDOCMeshOccluder occluder = m_MeshOccludersProxy[i];
-                    if (occluder != null && occluder.OccluderMesh != null) {
-                        Matrix4x4 mat1 = occluder.transform.localToWorldMatrix;
-                        SDOCHelper.sdocRenderBakedOccluder(m_pSDOCInstance, occluder.OccluderMesh, &mat1.m00);
+            try {
+                if (m_MeshOccludersProxy != null) {
+                    for (int i = 0; i < m_MeshOccludersProxy.Count; ++i) {
+                        SDOCMeshOccluder occluder = m_MeshOccludersProxy[i];
+                        if (occluder != null) {
+                            occluder.SDOCRender(m_pSDOCInstance);
+                        }
                     }
                 }
+            } finally {
+                SDOCHelper.sdocSet(m_pSDOCInstance, SDOCHelper.SDOC_FlushSubmittedOccluder, 1);
             }
         }
 

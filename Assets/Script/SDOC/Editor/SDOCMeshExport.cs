@@ -42,12 +42,20 @@ namespace SDOC
                         fixed (ushort* pIndex = targetIndexs) {
                             ushort* compressData = SDOCHelper.sdocMeshBake(&outSize, pVert, pIndex, (ushort)targetVertexs.Length, (ushort)targetIndexs.Length, 15, true, false, 0);
                             if (compressData != null && outSize > 0) {
-                                SDOCMeshData sdoMeshData = ScriptableObject.CreateInstance<SDOCMeshData>();
-                                sdoMeshData.Init(compressData, outSize);
-                                string targetAssetPath = Path.ChangeExtension(assetPath, ".asset");
-                                AssetDatabase.CreateAsset(sdoMeshData, targetAssetPath);
-                                AssetDatabase.SaveAssets();
-                                AssetDatabase.Refresh();
+                                try {
+                                    SDOCMeshData sdoMeshData = ScriptableObject.CreateInstance<SDOCMeshData>();
+                                    sdoMeshData.Init(compressData, outSize);
+                                    try {
+                                        string targetAssetPath = Path.ChangeExtension(assetPath, ".asset");
+                                        AssetDatabase.CreateAsset(sdoMeshData, targetAssetPath);
+                                        AssetDatabase.SaveAssets();
+                                        AssetDatabase.Refresh();
+                                    } finally {
+                                        sdoMeshData.Dispose();
+                                    }
+                                } finally {
+                                    compressData = SDOCHelper.sdocMeshBake((int*)compressData, null, null, 0, 0, 0, false, false, 0);
+                                }
                             }
                         }
                     }
