@@ -1,12 +1,13 @@
 using System;
+using System.IO;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using Utils;
 
 namespace SDOC
 {
-    [Serializable]
-    public unsafe class SDOCMeshData : ScriptableObject
+    public unsafe class SDOCMeshData
     {
         private NativeArray<ushort> Data;
 
@@ -37,6 +38,32 @@ namespace SDOC
             if (Data.IsCreated) {
                 Data.Dispose();
             }
+        }
+
+        public void WriteStream(Stream stream) {
+            if (stream == null || !Data.IsCreated)
+                return;
+            int num = Data.Length;
+            FilePathMgr.GetInstance().WriteInt(stream, num);
+            if (num > 0) {
+                var byteData = Data.Reinterpret<ushort, byte>();
+                stream.Write(byteData.AsReadOnlySpan());
+            }
+        }
+
+        public bool LoadFromStream(Stream stream) {
+            if (stream == null)
+                return false;
+            int num = FilePathMgr.GetInstance().ReadInt(stream);
+            if (num < 0)
+                return false;
+            Dispose();
+            Data = new NativeArray<ushort>();
+            if (num == 0) {
+                return true;
+            }
+            bool ret = stream.Read(Data.Reinterpret<ushort, byte>().AsSpan()) == num;
+            return ret;
         }
     }
 }

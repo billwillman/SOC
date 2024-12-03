@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using SOC.GamePlay;
 
 namespace SDOC
 {
@@ -43,11 +44,17 @@ namespace SDOC
                             ushort* compressData = SDOCHelper.sdocMeshBake(&outSize, pVert, pIndex, (ushort)targetVertexs.Length, (ushort)targetIndexs.Length, 15, true, false, 0);
                             if (compressData != null && outSize > 0) {
                                 try {
-                                    SDOCMeshData sdoMeshData = ScriptableObject.CreateInstance<SDOCMeshData>();
+                                    SDOCMeshData sdoMeshData = new SDOCMeshData();
                                     sdoMeshData.Init(compressData, outSize);
                                     try {
-                                        string targetAssetPath = Path.ChangeExtension(assetPath, ".asset");
-                                        AssetDatabase.CreateAsset(sdoMeshData, targetAssetPath);
+                                        string targetAssetPath = Path.ChangeExtension(assetPath, ".bytes");
+                                        var stream = FileHelper.CreateFileStream(targetAssetPath, FileControlType.Write);
+                                        try {
+                                            sdoMeshData.WriteStream(stream);
+                                        } finally {
+                                            stream.Flush();
+                                            stream.Dispose();
+                                        }
                                         AssetDatabase.SaveAssets();
                                         AssetDatabase.Refresh();
                                     } finally {
