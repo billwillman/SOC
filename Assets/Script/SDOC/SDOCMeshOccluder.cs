@@ -6,6 +6,20 @@ namespace SDOC
     {
         private SDOCMeshData m_TargetMesh = null;
 
+        public SDOCMeshData SDOCMesh {
+            get {
+                return m_TargetMesh;
+            }
+            set {
+                if (m_TargetMesh == value)
+                    return;
+                DestroyData();
+                m_TargetMesh = value;
+                if (m_TargetMesh != null)
+                    m_TargetMesh.AddRef();
+            }
+        }
+
         public void SDOCRender(void* pSDOCInstance) {
             if (pSDOCInstance == null || ((m_TargetMesh == null || !m_TargetMesh.IsVaildData())))
                 return;
@@ -18,7 +32,8 @@ namespace SDOC
 
         void DestroyData() {
             if (m_TargetMesh != null) {
-                m_TargetMesh.Dispose();
+                if (m_TargetMesh.DecRef())
+                    m_TargetMesh.Dispose();
                 m_TargetMesh = null;
             }
         }

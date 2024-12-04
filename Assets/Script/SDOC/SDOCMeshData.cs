@@ -10,6 +10,17 @@ namespace SDOC
     public unsafe class SDOCMeshData
     {
         private NativeArray<ushort> Data;
+        private int refNum = 0;
+
+        public void AddRef() {
+            ++refNum;
+        }
+
+
+        public bool DecRef() {
+            refNum = refNum > 0 ? refNum - 1 : 0;
+            return refNum <= 0;
+        }
 
         public bool IsVaildData() {
             bool ret = Data.IsCreated && Data.Length > 0;
