@@ -9,6 +9,7 @@ namespace SDOC
     {
         public static readonly uint SDOC_DestroySDOC = 240;
 		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
+		public static readonly uint SDOC_Get_Version = 212;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 		/*******************************************************************************************************************************
@@ -282,5 +283,14 @@ namespace SDOC
             void* ret = sdocInit(width, height, nearPlane);
             return ret;
         }
+
+		public static int GetVersion(void* pInstance) {
+			if (pInstance == null)
+				return 0;
+			int ret;
+			if (sdocSync(pInstance, SDOC_Get_Version, (void*)&ret))
+				return ret;
+			return 0;
+		}
     }
 }
