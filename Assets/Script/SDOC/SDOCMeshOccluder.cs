@@ -5,6 +5,8 @@ namespace SDOC
     public unsafe class SDOCMeshOccluder : MonoBehaviour
     {
         private SDOCMeshData m_TargetMesh = null;
+        // ´æ´¢µÄAsset
+        public TextAsset m_SDOCMeshAsset = null;
 
         public SDOCMeshData SDOCMesh {
             get {
