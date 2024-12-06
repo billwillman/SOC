@@ -57,18 +57,19 @@ namespace SDOC
             Vector3 viewPos = m_TargetCam.transform.position;
             Vector3 viewDir = m_TargetCam.transform.forward;
             Matrix4x4 mat = m_TargetCam.worldToCameraMatrix;
-            SDOCHelper.sdocStartNewFrame(m_pSDOCInstance, &viewPos.x, &viewDir.x, &mat.m00);
-            try {
-                if (m_MeshOccludersProxy != null) {
-                    for (int i = 0; i < m_MeshOccludersProxy.Count; ++i) {
-                        SDOCMeshOccluder occluder = m_MeshOccludersProxy[i];
-                        if (occluder != null) {
-                            occluder.SDOCRender(m_pSDOCInstance);
+            if (SDOCHelper.sdocStartNewFrame(m_pSDOCInstance, &viewPos.x, &viewDir.x, &mat.m00)) {
+                try {
+                    if (m_MeshOccludersProxy != null) {
+                        for (int i = 0; i < m_MeshOccludersProxy.Count; ++i) {
+                            SDOCMeshOccluder occluder = m_MeshOccludersProxy[i];
+                            if (occluder != null) {
+                                occluder.SDOCRender(m_pSDOCInstance);
+                            }
                         }
                     }
+                } finally {
+                    SDOCHelper.sdocSet(m_pSDOCInstance, SDOCHelper.SDOC_FlushSubmittedOccluder, 1);
                 }
-            } finally {
-                SDOCHelper.sdocSet(m_pSDOCInstance, SDOCHelper.SDOC_FlushSubmittedOccluder, 1);
             }
         }
 
