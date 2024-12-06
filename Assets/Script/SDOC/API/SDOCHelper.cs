@@ -10,6 +10,7 @@ namespace SDOC
         public static readonly uint SDOC_DestroySDOC = 240;
 		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
 		public static readonly uint SDOC_Get_Version = 212;
+		public static readonly uint SDOC_Get_MemoryUsed = 270;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 		/*******************************************************************************************************************************
@@ -284,13 +285,22 @@ namespace SDOC
             return ret;
         }
 
-		public static int GetVersion(void* pInstance) {
+		public static uint GetVersion(void* pInstance) {
 			if (pInstance == null)
 				return 0;
-			int ret;
+			uint ret;
 			if (sdocSync(pInstance, SDOC_Get_Version, (void*)&ret))
 				return ret;
 			return 0;
 		}
+
+		public static uint GetUseMemorySize(void* pInstance) {
+			if (pInstance == null)
+				return 0;
+			uint ret;
+			if (sdocSync(pInstance, SDOC_Get_MemoryUsed, (void*)&ret))
+				return ret;
+			return 0;
+        }
     }
 }

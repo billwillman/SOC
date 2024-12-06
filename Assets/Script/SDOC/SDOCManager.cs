@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,11 +10,36 @@ namespace SDOC
         private void* m_pSDOCInstance = null;
 
         private static SDOCManager m_SDOCManager = null;
+        private Dictionary<int, SDOCMeshData> m_LoadedMeshData = new Dictionary<int, SDOCMeshData>();
 
         private ISDOCMeshOccludersProxy m_MeshOccludersProxy = null;
 
+        internal SDOCMeshData LoadMeshData(TextAsset asset) {
+            if (asset == null)
+                return null;
+            int instanceId = asset.GetInstanceID();
+            SDOCMeshData ret;
+            if (m_LoadedMeshData.TryGetValue(instanceId, out ret))
+                return ret;
+            ret = new SDOCMeshData();
+            if (!ret.LoadFromTexAsset(asset))
+                ret.Dispose();
+            else {
+                m_LoadedMeshData.Add(instanceId, ret);
+                return ret;
+            }
+            return null;
+        }
 
-        public ISDOCMeshOccludersProxy MeshOccludersProxy {
+        internal void RemoveMeshData(TextAsset asset) {
+            if (asset == null)
+                return;
+            int instanceId = asset.GetInstanceID();
+            if (m_LoadedMeshData.ContainsKey(instanceId))
+                m_LoadedMeshData.Remove(instanceId);
+        }
+
+        internal ISDOCMeshOccludersProxy MeshOccludersProxy {
             get {
                 return m_MeshOccludersProxy;
             }

@@ -23,8 +23,14 @@ namespace SDOC
         }
 
         public void SDOCRender(void* pSDOCInstance) {
-            if (pSDOCInstance == null || ((m_TargetMesh == null || !m_TargetMesh.IsVaildData())))
+            if (pSDOCInstance == null || m_SDOCMeshAsset == null)
                 return;
+            if (m_TargetMesh == null && SDOCManager.Instance != null) {
+                this.SDOCMesh = SDOCManager.Instance.LoadMeshData(m_SDOCMeshAsset);
+            }
+            if ((m_TargetMesh == null || !m_TargetMesh.IsVaildData())) {
+                return;
+            }
             ushort* pOccluderMesh = m_TargetMesh.ReadOnlyDataPtr;
             if (pOccluderMesh != null) {
                 Matrix4x4 mat = transform.localToWorldMatrix;
@@ -34,8 +40,12 @@ namespace SDOC
 
         void DestroyData() {
             if (m_TargetMesh != null) {
-                if (m_TargetMesh.DecRef())
+                if (m_TargetMesh.DecRef()) {
                     m_TargetMesh.Dispose();
+                    if (SDOCManager.Instance != null) {
+                        SDOCManager.Instance.RemoveMeshData(m_SDOCMeshAsset);
+                    }
+                }
                 m_TargetMesh = null;
             }
         }

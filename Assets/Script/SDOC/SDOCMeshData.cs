@@ -76,5 +76,20 @@ namespace SDOC
             bool ret = stream.Read(Data.Reinterpret<ushort, byte>().AsSpan()) == num;
             return ret;
         }
+
+        public bool LoadFromTexAsset(TextAsset asset) {
+            if (asset == null)
+                return false;
+            NativeArray<byte> assetArr = asset.GetData<byte>();
+            NativeArray<int> numArr = assetArr.GetSubArray(0, 4).Reinterpret<byte, int>();
+            int num = numArr[0];
+            if (num <= 0) {
+                Dispose();
+                return true;
+            }
+            NativeArray<ushort> dataArr = assetArr.GetSubArray(4, assetArr.Length - 4 + 1).Reinterpret<byte, ushort>();
+            Init((ushort*)dataArr.GetUnsafePtr<ushort>(), num * 2);
+            return true;
+        }
     }
 }
