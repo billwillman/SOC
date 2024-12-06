@@ -38,6 +38,24 @@ namespace SDOC
             }
         }
 
+        private void OnEnable() {
+            if (SDOCManager.Instance == null)
+                return;
+            var proxy = SDOCManager.Instance.MeshOccludersProxy;
+            if (proxy == null)
+                return;
+            proxy.RegisterVisible(this);
+        }
+
+        private void OnDisable() {
+            if (SDOCManager.Instance == null)
+                return;
+            var proxy = SDOCManager.Instance.MeshOccludersProxy;
+            if (proxy == null)
+                return;
+            proxy.UnRegisterVisible(this);
+        }
+
         void DestroyData() {
             if (m_TargetMesh != null) {
                 if (m_TargetMesh.DecRef()) {
