@@ -30,7 +30,7 @@ namespace SDOC
 		 *   @return
 		 *       TRUE if initialized successfully.
 		*******************************************************************************************************************************/
-		[DllImport("libSDOC.quic")]
+		[DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern void* sdocInit(uint width, uint height, float nearPlane);
 
 
@@ -48,7 +48,7 @@ namespace SDOC
 	 *   @return
 	 *       TRUE if SDOC starts a new frame.
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocStartNewFrame(void* pSDOC, float* ViewPos, float* ViewDir, float* ViewProj);
 
 
@@ -73,7 +73,7 @@ namespace SDOC
 	 *       void
 	 *   Assumption: vertices != nullptr && indices != nullptr && nVert != 0 && nIdx != 0
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sdocRenderOccluder(void* pSDOC, float* vertices, ushort* indices, uint nVert, uint nIdx, float* localToWorld, bool enableBackfaceCull);
 
 
@@ -84,7 +84,7 @@ namespace SDOC
 	//SDOC would calculate meshMinExtent if input is nullptr
 	//if localToWorld is identity 4x4 matrix, developers could just set the passing parameter to be null to fast the process
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocQueryOccludeeMesh(void* pSDOC, float* vertices, ushort* indices, uint nVert, uint nIdx, float* localToWorld, bool enableBackfaceCull, float* worldAABB);
 
 	/*******************************************************************************************************************************
@@ -105,7 +105,7 @@ namespace SDOC
 	 *       TRUE if queried successfully.
 	 *   Assumption: bbox != nullptr && nMesh > 0 && results != nullptr
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocQueryOccludees(void* pSDOC, float* bbox, uint nMesh, bool* results);
 
 	/*******************************************************************************************************************************
@@ -134,7 +134,7 @@ namespace SDOC
 	 *       TRUE if queried successfully.
 	 *   Assumption: bbox != nullptr && nMesh > 0 && results != nullptr
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocQueryOccludees_OBB(void* pSDOC, float* bbox, uint nMesh, bool* results);
 
 	/*******************************************************************************************************************************
@@ -156,7 +156,7 @@ namespace SDOC
 	 *   @return
 	 *       TRUE if set successfully.
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocSet(void* pSDOC, uint ID, uint configValue);
 
 
@@ -191,7 +191,7 @@ namespace SDOC
 	 *   @return
 	 *       TRUE if sync successfully.
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocSync(void * pSDOC, uint id, void *param);
 
 
@@ -226,7 +226,7 @@ namespace SDOC
 	 *         "delete [] bake_data;" or 
 	 *         "sdocMeshBake( (int*)  bake_data, null, null, 0, 0, 0, false, fale, 0);"   as calling "delete [] bake_data;" might fail in some game engines
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern ushort* sdocMeshBake(int* outputCompressSize, float *vertices, ushort *indices, uint nVert, uint nIdx,  float quadAngle, bool enableBackfaceCull, bool counterClockWise, int SquareTerrainAxisPoints);
 
 
@@ -255,7 +255,7 @@ namespace SDOC
 	 *			  the correctness of mesh simplification is great related to simplify ratio. 
 	 *            provide reasonable targetFaceNum to avoid the simplified model lose the shape.
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool sdocMeshLod(float* vertices, ushort* indices, uint* nVert, uint* nIdx, int modelId, uint targetFaceNum, bool saveModel);
 
 
@@ -269,7 +269,7 @@ namespace SDOC
 	 *   @return
 	 *       void
 	*******************************************************************************************************************************/
-        [DllImport("libSDOC.quic")]
+        [DllImport("libSDOC.quic", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sdocRenderBakedOccluder(void * pSDOC, ushort *compressedModel, float *localToWorld);
 #endif
 
