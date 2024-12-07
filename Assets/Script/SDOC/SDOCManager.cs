@@ -61,6 +61,12 @@ namespace SDOC
             return SDOCHelper.GetUseMemorySize(m_pSDOCInstance);
         }
 
+        public void SaveDetphToFileName(string fileName) {
+            if (m_pSDOCInstance == null || string.IsNullOrEmpty(fileName))
+                return;
+            SDOCHelper.SaveDepthMapToFile(fileName, m_pSDOCInstance);
+        }
+
         public static SDOCManager Instance {
             get {
                 return m_SDOCManager;

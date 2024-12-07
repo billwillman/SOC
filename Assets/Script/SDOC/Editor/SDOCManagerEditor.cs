@@ -16,6 +16,11 @@ namespace SDOC
                 mgr.GetDepthWidthAndHeight(out width, out height);
                 EditorGUILayout.LabelField("【深度图大小】", string.Format("{0:D} x {1:D}", width, height));
                 EditorGUILayout.LabelField("【使用内存大小】", mgr.GetUsedMemorySize().ToString());
+                if (GUILayout.Button("保存DepthMap")) {
+                    string fileName = "depthMap.png";
+                    fileName = System.IO.Path.GetFullPath(fileName).Replace("\\", "/");
+                    mgr.SaveDetphToFileName(fileName);
+                }
             }
         }
     }

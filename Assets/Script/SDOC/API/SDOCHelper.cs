@@ -13,6 +13,8 @@ namespace SDOC
 		public static readonly uint SDOC_Get_DepthBufferWidthHeight = 250;
 		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
 		public static readonly uint SDOC_Get_Version = 212;
+		public static readonly uint SDOC_Save_DepthMap = 256;
+		public static readonly uint SDOC_Save_DepthMapPath = 257;
 		public static readonly uint SDOC_Get_MemoryUsed = 270;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
@@ -307,6 +309,10 @@ namespace SDOC
         }
 
 		public static void GetDepthWidthAndHeight(void* pInstance, out int width, out int height) {
+			if (pInstance == null) {
+				width = 0; height = 0;
+				return;
+            }
 			NativeArray<int> buffer = new NativeArray<int>(2, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
 			try {
 				sdocSync(pInstance, SDOC_Get_DepthBufferWidthHeight, buffer.GetUnsafePtr());
@@ -314,6 +320,17 @@ namespace SDOC
 				height = buffer[1];
             } finally {
 				buffer.Dispose();
+            }
+        }
+
+		public static void SaveDepthMapToFile(string fileName, void* pInstance) {
+			if (pInstance == null || string.IsNullOrEmpty(fileName))
+				return;
+			IntPtr s = Marshal.StringToHGlobalAnsi(fileName);
+			try {
+				sdocSync(pInstance, SDOC_Save_DepthMap, s.ToPointer());
+			} finally {
+				Marshal.FreeHGlobal(s);
             }
         }
     }
