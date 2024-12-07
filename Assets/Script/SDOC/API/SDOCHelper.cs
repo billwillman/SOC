@@ -328,7 +328,10 @@ namespace SDOC
 				return;
 			IntPtr s = Marshal.StringToHGlobalAnsi(fileName);
 			try {
-				sdocSync(pInstance, SDOC_Save_DepthMap, s.ToPointer());
+				// 1.设置文件名
+				sdocSync(pInstance, SDOC_Save_DepthMapPath, s.ToPointer());
+				// 2.设置DepthData
+
 			} finally {
 				Marshal.FreeHGlobal(s);
             }
