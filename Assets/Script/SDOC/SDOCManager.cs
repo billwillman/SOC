@@ -12,7 +12,7 @@ namespace SDOC
         private static SDOCManager m_SDOCManager = null;
         private Dictionary<int, SDOCMeshData> m_LoadedMeshData = new Dictionary<int, SDOCMeshData>();
 
-        private ISDOCMeshOccludersProxy m_MeshOccludersProxy = null;
+        private ISDOCMeshOccludersProxy m_MeshOccludersProxy = new DefaultSDOCMeshProxy();
 
         internal SDOCMeshData LoadMeshData(TextAsset asset) {
             if (asset == null)
