@@ -14,6 +14,12 @@ namespace SDOC
 
         private ISDOCMeshOccludersProxy m_MeshOccludersProxy = new DefaultSDOCMeshProxy();
 
+        public ulong pSDOCInstance {
+            get {
+                return (ulong)(m_pSDOCInstance);
+            }
+        }
+
         internal SDOCMeshData LoadMeshData(TextAsset asset) {
             if (asset == null)
                 return null;
