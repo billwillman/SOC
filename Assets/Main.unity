@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60404016320f7144db433dff867924c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxPixelWidth: 256
+  m_MaxPixelWidth: 512
   m_TargetCam: {fileID: 490286384}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

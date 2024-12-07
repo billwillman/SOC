@@ -119,6 +119,7 @@ namespace SDOC
             if (m_MaxPixelWidth > 0 && width > m_MaxPixelWidth) {
                 width = (uint)m_MaxPixelWidth;
                 height = (uint)Mathf.FloorToInt(m_MaxPixelWidth/m_TargetCam.aspect);
+                height = (uint)(Mathf.FloorToInt((float)(height)/8.0f) * 8 + height % 8 > 0 ? 8:0); // ±ØÐë8µÄ±¶Êý
             }
 
             Debug.LogFormat("¡¾SDOCInstance¡¿ width: {0:D} height: {1:D} newarClipPlane: {2}", width, height, m_TargetCam.nearClipPlane.ToString());
