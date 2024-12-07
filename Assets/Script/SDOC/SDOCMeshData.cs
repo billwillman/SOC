@@ -39,7 +39,7 @@ namespace SDOC
             if (buf != null && size > 0) {
                 int num = size / 2;
                 Dispose();
-                Data = new NativeArray<ushort>(num, Allocator.Persistent);
+                Data = new NativeArray<ushort>(num, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
                 ushort* target = (ushort*)Data.GetUnsafePtr();
                 Buffer.MemoryCopy(buf, target, size, size);
             }
@@ -69,7 +69,7 @@ namespace SDOC
             if (num < 0)
                 return false;
             Dispose();
-            Data = new NativeArray<ushort>();
+            Data = new NativeArray<ushort>(num, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
             if (num == 0) {
                 return true;
             }

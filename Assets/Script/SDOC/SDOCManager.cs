@@ -45,6 +45,15 @@ namespace SDOC
             }
         }
 
+        public void GetDepthWidthAndHeight(out int width, out int height) {
+            if (m_pSDOCInstance == null) {
+                width = 0;
+                height = 0;
+                return;
+            }
+            SDOCHelper.GetDepthWidthAndHeight(m_pSDOCInstance, out width, out height);
+        }
+
         public static SDOCManager Instance {
             get {
                 return m_SDOCManager;
@@ -75,7 +84,7 @@ namespace SDOC
 
 
         // 这个需要根据相机fov设置
-        public int m_MaxPixelHeight = 256;
+        public int m_MaxPixelWidth = 256;
         // ---------------
 
         public Camera m_TargetCam = null;
@@ -107,12 +116,14 @@ namespace SDOC
 
             uint width = (uint)m_TargetCam.scaledPixelWidth;
             uint height = (uint)m_TargetCam.scaledPixelHeight;
-            if (m_MaxPixelHeight > 0 && height > m_MaxPixelHeight) {
-                height = (uint)m_MaxPixelHeight;
-                width = (uint)Mathf.FloorToInt(m_TargetCam.aspect * m_MaxPixelHeight);
+            if (m_MaxPixelWidth > 0 && width > m_MaxPixelWidth) {
+                width = (uint)m_MaxPixelWidth;
+                height = (uint)Mathf.FloorToInt(m_MaxPixelWidth/m_TargetCam.aspect);
             }
 
             m_pSDOCInstance = SDOCHelper.CreateInstance(width, height, m_TargetCam.nearClipPlane);
+            ulong addr = (ulong)m_pSDOCInstance;
+            Debug.LogFormat("【SDOCInstance】 {0}", addr.ToString());
         }
 
         void OnApplicationQuit()

@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace SDOC
@@ -8,6 +10,7 @@ namespace SDOC
     public static unsafe class SDOCHelper
     {
         public static readonly uint SDOC_DestroySDOC = 240;
+		public static readonly uint SDOC_Get_DepthBufferWidthHeight = 250;
 		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
 		public static readonly uint SDOC_Get_Version = 212;
 		public static readonly uint SDOC_Get_MemoryUsed = 270;
@@ -301,6 +304,17 @@ namespace SDOC
 			if (sdocSync(pInstance, SDOC_Get_MemoryUsed, (void*)&ret))
 				return ret;
 			return 0;
+        }
+
+		public static void GetDepthWidthAndHeight(void* pInstance, out int width, out int height) {
+			NativeArray<int> buffer = new NativeArray<int>(2, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
+			try {
+				sdocSync(pInstance, SDOC_Get_DepthBufferWidthHeight, buffer.GetUnsafePtr());
+				width = buffer[0];
+				height = buffer[1];
+            } finally {
+				buffer.Dispose();
+            }
         }
     }
 }
