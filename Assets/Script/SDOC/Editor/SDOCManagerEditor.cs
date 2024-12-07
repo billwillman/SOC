@@ -15,6 +15,7 @@ namespace SDOC
                 int width, height;
                 mgr.GetDepthWidthAndHeight(out width, out height);
                 EditorGUILayout.LabelField("【深度图大小】", string.Format("{0:D} x {1:D}", width, height));
+                EditorGUILayout.LabelField("【使用内存大小】", mgr.GetUsedMemorySize().ToString());
             }
         }
     }

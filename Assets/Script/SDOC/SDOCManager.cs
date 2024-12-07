@@ -54,6 +54,13 @@ namespace SDOC
             SDOCHelper.GetDepthWidthAndHeight(m_pSDOCInstance, out width, out height);
         }
 
+        public uint GetUsedMemorySize() {
+            if (m_pSDOCInstance == null) {
+                return 0;
+            }
+            return SDOCHelper.GetUseMemorySize(m_pSDOCInstance);
+        }
+
         public static SDOCManager Instance {
             get {
                 return m_SDOCManager;
