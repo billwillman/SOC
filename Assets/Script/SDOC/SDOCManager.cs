@@ -121,6 +121,7 @@ namespace SDOC
                 height = (uint)Mathf.FloorToInt(m_MaxPixelWidth/m_TargetCam.aspect);
             }
 
+            Debug.LogFormat("¡¾SDOCInstance¡¿ width: {0:D} height: {1:D} newarClipPlane: {2}", width, height, m_TargetCam.nearClipPlane.ToString());
             m_pSDOCInstance = SDOCHelper.CreateInstance(width, height, m_TargetCam.nearClipPlane);
             ulong addr = (ulong)m_pSDOCInstance;
             Debug.LogFormat("¡¾SDOCInstance¡¿ {0}", addr.ToString());
