@@ -67,6 +67,13 @@ namespace SDOC
             return SDOCHelper.GetUseMemorySize(m_pSDOCInstance);
         }
 
+        public uint GetVersion() {
+            if (m_pSDOCInstance == null) {
+                return 0;
+            }
+            return SDOCHelper.GetVersion(m_pSDOCInstance);
+        }
+
         public void SaveDetphToFileName(string fileName) {
             if (m_pSDOCInstance == null || string.IsNullOrEmpty(fileName))
                 return;
