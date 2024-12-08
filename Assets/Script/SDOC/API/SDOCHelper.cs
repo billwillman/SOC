@@ -338,12 +338,20 @@ namespace SDOC
 				// 2.…Ë÷√DepthData
 				NativeArray<byte> buffer = new NativeArray<byte>(width * height, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
 				try {
-					sdocSync(pInstance, SDOC_Get_DepthMap, buffer.GetUnsafePtr());
+					if (!sdocSync(pInstance, SDOC_Get_DepthMap, buffer.GetUnsafePtr())) {
+						Debug.LogError("SDOC_Get_DepthMap: Error");
+						return;
+                    }
+					if (!sdocSync(pInstance, SDOC_Save_DepthMap, buffer.GetUnsafePtr())) {
+						Debug.LogError("SDOC_Save_DepthMap: Error");
+						return;
+                    }
                 } finally {
 					buffer.Dispose();
 
 				}
 			} finally {
+				sdocSync(pInstance, SDOC_Save_DepthMapPath, null);
 				Marshal.FreeHGlobal(s);
             }
         }
