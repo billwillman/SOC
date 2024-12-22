@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace SDOC
 {
+	public struct SDOC_AABB
+    {
+		public float minX, minY, minZ, maxX, maxY, maxZ;
+	}
 
     public static unsafe class SDOCHelper
     {
@@ -372,5 +376,20 @@ namespace SDOC
 				Marshal.FreeHGlobal(s);
             }
         }
+
+		public static bool QueryAABBBoxs(void* pInstance, NativeArray<SDOC_AABB> boxes, out NativeArray<bool> results) {
+			if (pInstance == null) {
+				results = new NativeArray<bool>(0, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+				return false;
+			}
+
+			if (boxes.Length <= 0) {
+				results = new NativeArray<bool>(0, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+				return true;
+            }
+			results = new NativeArray<bool>(boxes.Length, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+			bool ret = sdocQueryOccludees(pInstance, (float*)boxes.GetUnsafePtr(), (uint)boxes.Length, (bool*)results.GetUnsafePtr());
+			return ret;
+		}
     }
 }
