@@ -13,6 +13,7 @@ namespace SDOC
 		public static readonly uint SDOC_Get_DepthBufferWidthHeight = 250;
 		public static readonly uint SDOC_FlushSubmittedOccluder = 602;
 		public static readonly uint SDOC_Get_Version = 212;
+		public static readonly uint SDOC_Reset_DepthMapWidthAndHeight = 220;
 		public static readonly uint SDOC_Get_DepthMap = 252;
 		public static readonly uint SDOC_Save_DepthMap = 256;
 		public static readonly uint SDOC_Save_DepthMapPath = 257;
@@ -309,20 +310,36 @@ namespace SDOC
 			return 0;
         }
 
-		public static void GetDepthWidthAndHeight(void* pInstance, out int width, out int height) {
+		public static bool GetDepthWidthAndHeight(void* pInstance, out int width, out int height) {
 			if (pInstance == null) {
 				width = 0; height = 0;
-				return;
+				return false;
             }
 			NativeArray<int> buffer = new NativeArray<int>(2, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
 			try {
-				sdocSync(pInstance, SDOC_Get_DepthBufferWidthHeight, buffer.GetUnsafePtr());
+				bool ret = sdocSync(pInstance, SDOC_Get_DepthBufferWidthHeight, buffer.GetUnsafePtr());
 				width = buffer[0];
 				height = buffer[1];
+				return ret;
             } finally {
 				buffer.Dispose();
             }
+			// return false;
         }
+
+		public static bool ChangeDepthWidthAndHeight(void* pInstance, int width, int height) {
+			if (pInstance == null)
+				return false;
+			NativeArray<int> buffer = new NativeArray<int>(2, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
+			try {
+				buffer[0] = width;
+				buffer[1] = height;
+				bool ret = sdocSync(pInstance, SDOC_Reset_DepthMapWidthAndHeight, buffer.GetUnsafePtr());
+				return ret;
+            } finally {
+				buffer.Dispose();
+            }
+		}
 
 		public static void SaveDepthMapToFile(string fileName, void* pInstance) {
 			if (pInstance == null || string.IsNullOrEmpty(fileName))
