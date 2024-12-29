@@ -5,6 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+#if UNITY_WEIXINMINIGAME
+using WeChatWASM;
+using UnityEngine.Networking;
+using Unity.InstantGame;
+using Unity.AutoStreaming;
+#endif
 
 // 任务接口
 public abstract class ITask
@@ -105,7 +111,6 @@ public abstract class ITask
 }
 
 #if UNITY_5_3 || UNITY_5_4 || UNITY_5_5 || UNITY_5_6 || UNITY_2018 || UNITY_2019 || UNITY_2017 || UNITY_2017_1_OR_NEWER
-
 // LoadFromFileAsync
 public class BundleCreateAsyncTask: ITask
 {
@@ -148,7 +153,11 @@ public class BundleCreateAsyncTask: ITask
 
 	public AssetBundle StartLoad() {
 		if (m_Req == null) {
+#if UNITY_WEIXINMINIGAME
+			m_Req = WXAssetBundle.LoadFromFileAsync(m_FileName);
+#else
 			m_Req = AssetBundle.LoadFromFileAsync(m_FileName);
+#endif
 			if (m_Req != null) {
 				m_Req.priority = m_Priority;
 				if (m_Req.isDone)
@@ -288,7 +297,11 @@ public class BundleCreateAsyncTask: ITask
 
 	private string m_FileName = string.Empty;
 	private int m_Priority = 0;
+#if UNITY_WEIXINMINIGAME
+	private WXAssetBundleRequest m_Req = null;
+#else
 	private AssetBundleCreateRequest m_Req = null;
+#endif
 	private float m_Progress = 0;
 	private AssetBundle m_Bundle = null;
 
@@ -301,8 +314,8 @@ public class BundleCreateAsyncTask: ITask
 
 #endif
 
-// WWW 文件读取任务
-public class WWWFileLoadTask: ITask
+	// WWW 文件读取任务
+	public class WWWFileLoadTask: ITask
 {
 	// 注意：必须是WWW支持的文件名 PC上需要加 file:///
 	public WWWFileLoadTask(string wwwFileName, ThreadPriority priority = ThreadPriority.Normal)
