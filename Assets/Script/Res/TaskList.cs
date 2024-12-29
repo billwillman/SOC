@@ -88,6 +88,8 @@ public abstract class ITask
 	{
 	}
 
+	public virtual void QuickLoaded() { }
+
 	protected void TaskOk()
 	{
 		mResult = 1;
@@ -144,18 +146,24 @@ public class BundleCreateAsyncTask: ITask
 		return ret;
 	}
 
-	public AssetBundle StartLoad()
-	{
-        if (m_Req == null) {
-            m_Req = AssetBundle.LoadFromFileAsync(m_FileName);
-            if (m_Req != null) {
-                m_Req.priority = m_Priority;
-                return m_Req.assetBundle;
-            }
-        } else
-            return m_Req.assetBundle;
+	public AssetBundle StartLoad() {
+		if (m_Req == null) {
+			m_Req = AssetBundle.LoadFromFileAsync(m_FileName);
+			if (m_Req != null) {
+				m_Req.priority = m_Priority;
+				if (m_Req.isDone)
+					return m_Req.assetBundle;
+			}
+		} else if (m_Req.isDone)
+			return m_Req.assetBundle;
 
-        return null;
+		return null;
+	}
+
+	public override void QuickLoaded() {
+		if (m_Req != null) {
+			m_Bundle = m_Req.assetBundle; // 快速加载下，这样打断异步立马加载
+		}
 	}
 
 	public override void Release()
@@ -550,19 +558,28 @@ public class WWWFileLoadTask: ITask
 		InPool(this);
 	}
 
-    // 手动Load, 可以调也可以不调
-    public AssetBundle StartLoad() {
-        if (mLoader == null) {
-            if (IsUsedCached)
-                mLoader = WWW.LoadFromCacheOrDownload(mWWWFileName, 0);
-            else
-                mLoader = new WWW(mWWWFileName);
+	// 手动Load, 可以调也可以不调
+	public AssetBundle StartLoad() {
+		if (mLoader == null) {
+			if (IsUsedCached)
+				mLoader = WWW.LoadFromCacheOrDownload(mWWWFileName, 0);
+			else
+				mLoader = new WWW(mWWWFileName);
 
-            mLoader.threadPriority = mPriority;
-            return mLoader.assetBundle;
-        } else
-            return mLoader.assetBundle;
-    }
+			mLoader.threadPriority = mPriority;
+			if (mLoader.isDone)
+				return mLoader.assetBundle;
+		} else if (mLoader.isDone)
+			return mLoader.assetBundle;
+		return null;
+	}
+
+	// 快速打断异步加载
+	public override void QuickLoaded() {
+		if (mLoader != null) {
+			mBundle = mLoader.assetBundle;
+		}
+	}
 
 	public override void Process()
 	{
