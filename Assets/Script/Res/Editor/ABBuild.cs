@@ -4618,13 +4618,6 @@ public static class AssetBundleBuild
 		BuildPlatform(eBuildPlatform.eBuildWindow, 2, true);
 	}
 
-#if UNITY_WEIXINMINIGAME
-	[MenuItem("Assets/平台打包/WXMiniGame MD5(Lz4)")]
-	static public void OnBuildPlatformWXMiniGameLz4Md5() {
-		BuildPlatform(eBuildPlatform.eBuildWX, 2, true);
-	}
-#endif
-
 	[MenuItem("Assets/平台打包/增量Windows Md5(Lz4)")]
 	static public void OnAppendBuildPlatformWinLz4Md5()
 	{
