@@ -38,9 +38,7 @@ public enum eBuildPlatform
 	eBuildIOS,
 	eBuildAndroid,
 	eBuildDS, // DS平台
-#if UNITY_WEIXINMINIGAME
 	eBuildWX, // 微信
-#endif
 }
 
 // AssetBundle 文件打包类型
@@ -1826,12 +1824,14 @@ class AssetBundleMgr
 					target = BuildTarget.StandaloneWindows64;
 					break;
                 }
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX: {
+#if UNITY_WEIXINMINIGAME
 					target = BuildTarget.WeixinMiniGame;
 					break;
-                }
+#else
+					return false;
 #endif
+				}
 			default:
 			return false;
 		}
@@ -1904,7 +1904,6 @@ class AssetBundleMgr
 			}
 			break;
 		}
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX: {
 					outPath += "/MiniGame";
 					if (!Directory.Exists(outPath)) {
@@ -1915,7 +1914,6 @@ class AssetBundleMgr
 					}
 					break;
 				}
-#endif
 
 			case eBuildPlatform.eBuildDS:
 		case eBuildPlatform.eBuildWindow:
@@ -2045,7 +2043,7 @@ class AssetBundleMgr
 		{
 			// AssetBundle增加HASH（小游戏）
 #if UNITY_WEIXINMINIGAME
-			buildOpts |= BuildAssetBundleOptions.AppendHashToAssetBundleName;
+		//	buildOpts |= BuildAssetBundleOptions.AppendHashToAssetBundleName;
 #endif
 #if UNITY_2022_1_OR_NEWER
 			BuildAssetBundlesParameters abBuildParams = new BuildAssetBundlesParameters();
@@ -2105,7 +2103,7 @@ class AssetBundleMgr
 	}
 #endif
 
-	private void BuildAssetBundlesInfo_5_x(eBuildPlatform platform, string exportDir, int compressType, bool isForceAppend)
+				private void BuildAssetBundlesInfo_5_x(eBuildPlatform platform, string exportDir, int compressType, bool isForceAppend)
 	{	
 #if USE_UNITY5_X_BUILD
 		if (string.IsNullOrEmpty(exportDir))
@@ -3233,11 +3231,9 @@ class AssetBundleMgr
         case eBuildPlatform.eBuildIOS:
             dstRoot += "/IOS";
             break;
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX:
 				dstRoot += "/MiniGame";
 				break;
-#endif
 			default:
             return;
         }
@@ -3278,11 +3274,9 @@ class AssetBundleMgr
         case eBuildPlatform.eBuildIOS:
             dstRoot += "/IOS";
             break;
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX:
 				dstRoot += "/MiniGame";
 				break;
-#endif
 			default:
             return;
         }
@@ -4214,11 +4208,9 @@ public static class AssetBundleBuild
 		case eBuildPlatform.eBuildWindow:
 			ret += "/Windows";
 			break;
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX:
 				ret += "/MiniGame";
 				break;
-#endif
 			default:
 			return null;
 		}
@@ -4601,12 +4593,10 @@ public static class AssetBundleBuild
 		BuildPlatform(eBuildPlatform.eBuildWindow, 2);
 	}
 
-#if UNITY_WEIXINMINIGAME
 	[MenuItem("Assets/平台打包/WXMiniGame(Lz4)")]
 	static public void OnBuildPlatformWXMiniGameLz4() {
 		BuildPlatform(eBuildPlatform.eBuildWX, 2);
 	}
-#endif
 
 	[MenuItem("Assets/平台打包/增量Windows(Lz4)")]
     static public void OnAppendBuildPlatformWinLz4() {
@@ -4622,6 +4612,11 @@ public static class AssetBundleBuild
 	static public void OnAppendBuildPlatformWinLz4Md5()
 	{
 		BuildPlatform(eBuildPlatform.eBuildWindow, 2, true, true);
+	}
+
+	[MenuItem("Assets/平台打包/WXMiniGame Md5(Lz4)")]
+	static public void OnBuildPlatformWXMiniGameMd5Lz4() {
+		BuildPlatform(eBuildPlatform.eBuildWX, 2, true);
 	}
 
 	[MenuItem("Assets/平台打包/OSX(Lz4)")]
@@ -4806,6 +4801,18 @@ public static class AssetBundleBuild
 		mMgr.BuildPackage(eBuildPlatform.eBuildDS, dsOutPath, true);
 	}
 
+	// 打包WX
+	static public void Cmd_WX() {
+		string wxOutPath = "../WX";
+		wxOutPath = System.IO.Path.GetFullPath(wxOutPath);
+		if (Directory.Exists(wxOutPath)) {
+			DeleteDirectorAndFiles(wxOutPath);
+		}
+		Directory.CreateDirectory(wxOutPath);
+		Debug.Log("Build WX: " + wxOutPath);
+		mMgr.BuildPackage(eBuildPlatform.eBuildWX, wxOutPath, true);
+	}
+
 	static public void Cmd_Win()
 	{
 		string winOutPath = "../Win_Build";
@@ -4959,12 +4966,10 @@ public static class AssetBundleBuild
 			rootManifest += "/Windows";
 			copyManifest += "/Windows";
 			break;
-#if UNITY_WEIXINMINIGAME
 			case eBuildPlatform.eBuildWX:
 				rootManifest += "/MiniGame";
 				copyManifest += "/MiniGame";
 				break;
-#endif
 		}
 
 		/*
@@ -5075,12 +5080,11 @@ public static class AssetBundleBuild
 			rootManifest += "/Windows";
 			copyManifest += "/Windows";
 			break;
-#if UNITY_WEIXINMINIGAME
+
 			case eBuildPlatform.eBuildWX:
 				rootManifest += "/MiniGame";
 				copyManifest += "/MiniGame";
 				break;
-#endif
 		}
 
 		/*
@@ -5101,6 +5105,7 @@ public static class AssetBundleBuild
 
 		string logFileName = string.Empty;
 		string funcName = string.Empty;
+		string exeName = "Unity.exe";
 		if (platform == eBuildPlatform.eBuildAndroid)
 		{
 			// Copy 渠道包
@@ -5120,13 +5125,17 @@ public static class AssetBundleBuild
         {
 			logFileName = System.IO.Path.GetDirectoryName(searchProjPath) + '/' + "dsLog.txt";
 			funcName = "AssetBundleBuild.Cmd_DS";
+		} else if (platform == eBuildPlatform.eBuildWX) {
+			logFileName = System.IO.Path.GetDirectoryName(searchProjPath) + '/' + "wxLog.txt";
+			funcName = "AssetBundleBuild.Cmd_WX"; // 暂时不支持直接导出
+			exeName = "Tuanjie.exe";
 		}
 
 		if (!string.IsNullOrEmpty(funcName))
 		{
 #if UNITY_EDITOR_WIN
-			string cmdApk = StringHelper.Format("Unity.exe -quit -batchmode -nographics -executeMethod {0} -logFile {1} -projectPath {2}", 
-			                              funcName, logFileName, searchProjPath);
+			string cmdApk = StringHelper.Format("{0} -quit -batchmode -nographics -executeMethod {1} -logFile {2} -projectPath {3}",
+												exeName, funcName, logFileName, searchProjPath);
 			Debug.Log(cmdApk);
 			RunCmd(cmdApk);
 #endif
@@ -5171,6 +5180,11 @@ public static class AssetBundleBuild
 		Cmd_Build(2, true, eBuildPlatform.eBuildDS);
 	}
 #endif
+
+	[MenuItem("Assets/发布/Wx小游戏(Lz4)")]
+	static public void Cmd_BuildWx_Lz4() {
+		Cmd_Build(2, true, eBuildPlatform.eBuildWX);
+	}
 
 	[MenuItem("Assets/发布/APK_Debug(非压缩)")]
 	static public void Cmd_BuildAPK_DEBUG_UNCOMPRESS()
