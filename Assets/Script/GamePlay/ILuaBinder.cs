@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XLua;
+using UnityEngine.Playables;
+
 
 #if UNITY_INPUT
 using UnityEngine.InputSystem;
@@ -35,11 +37,17 @@ namespace SOC.GamePlay
         private LuaTable m_LuaClass = null;
         private Dictionary<string, LuaFunction> m_LuaCustomFuncs = null;
 
+        [BlackList]
+        public void SignalReceiver_OnNotify_Lua(string evtName, Playable origin, INotification notification, object context)
+        {
+            CallCustomLuaFunc(evtName, m_LuaSelf, context, origin);
+        }
+
         // 需要获取的Lua的方法
-        [DoNotGen]
+        [BlackList]
         public string[] CustomLuaFunctionName = null;
 
-        [DoNotGen]
+        [BlackList]
         public bool bInitCustomLuaFunctionInStart = false;
 
         public LuaTable LuaSelf {
@@ -60,7 +68,7 @@ namespace SOC.GamePlay
             m_LuaEventMap[evtType] = func;
         }
 
-        public System.Object[] CallCustomLuaFunc(string evtName, System.Object[] param) {
+        public System.Object[] CallCustomLuaFunc(string evtName, params System.Object[] param) {
             if (m_LuaCustomFuncs != null)
             {
                 LuaFunction func;
@@ -81,6 +89,7 @@ namespace SOC.GamePlay
                 if (m_LuaCustomFuncs == null)
                     m_LuaCustomFuncs = new Dictionary<string, LuaFunction>();
                 m_LuaCustomFuncs[evtName] = func;
+                return func.Call(param);
             }
             return null;
         }
@@ -97,7 +106,7 @@ namespace SOC.GamePlay
         }
 #endif
 
-        [DoNotGen]
+        [BlackList]
         void DoDestroyLuaObject() {
             DisposeCustomLuaFuncs();
             if (m_LuaEventMap != null) {
@@ -121,7 +130,7 @@ namespace SOC.GamePlay
             }
         }
 
-        [DoNotGen]
+        [BlackList]
         void LoadLua() {
             DoDestroyLuaObject();
             if (string.IsNullOrEmpty(LuaPath) || SelfTarget == null)
@@ -145,7 +154,7 @@ namespace SOC.GamePlay
             }
         }
 
-        [DoNotGen]
+        [BlackList]
         void InitCustomLuaFuncs()
         {
             if (!bInitCustomLuaFunctionInStart || CustomLuaFunctionName == null || m_LuaSelf == null)
@@ -167,7 +176,7 @@ namespace SOC.GamePlay
                
         }
 
-        [DoNotGen]
+        [BlackList]
         void DisposeCustomLuaFuncs()
         {
             if (m_LuaCustomFuncs == null)
@@ -181,7 +190,7 @@ namespace SOC.GamePlay
             m_LuaCustomFuncs.TrimExcess();
         }
 
-        [DoNotGen]
+        [BlackList]
         private bool CallLuaFunc(LuaEvent_MonoEventType evtType) {
             if (m_LuaEventMap == null)
                 return true;
@@ -192,8 +201,8 @@ namespace SOC.GamePlay
             return true;
         }
 
-        [DoNotGen]
-        private void Awake() {
+        [BlackList]
+        protected void Awake() {
             LoadLua();
             // 加载Lua
             if (CallLuaFunc(LuaEvent_MonoEventType.Awake)) {
@@ -201,25 +210,25 @@ namespace SOC.GamePlay
             }
         }
 
-        [DoNotGen]
+        [BlackList]
 
-        private void Start() {
+        protected void Start() {
             if (CallLuaFunc(LuaEvent_MonoEventType.Start)) {
                 OnStart();
             }
         }
 
-        [DoNotGen]
+        [BlackList]
 
-        private void Update() {
+        protected void Update() {
             if (CallLuaFunc(LuaEvent_MonoEventType.Update)) {
                 OnUpdate();
             }
         }
 
-        [DoNotGen]
+        [BlackList]
 
-        private void FixedUpdate()
+        protected void FixedUpdate()
         {
             if (CallLuaFunc(LuaEvent_MonoEventType.FixedUpdate))
             {
@@ -234,15 +243,15 @@ namespace SOC.GamePlay
             DoDestroyLuaObject();
         }
 
-        [DoNotGen]
+        [BlackList]
         public virtual void OnStart() { }
-        [DoNotGen]
+        [BlackList]
         public virtual void OnDestroyed() { }
-        [DoNotGen]
+        [BlackList]
         public virtual void OnUpdate() { }
-		[DoNotGen]
+		[BlackList]
         public virtual void OnAwake() { }
-        [DoNotGen]
+        [BlackList]
         public virtual void OnFixedUpdate() { }
     }
 }
